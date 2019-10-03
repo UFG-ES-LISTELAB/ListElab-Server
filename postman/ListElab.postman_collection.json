@@ -1,0 +1,312 @@
+{
+	"info": {
+		"_postman_id": "65348d07-0e1b-462b-a75a-36b1260b725a",
+		"name": "ListElab",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "QuestaoDiscursiva",
+			"item": [
+				{
+					"name": "QuestaoDiscursiva",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "22454fac-f4f8-403a-9280-3e8a339e6777",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna json com valor de 'sucesso' == true\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.sucesso).to.eql(true);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna json com uma ou mais questões cadastradas\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.resultado.length).to.be.above(0);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{ListElabUrl}}/api/QuestaoDiscursiva",
+							"host": [
+								"{{ListElabUrl}}"
+							],
+							"path": [
+								"api",
+								"QuestaoDiscursiva"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastrar QuestaoDiscursiva",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "bd3b303f-0918-4baa-bdcb-184e3bc1e34c",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna json com valor de 'sucesso' == true\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.sucesso).to.eql(true);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"enunciado\": \"TestePostman\",\r\n  \"areaDeConhecimento\": 10301003,\r\n  \"nivelDificuldade\": 2,\r\n  \"tempoMaximoDeResposta\": 3,\r\n  \"respostaEsperada\": {\r\n    \"palavrasChaves\": [\r\n      {\r\n        \"palavraChave\": \"Postman\",\r\n        \"peso\": 4\r\n      }\r\n    ]\r\n  },\r\n  \"id\": \"464a273a-f898-4b48-a80e-c6ad0a0761c7\",\r\n  \"codigo\": 8888\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ListElabUrl}}/api/QuestaoDiscursiva/cadastre",
+							"host": [
+								"{{ListElabUrl}}"
+							],
+							"path": [
+								"api",
+								"QuestaoDiscursiva",
+								"cadastre"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualize QuestaoDiscursiva",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "bd3b303f-0918-4baa-bdcb-184e3bc1e34c",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna json com valor de 'sucesso' == true\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.sucesso).to.eql(true);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"enunciado\": \"TestePostman\",\r\n  \"areaDeConhecimento\": 10301003,\r\n  \"nivelDificuldade\": 9,\r\n  \"tempoMaximoDeResposta\": 3,\r\n  \"respostaEsperada\": {\r\n    \"palavrasChaves\": [\r\n      {\r\n        \"palavraChave\": \"Postman\",\r\n        \"peso\": 4\r\n      }\r\n    ]\r\n  },\r\n  \"id\": \"464a273a-f898-4b48-a80e-c6ad0a0761c7\",\r\n  \"codigo\": 8888\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ListElabUrl}}/api/QuestaoDiscursiva/atualize",
+							"host": [
+								"{{ListElabUrl}}"
+							],
+							"path": [
+								"api",
+								"QuestaoDiscursiva",
+								"atualize"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "QuestaoDiscursiva codigo",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "22454fac-f4f8-403a-9280-3e8a339e6777",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna json com valor de 'sucesso' == true\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.sucesso).to.eql(true);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna questão pedida\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.resultado.codigo).to.eql(8888);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna questão pedida com edição anterior\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.resultado.nivelDificuldade).to.eql(9);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{ListElabUrl}}/api/QuestaoDiscursiva/8888",
+							"host": [
+								"{{ListElabUrl}}"
+							],
+							"path": [
+								"api",
+								"QuestaoDiscursiva",
+								"8888"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar QuestaoDiscursiva",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "bd3b303f-0918-4baa-bdcb-184e3bc1e34c",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna json com valor de 'sucesso' == true\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.sucesso).to.eql(true);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ListElabUrl}}/api/QuestaoDiscursiva/8888",
+							"host": [
+								"{{ListElabUrl}}"
+							],
+							"path": [
+								"api",
+								"QuestaoDiscursiva",
+								"8888"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "QuestaoDiscursiva codigo (questão deletada)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "22454fac-f4f8-403a-9280-3e8a339e6777",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna json com valor de 'sucesso' == true\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.sucesso).to.eql(true);",
+									"});",
+									"",
+									"pm.test(\"Requisição NÃO retorna questão pedida pois foi deletada\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.resultado).to.eql(null);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{ListElabUrl}}/api/QuestaoDiscursiva/8888",
+							"host": [
+								"{{ListElabUrl}}"
+							],
+							"path": [
+								"api",
+								"QuestaoDiscursiva",
+								"8888"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
