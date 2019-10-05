@@ -14,7 +14,7 @@ namespace listelab_contrato.Controllers
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
-    public class QuestaoDiscursivaController : ControllerBase
+    public class QuestaoController : ControllerBase
     {
         /// <summary>
         /// Lista todas as questões discursivas cadastradas.

@@ -4,39 +4,39 @@
         <name>listelab-contrato</name>
     </assembly>
     <members>
-        <member name="T:listelab_contrato.Controllers.QuestaoDiscursivaController">
+        <member name="T:listelab_contrato.Controllers.QuestaoController">
             <summary>
             Api para o conceito de questão discursiva.
             </summary>
         </member>
-        <member name="M:listelab_contrato.Controllers.QuestaoDiscursivaController.Get">
+        <member name="M:listelab_contrato.Controllers.QuestaoController.Get">
             <summary>
             Lista todas as questões discursivas cadastradas.
             </summary>
             <returns>Retorna um objeto de sucesso ou falha e a lista desejada, caso sucesso.</returns>
         </member>
-        <member name="M:listelab_contrato.Controllers.QuestaoDiscursivaController.Get(System.Int32)">
+        <member name="M:listelab_contrato.Controllers.QuestaoController.Get(System.Int32)">
             <summary>
             Retorna a questão discursiva do código informado.
             </summary>
             <param name="codigo">O código da questão discursiva que se deseja buscar.</param>
             <returns>Retorna objeto de resposta de sucesso ou falha, contendo o objeto desejado, caso sucesso.</returns>
         </member>
-        <member name="M:listelab_contrato.Controllers.QuestaoDiscursivaController.Cadastre(listelab_dominio.Conceitos.QuestaoObj.QuestaoDiscursiva)">
+        <member name="M:listelab_contrato.Controllers.QuestaoController.Cadastre(listelab_dominio.Conceitos.QuestaoObj.QuestaoDiscursiva)">
             <summary>
             Cadastra uma questão discursiva.
             </summary>
             <param name="questao">A questão discursiva que se deseja cadastrar.</param>
             <returns>Retorna objeto com resultado da requisição.</returns>
         </member>
-        <member name="M:listelab_contrato.Controllers.QuestaoDiscursivaController.Atualize(listelab_dominio.Conceitos.QuestaoObj.QuestaoDiscursiva)">
+        <member name="M:listelab_contrato.Controllers.QuestaoController.Atualize(listelab_dominio.Conceitos.QuestaoObj.QuestaoDiscursiva)">
             <summary>
             Atualiza uma questão discursiva.
             </summary>
             <param name="objeto">O objeto para atualização.</param>
             <returns>Retorna objeto com resultado da requisição.</returns>
         </member>
-        <member name="M:listelab_contrato.Controllers.QuestaoDiscursivaController.Delete(System.Int32)">
+        <member name="M:listelab_contrato.Controllers.QuestaoController.Delete(System.Int32)">
             <summary>
             Exclue uma questão discursiva.
             </summary>
