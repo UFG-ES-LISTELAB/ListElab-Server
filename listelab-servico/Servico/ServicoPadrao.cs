@@ -1,9 +1,11 @@
 ﻿using listelab_data.Repositorios;
 using listelab_dominio.Abstrato;
+using listelab_dominio.Conceitos.Filtro;
 using listelab_dominio.InterfaceDeServico;
 using listelab_servico.Validacoes;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace listelab_servico.Servico
@@ -49,9 +51,9 @@ namespace listelab_servico.Servico
         /// </summary>
         /// <param name="codigo">O código que será usado como filtro.</param>
         /// <returns></returns>
-        public virtual T Consulte(int codigo)
+        public virtual T Consulte(Filtro filtro)
         {
-            return Repositorio().Consulte(x => x.Codigo == codigo);
+            return Repositorio().Consulte(ApliqueFiltro(filtro));
         }
 
         /// <summary>
@@ -75,5 +77,7 @@ namespace listelab_servico.Servico
         protected abstract IRepositorio<T> Repositorio();
 
         protected abstract ValidadorPadrao<T> Validador();
+
+        protected abstract Expression<Func<T, bool>> ApliqueFiltro(Filtro filtro);
     }
 }

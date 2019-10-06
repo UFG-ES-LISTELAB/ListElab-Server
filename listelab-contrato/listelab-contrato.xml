@@ -4,47 +4,47 @@
         <name>listelab-contrato</name>
     </assembly>
     <members>
-        <member name="T:listelab_contrato.Controllers.ControladorPadrao`2">
+        <member name="T:listelab_contrato.Controllers.ControladorPadrao`3">
             <summary>
             Controlador Controaldor com rotinas padrão da api.
             </summary>
             <typeparam name="T">Objeto a ser trafegado.</typeparam>
             <typeparam name="S">Interface de serviço do objeto.</typeparam>
         </member>
-        <member name="M:listelab_contrato.Controllers.ControladorPadrao`2.Servico">
+        <member name="M:listelab_contrato.Controllers.ControladorPadrao`3.Servico">
             <summary>
             Retorna o serviço.
             </summary>
             <returns>A instância de serviço.</returns>
         </member>
-        <member name="M:listelab_contrato.Controllers.ControladorPadrao`2.Get">
+        <member name="M:listelab_contrato.Controllers.ControladorPadrao`3.Get">
             <summary>
             Lista todas as questões discursivas cadastradas.
             </summary>
             <returns>Retorna um objeto de sucesso ou falha e a lista desejada, caso sucesso.</returns>
         </member>
-        <member name="M:listelab_contrato.Controllers.ControladorPadrao`2.Get(System.Int32)">
+        <member name="M:listelab_contrato.Controllers.ControladorPadrao`3.Get(`2)">
             <summary>
             Retorna a questão discursiva do código informado.
             </summary>
-            <param name="codigo">O código da questão discursiva que se deseja buscar.</param>
+            <param name="filtro">O filtro de questão.</param>
             <returns>Retorna objeto de resposta de sucesso ou falha, contendo o objeto desejado, caso sucesso.</returns>
         </member>
-        <member name="M:listelab_contrato.Controllers.ControladorPadrao`2.Cadastre(`0)">
+        <member name="M:listelab_contrato.Controllers.ControladorPadrao`3.Cadastre(`0)">
             <summary>
             Cadastra uma questão discursiva.
             </summary>
             <param name="questao">A questão discursiva que se deseja cadastrar.</param>
             <returns>Retorna objeto com resultado da requisição.</returns>
         </member>
-        <member name="M:listelab_contrato.Controllers.ControladorPadrao`2.Atualize(`0)">
+        <member name="M:listelab_contrato.Controllers.ControladorPadrao`3.Atualize(`0)">
             <summary>
             Atualiza uma questão discursiva.
             </summary>
             <param name="objeto">O objeto para atualização.</param>
             <returns>Retorna objeto com resultado da requisição.</returns>
         </member>
-        <member name="M:listelab_contrato.Controllers.ControladorPadrao`2.Delete(System.Int32)">
+        <member name="M:listelab_contrato.Controllers.ControladorPadrao`3.Delete(System.Int32)">
             <summary>
             Exclue uma questão discursiva.
             </summary>

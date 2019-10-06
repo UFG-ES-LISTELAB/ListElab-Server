@@ -1,6 +1,7 @@
 ﻿using System;
 using listelab_contrato.RequestObject;
 using listelab_dominio;
+using listelab_dominio.Conceitos.Filtro;
 using listelab_dominio.InterfaceDeServico;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,7 +14,7 @@ namespace listelab_contrato.Controllers
     /// <typeparam name="S">Interface de serviço do objeto.</typeparam>
     [Route("api/[controller]")]
     [ApiController]
-    public class ControladorPadrao<T, S> : ControllerBase where S : IServicoPadrao<T>
+    public class ControladorPadrao<T, S, F> : ControllerBase where S : IServicoPadrao<T> where F : Filtro
     {
         /// <summary>
         /// Retorna o serviço.
@@ -46,14 +47,15 @@ namespace listelab_contrato.Controllers
         /// <summary>
         /// Retorna a questão discursiva do código informado.
         /// </summary>
-        /// <param name="codigo">O código da questão discursiva que se deseja buscar.</param>
+        /// <param name="filtro">O filtro de questão.</param>
         /// <returns>Retorna objeto de resposta de sucesso ou falha, contendo o objeto desejado, caso sucesso.</returns>
-        [HttpGet("{codigo}")]
-        public ActionResult<DtoResultado<T>> Get(int codigo)
+        [HttpPost]
+        [Route("consulte")]
+        public ActionResult<DtoResultado<T>> Get([FromBody] F filtro)
         {
             try
             {
-                var questao = Servico().Consulte(codigo);
+                var questao = Servico().Consulte(filtro);
 
                 return DtoResultado<T>.ObtenhaResultado(questao, "Consulta realizada sem erros");
             }
