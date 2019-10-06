@@ -30,7 +30,7 @@ namespace listelab_contrato.Controllers
         /// </summary>
         /// <returns>Retorna um objeto de sucesso ou falha e a lista desejada, caso sucesso.</returns>
         [HttpGet]
-        public ActionResult<DtoResultado<T>> Get()
+        public ActionResult<DtoResultado<T>> ConsulteLista()
         {
             try
             {
@@ -51,7 +51,7 @@ namespace listelab_contrato.Controllers
         /// <returns>Retorna objeto de resposta de sucesso ou falha, contendo o objeto desejado, caso sucesso.</returns>
         [HttpPost]
         [Route("consulte")]
-        public ActionResult<DtoResultado<T>> Get([FromBody] F filtro)
+        public ActionResult<DtoResultado<T>> ConsulteComFiltro([FromBody] F filtro)
         {
             try
             {

@@ -17,13 +17,13 @@
             </summary>
             <returns>A instância de serviço.</returns>
         </member>
-        <member name="M:listelab_contrato.Controllers.ControladorPadrao`3.Get">
+        <member name="M:listelab_contrato.Controllers.ControladorPadrao`3.ConsulteLista">
             <summary>
             Lista todas as questões discursivas cadastradas.
             </summary>
             <returns>Retorna um objeto de sucesso ou falha e a lista desejada, caso sucesso.</returns>
         </member>
-        <member name="M:listelab_contrato.Controllers.ControladorPadrao`3.Get(`2)">
+        <member name="M:listelab_contrato.Controllers.ControladorPadrao`3.ConsulteComFiltro(`2)">
             <summary>
             Retorna a questão discursiva do código informado.
             </summary>
