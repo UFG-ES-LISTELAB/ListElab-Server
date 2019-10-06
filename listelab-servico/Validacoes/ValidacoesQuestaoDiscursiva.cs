@@ -2,12 +2,12 @@
 using FluentValidation;
 using System.Collections.Generic;
 using System.Linq;
-using listelab_dominio.Conceitos.RespostaObj;
-using listelab_dominio.Conceitos.QuestaoObj;
+using listelab_dominio.Conceitos.Resposta;
+using listelab_dominio.Conceitos.Questao;
 
 namespace listelab_servico.Validacoes
 {
-    public class ValidacoesQuestaoDiscursiva : ValidadorPadrao<QuestaoDiscursiva>
+    public class ValidacoesQuestaoDiscursiva : ValidadorPadrao<Questao<Discursiva>>
     {
         /// <summary>
         /// Número do requisito.
@@ -66,7 +66,7 @@ namespace listelab_servico.Validacoes
         {
         }
 
-        private bool ValidePalavrasChaves(IList<PalavrasChaves> palavras)
+        private bool ValidePalavrasChaves(IList<PalavraChave> palavras)
         {
             if (palavras == null)
             {

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace listelab_dominio.Conceitos.RespostaObj
+namespace listelab_dominio.Conceitos.Resposta
 {
-    public class RespostaObjetiva
+    public class Objetiva
     {
         public string AlternativaCorreta { get; set; }
     }

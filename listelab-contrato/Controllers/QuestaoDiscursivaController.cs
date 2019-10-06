@@ -2,8 +2,8 @@
 using listelab_contrato.RequestObject;
 using listelab_dominio;
 using listelab_dominio.Conceitos;
-using listelab_dominio.Conceitos.QuestaoObj;
-using listelab_dominio.Conceitos.RespostaObj;
+using listelab_dominio.Conceitos.Questao;
+using listelab_dominio.Conceitos.Resposta;
 using listelab_dominio.InterfaceDeServico;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,27 +12,26 @@ namespace listelab_contrato.Controllers
     /// <summary>
     /// Api para o conceito de questão discursiva.
     /// </summary>
-    [Route("api/[controller]")]
+    [Route("api/questao_discursiva")]
     [ApiController]
-    public class QuestaoController : ControllerBase
+    public class QuestaoDiscursivaController : ControladorPadrao<IServicoQuestaoDiscursiva>
     {
         /// <summary>
         /// Lista todas as questões discursivas cadastradas.
         /// </summary>
         /// <returns>Retorna um objeto de sucesso ou falha e a lista desejada, caso sucesso.</returns>
         [HttpGet]
-        public ActionResult<ObjetoResult<Questao<RespostaDiscursiva>>> Get()
+        public ActionResult<DtoResultado<Questao<Discursiva>>> Get()
         {
             try
             {
-                var servico = FabricaGenerica.Crie<IServicoQuestaoDiscursiva>();
-                var questao = servico.ConsulteLista();
+                var questao = Servico.ConsulteLista();
 
-                return ObjetoResult<Questao<RespostaDiscursiva>>.ReturnResult(questao, "Consulta realizada sem erros");
+                return DtoResultado<Questao<Discursiva>>.ObtenhaResultado(questao, "Consulta realizada sem erros");
             }
             catch (Exception e)
             {
-                return ObjetoResult<Questao<RespostaDiscursiva>>.ReturnResultError(e);
+                return DtoResultado<Questao<Discursiva>>.ObtenhaResultado(e);
             }
         }
 
@@ -42,18 +41,17 @@ namespace listelab_contrato.Controllers
         /// <param name="codigo">O código da questão discursiva que se deseja buscar.</param>
         /// <returns>Retorna objeto de resposta de sucesso ou falha, contendo o objeto desejado, caso sucesso.</returns>
         [HttpGet("{codigo}")]
-        public ActionResult<ObjetoResult<Questao<RespostaDiscursiva>>> Get(int codigo)
+        public ActionResult<DtoResultado<Questao<Discursiva>>> Get(int codigo)
         {
             try
             {
-                var servico = FabricaGenerica.Crie<IServicoQuestaoDiscursiva>();
-                var questao = servico.Consulte(codigo);
+                var questao = Servico.Consulte(codigo);
 
-                return ObjetoResult<Questao<RespostaDiscursiva>>.ReturnResult(questao, "Consulta realizada sem erros");
+                return DtoResultado<Questao<Discursiva>>.ObtenhaResultado(questao, "Consulta realizada sem erros");
             }
             catch(Exception e)
             {
-                return ObjetoResult<Questao<RespostaDiscursiva>>.ReturnResultError(e);
+                return DtoResultado<Questao<Discursiva>>.ObtenhaResultado(e);
             }
         }
 
@@ -64,17 +62,16 @@ namespace listelab_contrato.Controllers
         /// <returns>Retorna objeto com resultado da requisição.</returns>
         [HttpPost]
         [Route("cadastre")]
-        public ActionResult<ObjetoResult<QuestaoDiscursiva>> Cadastre([FromBody] QuestaoDiscursiva questao)
+        public ActionResult<DtoResultado<Questao<Discursiva>>> Cadastre([FromBody] Questao<Discursiva> questao)
         {
             try
             {
-                var servico = FabricaGenerica.Crie<IServicoQuestaoDiscursiva>();
-                servico.Cadastre(questao);
-                return ObjetoResult<QuestaoDiscursiva>.ReturnResult("Cadastro realizado sem erros");
+                Servico.Cadastre(questao);
+                return DtoResultado<Questao<Discursiva>>.ObtenhaResultado("Cadastro realizado sem erros");
             }
             catch (Exception e)
             {
-                return ObjetoResult<QuestaoDiscursiva>.ReturnResultError(e);
+                return DtoResultado<Questao<Discursiva>>.ObtenhaResultado(e);
             }
         }
 
@@ -85,17 +82,16 @@ namespace listelab_contrato.Controllers
         /// <returns>Retorna objeto com resultado da requisição.</returns>
         [HttpPost]
         [Route("atualize")]
-        public ActionResult<ObjetoResult<QuestaoDiscursiva>> Atualize([FromBody] QuestaoDiscursiva objeto)
+        public ActionResult<DtoResultado<Questao<Discursiva>>> Atualize([FromBody] Questao<Discursiva> objeto)
         {
             try
             {
-                var servico = FabricaGenerica.Crie<IServicoQuestaoDiscursiva>();
-                servico.Atualize(objeto);
-                return ObjetoResult<QuestaoDiscursiva>.ReturnResult("Atualização realizada sem erros");
+                Servico.Atualize(objeto);
+                return DtoResultado<Questao<Discursiva>>.ObtenhaResultado("Atualização realizada sem erros");
             }
             catch (Exception e)
             {
-                return ObjetoResult<QuestaoDiscursiva>.ReturnResultError(e);
+                return DtoResultado<Questao<Discursiva>>.ObtenhaResultado(e);
             }
         }
 
@@ -105,18 +101,18 @@ namespace listelab_contrato.Controllers
         /// <param name="codigo">Código da questão discursiva que se deseja excluir.</param>
         /// <returns>Retorna objeto com resultado da requisição.</returns>
         [HttpDelete("{codigo}")]
-        public ActionResult<ObjetoResult<Questao<RespostaDiscursiva>>> Delete(int codigo)
+        public ActionResult<DtoResultado<Questao<Discursiva>>> Delete(int codigo)
         {
             try
             {
                 var servico = FabricaGenerica.Crie<IServicoQuestaoDiscursiva>();
                 servico.Exclua(codigo);
 
-                return ObjetoResult<Questao<RespostaDiscursiva>>.ReturnResult("Exclusão realizada sem erros");
+                return DtoResultado<Questao<Discursiva>>.ObtenhaResultado("Exclusão realizada sem erros");
             }
             catch (Exception e)
             {
-                return ObjetoResult<Questao<RespostaDiscursiva>>.ReturnResultError(e);
+                return DtoResultado<Questao<Discursiva>>.ObtenhaResultado(e);
             }
         }
     }
