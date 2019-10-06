@@ -15,11 +15,5 @@ namespace listelab_dominio.Conceitos.Resposta
         /// Representa o peso da palavra chave.
         /// </summary>
         public int Peso { get; set; }
-
-        public PalavraChave(int peso, string descricao)
-        {
-            this.Peso = peso;
-            this.Descricao = descricao;
-        }
     }
 }

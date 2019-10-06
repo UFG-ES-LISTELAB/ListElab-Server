@@ -37,9 +37,9 @@ namespace listelab_servico.Servico
         /// <param name="objeto">Objeto a ser cadastrado.</param>
         public virtual void Cadastre(T objeto)
         {
-            //Validador().AssineRegrasCadastro();
+            Validador().AssineRegrasCadastro();
 
-            //Validador().Valide(objeto);
+            Validador().Valide(objeto);
 
             Repositorio().Cadastre(objeto);
         }

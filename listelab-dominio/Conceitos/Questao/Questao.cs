@@ -1,5 +1,4 @@
 ﻿using listelab_dominio.Abstrato;
-using listelab_dominio.Conceitos.Resposta;
 using listelab_dominio.CustomAttributes;
 using listelab_dominio.Enumeradores;
 using System.Collections.Generic;
@@ -26,11 +25,15 @@ namespace listelab_dominio.Conceitos.Questao
         /// Representa o nível de dificuldade, indo de 1 à 5.
         /// </summary>
         public EnumNivelDificuldade NivelDificuldade { get; set; }
+        
         /// <summary>
         /// Tags para pesquisa da questão
         /// </summary>
         public List<string> Tags { get; set; }
 
+        /// <summary>
+        /// Tipo de questão.
+        /// </summary>
         public EnumTipoQuestao Tipo { get; set; }
 
         /// <summary>
