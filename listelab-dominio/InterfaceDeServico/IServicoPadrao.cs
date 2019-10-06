@@ -30,7 +30,7 @@ namespace listelab_dominio.InterfaceDeServico
         /// </summary>
         /// <param name="filtro">Filtro para consultar objeto.</param>
         /// <returns></returns>
-        T Consulte(Filtro filtro);
+        List<T> Consulte(Filtro filtro);
 
         /// <summary>
         /// Consulta todos os objetos que obedecem uma condição.
