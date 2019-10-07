@@ -4,44 +4,57 @@
         <name>listelab-contrato</name>
     </assembly>
     <members>
-        <member name="T:listelab_contrato.Controllers.QuestaoDiscursivaController">
+        <member name="T:listelab_contrato.Controllers.ControladorPadrao`3">
             <summary>
-            Api para o conceito de questão discursiva.
+            Controlador Controaldor com rotinas padrão da api.
             </summary>
+            <typeparam name="T">Objeto a ser trafegado.</typeparam>
+            <typeparam name="S">Interface de serviço do objeto.</typeparam>
         </member>
-        <member name="M:listelab_contrato.Controllers.QuestaoDiscursivaController.Get">
+        <member name="M:listelab_contrato.Controllers.ControladorPadrao`3.Servico">
+            <summary>
+            Retorna o serviço.
+            </summary>
+            <returns>A instância de serviço.</returns>
+        </member>
+        <member name="M:listelab_contrato.Controllers.ControladorPadrao`3.ConsulteLista">
             <summary>
             Lista todas as questões discursivas cadastradas.
             </summary>
             <returns>Retorna um objeto de sucesso ou falha e a lista desejada, caso sucesso.</returns>
         </member>
-        <member name="M:listelab_contrato.Controllers.QuestaoDiscursivaController.Get(System.Int32)">
+        <member name="M:listelab_contrato.Controllers.ControladorPadrao`3.ConsulteComFiltro(`2)">
             <summary>
             Retorna a questão discursiva do código informado.
             </summary>
-            <param name="codigo">O código da questão discursiva que se deseja buscar.</param>
+            <param name="filtro">O filtro de questão.</param>
             <returns>Retorna objeto de resposta de sucesso ou falha, contendo o objeto desejado, caso sucesso.</returns>
         </member>
-        <member name="M:listelab_contrato.Controllers.QuestaoDiscursivaController.Cadastre(listelab_dominio.Conceitos.QuestaoObj.QuestaoDiscursiva)">
+        <member name="M:listelab_contrato.Controllers.ControladorPadrao`3.Cadastre(`0)">
             <summary>
             Cadastra uma questão discursiva.
             </summary>
             <param name="questao">A questão discursiva que se deseja cadastrar.</param>
             <returns>Retorna objeto com resultado da requisição.</returns>
         </member>
-        <member name="M:listelab_contrato.Controllers.QuestaoDiscursivaController.Atualize(listelab_dominio.Conceitos.QuestaoObj.QuestaoDiscursiva)">
+        <member name="M:listelab_contrato.Controllers.ControladorPadrao`3.Atualize(`0)">
             <summary>
             Atualiza uma questão discursiva.
             </summary>
             <param name="objeto">O objeto para atualização.</param>
             <returns>Retorna objeto com resultado da requisição.</returns>
         </member>
-        <member name="M:listelab_contrato.Controllers.QuestaoDiscursivaController.Delete(System.Int32)">
+        <member name="M:listelab_contrato.Controllers.ControladorPadrao`3.Delete(System.Int32)">
             <summary>
             Exclue uma questão discursiva.
             </summary>
             <param name="codigo">Código da questão discursiva que se deseja excluir.</param>
             <returns>Retorna objeto com resultado da requisição.</returns>
+        </member>
+        <member name="T:listelab_contrato.Controllers.QuestaoDiscursivaController">
+            <summary>
+            Api para o conceito de questão discursiva.
+            </summary>
         </member>
         <member name="M:listelab_contrato.Controllers.UsuarioController.Cadastre(listelab_dominio.Conceitos.UsuarioObj.Login)">
             <summary>
@@ -50,21 +63,42 @@
             <param name="login">O usuário buscando autenticação.</param>
             <returns>Retorna objeto com resultado da requisição.</returns>
         </member>
-        <member name="M:listelab_contrato.RequestObject.ObjetoResult`1.ReturnResultError(System.Exception)">
+        <member name="T:listelab_contrato.RequestObject.DtoResultado`1">
+            <summary>
+            Representa um objeto para transferência de dados.
+            </summary>
+            <typeparam name="T">O tipo de objeto de transferência de dados.</typeparam>
+        </member>
+        <member name="P:listelab_contrato.RequestObject.DtoResultado`1.Mensagem">
+            <summary>
+            Mensagem retornada ao usuário.
+            </summary>
+        </member>
+        <member name="P:listelab_contrato.RequestObject.DtoResultado`1.Sucesso">
+            <summary>
+            Se houve sucesso ou não.
+            </summary>
+        </member>
+        <member name="P:listelab_contrato.RequestObject.DtoResultado`1.Resultado">
+            <summary>
+            Objeto retornado como resposta.
+            </summary>
+        </member>
+        <member name="M:listelab_contrato.RequestObject.DtoResultado`1.ObtenhaResultado(System.Exception)">
             <summary>
             Retorna um objeto de exceção.
             </summary>
             <param name="e">A mensagem da exception gerada.</param>
             <returns>Retorna o objeto com o erro.</returns>
         </member>
-        <member name="M:listelab_contrato.RequestObject.ObjetoResult`1.ReturnResult(System.String)">
+        <member name="M:listelab_contrato.RequestObject.DtoResultado`1.ObtenhaResultado(System.String)">
             <summary>
             Cria um objeto sem retorno.
             </summary>
             <param name="menssagem">Mensagem a ser apresentada.</param>
             <returns>Retorna objeto sem retorno.</returns>
         </member>
-        <member name="M:listelab_contrato.RequestObject.ObjetoResult`1.ReturnResult(System.Object,System.String)">
+        <member name="M:listelab_contrato.RequestObject.DtoResultado`1.ObtenhaResultado(System.Object,System.String)">
             <summary>
             Cria um objeto com retorno.
             </summary>

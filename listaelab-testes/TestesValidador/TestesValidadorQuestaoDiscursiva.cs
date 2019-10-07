@@ -1,6 +1,6 @@
 ﻿using listelab_dominio.Conceitos;
-using listelab_dominio.Conceitos.QuestaoObj;
-using listelab_dominio.Conceitos.RespostaObj;
+using listelab_dominio.Conceitos.Questao;
+using listelab_dominio.Conceitos.Resposta;
 using listelab_servico.Validacoes;
 using NUnit.Framework;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Collections.Generic;
 namespace listaelab_testes.TestesValidador
 {
     [TestFixture]
-    public class TestesValidadorQuestaoDiscursiva : TesteBase<QuestaoDiscursiva>
+    public class TestesValidadorQuestaoDiscursiva : TesteBase<Questao<Discursiva>>
     {
         private ValidacoesQuestaoDiscursiva _validador;
 
@@ -19,25 +19,13 @@ namespace listaelab_testes.TestesValidador
         }
 
         [Test, Sequential]
-        public void TesteRegraCodigoValido(
-            [Values(-1, 0, 1, 10000)] int codigo,
-            [Values(true, true, false, true)] bool ehParaDarErro)
-        {
-            _validador.AssineRegraCodigoValido();
-
-            var questaoDiscursiva = new QuestaoDiscursiva { Codigo = codigo };
-
-            EfetueChecagem(ehParaDarErro, questaoDiscursiva, _validador, "O código da questão deve ser superior à 0 e menor ou igual à 9999");
-        }
-
-        [Test, Sequential]
         public void TesteRegraDeveTerEnunciado(
             [Values(null, "", "Enunciado.", " ")] string enunciado,
             [Values(true, true, false, true)] bool ehParaDarErro)
         {
             _validador.AssineRegraDeveTerEnunciado();
 
-            var questaoDiscursiva = new QuestaoDiscursiva { Enunciado = enunciado };
+            var questaoDiscursiva = new Questao<Discursiva> { Enunciado = enunciado };
 
             EfetueChecagem(ehParaDarErro, questaoDiscursiva, _validador, "O enunciado da questão deve ser informado");
         }
@@ -47,20 +35,20 @@ namespace listaelab_testes.TestesValidador
         {
             _validador.AssineRegraPalavraChaveInformado();
 
-            var questaoDiscursiva = palavraChaveInformado ? new QuestaoDiscursiva
+            var questaoDiscursiva = palavraChaveInformado ? new Questao<Discursiva>()
             {
-                RespostaEsperada = new RespostaDiscursiva
+                RespostaEsperada = new Discursiva
                 {
-                    PalavrasChaves = new List<PalavrasChaves>
+                    PalavrasChaves = new List<PalavraChave>
                     {
-                        new PalavrasChaves
+                        new PalavraChave
                         {
-                            PalavraChave = "Dilma",
+                            Descricao = "Dilma",
                             Peso = 10
                         }
                     }
                 }
-            } : new QuestaoDiscursiva { RespostaEsperada = new RespostaDiscursiva() };
+            } : new Questao<Discursiva> { RespostaEsperada = new Discursiva() };
 
             EfetueChecagem(!palavraChaveInformado, questaoDiscursiva, _validador, "Pelo menos uma palavra chave deve ser informada");
         }

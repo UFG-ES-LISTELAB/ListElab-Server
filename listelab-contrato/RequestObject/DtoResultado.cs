@@ -1,14 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace listelab_contrato.RequestObject
 {
-    public class ObjetoResult<T>
+    /// <summary>
+    /// Representa um objeto para transferência de dados.
+    /// </summary>
+    /// <typeparam name="T">O tipo de objeto de transferência de dados.</typeparam>
+    public class DtoResultado<T>
     {
+        /// <summary>
+        /// Mensagem retornada ao usuário.
+        /// </summary>
         public string Mensagem { get; set; }
+        /// <summary>
+        /// Se houve sucesso ou não.
+        /// </summary>
         public bool Sucesso { get; set; }
+        /// <summary>
+        /// Objeto retornado como resposta.
+        /// </summary>
         public object Resultado { get; set; }
 
         /// <summary>
@@ -16,9 +26,9 @@ namespace listelab_contrato.RequestObject
         /// </summary>
         /// <param name="e">A mensagem da exception gerada.</param>
         /// <returns>Retorna o objeto com o erro.</returns>
-        public static ObjetoResult<T> ReturnResultError(Exception e)
+        public static DtoResultado<T> ObtenhaResultado(Exception e)
         {
-            return new ObjetoResult<T>
+            return new DtoResultado<T>
             {
                 Mensagem = e.Message,
                 Resultado = null,
@@ -31,9 +41,9 @@ namespace listelab_contrato.RequestObject
         /// </summary>
         /// <param name="menssagem">Mensagem a ser apresentada.</param>
         /// <returns>Retorna objeto sem retorno.</returns>
-        public static ObjetoResult<T> ReturnResult(string menssagem)
+        public static DtoResultado<T> ObtenhaResultado(string menssagem)
         {
-            return new ObjetoResult<T>
+            return new DtoResultado<T>
             {
                 Mensagem = menssagem,
                 Resultado = null,
@@ -47,9 +57,9 @@ namespace listelab_contrato.RequestObject
         /// <param name="value">Valor de retorno.</param>
         /// <param name="menssagem">Mensagem de retorno.</param>
         /// <returns></returns>
-        public static ObjetoResult<T> ReturnResult(object value, string menssagem)
+        public static DtoResultado<T> ObtenhaResultado(object value, string menssagem)
         {
-            return new ObjetoResult<T>
+            return new DtoResultado<T>
             {
                 Mensagem = menssagem,
                 Resultado = value,

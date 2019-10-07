@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace listelab_dominio.Conceitos.RespostaObj
+namespace listelab_dominio.Conceitos.Resposta
 {
-    public class PalavrasChaves
+    public class PalavraChave
     {
         /// <summary>
         /// Representa a palavra chave.
         /// </summary>
-        public string PalavraChave { get; set; }
+        public string Descricao { get; set; }
 
         /// <summary>
         /// Representa o peso da palavra chave.

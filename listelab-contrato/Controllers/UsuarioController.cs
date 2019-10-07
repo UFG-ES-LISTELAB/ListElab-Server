@@ -22,17 +22,17 @@ namespace listelab_contrato.Controllers
         /// <returns>Retorna objeto com resultado da requisição.</returns>
         [HttpPost]
         [Route("login")]
-        public ActionResult<ObjetoResult<Usuario>> Cadastre([FromBody] Login login)
+        public ActionResult<DtoResultado<Usuario>> Cadastre([FromBody] Login login)
         {
             try
             {
                 var servico = new ServicoBearerAuthentication();
                 var token = servico.EfetueLogin(login.Email, login.Password);
-                return ObjetoResult<Usuario>.ReturnResult(token, "Usuário logado");
+                return DtoResultado<Usuario>.ObtenhaResultado(token, "Usuário logado");
             }
             catch (Exception e)
             {
-                return ObjetoResult<Usuario>.ReturnResultError(e);
+                return DtoResultado<Usuario>.ObtenhaResultado(e);
             }
         }
     }

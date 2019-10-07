@@ -1,4 +1,5 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,11 +12,13 @@ namespace listelab_dominio.Abstrato
         /// O id do objeto.
         /// </summary>
         [BsonId]
+        [JsonIgnore]
         public Guid Id { get; set; }
 
         /// <summary>
         /// Código que representa o conceito.
         /// </summary>
+        [JsonIgnore]
         public int Codigo { get; set; }
 
         /// <summary>
