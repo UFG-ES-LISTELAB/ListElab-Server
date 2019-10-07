@@ -37,9 +37,9 @@ namespace listelab_data.Repositorios
             });
         }
 
-        public T Consulte(Expression<Func<T, bool>> condicao)
+        public List<T> Consulte(Expression<Func<T, bool>> condicao)
         {
-            return Collection().Find(condicao).FirstOrDefault();
+            return Collection().Find(condicao).ToList();
         }
 
         public bool ItemExiste(Expression<Func<T, bool>> condicao)

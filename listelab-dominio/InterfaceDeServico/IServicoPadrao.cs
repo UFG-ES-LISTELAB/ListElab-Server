@@ -1,4 +1,5 @@
-﻿using System;
+﻿using listelab_dominio.Conceitos.Filtro;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -27,9 +28,9 @@ namespace listelab_dominio.InterfaceDeServico
         /// <summary>
         /// Consulta o primeiro objeto genérico que atende uma condição.
         /// </summary>
-        /// <param name="codigo">O código que será usado como filtro.</param>
+        /// <param name="filtro">Filtro para consultar objeto.</param>
         /// <returns></returns>
-        T Consulte(int codigo);
+        List<T> Consulte(Filtro filtro);
 
         /// <summary>
         /// Consulta todos os objetos que obedecem uma condição.
