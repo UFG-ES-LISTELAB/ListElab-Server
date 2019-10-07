@@ -56,7 +56,7 @@ namespace listelab_servico.Servico
             string saltedPassword = password + salt;
             string hash = ComputeSha256Hash(saltedPassword);
 
-            var usuario = Repositorio().Consulte(x => x.Email.Equals(email) && x.Password.Equals(hash));
+            var usuario = Repositorio().ConsulteUm(x => x.Email.Equals(email) && x.Password.Equals(hash));
 
             if (usuario != null && usuario.Password.Equals(hash))
             {
@@ -76,14 +76,14 @@ namespace listelab_servico.Servico
 
         public async Task<bool> IsValidUserAsync(string token)
         {
-            Usuario usuario = Repositorio().Consulte(x => x.Token.Equals(token));
+            Usuario usuario = Repositorio().ConsulteUm(x => x.Token.Equals(token));
             bool isValidUser = usuario != null && usuario.Token.Equals(token) && usuario.Token.Equals(GetCurrentToken(usuario));
             return isValidUser;
         }
 
         public string GetRole(string token)
         {
-            string role = Repositorio().Consulte(x => x.Token.Equals(token)).Role.ToString();
+            string role = Repositorio().ConsulteUm(x => x.Token.Equals(token)).Role.ToString();
             role = role ?? "-1";
             return role;
         }
