@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using listelab_contrato.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -42,6 +43,16 @@ namespace listelab_contrato
             });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddAuthentication(AuthenticationDefaults.BearerAuthenticationScheme)
+                    .AddScheme<BearerAuthenticationOptions, BearerAuthenticationHandler>(
+                        AuthenticationDefaults.BearerAuthenticationScheme,
+                        options =>
+                        {
+                            options.Realm = "ListElab";
+                        }
+                    );
+            services.AddSingleton<IPostConfigureOptions<BearerAuthenticationOptions>, BearerAuthenticationPostConfigureOptions>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,8 +69,8 @@ namespace listelab_contrato
             }
 
             app.UseHttpsRedirection();
+            app.UseAuthentication();
             app.UseMvc();
-
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {

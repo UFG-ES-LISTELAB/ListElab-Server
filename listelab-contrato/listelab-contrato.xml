@@ -56,6 +56,13 @@
             Api para o conceito de questão discursiva.
             </summary>
         </member>
+        <member name="M:listelab_contrato.Controllers.UsuarioController.Cadastre(listelab_dominio.Conceitos.UsuarioObj.Login)">
+            <summary>
+            Realiza login.
+            </summary>
+            <param name="login">O usuário buscando autenticação.</param>
+            <returns>Retorna objeto com resultado da requisição.</returns>
+        </member>
         <member name="T:listelab_contrato.RequestObject.DtoResultado`1">
             <summary>
             Representa um objeto para transferência de dados.

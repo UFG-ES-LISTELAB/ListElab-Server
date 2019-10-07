@@ -42,6 +42,11 @@ namespace listelab_data.Repositorios
             return Collection().Find(condicao).ToList();
         }
 
+        public T ConsulteUm(Expression<Func<T, bool>> condicao)
+        {
+            return Collection().Find(condicao).FirstOrDefault();
+        }
+
         public bool ItemExiste(Expression<Func<T, bool>> condicao)
         {
             return Collection().CountDocuments(condicao) > 0;

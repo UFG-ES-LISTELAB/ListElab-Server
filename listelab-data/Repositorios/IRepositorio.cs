@@ -40,6 +40,13 @@ namespace listelab_data.Repositorios
         List<T> Consulte(Expression<Func<T, bool>> condicao);
 
         /// <summary>
+        /// Consulta o primeiro objeto genérico que atende uma condição.
+        /// </summary>
+        /// <param name="condicao">Filtro que indica qual será consultado.</param>
+        /// <returns></returns>
+        T ConsulteUm(Expression<Func<T, bool>> condicao);
+
+        /// <summary>
         /// Verifica se um item está cadastrado.
         /// </summary>
         /// <param name="condicao">Condição para se achar o item.</param>

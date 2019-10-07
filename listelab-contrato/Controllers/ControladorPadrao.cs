@@ -3,6 +3,7 @@ using listelab_contrato.RequestObject;
 using listelab_dominio;
 using listelab_dominio.Conceitos.Filtro;
 using listelab_dominio.InterfaceDeServico;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace listelab_contrato.Controllers
@@ -30,6 +31,7 @@ namespace listelab_contrato.Controllers
         /// </summary>
         /// <returns>Retorna um objeto de sucesso ou falha e a lista desejada, caso sucesso.</returns>
         [HttpGet]
+        [Authorize]
         public ActionResult<DtoResultado<T>> ConsulteLista()
         {
             try
@@ -51,6 +53,7 @@ namespace listelab_contrato.Controllers
         /// <returns>Retorna objeto de resposta de sucesso ou falha, contendo o objeto desejado, caso sucesso.</returns>
         [HttpPost]
         [Route("consulte")]
+        [Authorize]
         public ActionResult<DtoResultado<T>> ConsulteComFiltro([FromBody] F filtro)
         {
             try
@@ -72,6 +75,7 @@ namespace listelab_contrato.Controllers
         /// <returns>Retorna objeto com resultado da requisição.</returns>
         [HttpPost]
         [Route("cadastre")]
+        [Authorize(Roles = "0,1")]
         public ActionResult<DtoResultado<T>> Cadastre([FromBody] T questao)
         {
             try
@@ -92,6 +96,7 @@ namespace listelab_contrato.Controllers
         /// <returns>Retorna objeto com resultado da requisição.</returns>
         [HttpPost]
         [Route("atualize")]
+        [Authorize(Roles = "0,1")]
         public ActionResult<DtoResultado<T>> Atualize([FromBody] T objeto)
         {
             try
@@ -111,6 +116,7 @@ namespace listelab_contrato.Controllers
         /// <param name="codigo">Código da questão discursiva que se deseja excluir.</param>
         /// <returns>Retorna objeto com resultado da requisição.</returns>
         [HttpDelete("{codigo}")]
+        [Authorize(Roles = "0,1")]
         public ActionResult<DtoResultado<T>> Delete(int codigo)
         {
             try
