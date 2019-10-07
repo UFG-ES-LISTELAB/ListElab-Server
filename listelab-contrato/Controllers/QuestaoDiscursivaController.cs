@@ -5,6 +5,7 @@ using listelab_dominio.Conceitos;
 using listelab_dominio.Conceitos.QuestaoObj;
 using listelab_dominio.Conceitos.RespostaObj;
 using listelab_dominio.InterfaceDeServico;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace listelab_contrato.Controllers
@@ -21,6 +22,7 @@ namespace listelab_contrato.Controllers
         /// </summary>
         /// <returns>Retorna um objeto de sucesso ou falha e a lista desejada, caso sucesso.</returns>
         [HttpGet]
+        [Authorize]
         public ActionResult<ObjetoResult<Questao<RespostaDiscursiva>>> Get()
         {
             try
@@ -42,6 +44,7 @@ namespace listelab_contrato.Controllers
         /// <param name="codigo">O código da questão discursiva que se deseja buscar.</param>
         /// <returns>Retorna objeto de resposta de sucesso ou falha, contendo o objeto desejado, caso sucesso.</returns>
         [HttpGet("{codigo}")]
+        [Authorize]
         public ActionResult<ObjetoResult<Questao<RespostaDiscursiva>>> Get(int codigo)
         {
             try
@@ -51,7 +54,7 @@ namespace listelab_contrato.Controllers
 
                 return ObjetoResult<Questao<RespostaDiscursiva>>.ReturnResult(questao, "Consulta realizada sem erros");
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return ObjetoResult<Questao<RespostaDiscursiva>>.ReturnResultError(e);
             }
@@ -63,6 +66,7 @@ namespace listelab_contrato.Controllers
         /// <param name="questao">A questão discursiva que se deseja cadastrar.</param>
         /// <returns>Retorna objeto com resultado da requisição.</returns>
         [HttpPost]
+        [Authorize(Roles = "0,1")]
         [Route("cadastre")]
         public ActionResult<ObjetoResult<QuestaoDiscursiva>> Cadastre([FromBody] QuestaoDiscursiva questao)
         {
@@ -84,6 +88,7 @@ namespace listelab_contrato.Controllers
         /// <param name="objeto">O objeto para atualização.</param>
         /// <returns>Retorna objeto com resultado da requisição.</returns>
         [HttpPost]
+        [Authorize(Roles = "0,1")]
         [Route("atualize")]
         public ActionResult<ObjetoResult<QuestaoDiscursiva>> Atualize([FromBody] QuestaoDiscursiva objeto)
         {
@@ -105,6 +110,8 @@ namespace listelab_contrato.Controllers
         /// <param name="codigo">Código da questão discursiva que se deseja excluir.</param>
         /// <returns>Retorna objeto com resultado da requisição.</returns>
         [HttpDelete("{codigo}")]
+        [Authorize(Roles = "0,1")]
+
         public ActionResult<ObjetoResult<Questao<RespostaDiscursiva>>> Delete(int codigo)
         {
             try
