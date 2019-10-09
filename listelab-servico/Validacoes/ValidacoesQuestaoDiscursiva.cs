@@ -12,16 +12,6 @@ namespace listelab_servico.Validacoes
         /// <summary>
         /// Número do requisito.
         /// </summary>
-        public void AssineRegraCodigoValido()
-        {
-            RuleFor(questao => questao.Codigo)
-                .Must(codigo => codigo > 0 && codigo < 9999)
-                .WithMessage("O código da questão deve ser superior à 0 e menor ou igual à 9999");
-        }
-
-        /// <summary>
-        /// Número do requisito.
-        /// </summary>
         public void AssineRegraDeveTerEnunciado()
         {
             RuleFor(questao => questao.Enunciado)
@@ -44,7 +34,6 @@ namespace listelab_servico.Validacoes
         /// </summary>
         protected override void AssineRegrasDeCadastro()
         {
-            AssineRegraCodigoValido();
             AssineRegraPalavraChaveInformado();
             AssineRegraDeveTerEnunciado();
         }
@@ -54,7 +43,6 @@ namespace listelab_servico.Validacoes
         /// </summary>
         protected override void AssineRegrasDeAtualizacao()
         {
-            AssineRegraCodigoValido();
             AssineRegraPalavraChaveInformado();
             AssineRegraDeveTerEnunciado();
         }

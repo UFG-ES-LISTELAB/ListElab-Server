@@ -1,5 +1,7 @@
-﻿using listelab_data.Repositorios;
-using listelab_dominio.Conceitos;
+﻿using System;
+using System.Linq.Expressions;
+using listelab_data.Repositorios;
+using listelab_dominio.Conceitos.Filtro;
 using listelab_dominio.Conceitos.Questao;
 using listelab_dominio.Conceitos.Resposta;
 using listelab_dominio.InterfaceDeServico;
@@ -28,6 +30,17 @@ namespace listelab_servico.Servico
         protected override ValidadorPadrao<Questao<Discursiva>> Validador()
         {
             return _validador ?? (_validador = new ValidacoesQuestaoDiscursiva());
+        }
+
+        protected override Expression<Func<Questao<Discursiva>, bool>> ApliqueFiltro(Filtro filtro)
+        {
+            var filtroQuestao = filtro as FiltroQuestao;
+
+            Expression<Func<Questao<Discursiva>, bool>> query = x => (x.NivelDificuldade == filtroQuestao.NivelDificuldade)
+                || (x.AreaDeConhecimento == filtroQuestao.AreaDeConhecimento)
+                || (x.Tipo == filtroQuestao.Tipo);
+
+            return query;
         }
     }
 }

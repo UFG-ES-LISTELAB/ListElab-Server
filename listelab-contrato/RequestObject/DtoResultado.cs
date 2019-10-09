@@ -1,14 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace listelab_contrato.RequestObject
 {
+    /// <summary>
+    /// Representa um objeto para transferência de dados.
+    /// </summary>
+    /// <typeparam name="T">O tipo de objeto de transferência de dados.</typeparam>
     public class DtoResultado<T>
     {
+        /// <summary>
+        /// Mensagem retornada ao usuário.
+        /// </summary>
         public string Mensagem { get; set; }
+        /// <summary>
+        /// Se houve sucesso ou não.
+        /// </summary>
         public bool Sucesso { get; set; }
+        /// <summary>
+        /// Objeto retornado como resposta.
+        /// </summary>
         public object Resultado { get; set; }
 
         /// <summary>

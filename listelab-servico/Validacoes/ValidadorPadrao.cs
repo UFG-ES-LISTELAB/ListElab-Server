@@ -18,13 +18,6 @@ namespace listelab_servico.Validacoes
             }
         }
 
-        public void AssineRegraItemNaoDuplicado()
-        {
-            RuleFor(x => x.Codigo)
-                .Must(codigo => !Repositorio().ItemExiste(x => x.Codigo == codigo))
-                .WithMessage("Esse item já foi cadastrado");
-        }
-
         protected abstract void AssineRegrasDeCadastro();
 
         protected abstract void AssineRegrasDeAtualizacao();
@@ -34,7 +27,6 @@ namespace listelab_servico.Validacoes
         public void AssineRegrasCadastro()
         {
             AssineRegrasDeCadastro();
-            AssineRegraItemNaoDuplicado();
         }
 
         public void AssineRegrasAtualizacao()
