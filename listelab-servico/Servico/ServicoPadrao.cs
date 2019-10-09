@@ -1,12 +1,12 @@
 ﻿using listelab_data.Repositorios;
 using listelab_dominio.Abstrato;
-using listelab_dominio.Conceitos.Filtro;
+using listelab_dominio.Conceitos.Filtro;
 using listelab_dominio.InterfaceDeServico;
 using listelab_servico.Validacoes;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace listelab_servico.Servico
@@ -40,7 +40,7 @@ namespace listelab_servico.Servico
         /// <param name="objeto">Objeto a ser cadastrado.</param>
         public virtual void Cadastre(T objeto)
         {
-            Validador().AssineRegrasCadastro();
+            //Validador().AssineRegrasCadastro();
 
             Validador().Valide(objeto);
 
