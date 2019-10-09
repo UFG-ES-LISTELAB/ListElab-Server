@@ -121,7 +121,7 @@ namespace listelab_contrato.Controllers
         {
             try
             {
-                var servico = FabricaGenerica.Crie<IServicoQuestaoDiscursiva>();
+                var servico = FabricaGenerica.Crie<S>();
                 servico.Exclua(codigo);
 
                 return DtoResultado<T>.ObtenhaResultado("Exclusão realizada sem erros");

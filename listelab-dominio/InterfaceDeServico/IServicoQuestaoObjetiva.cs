@@ -6,7 +6,7 @@ using System.Text;
 
 namespace listelab_dominio.InterfaceDeServico
 {
-    public interface IServicoDeQuestaoObjetiva : IServicoPadrao<Questao<Objetiva>>
+    public interface IServicoQuestaoObjetiva : IServicoPadrao<Questao<Objetiva>>
     {
     }
 }
