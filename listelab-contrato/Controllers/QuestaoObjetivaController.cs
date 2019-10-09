@@ -5,7 +5,7 @@ using listelab_dominio.InterfaceDeServico;
 
 namespace listelab_contrato.Controllers
 {
-    public class QuestaoObjetivaController : ControladorPadrao<Questao<Objetiva>, IServicoDeQuestaoObjetiva, FiltroQuestao>
+    public class QuestaoObjetivaController : ControladorPadrao<Questao<Objetiva>, IServicoQuestaoObjetiva, FiltroQuestao>
     {
     }
 }
