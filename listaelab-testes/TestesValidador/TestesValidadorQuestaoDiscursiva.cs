@@ -1,5 +1,5 @@
-﻿using listelab_dominio.Conceitos;
-using listelab_dominio.Conceitos.Resposta;
+﻿using listelab_dominio.Conceitos.QuestaoObj;
+using listelab_dominio.Conceitos.RespostaObj;
 using listelab_servico.Validacoes;
 using NUnit.Framework;
 using System.Collections.Generic;

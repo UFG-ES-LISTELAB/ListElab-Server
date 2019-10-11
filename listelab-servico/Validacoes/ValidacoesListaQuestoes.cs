@@ -1,8 +1,5 @@
 ﻿using FluentValidation;
-using listelab_dominio.Conceitos;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using listelab_dominio.Conceitos.ListaObj;
 
 namespace listelab_servico.Validacoes
 {

@@ -2,7 +2,8 @@
 using FluentValidation;
 using System.Collections.Generic;
 using System.Linq;
-using listelab_dominio.Conceitos.Resposta;
+using listelab_dominio.Conceitos.RespostaObj;
+using listelab_dominio.Conceitos.QuestaoObj;
 
 namespace listelab_servico.Validacoes
 {

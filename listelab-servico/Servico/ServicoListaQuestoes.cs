@@ -1,12 +1,10 @@
 ﻿using listelab_data.Repositorios;
-using listelab_dominio.Conceitos;
 using listelab_dominio.Conceitos.Filtro;
+using listelab_dominio.Conceitos.ListaObj;
 using listelab_dominio.InterfaceDeServico;
 using listelab_servico.Validacoes;
 using System;
-using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Text;
 
 namespace listelab_servico.Servico
 {

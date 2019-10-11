@@ -1,10 +1,11 @@
 ﻿using listelab_dominio.Abstrato;
-using listelab_dominio.Conceitos.Resposta;
+using listelab_dominio.Conceitos.QuestaoObj;
+using listelab_dominio.Conceitos.RespostaObj;
 using listelab_dominio.CustomAttributes;
 using listelab_dominio.Enumeradores;
 using System.Collections.Generic;
 
-namespace listelab_dominio.Conceitos
+namespace listelab_dominio.Conceitos.ListaObj
 {
     [Colecao(Nome = "listas")]
     public class ListaQuestoes : ObjetoComId
