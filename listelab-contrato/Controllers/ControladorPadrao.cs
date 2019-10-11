@@ -13,6 +13,7 @@ namespace listelab_contrato.Controllers
     /// </summary>
     /// <typeparam name="T">Objeto a ser trafegado.</typeparam>
     /// <typeparam name="S">Interface de serviço do objeto.</typeparam>
+    /// <typeparam name="F">Filtro para pesquisa</typeparam>
     [Route("api/[controller]")]
     [ApiController]
     public class ControladorPadrao<T, S, F> : ControllerBase where S : IServicoPadrao<T> where F : Filtro

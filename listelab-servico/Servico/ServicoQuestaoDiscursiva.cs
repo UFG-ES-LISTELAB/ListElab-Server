@@ -2,7 +2,7 @@
 using System.Linq.Expressions;
 using listelab_data.Repositorios;
 using listelab_dominio.Conceitos.Filtro;
-using listelab_dominio.Conceitos.Questao;
+using listelab_dominio.Conceitos;
 using listelab_dominio.Conceitos.Resposta;
 using listelab_dominio.InterfaceDeServico;
 using listelab_servico.Validacoes;

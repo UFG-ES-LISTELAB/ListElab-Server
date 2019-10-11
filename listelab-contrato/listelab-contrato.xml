@@ -10,6 +10,7 @@
             </summary>
             <typeparam name="T">Objeto a ser trafegado.</typeparam>
             <typeparam name="S">Interface de serviço do objeto.</typeparam>
+            <typeparam name="F">Filtro para pesquisa</typeparam>
         </member>
         <member name="M:listelab_contrato.Controllers.ControladorPadrao`3.Servico">
             <summary>
@@ -51,9 +52,19 @@
             <param name="codigo">Código da questão discursiva que se deseja excluir.</param>
             <returns>Retorna objeto com resultado da requisição.</returns>
         </member>
+        <member name="T:listelab_contrato.Controllers.ListaController">
+            <summary>
+            Api para Lista
+            </summary>
+        </member>
         <member name="T:listelab_contrato.Controllers.QuestaoDiscursivaController">
             <summary>
             Api para o conceito de questão discursiva.
+            </summary>
+        </member>
+        <member name="T:listelab_contrato.Controllers.QuestaoObjetivaController">
+            <summary>
+            Api para pesquisa de questão objetiva
             </summary>
         </member>
         <member name="M:listelab_contrato.Controllers.UsuarioController.Cadastre(listelab_dominio.Conceitos.UsuarioObj.Login)">

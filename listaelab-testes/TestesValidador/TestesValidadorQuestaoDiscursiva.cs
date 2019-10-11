@@ -1,5 +1,4 @@
 ﻿using listelab_dominio.Conceitos;
-using listelab_dominio.Conceitos.Questao;
 using listelab_dominio.Conceitos.Resposta;
 using listelab_servico.Validacoes;
 using NUnit.Framework;

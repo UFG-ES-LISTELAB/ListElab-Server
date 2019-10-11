@@ -1,4 +1,4 @@
-﻿using listelab_dominio.Conceitos.Questao;
+﻿using listelab_dominio.Conceitos;
 using listelab_dominio.Conceitos.Resposta;
 
 namespace listelab_dominio.InterfaceDeServico

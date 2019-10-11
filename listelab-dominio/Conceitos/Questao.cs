@@ -4,7 +4,7 @@ using listelab_dominio.CustomAttributes;
 using listelab_dominio.Enumeradores;
 using System.Collections.Generic;
 
-namespace listelab_dominio.Conceitos.Questao
+namespace listelab_dominio.Conceitos
 {
     /// <summary>
     /// Representa uma questão genérica.
