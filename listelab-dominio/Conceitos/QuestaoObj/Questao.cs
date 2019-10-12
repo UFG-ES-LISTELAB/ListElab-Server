@@ -18,6 +18,11 @@ namespace listelab_dominio.Conceitos.QuestaoObj
         public string Enunciado { get; set; }
 
         /// <summary>
+        /// O email do usuário que criou a questão.
+        /// </summary>
+        public string Usuario { get; set; }
+
+        /// <summary>
         /// Representa as áreas de conhecimento disponíveis.
         /// </summary>
         public EnumAreaDeConhecimento AreaDeConhecimento { get; set; }
@@ -46,6 +51,5 @@ namespace listelab_dominio.Conceitos.QuestaoObj
         /// Representa os insumos para resposta.
         /// </summary>
         public T RespostaEsperada { get; set; }
-        public Usuario Usuario { get; set; }
     }
 }
