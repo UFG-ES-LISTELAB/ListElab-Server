@@ -4,7 +4,7 @@ using System.Text;
 
 namespace listelab_dominio.Enumeradores
 {
-    public enum EnumNivelDificuldade
+    public enum NivelDificuldade
     {
         MUITO_FACIL = 1,
         FACIL = 2,

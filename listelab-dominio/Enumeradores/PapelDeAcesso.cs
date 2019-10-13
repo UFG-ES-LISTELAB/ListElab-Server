@@ -4,7 +4,7 @@ using System.Text;
 
 namespace listelab_dominio.Enumeradores
 {
-    public enum EnumPapelDeAcesso
+    public enum PapelDeAcesso
     {
         ADMINISTRADOR = 0,
         PROFESSOR = 1,

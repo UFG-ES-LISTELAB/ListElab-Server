@@ -4,7 +4,7 @@ using System.Text;
 
 namespace listelab_dominio.Enumeradores
 {
-    public enum EnumAreaDeConhecimento
+    public enum AreaDeConhecimento
     {
         TEORIA_COMPUTACAO = 10301003,
         MATEMATICA_COMPUTACAO = 10302000,
