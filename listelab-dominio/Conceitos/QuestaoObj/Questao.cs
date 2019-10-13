@@ -4,7 +4,7 @@ using listelab_dominio.CustomAttributes;
 using listelab_dominio.Enumeradores;
 using System.Collections.Generic;
 
-namespace listelab_dominio.Conceitos.Questao
+namespace listelab_dominio.Conceitos.QuestaoObj
 {
     /// <summary>
     /// Representa uma questão genérica.
@@ -16,6 +16,11 @@ namespace listelab_dominio.Conceitos.Questao
         /// Representa o enunciado de uma questão.
         /// </summary>
         public string Enunciado { get; set; }
+
+        /// <summary>
+        /// O email do usuário que criou a questão.
+        /// </summary>
+        public string Usuario { get; set; }
 
         /// <summary>
         /// Representa as áreas de conhecimento disponíveis.
@@ -46,6 +51,5 @@ namespace listelab_dominio.Conceitos.Questao
         /// Representa os insumos para resposta.
         /// </summary>
         public T RespostaEsperada { get; set; }
-        public Usuario Usuario { get; set; }
     }
 }

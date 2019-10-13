@@ -1,5 +1,6 @@
-﻿using listelab_dominio.Conceitos.Questao;
-using listelab_dominio.Conceitos.Resposta;
+﻿using listelab_dominio.Conceitos;
+using listelab_dominio.Conceitos.QuestaoObj;
+using listelab_dominio.Conceitos.RespostaObj;
 
 namespace listelab_dominio.InterfaceDeServico
 {
