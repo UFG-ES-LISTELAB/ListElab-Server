@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿
 namespace listelab_dominio.Enumeradores
 {
     public enum PapelDeAcesso
     {
-        ADMINISTRADOR = 0,
-        PROFESSOR = 1,
-        ALUNO = 2
+        Administrador = 0,
+        Professor = 1,
+        Aluno = 2
     }
 }
