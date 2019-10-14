@@ -36,6 +36,6 @@ namespace listelab_dominio.Conceitos.UsuarioObj
         /// <summary>
         /// Permissão do usuário.
         /// </summary>
-        public EnumPapelDeAcesso Role { get; set; }
+        public PapelDeAcesso Role { get; set; }
     }
 }

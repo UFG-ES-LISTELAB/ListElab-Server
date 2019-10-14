@@ -13,17 +13,17 @@ namespace listelab_dominio.Conceitos.Filtro
         /// <summary>
         /// Representa as áreas de conhecimento disponíveis.
         /// </summary>
-        public EnumAreaDeConhecimento? AreaDeConhecimento { get; set; }
+        public AreaDeConhecimento? AreaDeConhecimento { get; set; }
 
         /// <summary>
         /// Representa o nível de dificuldade, indo de 1 à 5.
         /// </summary>
-        public EnumNivelDificuldade? NivelDificuldade { get; set; }
+        public NivelDificuldade? NivelDificuldade { get; set; }
 
         /// <summary>
         /// Tipo de questão.
         /// </summary>
-        public EnumTipoQuestao? Tipo { get; set; }
+        public TipoQuestao? Tipo { get; set; }
 
         /// <summary>
         /// Representa o tempo máximo para responder a questão em minutos.
