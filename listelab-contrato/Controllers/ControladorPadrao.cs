@@ -4,6 +4,7 @@ using listelab_dominio;
 using listelab_dominio.Conceitos.Filtro;
 using listelab_dominio.InterfaceDeServico;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace listelab_contrato.Controllers
@@ -32,7 +33,7 @@ namespace listelab_contrato.Controllers
         /// </summary>
         /// <returns>Retorna um objeto de sucesso ou falha e a lista desejada, caso sucesso.</returns>
         [HttpGet]
-        [Authorize]
+        [EnableCors("SiteCorsPolicy")]
         public ActionResult<DtoResultado<T>> ConsulteLista()
         {
             try

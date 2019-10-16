@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using listelab_contrato.Authentication;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
@@ -44,6 +45,17 @@ namespace listelab_contrato
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
+            var corsBuilder = new CorsPolicyBuilder();
+            corsBuilder.AllowAnyHeader();
+            corsBuilder.AllowAnyMethod();
+            corsBuilder.AllowAnyOrigin(); // For anyone access.
+            corsBuilder.AllowCredentials();
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("SiteCorsPolicy", corsBuilder.Build());
+            });
+
             services.AddAuthentication(AuthenticationDefaults.BearerAuthenticationScheme)
                     .AddScheme<BearerAuthenticationOptions, BearerAuthenticationHandler>(
                         AuthenticationDefaults.BearerAuthenticationScheme,
@@ -76,6 +88,7 @@ namespace listelab_contrato
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Swagger Sample");
             });
+            app.UseCors("SiteCorsPolicy");
         }
     }
 }
