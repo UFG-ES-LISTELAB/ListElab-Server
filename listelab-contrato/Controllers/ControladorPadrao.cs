@@ -17,6 +17,7 @@ namespace listelab_contrato.Controllers
     /// <typeparam name="F">Filtro para pesquisa</typeparam>
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("SiteCorsPolicy")]
     public class ControladorPadrao<T, S, F> : ControllerBase where S : IServicoPadrao<T> where F : Filtro
     {
         /// <summary>
@@ -33,6 +34,7 @@ namespace listelab_contrato.Controllers
         /// </summary>
         /// <returns>Retorna um objeto de sucesso ou falha e a lista desejada, caso sucesso.</returns>
         [HttpGet]
+        [Authorize]
         [EnableCors("SiteCorsPolicy")]
         public ActionResult<DtoResultado<T>> ConsulteLista()
         {
