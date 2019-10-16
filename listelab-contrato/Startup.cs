@@ -48,7 +48,7 @@ namespace listelab_contrato
             var corsBuilder = new CorsPolicyBuilder();
             corsBuilder.AllowAnyHeader();
             corsBuilder.AllowAnyMethod();
-            corsBuilder.AllowAnyOrigin(); // For anyone access.
+            corsBuilder.AllowAnyOrigin();
             corsBuilder.AllowCredentials();
 
             services.AddCors(options =>
