@@ -67,6 +67,11 @@
             Api para pesquisa de questão objetiva
             </summary>
         </member>
+        <member name="T:listelab_contrato.Controllers.UsuarioController">
+            <summary>
+            Api de usuário para efetuar login.
+            </summary>
+        </member>
         <member name="M:listelab_contrato.Controllers.UsuarioController.Cadastre(listelab_dominio.Conceitos.UsuarioObj.Login)">
             <summary>
             Realiza login.

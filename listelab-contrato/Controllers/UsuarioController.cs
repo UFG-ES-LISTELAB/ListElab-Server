@@ -5,12 +5,16 @@ using System.Threading.Tasks;
 using listelab_contrato.RequestObject;
 using listelab_dominio.Conceitos.UsuarioObj;
 using listelab_servico.Servico;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace listelab_contrato.Controllers
 {
 
+    /// <summary>
+    /// Api de usuário para efetuar login.
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class UsuarioController : ControllerBase
@@ -22,6 +26,7 @@ namespace listelab_contrato.Controllers
         /// <returns>Retorna objeto com resultado da requisição.</returns>
         [HttpPost]
         [Route("login")]
+        [EnableCors("SiteCorsPolicy")]
         public ActionResult<DtoResultado<Usuario>> Cadastre([FromBody] Login login)
         {
             try
