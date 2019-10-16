@@ -79,7 +79,7 @@ namespace listelab_contrato.Controllers
         /// <returns>Retorna objeto com resultado da requisição.</returns>
         [HttpPost]
         [Route("cadastre")]
-        [Authorize(Roles = "0,1")]
+        [Authorize(Roles = "Admin,Professor")]
         public ActionResult<DtoResultado<T>> Cadastre([FromBody] T questao)
         {
             try
@@ -100,7 +100,7 @@ namespace listelab_contrato.Controllers
         /// <returns>Retorna objeto com resultado da requisição.</returns>
         [HttpPost]
         [Route("atualize")]
-        [Authorize(Roles = "0,1")]
+        [Authorize(Roles = "Admin,Professor")]
         public ActionResult<DtoResultado<T>> Atualize([FromBody] T objeto)
         {
             try
@@ -120,7 +120,7 @@ namespace listelab_contrato.Controllers
         /// <param name="codigo">Código da questão discursiva que se deseja excluir.</param>
         /// <returns>Retorna objeto com resultado da requisição.</returns>
         [HttpDelete("{codigo}")]
-        [Authorize(Roles = "0,1")]
+        [Authorize(Roles = "Admin,Professor")]
         public ActionResult<DtoResultado<T>> Delete(int codigo)
         {
             try
