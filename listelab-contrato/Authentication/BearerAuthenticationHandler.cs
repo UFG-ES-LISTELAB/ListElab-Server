@@ -30,7 +30,7 @@ namespace listelab_contrato.Authentication
             if (!Request.Headers.ContainsKey("Authorization"))
             {
                 //Authorization header not in request
-                return AuthenticateResult.NoResult();
+                return AuthenticateResult.Fail(new Exception("O Token não foi passado."));
             }
 
             if (!AuthenticationHeaderValue.TryParse(Request.Headers["Authorization"], out AuthenticationHeaderValue headerValue))
