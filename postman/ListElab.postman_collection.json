@@ -1,15 +1,78 @@
 {
 	"info": {
-		"_postman_id": "65348d07-0e1b-462b-a75a-36b1260b725a",
+		"_postman_id": "b39b4363-3458-4c2b-bcd8-76d088de1b16",
 		"name": "ListElab",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
+			"name": "Usuario",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f1063a05-aa70-439c-9bc8-423f2d1b27e6",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna json com valor de 'sucesso' == true\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.sucesso).to.eql(true);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna token com 64 caracteres\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.resultado.length).to.eql(64);",
+									"});",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"ListElabToken\", jsonData.resultado);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\":\"professor@ufg.br\",\n\t\"password\":\"123456\"\n}"
+						},
+						"url": {
+							"raw": "{{ListElabUrl}}/api/Usuario/login",
+							"host": [
+								"{{ListElabUrl}}"
+							],
+							"path": [
+								"api",
+								"Usuario",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
 			"name": "QuestaoDiscursiva",
 			"item": [
 				{
-					"name": "QuestaoDiscursiva",
+					"name": "Questao Discursiva",
 					"event": [
 						{
 							"listen": "test",
@@ -35,8 +98,25 @@
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ListElabToken}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
 						"url": {
 							"raw": "{{ListElabUrl}}/api/QuestaoDiscursiva",
 							"host": [
@@ -51,7 +131,7 @@
 					"response": []
 				},
 				{
-					"name": "Cadastrar QuestaoDiscursiva",
+					"name": "Cadastre Questão",
 					"event": [
 						{
 							"listen": "test",
@@ -72,6 +152,16 @@
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ListElabToken}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -83,12 +173,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"enunciado\": \"TestePostman\",\r\n  \"areaDeConhecimento\": 10301003,\r\n  \"nivelDificuldade\": 2,\r\n  \"tempoMaximoDeResposta\": 3,\r\n  \"respostaEsperada\": {\r\n    \"palavrasChaves\": [\r\n      {\r\n        \"palavraChave\": \"Postman\",\r\n        \"peso\": 4\r\n      }\r\n    ]\r\n  },\r\n  \"id\": \"464a273a-f898-4b48-a80e-c6ad0a0761c7\",\r\n  \"codigo\": 8888\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": "{\r\n  \"enunciado\": \"Teste Postman\",\r\n  \"areaDeConhecimento\": 10301003,\r\n  \"nivelDificuldade\": 1,\r\n  \"tags\": [\r\n    \"Tag\"\r\n  ],\r\n  \"tipo\": 0,\r\n  \"tempoMaximoDeResposta\": 100,\r\n  \"respostaEsperada\": {\r\n    \"palavrasChaves\": [\r\n      {\r\n        \"descricao\": \"Teste\",\r\n        \"peso\": 1\r\n      }\r\n    ]\r\n  },\r\n  \"usuario\": \"professor@ufg.br\"\r\n}"
 						},
 						"url": {
 							"raw": "{{ListElabUrl}}/api/QuestaoDiscursiva/cadastre",
@@ -105,7 +190,7 @@
 					"response": []
 				},
 				{
-					"name": "Atualize QuestaoDiscursiva",
+					"name": "Atualize Questão",
 					"event": [
 						{
 							"listen": "test",
@@ -126,6 +211,16 @@
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ListElabToken}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -137,12 +232,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"enunciado\": \"TestePostman\",\r\n  \"areaDeConhecimento\": 10301003,\r\n  \"nivelDificuldade\": 9,\r\n  \"tempoMaximoDeResposta\": 3,\r\n  \"respostaEsperada\": {\r\n    \"palavrasChaves\": [\r\n      {\r\n        \"palavraChave\": \"Postman\",\r\n        \"peso\": 4\r\n      }\r\n    ]\r\n  },\r\n  \"id\": \"464a273a-f898-4b48-a80e-c6ad0a0761c7\",\r\n  \"codigo\": 8888\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": "{\r\n  \"enunciado\": \"Teste Postman Atualize\",\r\n  \"areaDeConhecimento\": 99999999,\r\n  \"nivelDificuldade\": 4,\r\n  \"tags\": [\r\n  \t\"Teste\",\r\n    \"Postman\"\r\n  ],\r\n  \"tipo\": 1,\r\n  \"tempoMaximoDeResposta\": 123456,\r\n  \"respostaEsperada\": {\r\n    \"palavrasChaves\": [\r\n      {\r\n        \"descricao\": \"Postman\",\r\n        \"peso\": 2\r\n      }\r\n    ]\r\n  },\r\n  \"usuario\": \"professor@ufg.br\"\r\n}"
 						},
 						"url": {
 							"raw": "{{ListElabUrl}}/api/QuestaoDiscursiva/atualize",
@@ -159,7 +249,7 @@
 					"response": []
 				},
 				{
-					"name": "QuestaoDiscursiva codigo",
+					"name": "Consulte Q. Atualizada",
 					"event": [
 						{
 							"listen": "test",
@@ -175,14 +265,19 @@
 									"    pm.expect(jsonData.sucesso).to.eql(true);",
 									"});",
 									"",
-									"pm.test(\"Requisição retorna questão pedida\", function () {",
+									"pm.test(\"Requisição retorna APENAS uma questão pedida\", function () {",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.resultado.codigo).to.eql(8888);",
+									"    pm.expect(jsonData.resultado.length).to.eql(1);",
 									"});",
 									"",
-									"pm.test(\"Requisição retorna questão pedida com edição anterior\", function () {",
+									"pm.test(\"Requisição retorna questão pedida com título atualizado\", function () {",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.resultado.nivelDificuldade).to.eql(9);",
+									"    pm.expect(jsonData.resultado[0].enunciado).to.eql(\"Teste Postman Atualize\");",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna questão pedida com tempo máximo atualizado\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.resultado[0].tempoMaximoDeResposta).to.eql(123456);",
 									"});"
 								],
 								"type": "text/javascript"
@@ -190,24 +285,50 @@
 						}
 					],
 					"request": {
-						"method": "GET",
-						"header": [],
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ListElabToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"areaDeConhecimento\": 99999999\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "{{ListElabUrl}}/api/QuestaoDiscursiva/8888",
+							"raw": "{{ListElabUrl}}/api/QuestaoDiscursiva/consulte",
 							"host": [
 								"{{ListElabUrl}}"
 							],
 							"path": [
 								"api",
 								"QuestaoDiscursiva",
-								"8888"
+								"consulte"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Deletar QuestaoDiscursiva",
+					"name": "Delete Questao (TO-DO)",
 					"event": [
 						{
 							"listen": "test",
@@ -228,6 +349,16 @@
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ListElabToken}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [
 							{
@@ -240,12 +371,7 @@
 						],
 						"body": {
 							"mode": "formdata",
-							"formdata": [],
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"formdata": []
 						},
 						"url": {
 							"raw": "{{ListElabUrl}}/api/QuestaoDiscursiva/8888",
@@ -262,7 +388,7 @@
 					"response": []
 				},
 				{
-					"name": "QuestaoDiscursiva codigo (questão deletada)",
+					"name": "Consulte Q. Deletada",
 					"event": [
 						{
 							"listen": "test",
@@ -278,9 +404,9 @@
 									"    pm.expect(jsonData.sucesso).to.eql(true);",
 									"});",
 									"",
-									"pm.test(\"Requisição NÃO retorna questão pedida pois foi deletada\", function () {",
+									"pm.test(\"Requisição NÂO retorna uma questão (pois foi deletada)\", function () {",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.resultado).to.eql(null);",
+									"    pm.expect(jsonData.resultado.length).to.eql(0);",
 									"});"
 								],
 								"type": "text/javascript"
@@ -288,17 +414,830 @@
 						}
 					],
 					"request": {
-						"method": "GET",
-						"header": [],
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ListElabToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"areaDeConhecimento\": 99999999\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "{{ListElabUrl}}/api/QuestaoDiscursiva/8888",
+							"raw": "{{ListElabUrl}}/api/QuestaoDiscursiva/consulte",
 							"host": [
 								"{{ListElabUrl}}"
 							],
 							"path": [
 								"api",
 								"QuestaoDiscursiva",
+								"consulte"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "QuestaoObjetiva",
+			"item": [
+				{
+					"name": "Questao Objetiva",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "22454fac-f4f8-403a-9280-3e8a339e6777",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna json com valor de 'sucesso' == true\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.sucesso).to.eql(true);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna json com uma ou mais questões cadastradas\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.resultado.length).to.be.above(0);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ListElabToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{ListElabUrl}}/api/QuestaoObjetiva",
+							"host": [
+								"{{ListElabUrl}}"
+							],
+							"path": [
+								"api",
+								"QuestaoObjetiva"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastre Questão",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "bd3b303f-0918-4baa-bdcb-184e3bc1e34c",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna json com valor de 'sucesso' == true\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.sucesso).to.eql(true);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ListElabToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"enunciado\": \"Teste Postman Objetiva\",\r\n  \"areaDeConhecimento\": 10301003,\r\n  \"nivelDificuldade\": 1,\r\n  \"tags\": [\r\n    \"Tag\"\r\n  ],\r\n  \"tipo\": 0,\r\n  \"tempoMaximoDeResposta\": 100,\r\n  \"respostaEsperada\": {\r\n    \"alternativaCorreta\": \"\"\r\n  },\r\n  \"usuario\": \"professor@ufg.br\"\r\n}"
+						},
+						"url": {
+							"raw": "{{ListElabUrl}}/api/QuestaoObjetiva/cadastre",
+							"host": [
+								"{{ListElabUrl}}"
+							],
+							"path": [
+								"api",
+								"QuestaoObjetiva",
+								"cadastre"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualize Questão",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "bd3b303f-0918-4baa-bdcb-184e3bc1e34c",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna json com valor de 'sucesso' == true\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.sucesso).to.eql(true);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ListElabToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"enunciado\": \"Teste Postman Objetiva Atualize\",\r\n  \"areaDeConhecimento\": 99999999,\r\n  \"nivelDificuldade\": 1,\r\n  \"tags\": [\r\n    \"Postman\"\r\n  ],\r\n  \"tipo\": 0,\r\n  \"tempoMaximoDeResposta\": 123456,\r\n  \"respostaEsperada\": {\r\n    \"alternativaCorreta\": \"\"\r\n  },\r\n  \"usuario\": \"professor@ufg.br\"\r\n}"
+						},
+						"url": {
+							"raw": "{{ListElabUrl}}/api/QuestaoObjetiva/atualize",
+							"host": [
+								"{{ListElabUrl}}"
+							],
+							"path": [
+								"api",
+								"QuestaoObjetiva",
+								"atualize"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consulte Q. Atualizada",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "22454fac-f4f8-403a-9280-3e8a339e6777",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna json com valor de 'sucesso' == true\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.sucesso).to.eql(true);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna APENAS uma questão pedida\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.resultado.length).to.eql(1);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna questão pedida com título atualizado\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.resultado[0].enunciado).to.eql(\"Teste Postman Objetiva Atualize\");",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna questão pedida com tempo máximo atualizado\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.resultado[0].tempoMaximoDeResposta).to.eql(123456);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ListElabToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"areaDeConhecimento\": 99999999\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ListElabUrl}}/api/QuestaoObjetiva/consulte",
+							"host": [
+								"{{ListElabUrl}}"
+							],
+							"path": [
+								"api",
+								"QuestaoObjetiva",
+								"consulte"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Questao (TO-DO)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "bd3b303f-0918-4baa-bdcb-184e3bc1e34c",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna json com valor de 'sucesso' == true\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.sucesso).to.eql(true);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ListElabToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{ListElabUrl}}/api/QuestaoObjetiva/8888",
+							"host": [
+								"{{ListElabUrl}}"
+							],
+							"path": [
+								"api",
+								"QuestaoObjetiva",
 								"8888"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consulte Q. Deletada",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "22454fac-f4f8-403a-9280-3e8a339e6777",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna json com valor de 'sucesso' == true\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.sucesso).to.eql(true);",
+									"});",
+									"",
+									"pm.test(\"Requisição NÂO retorna uma questão (pois foi deletada)\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.resultado.length).to.eql(0);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ListElabToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"areaDeConhecimento\": 99999999\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ListElabUrl}}/api/QuestaoObjetiva/consulte",
+							"host": [
+								"{{ListElabUrl}}"
+							],
+							"path": [
+								"api",
+								"QuestaoObjetiva",
+								"consulte"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Lista",
+			"item": [
+				{
+					"name": "Lista",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "22454fac-f4f8-403a-9280-3e8a339e6777",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna json com valor de 'sucesso' == true\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.sucesso).to.eql(true);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna json com uma ou mais listas cadastradas\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.resultado.length).to.be.above(0);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ListElabToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"type": "text",
+								"value": "",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{ListElabUrl}}/api/Lista",
+							"host": [
+								"{{ListElabUrl}}"
+							],
+							"path": [
+								"api",
+								"Lista"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastre Lista",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "bd3b303f-0918-4baa-bdcb-184e3bc1e34c",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna json com valor de 'sucesso' == true\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.sucesso).to.eql(true);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ListElabToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"titulo\": \"Lista Postman\",\r\n  \"areaDeConhecimento\": 10301003,\r\n  \"nivelDificuldade\": 1,\r\n  \"tags\": [\r\n    \"Postman\"\r\n  ],\r\n  \"discursivas\": [\r\n    {\r\n      \"enunciado\": \"Questão em Lista Postman\",\r\n      \"usuario\": \"professor@ufg.br\",\r\n      \"areaDeConhecimento\": 10301003,\r\n      \"nivelDificuldade\": 1,\r\n      \"tags\": [\r\n        \"TagPostman\"\r\n      ],\r\n      \"tipo\": 0,\r\n      \"tempoMaximoDeResposta\": 100,\r\n      \"respostaEsperada\": {\r\n        \"palavrasChaves\": [\r\n          {\r\n            \"descricao\": \"PalavraChavePostman\",\r\n            \"peso\": 1\r\n          }\r\n        ]\r\n      }\r\n    }\r\n  ],\r\n  \"objetivas\": []\r\n}"
+						},
+						"url": {
+							"raw": "{{ListElabUrl}}/api/Lista/cadastre",
+							"host": [
+								"{{ListElabUrl}}"
+							],
+							"path": [
+								"api",
+								"Lista",
+								"cadastre"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualize Lista",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "bd3b303f-0918-4baa-bdcb-184e3bc1e34c",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna json com valor de 'sucesso' == true\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.sucesso).to.eql(true);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ListElabToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"titulo\": \"Lista Postman Atualize\",\r\n  \"areaDeConhecimento\": 99999999,\r\n  \"nivelDificuldade\": 1,\r\n  \"tags\": [\r\n    \"Postman\"\r\n  ],\r\n  \"discursivas\": [\r\n    {\r\n      \"enunciado\": \"Questão em Lista Postman\",\r\n      \"usuario\": \"professor@ufg.br\",\r\n      \"areaDeConhecimento\": 99999999,\r\n      \"nivelDificuldade\": 1,\r\n      \"tags\": [\r\n        \"TagPostman\"\r\n      ],\r\n      \"tipo\": 0,\r\n      \"tempoMaximoDeResposta\": 123456,\r\n      \"respostaEsperada\": {\r\n        \"palavrasChaves\": [\r\n          {\r\n            \"descricao\": \"PalavraChavePostman\",\r\n            \"peso\": 1\r\n          }\r\n        ]\r\n      }\r\n    }\r\n  ],\r\n  \"objetivas\": []\r\n}"
+						},
+						"url": {
+							"raw": "{{ListElabUrl}}/api/Lista/atualize",
+							"host": [
+								"{{ListElabUrl}}"
+							],
+							"path": [
+								"api",
+								"Lista",
+								"atualize"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consulte Lista Atualizada",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "22454fac-f4f8-403a-9280-3e8a339e6777",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna json com valor de 'sucesso' == true\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.sucesso).to.eql(true);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna APENAS uma lista pedida\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.resultado.length).to.eql(1);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna lista pedida com título atualizado\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.resultado[0].titulo).to.eql(\"Lista Postman Atualize\");",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna lista pedida com área de conhecimento atualizada\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.resultado[0].areaDeConhecimento).to.eql(99999999);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna lista pedida com questão discursiva atualizada\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.resultado[0].discursivas[0].areaDeConhecimento).to.eql(99999999);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ListElabToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"areaDeConhecimento\": 99999999\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ListElabUrl}}/api/Lista/consulte",
+							"host": [
+								"{{ListElabUrl}}"
+							],
+							"path": [
+								"api",
+								"Lista",
+								"consulte"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Lista (TO-DO)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "bd3b303f-0918-4baa-bdcb-184e3bc1e34c",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna json com valor de 'sucesso' == true\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.sucesso).to.eql(true);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ListElabToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{ListElabUrl}}/api/Lista/8888",
+							"host": [
+								"{{ListElabUrl}}"
+							],
+							"path": [
+								"api",
+								"Lista",
+								"8888"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consulte Lista Deletada",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "22454fac-f4f8-403a-9280-3e8a339e6777",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna json com valor de 'sucesso' == true\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.sucesso).to.eql(true);",
+									"});",
+									"",
+									"pm.test(\"Requisição NÂO retorna uma questão (pois foi deletada)\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.resultado.length).to.eql(0);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ListElabToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"areaDeConhecimento\": 99999999\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ListElabUrl}}/api/Lista/consulte",
+							"host": [
+								"{{ListElabUrl}}"
+							],
+							"path": [
+								"api",
+								"Lista",
+								"consulte"
 							]
 						}
 					},
