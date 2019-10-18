@@ -69,10 +69,18 @@ namespace listelab_servico.Servico
         /// <summary>
         /// Exclua todos os objetos que atendem determinada condição.
         /// </summary>
-        /// <param name="codigo">O código que será usado como filtro.</param>
-        public virtual void Exclua(int codigo)
+        /// <param name="id">O id que será usado como filtro.</param>
+        public virtual void Exclua(string id)
         {
-            Repositorio().Exclua(x => x.Codigo == codigo);
+            Guid idConvertido = Guid.Empty;
+
+            if(Guid.TryParse(id, out idConvertido))
+            {
+                Repositorio().Exclua(x => x.Id == idConvertido);
+            } else
+            {
+                throw new Exception("Id inválido.");
+            }
         }
 
         protected abstract IRepositorio<T> Repositorio();
