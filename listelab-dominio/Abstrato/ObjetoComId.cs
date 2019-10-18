@@ -12,7 +12,6 @@ namespace listelab_dominio.Abstrato
         /// O id do objeto.
         /// </summary>
         [BsonId]
-        [JsonIgnore]
         public Guid Id { get; set; }
 
         /// <summary>
