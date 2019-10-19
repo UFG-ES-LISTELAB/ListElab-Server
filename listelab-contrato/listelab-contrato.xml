@@ -51,11 +51,11 @@
             <param name="objeto">O objeto para atualização.</param>
             <returns>Retorna objeto com resultado da requisição.</returns>
         </member>
-        <member name="M:listelab_contrato.Controllers.ControladorPadrao`3.Delete(System.Int32)">
+        <member name="M:listelab_contrato.Controllers.ControladorPadrao`3.Delete(System.String)">
             <summary>
             Exclue uma questão discursiva.
             </summary>
-            <param name="codigo">Código da questão discursiva que se deseja excluir.</param>
+            <param name="id">Id da questão discursiva que se deseja excluir.</param>
             <returns>Retorna objeto com resultado da requisição.</returns>
         </member>
         <member name="T:listelab_contrato.Controllers.ListaController">

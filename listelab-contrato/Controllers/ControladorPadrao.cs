@@ -117,16 +117,15 @@ namespace listelab_contrato.Controllers
         /// <summary>
         /// Exclue uma questão discursiva.
         /// </summary>
-        /// <param name="codigo">Código da questão discursiva que se deseja excluir.</param>
+        /// <param name="id">Id da questão discursiva que se deseja excluir.</param>
         /// <returns>Retorna objeto com resultado da requisição.</returns>
-        [HttpDelete("{codigo}")]
+        [HttpDelete("{id}")]
         [Authorize(Roles = "Admin,Professor")]
-        public ActionResult<DtoResultado<T>> Delete(int codigo)
+        public ActionResult<DtoResultado<T>> Delete(string id)
         {
             try
             {
-                var servico = FabricaGenerica.Crie<S>();
-                servico.Exclua(codigo);
+                Servico().Exclua(id);
 
                 return DtoResultado<T>.ObtenhaResultado("Exclusão realizada sem erros");
             }
