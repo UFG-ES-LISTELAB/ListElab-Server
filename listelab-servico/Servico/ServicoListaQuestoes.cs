@@ -13,11 +13,6 @@ namespace listelab_servico.Servico
         private IRepositorio<ListaQuestoes> _repositorio;
         private ValidacoesListaQuestoes _validador;
 
-        protected override Expression<Func<ListaQuestoes, bool>> ApliqueFiltro(Filtro filtro)
-        {
-            throw new NotImplementedException();
-        }
-
         protected override IRepositorio<ListaQuestoes> Repositorio()
         {
             return _repositorio ?? (_repositorio = new Repositorio<ListaQuestoes>());

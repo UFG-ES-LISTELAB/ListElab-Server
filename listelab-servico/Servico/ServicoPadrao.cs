@@ -48,16 +48,6 @@ namespace listelab_servico.Servico
         }
 
         /// <summary>
-        /// Consulta o primeiro objeto genérico que atende uma condição.
-        /// </summary>
-        /// <param name="codigo">O código que será usado como filtro.</param>
-        /// <returns></returns>
-        public virtual List<T> Consulte(Filtro filtro)
-        {
-            return Repositorio().Consulte(ApliqueFiltro(filtro));
-        }
-
-        /// <summary>
         /// Consulta um conceito por id.
         /// </summary>
         /// <param name="id">O id a ser pesquisado.</param>
@@ -109,7 +99,5 @@ namespace listelab_servico.Servico
         protected abstract IRepositorio<T> Repositorio();
 
         protected abstract ValidadorPadrao<T> Validador();
-
-        protected abstract Expression<Func<T, bool>> ApliqueFiltro(Filtro filtro);
     }
 }

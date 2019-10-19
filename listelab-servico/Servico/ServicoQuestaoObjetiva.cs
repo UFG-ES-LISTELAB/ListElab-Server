@@ -30,16 +30,5 @@ namespace listelab_servico.Servico
         {
             return _validador ?? (_validador = new ValidacoesQuestaoObjetiva());
         }
-
-        protected override Expression<Func<Questao<Objetiva>, bool>> ApliqueFiltro(Filtro filtro)
-        {
-            var filtroQuestao = filtro as FiltroQuestao;
-
-            Expression<Func<Questao<Objetiva>, bool>> query = x => (x.NivelDificuldade == filtroQuestao.NivelDificuldade)
-                || (x.AreaDeConhecimento == filtroQuestao.AreaDeConhecimento)
-                || (x.Tipo == filtroQuestao.Tipo);
-
-            return query;
-        }
     }
 }

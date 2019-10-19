@@ -28,13 +28,6 @@ namespace listelab_dominio.InterfaceDeServico
         /// <summary>
         /// Consulta o primeiro objeto genérico que atende uma condição.
         /// </summary>
-        /// <param name="filtro">Filtro para consultar objeto.</param>
-        /// <returns></returns>
-        List<T> Consulte(Filtro filtro);
-
-        /// <summary>
-        /// Consulta o primeiro objeto genérico que atende uma condição.
-        /// </summary>
         /// <param name="id">Id para pesquisar o objeto.</param>
         /// <returns></returns>
         T Consulte(string id);
