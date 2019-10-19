@@ -10,14 +10,8 @@ namespace listelab_servico.Servico
 {
     public class ServicoListaQuestoes : ServicoPadrao<ListaQuestoes>, IServicoListaQuestoes
     {
-
         private IRepositorio<ListaQuestoes> _repositorio;
         private ValidacoesListaQuestoes _validador;
-
-        protected override Expression<Func<ListaQuestoes, bool>> ApliqueFiltro(Filtro filtro)
-        {
-            throw new NotImplementedException();
-        }
 
         protected override IRepositorio<ListaQuestoes> Repositorio()
         {

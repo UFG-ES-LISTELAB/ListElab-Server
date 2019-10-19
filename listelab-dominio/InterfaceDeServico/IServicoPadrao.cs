@@ -22,15 +22,15 @@ namespace listelab_dominio.InterfaceDeServico
         /// <summary>
         /// Exclua todos os objetos que atendem determinada condição.
         /// </summary>
-        /// <param name="codigo">O código que será usado como filtro.</param>
-        void Exclua(int codigo);
+        /// <param name="id">O Id que será usado como filtro.</param>
+        void Exclua(string id);
 
         /// <summary>
         /// Consulta o primeiro objeto genérico que atende uma condição.
         /// </summary>
-        /// <param name="filtro">Filtro para consultar objeto.</param>
+        /// <param name="id">Id para pesquisar o objeto.</param>
         /// <returns></returns>
-        List<T> Consulte(Filtro filtro);
+        T Consulte(string id);
 
         /// <summary>
         /// Consulta todos os objetos que obedecem uma condição.

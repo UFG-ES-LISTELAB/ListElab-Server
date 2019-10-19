@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq.Expressions;
 using listelab_data.Repositorios;
 using listelab_dominio.Conceitos.Filtro;
@@ -32,13 +33,26 @@ namespace listelab_servico.Servico
             return _validador ?? (_validador = new ValidacoesQuestaoDiscursiva());
         }
 
-        protected override Expression<Func<Questao<Discursiva>, bool>> ApliqueFiltro(Filtro filtro)
+        /// <summary>
+        /// Consulta o primeiro objeto genérico que atende uma condição.
+        /// </summary>
+        /// <param name="filtro">O filtro para trazer as questões.</param>
+        /// <returns>A lista de questões que se adequam ao filtro.</returns>
+        public List<Questao<Discursiva>> Consulte(FiltroQuestao filtro)
+        {
+            return Repositorio().Consulte(ApliqueFiltro(filtro));
+        }
+
+        private Expression<Func<Questao<Discursiva>, bool>> ApliqueFiltro(Filtro filtro)
         {
             var filtroQuestao = filtro as FiltroQuestao;
 
-            Expression<Func<Questao<Discursiva>, bool>> query = x => (x.NivelDificuldade == filtroQuestao.NivelDificuldade)
-                || (x.AreaDeConhecimento == filtroQuestao.AreaDeConhecimento)
-                || (x.Tipo == filtroQuestao.Tipo);
+            Expression<Func<Questao<Discursiva>, bool>> query = questao => (questao.NivelDificuldade == filtroQuestao.NivelDificuldade)
+                || (questao.AreaDeConhecimento == filtroQuestao.AreaDeConhecimento)
+                || (questao.Tipo == filtroQuestao.Tipo)
+                || (questao.TempoMaximoDeResposta <= filtroQuestao.TempoMaximoDeResposta)
+                || (questao.Usuario == filtroQuestao.Usuario)
+                || (questao.Disciplina == filtroQuestao.Disciplina);
 
             return query;
         }

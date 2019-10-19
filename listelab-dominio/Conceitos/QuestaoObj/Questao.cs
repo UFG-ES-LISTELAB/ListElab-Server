@@ -33,6 +33,11 @@ namespace listelab_dominio.Conceitos.QuestaoObj
         public NivelDificuldade NivelDificuldade { get; set; }
 
         /// <summary>
+        /// Disciplina da questão.
+        /// </summary>
+        public Disciplina Disciplina { get; set; }
+
+        /// <summary>
         /// Tags para pesquisa da questão
         /// </summary>
         public List<string> Tags { get; set; }

@@ -12,10 +12,20 @@ using System.Threading.Tasks;
 
 namespace listelab_contrato.Authentication
 { 
+    /// <summary>
+    /// Define as regras para autenticação.
+    /// </summary>
     public class BearerAuthenticationHandler : AuthenticationHandler<BearerAuthenticationOptions>
     {
         private ServicoBearerAuthentication authenticationService;
 
+        /// <summary>
+        /// Construtor da classe que define as regras para autenticação.
+        /// </summary>
+        /// <param name="options">Opções para autenticação.</param>
+        /// <param name="logger">Arquivo de log para auteneticação.</param>
+        /// <param name="encoder">Tipo de encode para arquivo.</param>
+        /// <param name="clock">Tempo de autenticação.</param>
         public BearerAuthenticationHandler(
             IOptionsMonitor<BearerAuthenticationOptions> options,
             ILoggerFactory logger,
@@ -25,6 +35,10 @@ namespace listelab_contrato.Authentication
             authenticationService = new ServicoBearerAuthentication();
         }
 
+        /// <summary>
+        /// Método para aplicar regras de autenticação.
+        /// </summary>
+        /// <returns>Se a autenticação aconteceu ou não.</returns>
         protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
         {
             if (!Request.Headers.ContainsKey("Authorization"))
@@ -54,10 +68,11 @@ namespace listelab_contrato.Authentication
             }
 
             var claims = new List<Claim>
-                {
-                    new Claim(ClaimTypes.Authentication, token),
-                    new Claim(ClaimTypes.Role, authenticationService.GetRole(token)),
+            {
+                new Claim(ClaimTypes.Authentication, token),
+                new Claim(ClaimTypes.Role, authenticationService.GetRole(token)),
             };
+
             var identity = new ClaimsIdentity(claims, Scheme.Name);
             var principal = new ClaimsPrincipal(identity);
             var ticket = new AuthenticationTicket(principal, Scheme.Name);

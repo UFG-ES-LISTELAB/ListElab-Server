@@ -48,13 +48,26 @@ namespace listelab_servico.Servico
         }
 
         /// <summary>
-        /// Consulta o primeiro objeto genérico que atende uma condição.
+        /// Consulta um conceito por id.
         /// </summary>
-        /// <param name="codigo">O código que será usado como filtro.</param>
-        /// <returns></returns>
-        public virtual List<T> Consulte(Filtro filtro)
+        /// <param name="id">O id a ser pesquisado.</param>
+        /// <returns>Retorna o conceito que possui aquele id.</returns>
+        public T Consulte(string id)
         {
-            return Repositorio().Consulte(ApliqueFiltro(filtro));
+            T resultado = null;
+
+            try
+            {
+                if (Guid.TryParse(id, out Guid idConvertido))
+                {
+                    resultado = Repositorio().ConsulteUm(x => x.Id == idConvertido);
+                }
+            } catch(Exception e)
+            {
+                throw new Exception("Id passado não é valido ou não está cadastrado.");
+            }
+
+            return resultado;
         }
 
         /// <summary>
@@ -69,16 +82,22 @@ namespace listelab_servico.Servico
         /// <summary>
         /// Exclua todos os objetos que atendem determinada condição.
         /// </summary>
-        /// <param name="codigo">O código que será usado como filtro.</param>
-        public virtual void Exclua(int codigo)
+        /// <param name="id">O id que será usado como filtro.</param>
+        public virtual void Exclua(string id)
         {
-            Repositorio().Exclua(x => x.Codigo == codigo);
+            Guid idConvertido = Guid.Empty;
+
+            if(Guid.TryParse(id, out idConvertido))
+            {
+                Repositorio().Exclua(x => x.Id == idConvertido);
+            } else
+            {
+                throw new Exception("Id inválido.");
+            }
         }
 
         protected abstract IRepositorio<T> Repositorio();
 
         protected abstract ValidadorPadrao<T> Validador();
-
-        protected abstract Expression<Func<T, bool>> ApliqueFiltro(Filtro filtro);
     }
 }
