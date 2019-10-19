@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System;
 using listelab_contrato.RequestObject;
 using listelab_dominio.Conceitos.UsuarioObj;
 using listelab_servico.Servico;
 using Microsoft.AspNetCore.Cors;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace listelab_contrato.Controllers

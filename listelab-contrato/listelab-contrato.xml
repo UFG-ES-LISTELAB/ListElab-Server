@@ -4,6 +4,12 @@
         <name>listelab-contrato</name>
     </assembly>
     <members>
+        <member name="M:listelab_contrato.Authentication.BearerAuthenticationHandler.HandleAuthenticateAsync">
+            <summary>
+            Aplica regras de autenticação.
+            </summary>
+            <returns>Retorna resultado de autenticação.</returns>
+        </member>
         <member name="T:listelab_contrato.Controllers.ControladorPadrao`3">
             <summary>
             Controlador Controaldor com rotinas padrão da api.

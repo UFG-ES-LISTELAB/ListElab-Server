@@ -15,6 +15,7 @@ namespace listelab_contrato.Authentication
     public class BearerAuthenticationHandler : AuthenticationHandler<BearerAuthenticationOptions>
     {
         private ServicoBearerAuthentication authenticationService;
+        private AuthenticateResult resultado = null;
 
         public BearerAuthenticationHandler(
             IOptionsMonitor<BearerAuthenticationOptions> options,
@@ -25,43 +26,47 @@ namespace listelab_contrato.Authentication
             authenticationService = new ServicoBearerAuthentication();
         }
 
+        /// <summary>
+        /// Aplica regras de autenticação.
+        /// </summary>
+        /// <returns>Retorna resultado de autenticação.</returns>
         protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
         {
-            if (!Request.Headers.ContainsKey("Authorization"))
-            {
-                //Authorization header not in request
-                return AuthenticateResult.Fail(new Exception("O Token não foi passado."));
-            }
+            VerifiqueAutenticacao(!Request.Headers.ContainsKey("Authorization"), () => AuthenticateResult.Fail(new Exception("O Token não foi passado.")), ref resultado);
 
-            if (!AuthenticationHeaderValue.TryParse(Request.Headers["Authorization"], out AuthenticationHeaderValue headerValue))
-            {
-                //Invalid Authorization header
-                return AuthenticateResult.NoResult();
-            }
+            VerifiqueAutenticacao(!AuthenticationHeaderValue.TryParse(Request.Headers["Authorization"], out AuthenticationHeaderValue headerValue), () => AuthenticateResult.NoResult(), ref resultado);
 
-            if (!AuthenticationDefaults.BearerAuthenticationScheme.Equals(headerValue.Scheme, StringComparison.OrdinalIgnoreCase))
-            {
-                return AuthenticateResult.Fail("Wrong scheme");
-            }
+            VerifiqueAutenticacao(!AuthenticationDefaults.BearerAuthenticationScheme.Equals(headerValue.Scheme, StringComparison.OrdinalIgnoreCase), () => AuthenticateResult.Fail("Wrong scheme"), ref resultado);
 
             string token = headerValue.Parameter;
-
             bool isValidUser = await authenticationService.IsValidUserAsync(token);
 
-            if (!isValidUser)
-            {
-                return AuthenticateResult.Fail("Token inválido");
-            }
+            VerifiqueAutenticacao(!isValidUser, () => AuthenticateResult.Fail("Token inválido"), ref resultado);
 
-            var claims = new List<Claim>
+            VerifiqueAutenticacao(resultado == null, () =>
+            {
+                var claims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Authentication, token),
                     new Claim(ClaimTypes.Role, authenticationService.GetRole(token)),
-            };
-            var identity = new ClaimsIdentity(claims, Scheme.Name);
-            var principal = new ClaimsPrincipal(identity);
-            var ticket = new AuthenticationTicket(principal, Scheme.Name);
-            return AuthenticateResult.Success(ticket);
+                };
+
+                var identity = new ClaimsIdentity(claims, Scheme.Name);
+                var principal = new ClaimsPrincipal(identity);
+                var ticket = new AuthenticationTicket(principal, Scheme.Name);
+                return AuthenticateResult.Success(ticket);
+
+            }, ref resultado);
+
+            return resultado;
+        }
+
+        private void VerifiqueAutenticacao(bool condicao, Func<AuthenticateResult> acaoResultado, ref AuthenticateResult resultado)
+        {
+            if(condicao && resultado == null)
+            {
+                resultado = acaoResultado();
+            }
         }
     }
 }
