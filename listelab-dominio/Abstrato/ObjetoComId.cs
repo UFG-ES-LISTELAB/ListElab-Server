@@ -8,6 +8,11 @@ namespace listelab_dominio.Abstrato
 {
     public abstract class ObjetoComId
     {
+        public ObjetoComId()
+        {
+            Id = Guid.NewGuid();
+        }
+
         /// <summary>
         /// O id do objeto.
         /// </summary>

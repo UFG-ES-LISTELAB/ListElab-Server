@@ -10,7 +10,6 @@ namespace listelab_servico.Servico
 {
     public class ServicoListaQuestoes : ServicoPadrao<ListaQuestoes>, IServicoListaQuestoes
     {
-
         private IRepositorio<ListaQuestoes> _repositorio;
         private ValidacoesListaQuestoes _validador;
 
