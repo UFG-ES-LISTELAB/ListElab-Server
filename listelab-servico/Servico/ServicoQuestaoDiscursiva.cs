@@ -36,9 +36,12 @@ namespace listelab_servico.Servico
         {
             var filtroQuestao = filtro as FiltroQuestao;
 
-            Expression<Func<Questao<Discursiva>, bool>> query = x => (x.NivelDificuldade == filtroQuestao.NivelDificuldade)
-                || (x.AreaDeConhecimento == filtroQuestao.AreaDeConhecimento)
-                || (x.Tipo == filtroQuestao.Tipo);
+            Expression<Func<Questao<Discursiva>, bool>> query = questao => (questao.NivelDificuldade == filtroQuestao.NivelDificuldade)
+                || (questao.AreaDeConhecimento == filtroQuestao.AreaDeConhecimento)
+                || (questao.Tipo == filtroQuestao.Tipo)
+                || (questao.TempoMaximoDeResposta <= filtroQuestao.TempoMaximoDeResposta)
+                || (questao.Usuario == filtroQuestao.Usuario)
+                || (questao.Disciplina == filtroQuestao.Disciplina);
 
             return query;
         }

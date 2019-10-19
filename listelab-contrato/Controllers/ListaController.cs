@@ -10,7 +10,7 @@ namespace listelab_contrato.Controllers
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
-    public class ListaController : ControladorPadrao<ListaQuestoes, IServicoListaQuestoes, FiltroLista>
+    public class ListaController : ControladorPadrao<ListaQuestoes, IServicoListaQuestoes>
     {
     }
 }

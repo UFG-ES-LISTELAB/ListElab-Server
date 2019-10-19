@@ -4,59 +4,78 @@
         <name>listelab-contrato</name>
     </assembly>
     <members>
+        <member name="T:listelab_contrato.Authentication.BearerAuthenticationHandler">
+            <summary>
+            Define as regras para autenticação.
+            </summary>
+        </member>
+        <member name="M:listelab_contrato.Authentication.BearerAuthenticationHandler.#ctor(Microsoft.Extensions.Options.IOptionsMonitor{listelab_contrato.Authentication.BearerAuthenticationOptions},Microsoft.Extensions.Logging.ILoggerFactory,System.Text.Encodings.Web.UrlEncoder,Microsoft.AspNetCore.Authentication.ISystemClock)">
+            <summary>
+            Construtor da classe que define as regras para autenticação.
+            </summary>
+            <param name="options">Opções para autenticação.</param>
+            <param name="logger">Arquivo de log para auteneticação.</param>
+            <param name="encoder">Tipo de encode para arquivo.</param>
+            <param name="clock">Tempo de autenticação.</param>
+        </member>
         <member name="M:listelab_contrato.Authentication.BearerAuthenticationHandler.HandleAuthenticateAsync">
             <summary>
-            Aplica regras de autenticação.
+            Método para aplicar regras de autenticação.
             </summary>
-            <returns>Retorna resultado de autenticação.</returns>
+            <returns>Se a autenticação aconteceu ou não.</returns>
         </member>
-        <member name="T:listelab_contrato.Controllers.ControladorPadrao`3">
+        <member name="T:listelab_contrato.Controllers.ControladorPadrao`2">
             <summary>
             Controlador Controaldor com rotinas padrão da api.
             </summary>
             <typeparam name="T">Objeto a ser trafegado.</typeparam>
             <typeparam name="S">Interface de serviço do objeto.</typeparam>
-            <typeparam name="F">Filtro para pesquisa</typeparam>
         </member>
-        <member name="M:listelab_contrato.Controllers.ControladorPadrao`3.Servico">
+        <member name="M:listelab_contrato.Controllers.ControladorPadrao`2.Servico">
             <summary>
             Retorna o serviço.
             </summary>
             <returns>A instância de serviço.</returns>
         </member>
-        <member name="M:listelab_contrato.Controllers.ControladorPadrao`3.ConsulteLista">
+        <member name="M:listelab_contrato.Controllers.ControladorPadrao`2.ConsulteLista">
             <summary>
             Lista todas as questões discursivas cadastradas.
             </summary>
             <returns>Retorna um objeto de sucesso ou falha e a lista desejada, caso sucesso.</returns>
         </member>
-        <member name="M:listelab_contrato.Controllers.ControladorPadrao`3.ConsulteComFiltro(`2)">
+        <member name="M:listelab_contrato.Controllers.ControladorPadrao`2.ConsultePorId(System.String)">
             <summary>
-            Retorna a questão discursiva do código informado.
+            Lista todas as questões discursivas cadastradas.
             </summary>
-            <param name="filtro">O filtro de questão.</param>
-            <returns>Retorna objeto de resposta de sucesso ou falha, contendo o objeto desejado, caso sucesso.</returns>
+            <returns>Retorna um objeto de sucesso ou falha e a lista desejada, caso sucesso.</returns>
         </member>
-        <member name="M:listelab_contrato.Controllers.ControladorPadrao`3.Cadastre(`0)">
+        <member name="M:listelab_contrato.Controllers.ControladorPadrao`2.Cadastre(`0)">
             <summary>
             Cadastra uma questão discursiva.
             </summary>
-            <param name="questao">A questão discursiva que se deseja cadastrar.</param>
+            <param name="objeto">A questão discursiva que se deseja cadastrar.</param>
             <returns>Retorna objeto com resultado da requisição.</returns>
         </member>
-        <member name="M:listelab_contrato.Controllers.ControladorPadrao`3.Atualize(`0)">
+        <member name="M:listelab_contrato.Controllers.ControladorPadrao`2.Atualize(`0)">
             <summary>
             Atualiza uma questão discursiva.
             </summary>
             <param name="objeto">O objeto para atualização.</param>
             <returns>Retorna objeto com resultado da requisição.</returns>
         </member>
-        <member name="M:listelab_contrato.Controllers.ControladorPadrao`3.Delete(System.String)">
+        <member name="M:listelab_contrato.Controllers.ControladorPadrao`2.Delete(System.String)">
             <summary>
             Exclue uma questão discursiva.
             </summary>
             <param name="id">Id da questão discursiva que se deseja excluir.</param>
             <returns>Retorna objeto com resultado da requisição.</returns>
+        </member>
+        <member name="M:listelab_contrato.Controllers.ControladorPadrao`2.ExecuteAcaoAutorizada(System.Func{Microsoft.AspNetCore.Mvc.ActionResult{listelab_contrato.RequestObject.DtoResultado{`0}}})">
+            <summary>
+            Executa o método para a requisição da api e retorna o resultado da requisição.
+            </summary>
+            <param name="sucesso">Método quando a requisição aconteceu com sucesso.</param>
+            <returns></returns>
         </member>
         <member name="T:listelab_contrato.Controllers.ListaController">
             <summary>
@@ -67,6 +86,13 @@
             <summary>
             Api para o conceito de questão discursiva.
             </summary>
+        </member>
+        <member name="M:listelab_contrato.Controllers.QuestaoDiscursivaController.ConsulteComFiltro(listelab_dominio.Conceitos.Filtro.FiltroQuestao)">
+            <summary>
+            Retorna a questão discursiva do código informado.
+            </summary>
+            <param name="filtro">O filtro de questão.</param>
+            <returns>Retorna objeto de resposta de sucesso ou falha, contendo o objeto desejado, caso sucesso.</returns>
         </member>
         <member name="T:listelab_contrato.Controllers.QuestaoObjetivaController">
             <summary>

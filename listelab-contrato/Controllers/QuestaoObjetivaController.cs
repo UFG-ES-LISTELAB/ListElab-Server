@@ -8,7 +8,7 @@ namespace listelab_contrato.Controllers
     /// <summary>
     /// Api para pesquisa de questão objetiva
     /// </summary>
-    public class QuestaoObjetivaController : ControladorPadrao<Questao<Objetiva>, IServicoQuestaoObjetiva, FiltroQuestao>
+    public class QuestaoObjetivaController : ControladorPadrao<Questao<Objetiva>, IServicoQuestaoObjetiva>
     {
     }
 }

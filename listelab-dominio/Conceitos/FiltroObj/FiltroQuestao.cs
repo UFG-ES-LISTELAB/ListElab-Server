@@ -1,7 +1,4 @@
 ﻿using listelab_dominio.Enumeradores;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace listelab_dominio.Conceitos.Filtro
 {
@@ -26,8 +23,18 @@ namespace listelab_dominio.Conceitos.Filtro
         public TipoQuestao? Tipo { get; set; }
 
         /// <summary>
+        /// Disciplina da questão.
+        /// </summary>
+        public Disciplina? Disciplina { get; set; }
+
+        /// <summary>
         /// Representa o tempo máximo para responder a questão em minutos.
         /// </summary>
         public int? TempoMaximoDeResposta { get; set; }
+
+        /// <summary>
+        /// Email do usuário que fez a questão.
+        /// </summary>
+        public string Usuario { get; set; }
     }
 }

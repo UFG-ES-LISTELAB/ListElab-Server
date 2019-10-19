@@ -58,6 +58,29 @@ namespace listelab_servico.Servico
         }
 
         /// <summary>
+        /// Consulta um conceito por id.
+        /// </summary>
+        /// <param name="id">O id a ser pesquisado.</param>
+        /// <returns>Retorna o conceito que possui aquele id.</returns>
+        public T Consulte(string id)
+        {
+            T resultado = null;
+
+            try
+            {
+                if (Guid.TryParse(id, out Guid idConvertido))
+                {
+                    resultado = Repositorio().ConsulteUm(x => x.Id == idConvertido);
+                }
+            } catch(Exception e)
+            {
+                throw new Exception("Id passado não é valido ou não está cadastrado.");
+            }
+
+            return resultado;
+        }
+
+        /// <summary>
         /// Consulta todos os objetos que obedecem uma condição.
         /// </summary>
         /// <returns>Retorna uma coleção de objetos genéricos.</returns>
