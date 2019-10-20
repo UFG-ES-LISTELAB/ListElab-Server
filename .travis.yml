@@ -1,0 +1,26 @@
+dist: trusty
+
+branches:
+  only:
+  - master
+  - dev
+ 
+jobs:
+  include:
+    - stage: build docker image
+      script:
+      - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
+      - docker build --no-cache -t $DOCKER_USERNAME/listelab-server .
+      - docker images
+      - docker tag $DOCKER_USERNAME/listelab-server $DOCKER_USERNAME/listelab-server
+      - docker push $DOCKER_USERNAME/listelab-server
+
+notifications:
+  webhooks:
+    urls:
+      - $FLOW_WEBHOOK
+    on_success: always # default: always
+    on_failure: always # default: always
+    on_start:   never # default: never
+    on_cancel:  never # default: always
+    on_error:   always # default: always
