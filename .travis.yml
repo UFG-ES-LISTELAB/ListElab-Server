@@ -15,12 +15,11 @@ jobs:
       - docker tag $DOCKER_USERNAME/listelab-server $DOCKER_USERNAME/listelab-server
       - docker push $DOCKER_USERNAME/listelab-server
 
-notifications:
-  webhooks:
-    urls:
-      - $FLOW_WEBHOOK
-    on_success: always # default: always
-    on_failure: always # default: always
-    on_start:   never # default: never
-    on_cancel:  never # default: always
-    on_error:   always # default: always
+after_success:
+  - wget https://raw.githubusercontent.com/DiscordHooks/travis-ci-discord-webhook/master/send.sh
+  - chmod +x send.sh
+  - ./send.sh success $WEBHOOK_URL
+after_failure:
+  - wget https://raw.githubusercontent.com/DiscordHooks/travis-ci-discord-webhook/master/send.sh
+  - chmod +x send.sh
+  - ./send.sh failure $WEBHOOK_URL
