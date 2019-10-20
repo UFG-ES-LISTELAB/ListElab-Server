@@ -29,7 +29,12 @@ namespace listelab_dominio.Conceitos.ListaObj
         /// Tags para busca da lista
         /// </summary>
         public List<string> Tags { get; set; }
-        
+
+        /// <summary>
+        /// Disciplina da questão.
+        /// </summary>
+        public Disciplina Disciplina { get; set; }
+
         /// <summary>
         /// Questões discursivas
         /// </summary>

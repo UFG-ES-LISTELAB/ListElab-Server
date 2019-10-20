@@ -23,15 +23,7 @@ namespace listelab_servico.Servico
 
             Validador().Valide(objeto);
 
-            if (objeto.Id != Guid.Empty)
-            {
-                Repositorio().Atualize(x => x.Codigo == objeto.Codigo, objeto);
-            }
-            else
-            {
-                objeto.Id = Repositorio().Consulte(x => x.Codigo == objeto.Codigo).FirstOrDefault().Id;
-                Repositorio().Atualize(x => x.Codigo == objeto.Codigo, objeto);
-            }
+            Repositorio().Atualize(x => x.Id == objeto.Id, objeto);
         }
 
         /// <summary>
