@@ -1,13 +1,9 @@
 ﻿using listelab_data.Repositorios;
 using listelab_dominio.Abstrato;
-using listelab_dominio.Conceitos.Filtro;
 using listelab_dominio.InterfaceDeServico;
 using listelab_servico.Validacoes;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
 
 namespace listelab_servico.Servico
 {
@@ -17,34 +13,30 @@ namespace listelab_servico.Servico
         /// Atualiza um objeto genérico no banco.
         /// </summary>
         /// <param name="objeto">Objeto a ser atualizado.</param>
-        public void Atualize(T objeto)
+        public T Atualize(T objeto)
         {
             Validador().AssineRegrasAtualizacao();
 
             Validador().Valide(objeto);
 
-            if (objeto.Id != Guid.Empty)
-            {
-                Repositorio().Atualize(x => x.Codigo == objeto.Codigo, objeto);
-            }
-            else
-            {
-                objeto.Id = Repositorio().Consulte(x => x.Codigo == objeto.Codigo).FirstOrDefault().Id;
-                Repositorio().Atualize(x => x.Codigo == objeto.Codigo, objeto);
-            }
+            Repositorio().Atualize(x => x.Id == objeto.Id, objeto);
+            
+            return objeto;
         }
 
         /// <summary>
         /// Cadastra um objeto de tipo genérico.
         /// </summary>
         /// <param name="objeto">Objeto a ser cadastrado.</param>
-        public virtual void Cadastre(T objeto)
+        public virtual T Cadastre(T objeto)
         {
             Validador().AssineRegrasCadastro();
 
             Validador().Valide(objeto);
 
             Repositorio().Cadastre(objeto);
+
+            return objeto;
         }
 
         /// <summary>

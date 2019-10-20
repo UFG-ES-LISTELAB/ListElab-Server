@@ -11,13 +11,13 @@ namespace listelab_dominio.InterfaceDeServico
         /// Cadastra um objeto de tipo genérico.
         /// </summary>
         /// <param name="objeto">Objeto a ser cadastrado.</param>
-        void Cadastre(T objeto);
+        T Cadastre(T objeto);
 
         /// <summary>
         /// Atualiza um objeto genérico no banco.
         /// </summary>
         /// <param name="objeto">Objeto a ser atualizado.</param>
-        void Atualize(T objeto);
+        T Atualize(T objeto);
 
         /// <summary>
         /// Exclua todos os objetos que atendem determinada condição.

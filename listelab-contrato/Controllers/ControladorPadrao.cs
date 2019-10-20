@@ -72,8 +72,8 @@ namespace listelab_contrato.Controllers
         {
             return ExecuteAcaoAutorizada(() =>
             {
-                Servico().Cadastre(objeto);
-                return DtoResultado<T>.ObtenhaResultado("Cadastro realizado sem erros");
+                var resultado = Servico().Cadastre(objeto);
+                return DtoResultado<T>.ObtenhaResultado(resultado, "Cadastro realizado sem erros");
             });
         }
 
@@ -89,8 +89,9 @@ namespace listelab_contrato.Controllers
         {
             return ExecuteAcaoAutorizada(() =>
             {
-                Servico().Atualize(objeto);
-                return DtoResultado<T>.ObtenhaResultado("Atualização realizada sem erros");
+                var resultado = Servico().Atualize(objeto);
+
+                return DtoResultado<T>.ObtenhaResultado(resultado, "Atualização realizada sem erros");
             });
         }
 
