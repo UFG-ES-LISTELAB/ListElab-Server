@@ -47,9 +47,7 @@ namespace listelab_contrato.Controllers
         /// Lista todas as questões discursivas cadastradas.
         /// </summary>
         /// <returns>Retorna um objeto de sucesso ou falha e a lista desejada, caso sucesso.</returns>
-        [HttpGet]
         [Authorize]
-        [Route("consulteporid")]
         [HttpGet("{id}")]
         public ActionResult<DtoResultado<T>> ConsultePorId(string id)
         {
@@ -66,7 +64,6 @@ namespace listelab_contrato.Controllers
         /// <param name="objeto">A questão discursiva que se deseja cadastrar.</param>
         /// <returns>Retorna objeto com resultado da requisição.</returns>
         [HttpPost]
-        [Route("cadastre")]
         [Authorize(Roles = "Admin,Professor")]
         public ActionResult<DtoResultado<T>> Cadastre([FromBody] T objeto)
         {
@@ -82,8 +79,7 @@ namespace listelab_contrato.Controllers
         /// </summary>
         /// <param name="objeto">O objeto para atualização.</param>
         /// <returns>Retorna objeto com resultado da requisição.</returns>
-        [HttpPost]
-        [Route("atualize")]
+        [HttpPut]
         [Authorize(Roles = "Admin,Professor")]
         public ActionResult<DtoResultado<T>> Atualize([FromBody] T objeto)
         {
