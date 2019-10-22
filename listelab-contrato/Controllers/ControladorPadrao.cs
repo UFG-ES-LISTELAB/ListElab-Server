@@ -29,9 +29,9 @@ namespace listelab_contrato.Controllers
         }
 
         /// <summary>
-        /// Lista todas as questões discursivas cadastradas.
+        /// Lista todas os registros cadastrados.
         /// </summary>
-        /// <returns>Retorna um objeto de sucesso ou falha e a lista desejada, caso sucesso.</returns>
+        /// <returns>Retorna um objeto de sucesso ou falha e os registros cadastrados, caso sucesso.</returns>
         [HttpGet]
         [Authorize]
         public ActionResult<DtoResultado<T>> ConsulteLista()
@@ -44,12 +44,10 @@ namespace listelab_contrato.Controllers
         }
 
         /// <summary>
-        /// Lista todas as questões discursivas cadastradas.
+        /// Consulta um registro passando o identificador único.
         /// </summary>
-        /// <returns>Retorna um objeto de sucesso ou falha e a lista desejada, caso sucesso.</returns>
-        [HttpGet]
+        /// <returns>Retorna um objeto de sucesso ou falha com o registro encontrado, caso sucesso.</returns>
         [Authorize]
-        [Route("consulteporid")]
         [HttpGet("{id}")]
         public ActionResult<DtoResultado<T>> ConsultePorId(string id)
         {
@@ -61,12 +59,11 @@ namespace listelab_contrato.Controllers
         }
 
         /// <summary>
-        /// Cadastra uma questão discursiva.
+        /// Cadastra um registro novo no banco.
         /// </summary>
-        /// <param name="objeto">A questão discursiva que se deseja cadastrar.</param>
+        /// <param name="objeto">O registro a ser cadastrado..</param>
         /// <returns>Retorna objeto com resultado da requisição.</returns>
         [HttpPost]
-        [Route("cadastre")]
         [Authorize(Roles = "Admin,Professor")]
         public ActionResult<DtoResultado<T>> Cadastre([FromBody] T objeto)
         {
@@ -78,12 +75,11 @@ namespace listelab_contrato.Controllers
         }
 
         /// <summary>
-        /// Atualiza uma questão discursiva.
+        /// Atualiza um registro existente no banco.
         /// </summary>
-        /// <param name="objeto">O objeto para atualização.</param>
+        /// <param name="objeto">O registro com seus novos dados e o id para identificação.</param>
         /// <returns>Retorna objeto com resultado da requisição.</returns>
-        [HttpPost]
-        [Route("atualize")]
+        [HttpPut]
         [Authorize(Roles = "Admin,Professor")]
         public ActionResult<DtoResultado<T>> Atualize([FromBody] T objeto)
         {
@@ -96,9 +92,9 @@ namespace listelab_contrato.Controllers
         }
 
         /// <summary>
-        /// Exclue uma questão discursiva.
+        /// Exclue um registro no banco.
         /// </summary>
-        /// <param name="id">Id da questão discursiva que se deseja excluir.</param>
+        /// <param name="id">Id do registro que será excluído.</param>
         /// <returns>Retorna objeto com resultado da requisição.</returns>
         [HttpDelete("{id}")]
         [Authorize(Roles = "Admin,Professor")]
