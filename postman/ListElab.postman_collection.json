@@ -180,14 +180,13 @@
 							"raw": "{\r\n  \"enunciado\": \"Teste Postman\",\r\n  \"areaDeConhecimento\": 10301003,\r\n  \"nivelDificuldade\": 1,\r\n  \"tags\": [\r\n    \"Tag\"\r\n  ],\r\n  \"tipo\": 0,\r\n  \"tempoMaximoDeResposta\": 100,\r\n  \"respostaEsperada\": {\r\n    \"palavrasChaves\": [\r\n      {\r\n        \"descricao\": \"Teste\",\r\n        \"peso\": 1\r\n      }\r\n    ]\r\n  },\r\n  \"usuario\": \"postman@ufg.br\"\r\n}"
 						},
 						"url": {
-							"raw": "{{ListElabUrl}}/api/QuestaoDiscursiva/cadastre",
+							"raw": "{{ListElabUrl}}/api/QuestaoDiscursiva",
 							"host": [
 								"{{ListElabUrl}}"
 							],
 							"path": [
 								"api",
-								"QuestaoDiscursiva",
-								"cadastre"
+								"QuestaoDiscursiva"
 							]
 						}
 					},
@@ -225,7 +224,7 @@
 								}
 							]
 						},
-						"method": "POST",
+						"method": "PUT",
 						"header": [
 							{
 								"key": "Content-Type",
@@ -239,14 +238,13 @@
 							"raw": "{\r\n  \"enunciado\": \"Teste Postman Atualize\",\r\n  \"usuario\": \"postman-vv@ufg.br\",\r\n  \"areaDeConhecimento\": 10301003,\r\n  \"nivelDificuldade\": 4,\r\n  \"tags\": [\r\n  \t\"Teste\",\r\n    \"Postman\"\r\n  ],\r\n  \"tipo\": 1,\r\n  \"tempoMaximoDeResposta\": 123456,\r\n  \"respostaEsperada\": {\r\n    \"palavrasChaves\": [\r\n      {\r\n        \"descricao\": \"Postman\",\r\n        \"peso\": 2\r\n      }\r\n    ]\r\n  },\r\n  \"id\" : {{ObjectIdString}}\r\n}"
 						},
 						"url": {
-							"raw": "{{ListElabUrl}}/api/QuestaoDiscursiva/atualize",
+							"raw": "{{ListElabUrl}}/api/QuestaoDiscursiva",
 							"host": [
 								"{{ListElabUrl}}"
 							],
 							"path": [
 								"api",
-								"QuestaoDiscursiva",
-								"atualize"
+								"QuestaoDiscursiva"
 							]
 						}
 					},
@@ -638,14 +636,13 @@
 							"raw": "{\r\n  \"titulo\": \"Lista Postman\",\r\n  \"areaDeConhecimento\": 10301003,\r\n  \"nivelDificuldade\": 1,\r\n  \"tags\": [\r\n    \"Postman\"\r\n  ],\r\n  \"discursivas\": [\r\n    {\r\n      \"enunciado\": \"Questão em Lista Postman\",\r\n      \"usuario\": \"professor@ufg.br\",\r\n      \"areaDeConhecimento\": 10301003,\r\n      \"nivelDificuldade\": 1,\r\n      \"tags\": [\r\n        \"TagPostman\"\r\n      ],\r\n      \"tipo\": 0,\r\n      \"tempoMaximoDeResposta\": 100,\r\n      \"respostaEsperada\": {\r\n        \"palavrasChaves\": [\r\n          {\r\n            \"descricao\": \"PalavraChavePostman\",\r\n            \"peso\": 1\r\n          }\r\n        ]\r\n      }\r\n    }\r\n  ],\r\n  \"objetivas\": []\r\n}"
 						},
 						"url": {
-							"raw": "{{ListElabUrl}}/api/Lista/cadastre",
+							"raw": "{{ListElabUrl}}/api/Lista",
 							"host": [
 								"{{ListElabUrl}}"
 							],
 							"path": [
 								"api",
-								"Lista",
-								"cadastre"
+								"Lista"
 							]
 						}
 					},
@@ -683,7 +680,7 @@
 								}
 							]
 						},
-						"method": "POST",
+						"method": "PUT",
 						"header": [
 							{
 								"key": "Content-Type",
@@ -697,21 +694,20 @@
 							"raw": "{\r\n  \"titulo\": \"Lista Postman Atualize\",\r\n  \"areaDeConhecimento\": 99999999,\r\n  \"nivelDificuldade\": 1,\r\n  \"tags\": [\r\n    \"Postman\"\r\n  ],\r\n  \"discursivas\": [\r\n    {\r\n      \"enunciado\": \"Questão em Lista Postman\",\r\n      \"usuario\": \"postman-vv@ufg.br\",\r\n      \"areaDeConhecimento\": 99999999,\r\n      \"nivelDificuldade\": 1,\r\n      \"tags\": [\r\n        \"TagPostman\"\r\n      ],\r\n      \"tipo\": 0,\r\n      \"tempoMaximoDeResposta\": 123456,\r\n      \"respostaEsperada\": {\r\n        \"palavrasChaves\": [\r\n          {\r\n            \"descricao\": \"PalavraChavePostman\",\r\n            \"peso\": 1\r\n          }\r\n        ]\r\n      }\r\n    }\r\n  ],\r\n  \"objetivas\": [],\r\n  \"id\" : {{ObjectIdString}}\r\n}"
 						},
 						"url": {
-							"raw": "{{ListElabUrl}}/api/Lista/atualize",
+							"raw": "{{ListElabUrl}}/api/Lista",
 							"host": [
 								"{{ListElabUrl}}"
 							],
 							"path": [
 								"api",
-								"Lista",
-								"atualize"
+								"Lista"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Consulte Lista Atualizada",
+					"name": "Lista Atualizada (por id)",
 					"event": [
 						{
 							"listen": "test",
@@ -853,7 +849,7 @@
 					"response": []
 				},
 				{
-					"name": "Consulte Lista Deletada",
+					"name": "Lista Deletada  (por id)",
 					"event": [
 						{
 							"listen": "test",
