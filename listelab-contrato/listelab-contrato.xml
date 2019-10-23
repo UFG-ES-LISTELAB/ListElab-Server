@@ -39,35 +39,35 @@
         </member>
         <member name="M:listelab_contrato.Controllers.ControladorPadrao`2.ConsulteLista">
             <summary>
-            Lista todas as questões discursivas cadastradas.
+            Lista todas os registros cadastrados.
             </summary>
-            <returns>Retorna um objeto de sucesso ou falha e a lista desejada, caso sucesso.</returns>
+            <returns>Retorna um objeto de sucesso ou falha e os registros cadastrados, caso sucesso.</returns>
         </member>
         <member name="M:listelab_contrato.Controllers.ControladorPadrao`2.ConsultePorId(System.String)">
             <summary>
-            Lista todas as questões discursivas cadastradas.
+            Consulta um registro passando o identificador único.
             </summary>
-            <returns>Retorna um objeto de sucesso ou falha e a lista desejada, caso sucesso.</returns>
+            <returns>Retorna um objeto de sucesso ou falha com o registro encontrado, caso sucesso.</returns>
         </member>
         <member name="M:listelab_contrato.Controllers.ControladorPadrao`2.Cadastre(`0)">
             <summary>
-            Cadastra uma questão discursiva.
+            Cadastra um registro novo no banco.
             </summary>
-            <param name="objeto">A questão discursiva que se deseja cadastrar.</param>
+            <param name="objeto">O registro a ser cadastrado..</param>
             <returns>Retorna objeto com resultado da requisição.</returns>
         </member>
         <member name="M:listelab_contrato.Controllers.ControladorPadrao`2.Atualize(`0)">
             <summary>
-            Atualiza uma questão discursiva.
+            Atualiza um registro existente no banco.
             </summary>
-            <param name="objeto">O objeto para atualização.</param>
+            <param name="objeto">O registro com seus novos dados e o id para identificação.</param>
             <returns>Retorna objeto com resultado da requisição.</returns>
         </member>
         <member name="M:listelab_contrato.Controllers.ControladorPadrao`2.Delete(System.String)">
             <summary>
-            Exclue uma questão discursiva.
+            Exclue um registro no banco.
             </summary>
-            <param name="id">Id da questão discursiva que se deseja excluir.</param>
+            <param name="id">Id do registro que será excluído.</param>
             <returns>Retorna objeto com resultado da requisição.</returns>
         </member>
         <member name="M:listelab_contrato.Controllers.ControladorPadrao`2.ExecuteAcaoAutorizada(System.Func{Microsoft.AspNetCore.Mvc.ActionResult{listelab_contrato.RequestObject.DtoResultado{`0}}})">

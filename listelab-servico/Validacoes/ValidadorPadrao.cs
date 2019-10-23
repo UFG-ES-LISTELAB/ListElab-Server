@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using listelab_data.Repositorios;
 using listelab_dominio.Abstrato;
+using System;
 
 namespace listelab_servico.Validacoes
 {
@@ -18,6 +19,26 @@ namespace listelab_servico.Validacoes
             }
         }
 
+        /// <summary>
+        /// Número do requisito.
+        /// </summary>
+        public void AssineRegraIdDeveSerInformado()
+        {
+            RuleFor(objeto => objeto.Id)
+                .Must(id => id != Guid.Empty)
+                .WithMessage("O id deve ser informado na atualização.");
+        }
+
+        /// <summary>
+        /// Número do requisito.
+        /// </summary>
+        public void AssineRegraConceitoExiste()
+        {
+            RuleFor(objeto => objeto.Id)
+                .Must(id => Repositorio().ItemExiste(x => x.Id == id))
+                .WithMessage("O id passado é inválido ou não representa um conceito cadastrado.");
+        }
+
         protected abstract void AssineRegrasDeCadastro();
 
         protected abstract void AssineRegrasDeAtualizacao();
@@ -31,11 +52,14 @@ namespace listelab_servico.Validacoes
 
         public void AssineRegrasAtualizacao()
         {
+            AssineRegraIdDeveSerInformado();
+            AssineRegraConceitoExiste();
             AssineRegrasDeAtualizacao();
         }
 
         public void AssineRegrasExclusao()
         {
+            AssineRegraConceitoExiste();
             AssineRegrasDeAtualizacao();
         }
 
