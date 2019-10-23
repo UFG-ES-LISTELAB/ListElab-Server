@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "b39b4363-3458-4c2b-bcd8-76d088de1b16",
+		"_postman_id": "7b656e3a-30f0-4e95-b8bb-2f3c04c10175",
 		"name": "ListElab",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -917,6 +917,83 @@
 								"{{ObjectId}}"
 							]
 						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consulte questões por filtro",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "fd8d0ebe-96a6-43c2-99cb-c3edd1e13ca2",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna json com valor de 'sucesso' == true\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.sucesso).to.eql(true);",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "c0f30421-da1e-4811-b248-a8cbd45fb534",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ListElabToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"AreaDeConhecimento\": 10302000,\n\t\"NivelDificuldade\": 1,\n\t\"Tipo\": 0,\n\t\"Disciplina\": 2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ListElabUrl}}/api/Lista/filtro",
+							"host": [
+								"{{ListElabUrl}}"
+							],
+							"path": [
+								"api",
+								"Lista",
+								"filtro"
+							]
+						},
+						"description": "Dado um filtro passado na requisição, retorna uma lista com questões discursivas e objetivas baseadas nos itens do filtro."
 					},
 					"response": []
 				}
