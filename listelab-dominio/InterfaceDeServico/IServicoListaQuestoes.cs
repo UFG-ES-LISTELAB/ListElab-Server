@@ -11,6 +11,6 @@ namespace listelab_dominio.InterfaceDeServico
 {
     public interface IServicoListaQuestoes : IServicoPadrao<ListaQuestoes>
     {
-        List<Questao<Discursiva>> ConsulteQuestoesDiscursivas(FiltroQuestao filtro);
+        ListaQuestoes ConsulteQuestoes(FiltroQuestao filtro);
     }
 }

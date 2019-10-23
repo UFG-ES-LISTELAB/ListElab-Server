@@ -22,14 +22,14 @@ namespace listelab_contrato.Controllers
         /// </summary>
         /// <param name="filtro">O filtro de questão.</param>
         /// <returns>Retorna objeto de resposta de sucesso ou falha, contendo o objeto desejado, caso sucesso.</returns>
-        [HttpGet]
-        [Route("consulte")]
+        [HttpPost]
+        [Route("filtro")]
         [Authorize]
         public ActionResult<DtoResultado<ListaQuestoes>> ConsulteDiscursivasComFiltro([FromBody] FiltroQuestao filtro)
         {
             return ExecuteAcaoAutorizada(() =>
             {
-                var resultado = Servico().ConsulteQuestoesDiscursivas(filtro);
+                var resultado = Servico().ConsulteQuestoes(filtro);
                 return DtoResultado<ListaQuestoes>.ObtenhaResultado(resultado, "Consulta realizada sem erros");
             });
         }
