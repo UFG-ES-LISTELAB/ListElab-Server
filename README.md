@@ -13,7 +13,40 @@ Esse software é uma demanda da Fábrica de Software da UFG.
 
 [Documentação](http://sifo.tech/swagger/index.html)
 
-## Pré-requisitos
+#### Login
+
+**Endpoint:** [Post] /api/usuario/login
+
+*Body*:
+
+```
+{
+  "email": "admin@ufg.br"
+  "password": "123456"
+}
+```
+
+#### Questão / Lista
+
+As informações sobre as requisições podem ser adquiridas aqui:
+
+[Documentação](http://sifo.tech/swagger/index.html)
+
+Todas as requisições devem ter no header a tag [Authorization] que deve conter:
+
+**Bearer Token**
+
+## Arquitetura API
+
+A api foi dividida em camadas utilizando a seguinte organização:
+
+![diagrama do projetista](https://raw.githubusercontent.com/UFG-ES-LISTELAB/ListElab-Server/dev/diagramas/diagramas/visaoProjetista.png)
+
+As classes obedecem a seguinte organização:
+
+![diagrama de classes](https://raw.githubusercontent.com/UFG-ES-LISTELAB/ListElab-Server/dev/diagramas/diagramas/digramaDeClasses.jpg)
+
+## Para rodar a api
 
 Caso você queira baixar o código e rodá-lo em sua máquina você precisará atender os seguintes passos:
 
