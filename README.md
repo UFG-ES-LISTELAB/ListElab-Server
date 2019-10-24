@@ -43,6 +43,7 @@ A api foi dividida em camadas utilizando a seguinte organização:
 ![diagrama do projetista](https://raw.githubusercontent.com/UFG-ES-LISTELAB/ListElab-Server/dev/diagramas/visaoProjetista.png)
 
 As classes obedecem a seguinte organização:
+
 ![diagrama de classes](https://raw.githubusercontent.com/UFG-ES-LISTELAB/ListElab-Server/dev/diagramas/digramaDeClasses.jpg)
 
 ## Para rodar a api
