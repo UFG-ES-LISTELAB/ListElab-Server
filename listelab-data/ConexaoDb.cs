@@ -1,7 +1,7 @@
 ﻿using MongoDB.Driver;
 using System.Configuration;
 
-namespace listelab_data
+namespace ListElab.Data
 {
     public class ConexaoDb
     {

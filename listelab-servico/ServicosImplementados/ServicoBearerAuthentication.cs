@@ -1,25 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using ListElab.Data.Repositorios;
+using ListElab.Dominio.Conceitos.UsuarioObj;
+using ListElab.Dominio.InterfaceDeServico;
+using System;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using listelab_data.Repositorios;
-using listelab_dominio.Conceitos.UsuarioObj;
-using listelab_dominio.Enumeradores;
-using listelab_dominio.InterfaceDeServico;
-using System.Security.Cryptography;
 
-namespace listelab_servico.Servico
+namespace ListElab.Servico.ServicosImplementados
 {
     public class ServicoBearerAuthentication : IServicoBearerAuthentication
     {
         private IRepositorio<Usuario> _repositorio;
 
         private const string salt = "listelab";
-
-        public ServicoBearerAuthentication()
-        {
-
-        }
 
         private string ComputeSha256Hash(string rawData)
         {

@@ -1,10 +1,10 @@
-﻿using listelab_dominio.Conceitos.QuestaoObj;
-using listelab_dominio.Conceitos.RespostaObj;
-using listelab_servico.Validacoes;
+﻿using ListElab.Dominio.Conceitos.QuestaoObj;
+using ListElab.Dominio.Conceitos.RespostaObj;
+using ListElab.Servico.Validacoes;
 using NUnit.Framework;
 using System.Collections.Generic;
 
-namespace listaelab_testes.TestesValidador
+namespace ListElab.Testes.TestesValidador
 {
     [TestFixture]
     public class TestesValidadorQuestaoDiscursiva : TesteBase<Questao<Discursiva>>

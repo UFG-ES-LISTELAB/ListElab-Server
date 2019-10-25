@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace listelab_dominio.Conceitos.RespostaObj
+﻿namespace ListElab.Dominio.Conceitos.RespostaObj
 {
     public class PalavraChave
     {

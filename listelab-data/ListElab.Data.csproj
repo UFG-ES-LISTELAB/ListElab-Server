@@ -2,8 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <RootNamespace>listelab_data</RootNamespace>
+    <RootNamespace>ListElab.Data</RootNamespace>
     <PublishWithAspNetCoreTargetManifest>false</PublishWithAspNetCoreTargetManifest>
+    <AssemblyName>ListElab.Data</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\listelab-dominio\listelab-dominio.csproj" />
+    <ProjectReference Include="..\listelab-dominio\ListElab.Dominio.csproj" />
   </ItemGroup>
 
 </Project>

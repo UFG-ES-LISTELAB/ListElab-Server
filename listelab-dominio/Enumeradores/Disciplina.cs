@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace listelab_dominio.Enumeradores
+﻿namespace ListElab.Dominio.Enumeradores
 {
     public enum Disciplina
     {

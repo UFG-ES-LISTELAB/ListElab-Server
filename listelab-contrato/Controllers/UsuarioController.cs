@@ -1,11 +1,11 @@
 using System;
-using listelab_contrato.RequestObject;
-using listelab_dominio.Conceitos.UsuarioObj;
-using listelab_servico.Servico;
+using ListElab.Contrato.RequestObject;
+using ListElab.Dominio.Conceitos.UsuarioObj;
+using ListElab.Servico.ServicosImplementados;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
-namespace listelab_contrato.Controllers
+namespace ListElab.Contrato.Controllers
 {
 
     /// <summary>

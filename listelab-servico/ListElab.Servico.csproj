@@ -2,8 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <RootNamespace>listelab_servico</RootNamespace>
+    <RootNamespace>ListElab.Servico</RootNamespace>
     <PublishWithAspNetCoreTargetManifest>false</PublishWithAspNetCoreTargetManifest>
+    <AssemblyName>ListElab.Servico</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
@@ -11,8 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\listelab-data\listelab-data.csproj" />
-    <ProjectReference Include="..\listelab-dominio\listelab-dominio.csproj" />
+    <ProjectReference Include="..\listelab-data\ListElab.Data.csproj" />
+    <ProjectReference Include="..\listelab-dominio\ListElab.Dominio.csproj" />
   </ItemGroup>
 
 </Project>

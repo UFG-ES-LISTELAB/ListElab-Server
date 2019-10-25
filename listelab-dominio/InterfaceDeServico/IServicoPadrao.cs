@@ -1,9 +1,6 @@
-﻿using listelab_dominio.Conceitos.Filtro;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
-namespace listelab_dominio.InterfaceDeServico
+namespace ListElab.Dominio.InterfaceDeServico
 {
     public interface IServicoPadrao<T>
     {

@@ -1,9 +1,9 @@
 ﻿using FluentValidation;
-using listelab_data.Repositorios;
-using listelab_dominio.Abstrato;
+using ListElab.Data.Repositorios;
+using ListElab.Dominio.Abstrato;
 using System;
 
-namespace listelab_servico.Validacoes
+namespace ListElab.Servico.Validacoes
 {
     public abstract class ValidadorPadrao<T> : AbstractValidator<T> where T : ObjetoComId
     {
@@ -13,7 +13,7 @@ namespace listelab_servico.Validacoes
         {
             var resultado = Validate(objeto);
 
-            if(!resultado.IsValid)
+            if (!resultado.IsValid)
             {
                 throw new ValidationException(resultado.Errors[0].ErrorMessage);
             }

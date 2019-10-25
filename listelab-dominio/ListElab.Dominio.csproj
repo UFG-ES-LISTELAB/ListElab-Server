@@ -2,8 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <RootNamespace>listelab_dominio</RootNamespace>
+    <RootNamespace>ListElab.Dominio</RootNamespace>
     <PublishWithAspNetCoreTargetManifest>false</PublishWithAspNetCoreTargetManifest>
+    <AssemblyName>ListElab.Dominio</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>

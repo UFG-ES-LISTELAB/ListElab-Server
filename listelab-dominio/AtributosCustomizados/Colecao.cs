@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace listelab_dominio.CustomAttributes
+namespace ListElab.Dominio.AtributosCustomizados
 {
     public class Colecao : Attribute
     {

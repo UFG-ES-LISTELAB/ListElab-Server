@@ -4,12 +4,12 @@
         <name>ListElab.Contrato</name>
     </assembly>
     <members>
-        <member name="T:ListElab.Contrato.Authentication.BearerAuthenticationHandler">
+        <member name="T:ListElab.Contrato.Autenticacao.BearerAuthenticationHandler">
             <summary>
             Define as regras para autenticação.
             </summary>
         </member>
-        <member name="M:ListElab.Contrato.Authentication.BearerAuthenticationHandler.#ctor(Microsoft.Extensions.Options.IOptionsMonitor{ListElab.Contrato.Authentication.BearerAuthenticationOptions},Microsoft.Extensions.Logging.ILoggerFactory,System.Text.Encodings.Web.UrlEncoder,Microsoft.AspNetCore.Authentication.ISystemClock)">
+        <member name="M:ListElab.Contrato.Autenticacao.BearerAuthenticationHandler.#ctor(Microsoft.Extensions.Options.IOptionsMonitor{ListElab.Contrato.Autenticacao.BearerAuthenticationOptions},Microsoft.Extensions.Logging.ILoggerFactory,System.Text.Encodings.Web.UrlEncoder,Microsoft.AspNetCore.Authentication.ISystemClock)">
             <summary>
             Construtor da classe que define as regras para autenticação.
             </summary>
@@ -18,7 +18,7 @@
             <param name="encoder">Tipo de encode para arquivo.</param>
             <param name="clock">Tempo de autenticação.</param>
         </member>
-        <member name="M:ListElab.Contrato.Authentication.BearerAuthenticationHandler.HandleAuthenticateAsync">
+        <member name="M:ListElab.Contrato.Autenticacao.BearerAuthenticationHandler.HandleAuthenticateAsync">
             <summary>
             Método para aplicar regras de autenticação.
             </summary>
@@ -82,7 +82,7 @@
             Api para Lista
             </summary>
         </member>
-        <member name="M:ListElab.Contrato.Controllers.ListaController.ConsulteDiscursivasComFiltro(listelab_dominio.Conceitos.Filtro.FiltroQuestao)">
+        <member name="M:ListElab.Contrato.Controllers.ListaController.ConsulteDiscursivasComFiltro(ListElab.Dominio.Conceitos.Filtro.FiltroQuestao)">
             <summary>
             Retorna uma lista de questoes discursivas
             </summary>
@@ -94,7 +94,7 @@
             Api para o conceito de questão discursiva.
             </summary>
         </member>
-        <member name="M:ListElab.Contrato.Controllers.QuestaoDiscursivaController.ConsulteComFiltro(listelab_dominio.Conceitos.Filtro.FiltroQuestao)">
+        <member name="M:ListElab.Contrato.Controllers.QuestaoDiscursivaController.ConsulteComFiltro(ListElab.Dominio.Conceitos.Filtro.FiltroQuestao)">
             <summary>
             Retorna a questão discursiva do código informado.
             </summary>
@@ -111,7 +111,7 @@
             Api de usuário para efetuar login.
             </summary>
         </member>
-        <member name="M:ListElab.Contrato.Controllers.UsuarioController.Cadastre(listelab_dominio.Conceitos.UsuarioObj.Login)">
+        <member name="M:ListElab.Contrato.Controllers.UsuarioController.Cadastre(ListElab.Dominio.Conceitos.UsuarioObj.Login)">
             <summary>
             Realiza login.
             </summary>

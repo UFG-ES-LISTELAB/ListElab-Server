@@ -1,11 +1,11 @@
-﻿using listelab_data.Repositorios;
-using listelab_dominio.Abstrato;
-using listelab_dominio.InterfaceDeServico;
-using listelab_servico.Validacoes;
+﻿using ListElab.Data.Repositorios;
+using ListElab.Dominio.Abstrato;
+using ListElab.Dominio.InterfaceDeServico;
+using ListElab.Servico.Validacoes;
 using System;
 using System.Collections.Generic;
 
-namespace listelab_servico.Servico
+namespace ListElab.Servico.ServicosImplementados
 {
     public abstract class ServicoPadrao<T> : IServicoPadrao<T> where T : ObjetoComId
     {
@@ -20,7 +20,7 @@ namespace listelab_servico.Servico
             Validador().Valide(objeto);
 
             Repositorio().Atualize(x => x.Id == objeto.Id, objeto);
-            
+
             return objeto;
         }
 
@@ -54,7 +54,8 @@ namespace listelab_servico.Servico
                 {
                     resultado = Repositorio().ConsulteUm(x => x.Id == idConvertido);
                 }
-            } catch(Exception e)
+            }
+            catch (Exception e)
             {
                 throw new Exception("Id passado não é valido ou não está cadastrado.");
             }
@@ -79,10 +80,11 @@ namespace listelab_servico.Servico
         {
             Guid idConvertido = Guid.Empty;
 
-            if(Guid.TryParse(id, out idConvertido))
+            if (Guid.TryParse(id, out idConvertido))
             {
                 Repositorio().Exclua(x => x.Id == idConvertido);
-            } else
+            }
+            else
             {
                 throw new Exception("Id inválido.");
             }

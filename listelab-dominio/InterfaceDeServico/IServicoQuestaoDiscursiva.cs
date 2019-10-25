@@ -1,10 +1,9 @@
-﻿using listelab_dominio.Conceitos;
-using listelab_dominio.Conceitos.Filtro;
-using listelab_dominio.Conceitos.QuestaoObj;
-using listelab_dominio.Conceitos.RespostaObj;
+﻿using ListElab.Dominio.Conceitos.Filtro;
+using ListElab.Dominio.Conceitos.QuestaoObj;
+using ListElab.Dominio.Conceitos.RespostaObj;
 using System.Collections.Generic;
 
-namespace listelab_dominio.InterfaceDeServico
+namespace ListElab.Dominio.InterfaceDeServico
 {
     public interface IServicoQuestaoDiscursiva : IServicoPadrao<Questao<Discursiva>>
     {

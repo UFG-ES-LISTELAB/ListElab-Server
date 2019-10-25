@@ -1,14 +1,14 @@
-﻿using System;
+﻿using ListElab.Data.Repositorios;
+using ListElab.Dominio.Conceitos.Filtro;
+using ListElab.Dominio.Conceitos.QuestaoObj;
+using ListElab.Dominio.Conceitos.RespostaObj;
+using ListElab.Dominio.InterfaceDeServico;
+using ListElab.Servico.Validacoes;
+using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using listelab_data.Repositorios;
-using listelab_dominio.Conceitos.Filtro;
-using listelab_dominio.Conceitos.QuestaoObj;
-using listelab_dominio.Conceitos.RespostaObj;
-using listelab_dominio.InterfaceDeServico;
-using listelab_servico.Validacoes;
 
-namespace listelab_servico.Servico
+namespace ListElab.Servico.ServicosImplementados
 {
     public class ServicoQuestaoDiscursiva : ServicoPadrao<Questao<Discursiva>>, IServicoQuestaoDiscursiva
     {
