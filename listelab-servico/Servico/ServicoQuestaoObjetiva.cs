@@ -1,12 +1,9 @@
-﻿using listelab_data.Repositorios;
-using listelab_dominio.Conceitos.Filtro;
-using listelab_dominio.Conceitos.QuestaoObj;
-using listelab_dominio.Conceitos.RespostaObj;
-using listelab_dominio.InterfaceDeServico;
-using listelab_servico.Validacoes;
-using System;
-using System.Linq.Expressions;
-namespace listelab_servico.Servico
+﻿using ListElab.Data.Repositorios;
+using ListElab.Dominio.Conceitos.QuestaoObj;
+using ListElab.Dominio.Conceitos.RespostaObj;
+using ListElab.Dominio.InterfaceDeServico;
+using ListElab.Servico.Validacoes;
+namespace ListElab.Servico.Servico
 {
     public class ServicoQuestaoObjetiva : ServicoPadrao<Questao<Objetiva>>, IServicoQuestaoObjetiva
     {

@@ -1,9 +1,8 @@
-﻿using listelab_dominio.Conceitos.Filtro;
-using listelab_dominio.Conceitos.QuestaoObj;
-using listelab_dominio.Conceitos.RespostaObj;
-using listelab_dominio.InterfaceDeServico;
+﻿using ListElab.Dominio.Conceitos.QuestaoObj;
+using ListElab.Dominio.Conceitos.RespostaObj;
+using ListElab.Dominio.InterfaceDeServico;
 
-namespace listelab_contrato.Controllers
+namespace ListElab.Contrato.Controllers
 {
     /// <summary>
     /// Api para pesquisa de questão objetiva

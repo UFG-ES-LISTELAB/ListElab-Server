@@ -1,8 +1,8 @@
-﻿using listelab_dominio.CustomAttributes;
-using listelab_dominio.Enumeradores;
+﻿using ListElab.Dominio.CustomAttributes;
+using ListElab.Dominio.Enumeradores;
 using MongoDB.Bson;
 
-namespace listelab_dominio.Conceitos.UsuarioObj
+namespace ListElab.Dominio.Conceitos.UsuarioObj
 {
 
     [Colecao(Nome = "usuario")]
@@ -12,7 +12,7 @@ namespace listelab_dominio.Conceitos.UsuarioObj
         /// Id do usuário.
         /// </summary>
         public ObjectId Id { get; set; }
-        
+
         /// <summary>
         /// Email do usuário.
         /// </summary>

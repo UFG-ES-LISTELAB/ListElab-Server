@@ -1,13 +1,12 @@
 ﻿using System;
-using listelab_contrato.RequestObject;
-using listelab_dominio;
-using listelab_dominio.Conceitos.Filtro;
-using listelab_dominio.InterfaceDeServico;
+using ListElab.Contrato.RequestObject;
+using ListElab.Dominio;
+using ListElab.Dominio.InterfaceDeServico;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
-namespace listelab_contrato.Controllers
+namespace ListElab.Contrato.Controllers
 {
     /// <summary>
     /// Controlador Controaldor com rotinas padrão da api.

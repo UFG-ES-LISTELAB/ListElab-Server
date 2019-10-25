@@ -1,6 +1,6 @@
-﻿using listelab_dominio.Enumeradores;
+﻿using ListElab.Dominio.Enumeradores;
 
-namespace listelab_dominio.Conceitos.Filtro
+namespace ListElab.Dominio.Conceitos.Filtro
 {
     /// <summary>
     /// Representa filtro de questão.

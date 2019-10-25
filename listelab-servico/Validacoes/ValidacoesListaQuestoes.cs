@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
-using listelab_dominio.Conceitos.ListaObj;
+using ListElab.Dominio.Conceitos.ListaObj;
 
-namespace listelab_servico.Validacoes
+namespace ListElab.Servico.Validacoes
 {
     public class ValidacoesListaQuestoes : ValidadorPadrao<ListaQuestoes>
     {

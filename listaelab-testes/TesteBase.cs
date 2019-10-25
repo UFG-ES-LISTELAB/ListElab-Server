@@ -1,11 +1,8 @@
-﻿using listelab_dominio.Abstrato;
-using listelab_servico.Validacoes;
+﻿using ListElab.Dominio.Abstrato;
+using ListElab.Servico.Validacoes;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace listaelab_testes
+namespace ListElab.Testes
 {
     public abstract class TesteBase<T> where T : ObjetoComId
     {

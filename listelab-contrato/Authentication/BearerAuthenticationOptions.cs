@@ -1,10 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace listelab_contrato.Authentication
+namespace ListElab.Contrato.Authentication
 {
     public class BearerAuthenticationOptions : AuthenticationSchemeOptions
     {

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace listelab_data.Repositorios
+namespace ListElab.Data.Repositorios
 {
     public interface IRepositorio<T>
     {

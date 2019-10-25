@@ -1,14 +1,11 @@
-﻿using listelab_contrato.RequestObject;
-using listelab_dominio.Conceitos.Filtro;
-using listelab_dominio.Conceitos.ListaObj;
-using listelab_dominio.Conceitos.QuestaoObj;
-using listelab_dominio.Conceitos.RespostaObj;
-using listelab_dominio.InterfaceDeServico;
+﻿using ListElab.Contrato.RequestObject;
+using ListElab.Dominio.Conceitos.Filtro;
+using ListElab.Dominio.Conceitos.ListaObj;
+using ListElab.Dominio.InterfaceDeServico;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 
-namespace listelab_contrato.Controllers
+namespace ListElab.Contrato.Controllers
 {
     /// <summary>
     /// Api para Lista

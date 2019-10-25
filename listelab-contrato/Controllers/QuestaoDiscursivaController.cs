@@ -1,12 +1,12 @@
-﻿using listelab_contrato.RequestObject;
-using listelab_dominio.Conceitos.Filtro;
-using listelab_dominio.Conceitos.QuestaoObj;
-using listelab_dominio.Conceitos.RespostaObj;
-using listelab_dominio.InterfaceDeServico;
+﻿using ListElab.Contrato.RequestObject;
+using ListElab.Dominio.Conceitos.Filtro;
+using ListElab.Dominio.Conceitos.QuestaoObj;
+using ListElab.Dominio.Conceitos.RespostaObj;
+using ListElab.Dominio.InterfaceDeServico;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace listelab_contrato.Controllers
+namespace ListElab.Contrato.Controllers
 {
     /// <summary>
     /// Api para o conceito de questão discursiva.

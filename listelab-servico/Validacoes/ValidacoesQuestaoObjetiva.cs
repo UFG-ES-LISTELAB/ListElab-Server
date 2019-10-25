@@ -1,8 +1,8 @@
-﻿using listelab_dominio.Conceitos.QuestaoObj;
-using listelab_dominio.Conceitos.RespostaObj;
+﻿using ListElab.Dominio.Conceitos.QuestaoObj;
+using ListElab.Dominio.Conceitos.RespostaObj;
 using System;
 
-namespace listelab_servico.Validacoes
+namespace ListElab.Servico.Validacoes
 {
     public class ValidacoesQuestaoObjetiva : ValidadorPadrao<Questao<Objetiva>>
     {

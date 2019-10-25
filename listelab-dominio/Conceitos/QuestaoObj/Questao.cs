@@ -1,10 +1,9 @@
-﻿using listelab_dominio.Abstrato;
-using listelab_dominio.Conceitos.UsuarioObj;
-using listelab_dominio.CustomAttributes;
-using listelab_dominio.Enumeradores;
+﻿using ListElab.Dominio.Abstrato;
+using ListElab.Dominio.CustomAttributes;
+using ListElab.Dominio.Enumeradores;
 using System.Collections.Generic;
 
-namespace listelab_dominio.Conceitos.QuestaoObj
+namespace ListElab.Dominio.Conceitos.QuestaoObj
 {
     /// <summary>
     /// Representa uma questão genérica.

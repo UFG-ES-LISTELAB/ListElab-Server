@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using listelab_dominio.CustomAttributes;
+using ListElab.Dominio.CustomAttributes;
 using MongoDB.Driver;
 
-namespace listelab_data.Repositorios
+namespace ListElab.Data.Repositorios
 {
     public class Repositorio<T> : IRepositorio<T>
     {

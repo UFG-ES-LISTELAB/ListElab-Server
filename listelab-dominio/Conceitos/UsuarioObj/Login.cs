@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace listelab_dominio.Conceitos.UsuarioObj
+﻿namespace ListElab.Dominio.Conceitos.UsuarioObj
 {
     public class Login
     {
@@ -10,7 +6,7 @@ namespace listelab_dominio.Conceitos.UsuarioObj
         /// Email do usuário.
         /// </summary>
         public string Email { get; set; }
-        
+
         /// <summary>
         /// Senha do usuário.
         /// </summary>
