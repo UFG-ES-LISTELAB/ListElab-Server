@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Options;
 using System;
 
-namespace ListElab.Contrato.Authentication
+namespace ListElab.Contrato.Autenticacao
 {
     public class BearerAuthenticationPostConfigureOptions : IPostConfigureOptions<BearerAuthenticationOptions>
     {

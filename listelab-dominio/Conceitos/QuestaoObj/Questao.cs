@@ -1,5 +1,5 @@
 ﻿using ListElab.Dominio.Abstrato;
-using ListElab.Dominio.CustomAttributes;
+using ListElab.Dominio.AtributosCustomizados;
 using ListElab.Dominio.Enumeradores;
 using System.Collections.Generic;
 

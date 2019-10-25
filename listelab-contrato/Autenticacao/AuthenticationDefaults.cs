@@ -1,5 +1,5 @@
 ﻿
-namespace ListElab.Contrato.Authentication
+namespace ListElab.Contrato.Autenticacao
 {
     public class AuthenticationDefaults
     {

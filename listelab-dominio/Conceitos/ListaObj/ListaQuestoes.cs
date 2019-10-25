@@ -1,7 +1,7 @@
 ﻿using ListElab.Dominio.Abstrato;
+using ListElab.Dominio.AtributosCustomizados;
 using ListElab.Dominio.Conceitos.QuestaoObj;
 using ListElab.Dominio.Conceitos.RespostaObj;
-using ListElab.Dominio.CustomAttributes;
 using ListElab.Dominio.Enumeradores;
 using System.Collections.Generic;
 

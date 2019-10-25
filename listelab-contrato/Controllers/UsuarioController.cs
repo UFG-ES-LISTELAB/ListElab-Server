@@ -1,7 +1,7 @@
 using System;
 using ListElab.Contrato.RequestObject;
 using ListElab.Dominio.Conceitos.UsuarioObj;
-using ListElab.Servico.Servico;
+using ListElab.Servico.ServicosImplementados;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 

@@ -3,7 +3,8 @@ using ListElab.Dominio.Conceitos.QuestaoObj;
 using ListElab.Dominio.Conceitos.RespostaObj;
 using ListElab.Dominio.InterfaceDeServico;
 using ListElab.Servico.Validacoes;
-namespace ListElab.Servico.Servico
+
+namespace ListElab.Servico.ServicosImplementados
 {
     public class ServicoQuestaoObjetiva : ServicoPadrao<Questao<Objetiva>>, IServicoQuestaoObjetiva
     {

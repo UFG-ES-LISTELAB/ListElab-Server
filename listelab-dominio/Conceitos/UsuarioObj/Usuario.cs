@@ -1,4 +1,4 @@
-﻿using ListElab.Dominio.CustomAttributes;
+﻿using ListElab.Dominio.AtributosCustomizados;
 using ListElab.Dominio.Enumeradores;
 using MongoDB.Bson;
 

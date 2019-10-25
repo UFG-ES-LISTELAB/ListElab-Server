@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using ListElab.Dominio.CustomAttributes;
+using ListElab.Dominio.AtributosCustomizados;
 using MongoDB.Driver;
 
 namespace ListElab.Data.Repositorios

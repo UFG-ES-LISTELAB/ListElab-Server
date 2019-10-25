@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 
-namespace ListElab.Contrato.Authentication
+namespace ListElab.Contrato.Autenticacao
 {
     public class BearerAuthenticationOptions : AuthenticationSchemeOptions
     {

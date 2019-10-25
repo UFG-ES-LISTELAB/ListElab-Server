@@ -4,12 +4,12 @@
         <name>ListElab.Contrato</name>
     </assembly>
     <members>
-        <member name="T:ListElab.Contrato.Authentication.BearerAuthenticationHandler">
+        <member name="T:ListElab.Contrato.Autenticacao.BearerAuthenticationHandler">
             <summary>
             Define as regras para autenticação.
             </summary>
         </member>
-        <member name="M:ListElab.Contrato.Authentication.BearerAuthenticationHandler.#ctor(Microsoft.Extensions.Options.IOptionsMonitor{ListElab.Contrato.Authentication.BearerAuthenticationOptions},Microsoft.Extensions.Logging.ILoggerFactory,System.Text.Encodings.Web.UrlEncoder,Microsoft.AspNetCore.Authentication.ISystemClock)">
+        <member name="M:ListElab.Contrato.Autenticacao.BearerAuthenticationHandler.#ctor(Microsoft.Extensions.Options.IOptionsMonitor{ListElab.Contrato.Autenticacao.BearerAuthenticationOptions},Microsoft.Extensions.Logging.ILoggerFactory,System.Text.Encodings.Web.UrlEncoder,Microsoft.AspNetCore.Authentication.ISystemClock)">
             <summary>
             Construtor da classe que define as regras para autenticação.
             </summary>
@@ -18,7 +18,7 @@
             <param name="encoder">Tipo de encode para arquivo.</param>
             <param name="clock">Tempo de autenticação.</param>
         </member>
-        <member name="M:ListElab.Contrato.Authentication.BearerAuthenticationHandler.HandleAuthenticateAsync">
+        <member name="M:ListElab.Contrato.Autenticacao.BearerAuthenticationHandler.HandleAuthenticateAsync">
             <summary>
             Método para aplicar regras de autenticação.
             </summary>

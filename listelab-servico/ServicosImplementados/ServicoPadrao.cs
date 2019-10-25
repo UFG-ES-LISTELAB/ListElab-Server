@@ -5,7 +5,7 @@ using ListElab.Servico.Validacoes;
 using System;
 using System.Collections.Generic;
 
-namespace ListElab.Servico.Servico
+namespace ListElab.Servico.ServicosImplementados
 {
     public abstract class ServicoPadrao<T> : IServicoPadrao<T> where T : ObjetoComId
     {

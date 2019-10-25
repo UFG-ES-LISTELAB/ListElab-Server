@@ -8,7 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace ListElab.Servico.Servico
+namespace ListElab.Servico.ServicosImplementados
 {
     public class ServicoQuestaoDiscursiva : ServicoPadrao<Questao<Discursiva>>, IServicoQuestaoDiscursiva
     {

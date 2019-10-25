@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ListElab.Dominio.CustomAttributes
+namespace ListElab.Dominio.AtributosCustomizados
 {
     public class Colecao : Attribute
     {

@@ -8,7 +8,7 @@ using ListElab.Servico.Validacoes;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ListElab.Servico.Servico
+namespace ListElab.Servico.ServicosImplementados
 {
     public class ServicoListaQuestoes : ServicoPadrao<ListaQuestoes>, IServicoListaQuestoes
     {

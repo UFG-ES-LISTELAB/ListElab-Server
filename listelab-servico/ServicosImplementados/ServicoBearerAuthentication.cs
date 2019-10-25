@@ -6,18 +6,13 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ListElab.Servico.Servico
+namespace ListElab.Servico.ServicosImplementados
 {
     public class ServicoBearerAuthentication : IServicoBearerAuthentication
     {
         private IRepositorio<Usuario> _repositorio;
 
         private const string salt = "listelab";
-
-        public ServicoBearerAuthentication()
-        {
-
-        }
 
         private string ComputeSha256Hash(string rawData)
         {

@@ -1,4 +1,4 @@
-﻿using ListElab.Servico.Servico;
+﻿using ListElab.Servico.ServicosImplementados;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -9,8 +9,8 @@ using System.Security.Claims;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 
-namespace ListElab.Contrato.Authentication
-{ 
+namespace ListElab.Contrato.Autenticacao
+{
     /// <summary>
     /// Define as regras para autenticação.
     /// </summary>
