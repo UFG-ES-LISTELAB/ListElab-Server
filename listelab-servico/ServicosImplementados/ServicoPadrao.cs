@@ -1,42 +1,52 @@
 ﻿using ListElab.Data.Repositorios;
 using ListElab.Dominio.Abstrato;
 using ListElab.Dominio.InterfaceDeServico;
+using ListElab.Servico.Conversores.Interfaces;
 using ListElab.Servico.Validacoes;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ListElab.Servico.ServicosImplementados
 {
-    public abstract class ServicoPadrao<T> : IServicoPadrao<T> where T : ObjetoComId
+    public abstract class ServicoPadrao<TObjeto, TDto> : IServicoPadrao<TObjeto, TDto> where TObjeto : ObjetoComId
     {
         /// <summary>
         /// Atualiza um objeto genérico no banco.
         /// </summary>
         /// <param name="objeto">Objeto a ser atualizado.</param>
-        public T Atualize(T objeto)
+        public TDto Atualize(TDto dto)
         {
+            var objeto = Conversor().Converta(dto);
+
             Validador().AssineRegrasAtualizacao();
 
             Validador().Valide(objeto);
 
             Repositorio().Atualize(x => x.Id == objeto.Id, objeto);
 
-            return objeto;
+            var dtoAtualizado = Conversor().Converta(objeto);
+
+            return dtoAtualizado;
         }
 
         /// <summary>
         /// Cadastra um objeto de tipo genérico.
         /// </summary>
         /// <param name="objeto">Objeto a ser cadastrado.</param>
-        public virtual T Cadastre(T objeto)
+        public virtual TDto Cadastre(TDto dto)
         {
+            var objeto = Conversor().Converta(dto);
+
             Validador().AssineRegrasCadastro();
 
             Validador().Valide(objeto);
 
             Repositorio().Cadastre(objeto);
 
-            return objeto;
+            var dtoCadastrado = Conversor().Converta(objeto);
+
+            return dtoCadastrado;
         }
 
         /// <summary>
@@ -44,9 +54,9 @@ namespace ListElab.Servico.ServicosImplementados
         /// </summary>
         /// <param name="id">O id a ser pesquisado.</param>
         /// <returns>Retorna o conceito que possui aquele id.</returns>
-        public T Consulte(string id)
+        public TDto Consulte(string id)
         {
-            T resultado = null;
+            TObjeto resultado = null;
 
             try
             {
@@ -60,16 +70,16 @@ namespace ListElab.Servico.ServicosImplementados
                 throw new Exception("Id passado não é valido ou não está cadastrado.");
             }
 
-            return resultado;
+            return Conversor().Converta(resultado);
         }
 
         /// <summary>
         /// Consulta todos os objetos que obedecem uma condição.
         /// </summary>
         /// <returns>Retorna uma coleção de objetos genéricos.</returns>
-        public virtual IList<T> ConsulteLista()
+        public virtual IList<TDto> ConsulteLista()
         {
-            return Repositorio().ConsulteLista(x => true);
+            return Repositorio().ConsulteLista(x => true).Select(x => Conversor().Converta(x)).ToList();
         }
 
         /// <summary>
@@ -84,7 +94,7 @@ namespace ListElab.Servico.ServicosImplementados
             {
                 Validador().AssineRegrasExclusao();
 
-                var objeto = (T)Activator.CreateInstance(typeof(T));
+                var objeto = (TObjeto)Activator.CreateInstance(typeof(TObjeto));
 
                 objeto.Id = idConvertido;
 
@@ -98,8 +108,10 @@ namespace ListElab.Servico.ServicosImplementados
             }
         }
 
-        protected abstract IRepositorio<T> Repositorio();
+        protected abstract IRepositorio<TObjeto> Repositorio();
 
-        protected abstract ValidadorPadrao<T> Validador();
+        protected abstract ValidadorPadrao<TObjeto> Validador();
+
+        protected abstract IConversor<TDto, TObjeto> Conversor();
     }
 }

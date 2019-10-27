@@ -1,6 +1,6 @@
-﻿using ListElab.Contrato.RequestObject;
-using ListElab.Dominio.Conceitos.Filtro;
+﻿using ListElab.Dominio.Conceitos.Filtro;
 using ListElab.Dominio.Conceitos.ListaObj;
+using ListElab.Dominio.Dtos;
 using ListElab.Dominio.InterfaceDeServico;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,7 +12,7 @@ namespace ListElab.Contrato.Controllers
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
-    public class ListaController : ControladorPadrao<ListaQuestoes, IServicoListaQuestoes>
+    public class ListaController : ControladorPadrao<ListaQuestoes, IServicoListaQuestoes, DtoListaQuestoes>
     {
         /// <summary>
         /// Retorna uma lista de questoes discursivas
@@ -22,12 +22,12 @@ namespace ListElab.Contrato.Controllers
         [HttpPost]
         [Route("filtro")]
         [Authorize]
-        public ActionResult<DtoResultado<ListaQuestoes>> ConsulteDiscursivasComFiltro([FromBody] FiltroQuestao filtro)
+        public ActionResult<DtoResultado<DtoListaQuestoes>> ConsulteDiscursivasComFiltro([FromBody] FiltroQuestao filtro)
         {
             return ExecuteAcaoAutorizada(() =>
             {
                 var resultado = Servico().ConsulteQuestoes(filtro);
-                return DtoResultado<ListaQuestoes>.ObtenhaResultado(resultado, "Consulta realizada sem erros");
+                return DtoResultado<DtoListaQuestoes>.ObtenhaResultado(resultado, "Consulta realizada sem erros");
             });
         }
     }
