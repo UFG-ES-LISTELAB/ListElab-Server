@@ -32,9 +32,9 @@ RUN dotnet build -c Release -f netcoreapp2.1 -o /app
 
 WORKDIR /src/listaelab-testes
 RUN dotnet build -c Release -f netcoreapp2.1 -o /app
+RUN dotnet test -c Release -f netcoreapp2.1
 
 WORKDIR /src
-RUN dotnet test listaelab-testes/listaelab-testes -c Release
 FROM build AS publish
 RUN dotnet publish -c Release -f netcoreapp2.1 -o /app
 
