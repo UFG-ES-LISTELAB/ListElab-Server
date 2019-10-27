@@ -18,5 +18,9 @@
     </Reference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Conceitos\AreaDoConhecimentoObj\" />
+  </ItemGroup>
+
 
 </Project>
