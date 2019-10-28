@@ -1,9 +1,9 @@
 ﻿using ListElab.Data.Repositorios;
-using ListElab.Dominio.Conceitos.Filtro;
 using ListElab.Dominio.Conceitos.ListaObj;
 using ListElab.Dominio.Conceitos.QuestaoObj;
 using ListElab.Dominio.Conceitos.RespostaObj;
 using ListElab.Dominio.Dtos;
+using ListElab.Dominio.Dtos.Filtro;
 using ListElab.Dominio.InterfaceDeServico;
 using ListElab.Servico.Conversores;
 using ListElab.Servico.Conversores.Interfaces;

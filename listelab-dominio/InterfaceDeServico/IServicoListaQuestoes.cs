@@ -1,6 +1,6 @@
-﻿using ListElab.Dominio.Conceitos.Filtro;
-using ListElab.Dominio.Conceitos.ListaObj;
+﻿using ListElab.Dominio.Conceitos.ListaObj;
 using ListElab.Dominio.Dtos;
+using ListElab.Dominio.Dtos.Filtro;
 
 namespace ListElab.Dominio.InterfaceDeServico
 {

@@ -1,8 +1,8 @@
 ﻿using ListElab.Data.Repositorios;
-using ListElab.Dominio.Conceitos.Filtro;
 using ListElab.Dominio.Conceitos.QuestaoObj;
 using ListElab.Dominio.Conceitos.RespostaObj;
 using ListElab.Dominio.Dtos;
+using ListElab.Dominio.Dtos.Filtro;
 using ListElab.Dominio.InterfaceDeServico;
 using ListElab.Servico.Conversores;
 using ListElab.Servico.Conversores.Interfaces;
@@ -50,12 +50,15 @@ namespace ListElab.Servico.ServicosImplementados
         {
             var filtroQuestao = filtro as FiltroQuestao;
 
+            var areaConhecimento = new ConversorAreaDeConhecimento().Converta(filtroQuestao.AreaDeConhecimento);
+            var disciplina = new ConversorDisciplina().Converta(filtroQuestao.Disciplina);
+
             Expression<Func<Questao<Discursiva>, bool>> query = questao => (questao.NivelDificuldade == filtroQuestao.NivelDificuldade)
-                || (questao.AreaDeConhecimento == filtroQuestao.AreaDeConhecimento)
+                || (questao.AreaDeConhecimento == areaConhecimento)
                 || (questao.Tipo == filtroQuestao.Tipo)
                 || (questao.TempoMaximoDeResposta <= filtroQuestao.TempoMaximoDeResposta)
                 || (questao.Usuario == filtroQuestao.Usuario)
-                || (questao.Disciplina == filtroQuestao.Disciplina);
+                || (questao.Disciplina == disciplina);
 
             return query;
         }
