@@ -1,9 +1,9 @@
-using System;
-using ListElab.Contrato.RequestObject;
 using ListElab.Dominio.Conceitos.UsuarioObj;
+using ListElab.Dominio.Dtos;
 using ListElab.Servico.ServicosImplementados;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace ListElab.Contrato.Controllers
 {

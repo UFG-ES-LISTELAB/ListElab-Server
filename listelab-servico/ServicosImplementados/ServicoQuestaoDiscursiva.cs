@@ -2,7 +2,10 @@
 using ListElab.Dominio.Conceitos.Filtro;
 using ListElab.Dominio.Conceitos.QuestaoObj;
 using ListElab.Dominio.Conceitos.RespostaObj;
+using ListElab.Dominio.Dtos;
 using ListElab.Dominio.InterfaceDeServico;
+using ListElab.Servico.Conversores;
+using ListElab.Servico.Conversores.Interfaces;
 using ListElab.Servico.Validacoes;
 using System;
 using System.Collections.Generic;
@@ -10,7 +13,7 @@ using System.Linq.Expressions;
 
 namespace ListElab.Servico.ServicosImplementados
 {
-    public class ServicoQuestaoDiscursiva : ServicoPadrao<Questao<Discursiva>>, IServicoQuestaoDiscursiva
+    public class ServicoQuestaoDiscursiva : ServicoPadrao<Questao<Discursiva>, DtoQuestaoDiscursiva>, IServicoQuestaoDiscursiva
     {
         private IRepositorio<Questao<Discursiva>> _repositorio;
         private ValidacoesQuestaoDiscursiva _validador;
@@ -55,6 +58,11 @@ namespace ListElab.Servico.ServicosImplementados
                 || (questao.Disciplina == filtroQuestao.Disciplina);
 
             return query;
+        }
+
+        protected override IConversor<DtoQuestaoDiscursiva, Questao<Discursiva>> Conversor()
+        {
+            return new ConversorQuestaoDiscursiva();
         }
     }
 }

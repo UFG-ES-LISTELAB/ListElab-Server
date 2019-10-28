@@ -72,7 +72,7 @@ namespace ListElab.Servico.Validacoes
         public void AssineRegraAutorDaQuestaoExiste()
         {
             RuleFor(questao => questao.Usuario)
-                .Must(usuario => new Repositorio<Usuario>().ItemExiste(x => x.Email == usuario))
+                .Must(usuario => RepositorioUsuario().ItemExiste(x => x.Email == usuario))
                 .WithMessage("O autor da questão não é um usuário válido");
         }
 
@@ -138,6 +138,11 @@ namespace ListElab.Servico.Validacoes
         private bool AutorDaQuestaoNaoFoiAtualizado(string usuario)
         {
             return objetoPersistido.Usuario == usuario;
+        }
+
+        private IRepositorio<Usuario> RepositorioUsuario()
+        {
+            return new Repositorio<Usuario>();
         }
     }
 }

@@ -1,7 +1,10 @@
-﻿using ListElab.Dominio.Conceitos.QuestaoObj;
+﻿using ListElab.Data.Repositorios;
+using ListElab.Dominio.Conceitos.QuestaoObj;
 using ListElab.Dominio.Conceitos.RespostaObj;
+using ListElab.Dominio.Conceitos.UsuarioObj;
 using ListElab.Dominio.Enumeradores;
 using ListElab.Servico.Validacoes;
+using Moq;
 using NUnit.Framework;
 using System.Collections.Generic;
 
@@ -85,5 +88,19 @@ namespace ListElab.Testes.TestesValidador
 
             ValideTeste(cenarioInvalido, questaoDiscursiva, _validador, "Informe um valor válido para nível de dificuldade");
         }
+
+        //[Test, Theory]
+        //public void TesteRegraAutorDaQuestaoExiste(bool autorExiste)
+        //{
+        //    var mock = new Mock<IRepositorio<Usuario>>();
+
+        //    mock.Setup(repo => repo.ItemExiste(x => x.Email == "saulo@ufg.br")).Returns(autorExiste);
+
+        //    var questaoDiscursiva = new Questao<Discursiva> { Usuario = "saulo@ufg.br" };
+
+        //    _validador.AssineRegraAutorDaQuestaoExiste();
+
+        //    ValideTeste(!autorExiste, questaoDiscursiva, _validador, "O autor da questão não é um usuário válido");
+        //}
     }
 }

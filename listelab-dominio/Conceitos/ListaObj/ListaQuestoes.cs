@@ -36,6 +36,11 @@ namespace ListElab.Dominio.Conceitos.ListaObj
         public Disciplina Disciplina { get; set; }
 
         /// <summary>
+        /// O email do usuário que criou a lista.
+        /// </summary>
+        public string Usuario { get; set; }
+
+        /// <summary>
         /// Questões discursivas
         /// </summary>
         public List<Questao<Discursiva>> Discursivas { get; set; }

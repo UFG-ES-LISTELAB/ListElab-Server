@@ -3,14 +3,17 @@ using ListElab.Dominio.Conceitos.Filtro;
 using ListElab.Dominio.Conceitos.ListaObj;
 using ListElab.Dominio.Conceitos.QuestaoObj;
 using ListElab.Dominio.Conceitos.RespostaObj;
+using ListElab.Dominio.Dtos;
 using ListElab.Dominio.InterfaceDeServico;
+using ListElab.Servico.Conversores;
+using ListElab.Servico.Conversores.Interfaces;
 using ListElab.Servico.Validacoes;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace ListElab.Servico.ServicosImplementados
 {
-    public class ServicoListaQuestoes : ServicoPadrao<ListaQuestoes>, IServicoListaQuestoes
+    public class ServicoListaQuestoes : ServicoPadrao<ListaQuestoes, DtoListaQuestoes>, IServicoListaQuestoes
     {
         private IRepositorio<ListaQuestoes> _repositorio;
         private ValidacoesListaQuestoes _validador;
@@ -50,6 +53,11 @@ namespace ListElab.Servico.ServicosImplementados
         protected override ValidadorPadrao<ListaQuestoes> Validador()
         {
             return _validador ?? (_validador = new ValidacoesListaQuestoes());
+        }
+
+        protected override IConversor<DtoListaQuestoes, ListaQuestoes> Conversor()
+        {
+            return new ConversorListaDeQuestoes();
         }
     }
 }
