@@ -55,7 +55,7 @@ namespace ListElab.Servico.ServicosImplementados
                     resultado = Repositorio().ConsulteUm(x => x.Id == idConvertido);
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 throw new Exception("Id passado não é valido ou não está cadastrado.");
             }
@@ -82,6 +82,14 @@ namespace ListElab.Servico.ServicosImplementados
 
             if (Guid.TryParse(id, out idConvertido))
             {
+                Validador().AssineRegrasExclusao();
+
+                var objeto = (T)Activator.CreateInstance(typeof(T));
+
+                objeto.Id = idConvertido;
+
+                Validador().Valide(objeto);
+
                 Repositorio().Exclua(x => x.Id == idConvertido);
             }
             else

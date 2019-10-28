@@ -2,11 +2,11 @@
 {
     public enum Disciplina
     {
-        BancoDeDados = 0,
-        EngenhariaDeSoftware = 1,
-        Requisitos = 2,
-        ConstrucaoDeSoftware = 3,
-        Integracao1 = 4,
-        Integracao2 = 5
+        EngenhariaEconomicaParaSoftware = 0,
+        MercadoInternoExternoSoftware = 1,
+        Integracao2 = 2,
+        PraticaEngenhariaSoftware = 3,
+        TecnicasAvancadasConstrucaoSoftware = 4,
+        IntroducaoALinguagemSinais = 5
     }
 }

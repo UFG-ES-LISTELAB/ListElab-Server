@@ -1,8 +1,8 @@
-﻿using System;
+﻿using ListElab.Dominio.AtributosCustomizados;
+using MongoDB.Driver;
+using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using ListElab.Dominio.AtributosCustomizados;
-using MongoDB.Driver;
 
 namespace ListElab.Data.Repositorios
 {
@@ -10,6 +10,10 @@ namespace ListElab.Data.Repositorios
     {
         private ConexaoDb _conexao;
 
+        /// <summary>
+        /// Acessa a coleção do objeto passado no tipo genérico.
+        /// </summary>
+        /// <returns>Retorna uma conexão com o banco com a coleção do tipo passado.</returns>
         public IMongoCollection<T> Collection()
         {
             T objeto = Activator.CreateInstance<T>();
@@ -21,6 +25,11 @@ namespace ListElab.Data.Repositorios
             return conexao.ConexaoMongoDB().GetCollection<T>(colecao.Nome);
         }
 
+        /// <summary>
+        /// Atualiza um objeto no banco.
+        /// </summary>
+        /// <param name="condicao">Condição para verificar qual objeto será atualizado.</param>
+        /// <param name="objeto">Objeto atualizado para ser persistido.</param>
         public void Atualize(Expression<Func<T, bool>> condicao, T objeto)
         {
             ExecuteAcaoNoBanco(() =>
@@ -37,11 +46,6 @@ namespace ListElab.Data.Repositorios
             });
         }
 
-        public List<T> Consulte(Expression<Func<T, bool>> condicao)
-        {
-            return Collection().Find(condicao).ToList();
-        }
-
         public T ConsulteUm(Expression<Func<T, bool>> condicao)
         {
             return Collection().Find(condicao).FirstOrDefault();
@@ -52,9 +56,14 @@ namespace ListElab.Data.Repositorios
             return Collection().CountDocuments(condicao) > 0;
         }
 
+        public List<T> Consulte(Expression<Func<T, bool>> condicao)
+        {
+            return Collection().Find(condicao).ToList();
+        }
+
         public IList<T> ConsulteLista(Expression<Func<T, bool>> condicao)
         {
- 
+
             return Collection().Find(condicao).ToList();
         }
 
@@ -77,8 +86,8 @@ namespace ListElab.Data.Repositorios
             }
             catch (Exception e)
             {
-                Console.WriteLine("Erro ao salvar no banco: " + e.Message);
                 Conexao().Sessao.AbortTransaction();
+                throw new Exception("Ocorreu um erro ao manipular o banco de dados: " + e.Message);
             }
         }
 
