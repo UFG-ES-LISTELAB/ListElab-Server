@@ -1,6 +1,6 @@
 ﻿using ListElab.Dominio.Enumeradores;
 
-namespace ListElab.Dominio.Conceitos.Filtro
+namespace ListElab.Dominio.Dtos.Filtro
 {
     /// <summary>
     /// Representa filtro de questão.
@@ -10,12 +10,12 @@ namespace ListElab.Dominio.Conceitos.Filtro
         /// <summary>
         /// Representa as áreas de conhecimento disponíveis.
         /// </summary>
-        public AreaDeConhecimento? AreaDeConhecimento { get; set; }
+        public DtoAreaDoConhecimento AreaDeConhecimento { get; set; }
 
         /// <summary>
         /// Representa o nível de dificuldade, indo de 1 à 5.
         /// </summary>
-        public NivelDificuldade? NivelDificuldade { get; set; }
+        public NivelDificuldade NivelDificuldade { get; set; }
 
         /// <summary>
         /// Tipo de questão.
@@ -25,7 +25,7 @@ namespace ListElab.Dominio.Conceitos.Filtro
         /// <summary>
         /// Disciplina da questão.
         /// </summary>
-        public Disciplina? Disciplina { get; set; }
+        public DtoDisciplina Disciplina { get; set; }
 
         /// <summary>
         /// Representa o tempo máximo para responder a questão em minutos.

@@ -83,7 +83,7 @@
             Api para Lista
             </summary>
         </member>
-        <member name="M:ListElab.Contrato.Controllers.ListaController.ConsulteDiscursivasComFiltro(ListElab.Dominio.Conceitos.Filtro.FiltroQuestao)">
+        <member name="M:ListElab.Contrato.Controllers.ListaController.ConsulteDiscursivasComFiltro(ListElab.Dominio.Dtos.Filtro.FiltroQuestao)">
             <summary>
             Retorna uma lista de questoes discursivas
             </summary>
@@ -95,7 +95,7 @@
             Api para o conceito de questão discursiva.
             </summary>
         </member>
-        <member name="M:ListElab.Contrato.Controllers.QuestaoDiscursivaController.ConsulteComFiltro(ListElab.Dominio.Conceitos.Filtro.FiltroQuestao)">
+        <member name="M:ListElab.Contrato.Controllers.QuestaoDiscursivaController.ConsulteComFiltro(ListElab.Dominio.Dtos.Filtro.FiltroQuestao)">
             <summary>
             Retorna a questão discursiva do código informado.
             </summary>

@@ -1,5 +1,5 @@
 ﻿
-namespace ListElab.Dominio.Conceitos.Filtro
+namespace ListElab.Dominio.Dtos.Filtro
 {
     /// <summary>
     /// Classe abstrata que representa filtro.
