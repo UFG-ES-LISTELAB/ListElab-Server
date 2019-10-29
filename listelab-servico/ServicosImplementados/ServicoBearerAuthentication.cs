@@ -44,7 +44,7 @@ namespace ListElab.Servico.ServicosImplementados
             return currentToken;
         }
 
-        public string EfetueLogin(string email, string password)
+        public Usuario EfetueLogin(string email, string password)
         {
             string saltedPassword = password + salt;
             string hash = ComputeSha256Hash(saltedPassword);
@@ -59,7 +59,7 @@ namespace ListElab.Servico.ServicosImplementados
                     Repositorio().Atualize(x => x.Id.Equals(usuario.Id), usuario);
                 }
 
-                return usuario.Token;
+                return new Usuario { Email = usuario.Email, Id = usuario.Id, Role = usuario.Role, Token = usuario.Token };
             }
             else
             {

@@ -28,8 +28,8 @@ namespace ListElab.Contrato.Controllers
             try
             {
                 var servico = new ServicoBearerAuthentication();
-                var token = servico.EfetueLogin(login.Email, login.Password);
-                return DtoResultado<Usuario>.ObtenhaResultado(token, "Usuário logado");
+                var usuario = servico.EfetueLogin(login.Email, login.Password);
+                return DtoResultado<Usuario>.ObtenhaResultado(usuario, "Usuário logado");
             }
             catch (Exception e)
             {
