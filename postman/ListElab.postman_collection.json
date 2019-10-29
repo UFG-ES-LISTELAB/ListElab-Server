@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "7b656e3a-30f0-4e95-b8bb-2f3c04c10175",
+		"_postman_id": "61de0cf8-1023-48ed-813f-4e99dde5028f",
 		"name": "ListElab",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -27,11 +27,11 @@
 									"",
 									"pm.test(\"Requisição retorna token com 64 caracteres\", function () {",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.resultado.length).to.eql(64);",
+									"    pm.expect(jsonData.resultado.token.length).to.eql(64);",
 									"});",
 									"",
 									"var jsonData = JSON.parse(responseBody);",
-									"postman.setEnvironmentVariable(\"ListElabToken\", jsonData.resultado);"
+									"postman.setEnvironmentVariable(\"ListElabToken\", jsonData.resultado.token);"
 								],
 								"type": "text/javascript"
 							}
@@ -49,7 +49,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"email\":\"professor@ufg.br\",\n\t\"password\":\"123456\"\n}"
+							"raw": "{\n\t\"email\":\"postman@ufg.br\",\n\t\"password\":\"123456\"\n}"
 						},
 						"url": {
 							"raw": "{{ListElabUrl}}/api/Usuario/login",
@@ -177,7 +177,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"enunciado\": \"Teste Postman\",\r\n  \"areaDeConhecimento\": 10301003,\r\n  \"nivelDificuldade\": 1,\r\n  \"tags\": [\r\n    \"Tag\"\r\n  ],\r\n  \"tipo\": 0,\r\n  \"tempoMaximoDeResposta\": 100,\r\n  \"respostaEsperada\": {\r\n    \"palavrasChaves\": [\r\n      {\r\n        \"descricao\": \"Teste\",\r\n        \"peso\": 1\r\n      }\r\n    ]\r\n  },\r\n  \"usuario\": \"postman@ufg.br\"\r\n}"
+							"raw": "{\n    \"enunciado\": \"Teste Postman\",\n    \"areaDeConhecimento\": {\n        \"codigo\": \"10303006\",\n        \"descricao\": \"METODOLOGIA E TÉCNICAS DA COMPUTAÇÃO\"\n    },\n    \"nivelDificuldade\": 1,\n    \"tags\": [\n        \"Tag\"\n    ],\n    \"tipo\": 0,\n    \"tempoMaximoDeResposta\": 100,\n    \"respostaEsperada\": [\n        {\n            \"descricao\": \"Teste Postman\",\n            \"peso\": 3\n        },\n        {\n            \"descricao\": \"Pooostman\",\n            \"peso\": 2\n        }\n    ],\n    \"usuario\": \"professor@ufg.br\"\n}"
 						},
 						"url": {
 							"raw": "{{ListElabUrl}}/api/QuestaoDiscursiva",
@@ -235,7 +235,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"enunciado\": \"Teste Postman Atualize\",\r\n  \"usuario\": \"postman-vv@ufg.br\",\r\n  \"areaDeConhecimento\": 10301003,\r\n  \"nivelDificuldade\": 4,\r\n  \"tags\": [\r\n  \t\"Teste\",\r\n    \"Postman\"\r\n  ],\r\n  \"tipo\": 1,\r\n  \"tempoMaximoDeResposta\": 123456,\r\n  \"respostaEsperada\": {\r\n    \"palavrasChaves\": [\r\n      {\r\n        \"descricao\": \"Postman\",\r\n        \"peso\": 2\r\n      }\r\n    ]\r\n  },\r\n  \"id\" : {{ObjectIdString}}\r\n}"
+							"raw": "{\n    \"enunciado\": \"Teste Postman Atualizado\",\n    \"areaDeConhecimento\": {\n        \"codigo\": \"10303006\",\n        \"descricao\": \"METODOLOGIA E TÉCNICAS DA COMPUTAÇÃO\"\n    },\n    \"nivelDificuldade\": 2,\n    \"tags\": [\n        \"Tag\"\n    ],\n    \"tipo\": 0,\n    \"tempoMaximoDeResposta\": 123456,\n    \"respostaEsperada\": [\n        {\n            \"descricao\": \"Teste Postman\",\n            \"peso\": 3\n        },\n        {\n            \"descricao\": \"Pooostman\",\n            \"peso\": 2\n        }\n    ],\n    \"usuario\": \"professor@ufg.br\",\n    \"id\": {{ObjectIdString}}\n}"
 						},
 						"url": {
 							"raw": "{{ListElabUrl}}/api/QuestaoDiscursiva",
@@ -274,7 +274,7 @@
 									"",
 									"pm.test(\"Requisição retorna questão pedida com título atualizado\", function () {",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.resultado[0].enunciado).to.eql(\"Teste Postman Atualize\");",
+									"    pm.expect(jsonData.resultado[0].enunciado).to.eql(\"Teste Postman Atualizado\");",
 									"});",
 									"",
 									"pm.test(\"Requisição retorna questão pedida com tempo máximo atualizado\", function () {",
@@ -308,7 +308,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"usuario\": \"postman-vv@ufg.br\"\r\n}",
+							"raw": "{\r\n  \"usuario\": \"professor@ufg.br\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -348,7 +348,7 @@
 									"",
 									"pm.test(\"Requisição retorna json com o resultado correto\", function () {",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.resultado.usuario).to.eql(\"postman-vv@ufg.br\");",
+									"    pm.expect(jsonData.resultado.enunciado).to.eql(\"Teste Postman Atualizado\");",
 									"});"
 								],
 								"type": "text/javascript"
@@ -633,7 +633,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"titulo\": \"Lista Postman\",\r\n  \"areaDeConhecimento\": 10301003,\r\n  \"nivelDificuldade\": 1,\r\n  \"tags\": [\r\n    \"Postman\"\r\n  ],\r\n  \"discursivas\": [\r\n    {\r\n      \"enunciado\": \"Questão em Lista Postman\",\r\n      \"usuario\": \"professor@ufg.br\",\r\n      \"areaDeConhecimento\": 10301003,\r\n      \"nivelDificuldade\": 1,\r\n      \"tags\": [\r\n        \"TagPostman\"\r\n      ],\r\n      \"tipo\": 0,\r\n      \"tempoMaximoDeResposta\": 100,\r\n      \"respostaEsperada\": {\r\n        \"palavrasChaves\": [\r\n          {\r\n            \"descricao\": \"PalavraChavePostman\",\r\n            \"peso\": 1\r\n          }\r\n        ]\r\n      }\r\n    }\r\n  ],\r\n  \"objetivas\": []\r\n}"
+							"raw": "{\n    \"titulo\": \"Lista Postman\",\n    \"areaDeConhecimento\": {\n        \"codigo\": \"10303006\",\n        \"descricao\": \"METODOLOGIA E TÉCNICAS DA COMPUTAÇÃO\"\n    },\n    \"nivelDificuldade\": 1,\n    \"tags\": [\n        \"Postman\"\n    ],\n    \"discursivas\": [\n        {\n            \"enunciado\": \"Questão em Lista Postman\",\n            \"usuario\": \"professor@ufg.br\",\n            \"areaDeConhecimento\": {\n                \"codigo\": \"10303006\",\n                \"descricao\": \"METODOLOGIA E TÉCNICAS DA COMPUTAÇÃO\"\n            },\n            \"nivelDificuldade\": 1,\n            \"tags\": [\n                \"TagPostman\"\n            ],\n            \"tipo\": 0,\n            \"tempoMaximoDeResposta\": 100,\n            \"respostaEsperada\": [\n                {\n                    \"descricao\": \"Teste Postman\",\n                    \"peso\": 3\n                },\n                {\n                    \"descricao\": \"Pooostman\",\n                    \"peso\": 2\n                }\n            ]\n        }\n    ],\n    \"objetivas\": []\n}"
 						},
 						"url": {
 							"raw": "{{ListElabUrl}}/api/Lista",
@@ -691,7 +691,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"titulo\": \"Lista Postman Atualize\",\r\n  \"areaDeConhecimento\": 99999999,\r\n  \"nivelDificuldade\": 1,\r\n  \"tags\": [\r\n    \"Postman\"\r\n  ],\r\n  \"discursivas\": [\r\n    {\r\n      \"enunciado\": \"Questão em Lista Postman\",\r\n      \"usuario\": \"postman-vv@ufg.br\",\r\n      \"areaDeConhecimento\": 99999999,\r\n      \"nivelDificuldade\": 1,\r\n      \"tags\": [\r\n        \"TagPostman\"\r\n      ],\r\n      \"tipo\": 0,\r\n      \"tempoMaximoDeResposta\": 123456,\r\n      \"respostaEsperada\": {\r\n        \"palavrasChaves\": [\r\n          {\r\n            \"descricao\": \"PalavraChavePostman\",\r\n            \"peso\": 1\r\n          }\r\n        ]\r\n      }\r\n    }\r\n  ],\r\n  \"objetivas\": [],\r\n  \"id\" : {{ObjectIdString}}\r\n}"
+							"raw": "{\n    \"titulo\": \"Lista Postman Atualizado\",\n    \"areaDeConhecimento\": {\n        \"codigo\": \"10300007\",\n        \"descricao\": \"METODOLOGIA E TÉCNICAS DA COMPUTAÇÃO\"\n    },\n    \"nivelDificuldade\": 1,\n    \"tags\": [\n        \"Postman\"\n    ],\n    \"discursivas\": [\n        {\n            \"enunciado\": \"Questão em Lista Postman\",\n            \"usuario\": \"postman@ufg.br\",\n            \"areaDeConhecimento\": {\n                \"codigo\": \"10303006\",\n                \"descricao\": \"METODOLOGIA E TÉCNICAS DA COMPUTAÇÃO\"\n            },\n            \"nivelDificuldade\": 1,\n            \"tags\": [\n                \"TagPostman\"\n            ],\n            \"tipo\": 0,\n            \"tempoMaximoDeResposta\": 100,\n            \"respostaEsperada\": [\n                {\n                    \"descricao\": \"Teste Postman\",\n                    \"peso\": 3\n                },\n                {\n                    \"descricao\": \"Pooostman\",\n                    \"peso\": 2\n                }\n            ]\n        }\n    ],\n    \"objetivas\": [],\n    \"id\": {{ObjectIdString}}\n}"
 						},
 						"url": {
 							"raw": "{{ListElabUrl}}/api/Lista",
@@ -725,17 +725,17 @@
 									"",
 									"pm.test(\"Requisição retorna lista pedida com título atualizado\", function () {",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.resultado.titulo).to.eql(\"Lista Postman Atualize\");",
+									"    pm.expect(jsonData.resultado.titulo).to.eql(\"Lista Postman Atualizado\");",
 									"});",
 									"",
 									"pm.test(\"Requisição retorna lista pedida com área de conhecimento atualizada\", function () {",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.resultado.areaDeConhecimento).to.eql(99999999);",
+									"    pm.expect(jsonData.resultado.areaDeConhecimento.codigo).to.eql(\"10300007\");",
 									"});",
 									"",
 									"pm.test(\"Requisição retorna lista pedida com questão discursiva atualizada\", function () {",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.resultado.discursivas[0].areaDeConhecimento).to.eql(99999999);",
+									"    pm.expect(jsonData.resultado.discursivas[0].usuario).to.eql(\"postman@ufg.br\");",
 									"});"
 								],
 								"type": "text/javascript"
@@ -975,7 +975,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"AreaDeConhecimento\": 10302000,\n\t\"NivelDificuldade\": 1,\n\t\"Tipo\": 0,\n\t\"Disciplina\": 2\n}",
+							"raw": "{\n\t\"AreaDeConhecimento\": {\n\t\t\"codigo\": \"10302000\"\n\t},\n\t\"NivelDificuldade\": 1,\n\t\"Tipo\": 0,\n\t\"Disciplina\": {\n\t\n\t\t\"codigo\": \"INF0150\"\n\t}\n}",
 							"options": {
 								"raw": {
 									"language": "json"
