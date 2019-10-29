@@ -27,11 +27,11 @@
 									"",
 									"pm.test(\"Requisição retorna token com 64 caracteres\", function () {",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.resultado.length).to.eql(64);",
+									"    pm.expect(jsonData.resultado.token.length).to.eql(64);",
 									"});",
 									"",
 									"var jsonData = JSON.parse(responseBody);",
-									"postman.setEnvironmentVariable(\"ListElabToken\", jsonData.resultado);"
+									"postman.setEnvironmentVariable(\"ListElabToken\", jsonData.resultado.token);"
 								],
 								"type": "text/javascript"
 							}
@@ -975,7 +975,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"AreaDeConhecimento\": 10302000,\n\t\"NivelDificuldade\": 1,\n\t\"Tipo\": 0,\n\t\"Disciplina\": 2\n}",
+							"raw": "{\n\t\"AreaDeConhecimento\": {\n\t\t\"codigo\": \"10302000\"\n\t},\n\t\"NivelDificuldade\": 1,\n\t\"Tipo\": 0,\n\t\"Disciplina\": {\n\t\n\t\t\"codigo\": \"INF0150\"\n\t}\n}",
 							"options": {
 								"raw": {
 									"language": "json"
