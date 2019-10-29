@@ -1,11 +1,11 @@
-using System;
-using listelab_contrato.RequestObject;
-using listelab_dominio.Conceitos.UsuarioObj;
-using listelab_servico.Servico;
+using ListElab.Dominio.Conceitos.UsuarioObj;
+using ListElab.Dominio.Dtos;
+using ListElab.Servico.ServicosImplementados;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
-namespace listelab_contrato.Controllers
+namespace ListElab.Contrato.Controllers
 {
 
     /// <summary>
@@ -28,8 +28,8 @@ namespace listelab_contrato.Controllers
             try
             {
                 var servico = new ServicoBearerAuthentication();
-                var token = servico.EfetueLogin(login.Email, login.Password);
-                return DtoResultado<Usuario>.ObtenhaResultado(token, "Usuário logado");
+                var usuario = servico.EfetueLogin(login.Email, login.Password);
+                return DtoResultado<Usuario>.ObtenhaResultado(usuario, "Usuário logado");
             }
             catch (Exception e)
             {

@@ -1,23 +1,20 @@
-﻿using listelab_dominio.Conceitos.Filtro;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
-namespace listelab_dominio.InterfaceDeServico
+namespace ListElab.Dominio.InterfaceDeServico
 {
-    public interface IServicoPadrao<T>
+    public interface IServicoPadrao<TObjeto, TDto>
     {
         /// <summary>
         /// Cadastra um objeto de tipo genérico.
         /// </summary>
         /// <param name="objeto">Objeto a ser cadastrado.</param>
-        T Cadastre(T objeto);
+        TDto Cadastre(TDto objeto);
 
         /// <summary>
         /// Atualiza um objeto genérico no banco.
         /// </summary>
         /// <param name="objeto">Objeto a ser atualizado.</param>
-        T Atualize(T objeto);
+        TDto Atualize(TDto objeto);
 
         /// <summary>
         /// Exclua todos os objetos que atendem determinada condição.
@@ -30,12 +27,12 @@ namespace listelab_dominio.InterfaceDeServico
         /// </summary>
         /// <param name="id">Id para pesquisar o objeto.</param>
         /// <returns></returns>
-        T Consulte(string id);
+        TDto Consulte(string id);
 
         /// <summary>
         /// Consulta todos os objetos que obedecem uma condição.
         /// </summary>
         /// <returns>Retorna uma coleção de objetos genéricos.</returns>
-        IList<T> ConsulteLista();
+        IList<TDto> ConsulteLista();
     }
 }

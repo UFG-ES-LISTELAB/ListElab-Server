@@ -1,5 +1,4 @@
-﻿
-namespace listelab_dominio.Enumeradores
+﻿namespace ListElab.Dominio.Enumeradores
 {
     public enum TipoQuestao
     {

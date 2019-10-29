@@ -32,15 +32,16 @@ RUN dotnet build -c Release -f netcoreapp2.1 -o /app
 
 WORKDIR /src/listaelab-testes
 RUN dotnet build -c Release -f netcoreapp2.1 -o /app
+RUN dotnet test -c Release -f netcoreapp2.1
 
 WORKDIR /src
 FROM build AS publish
 RUN dotnet publish -c Release -f netcoreapp2.1 -o /app
 
 WORKDIR /src
-COPY listelab-contrato/listelab-contrato.xml /app
+COPY listelab-contrato/listelab.Contrato.xml /app
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app .
-ENTRYPOINT ["dotnet", "listelab-contrato.dll"]
+ENTRYPOINT ["dotnet", "ListElab.Contrato.dll"]

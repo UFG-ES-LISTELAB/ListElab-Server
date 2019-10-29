@@ -1,15 +1,10 @@
-﻿using listelab_dominio.Conceitos;
-using listelab_dominio.Conceitos.Filtro;
-using listelab_dominio.Conceitos.ListaObj;
-using listelab_dominio.Conceitos.QuestaoObj;
-using listelab_dominio.Conceitos.RespostaObj;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using ListElab.Dominio.Conceitos.ListaObj;
+using ListElab.Dominio.Dtos;
+using ListElab.Dominio.Dtos.Filtro;
 
-namespace listelab_dominio.InterfaceDeServico
+namespace ListElab.Dominio.InterfaceDeServico
 {
-    public interface IServicoListaQuestoes : IServicoPadrao<ListaQuestoes>
+    public interface IServicoListaQuestoes : IServicoPadrao<ListaQuestoes, DtoListaQuestoes>
     {
         ListaQuestoes ConsulteQuestoes(FiltroQuestao filtro);
     }

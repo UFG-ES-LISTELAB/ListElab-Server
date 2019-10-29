@@ -1,16 +1,19 @@
-﻿using listelab_data.Repositorios;
-using listelab_dominio.Conceitos.Filtro;
-using listelab_dominio.Conceitos.ListaObj;
-using listelab_dominio.Conceitos.QuestaoObj;
-using listelab_dominio.Conceitos.RespostaObj;
-using listelab_dominio.InterfaceDeServico;
-using listelab_servico.Validacoes;
-using System.Linq;
+﻿using ListElab.Data.Repositorios;
+using ListElab.Dominio.Conceitos.ListaObj;
+using ListElab.Dominio.Conceitos.QuestaoObj;
+using ListElab.Dominio.Conceitos.RespostaObj;
+using ListElab.Dominio.Dtos;
+using ListElab.Dominio.Dtos.Filtro;
+using ListElab.Dominio.InterfaceDeServico;
+using ListElab.Servico.Conversores;
+using ListElab.Servico.Conversores.Interfaces;
+using ListElab.Servico.Validacoes;
 using System.Collections.Generic;
+using System.Linq;
 
-namespace listelab_servico.Servico
+namespace ListElab.Servico.ServicosImplementados
 {
-    public class ServicoListaQuestoes : ServicoPadrao<ListaQuestoes>, IServicoListaQuestoes
+    public class ServicoListaQuestoes : ServicoPadrao<ListaQuestoes, DtoListaQuestoes>, IServicoListaQuestoes
     {
         private IRepositorio<ListaQuestoes> _repositorio;
         private ValidacoesListaQuestoes _validador;
@@ -50,6 +53,11 @@ namespace listelab_servico.Servico
         protected override ValidadorPadrao<ListaQuestoes> Validador()
         {
             return _validador ?? (_validador = new ValidacoesListaQuestoes());
+        }
+
+        protected override IConversor<DtoListaQuestoes, ListaQuestoes> Conversor()
+        {
+            return new ConversorListaDeQuestoes();
         }
     }
 }

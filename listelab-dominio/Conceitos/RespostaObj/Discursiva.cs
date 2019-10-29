@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
-namespace listelab_dominio.Conceitos.RespostaObj
+namespace ListElab.Dominio.Conceitos.RespostaObj
 {
     public class Discursiva
     {

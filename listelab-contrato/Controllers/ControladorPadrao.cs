@@ -1,23 +1,23 @@
-﻿using System;
-using listelab_contrato.RequestObject;
-using listelab_dominio;
-using listelab_dominio.Conceitos.Filtro;
-using listelab_dominio.InterfaceDeServico;
+﻿using ListElab.Dominio;
+using ListElab.Dominio.Dtos;
+using ListElab.Dominio.InterfaceDeServico;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
-namespace listelab_contrato.Controllers
+namespace ListElab.Contrato.Controllers
 {
     /// <summary>
-    /// Controlador Controaldor com rotinas padrão da api.
+    /// Controller padrão.
     /// </summary>
-    /// <typeparam name="T">Objeto a ser trafegado.</typeparam>
-    /// <typeparam name="S">Interface de serviço do objeto.</typeparam>
+    /// <typeparam name="TObjeto">Objeto a ser trafegado.</typeparam>
+    /// <typeparam name="S">Serviço do conceito.</typeparam>
+    /// <typeparam name="TDto">Dto a ser trafegado.</typeparam>
     [Route("api/[controller]")]
-    [ApiController]
     [EnableCors("SiteCorsPolicy")]
-    public class ControladorPadrao<T, S> : ControllerBase where S : IServicoPadrao<T>
+    [ApiController]
+    public class ControladorPadrao<TObjeto, S, TDto> : ControllerBase where S : IServicoPadrao<TObjeto, TDto>
     {
         /// <summary>
         /// Retorna o serviço.
@@ -34,12 +34,12 @@ namespace listelab_contrato.Controllers
         /// <returns>Retorna um objeto de sucesso ou falha e os registros cadastrados, caso sucesso.</returns>
         [HttpGet]
         [Authorize]
-        public ActionResult<DtoResultado<T>> ConsulteLista()
+        public ActionResult<DtoResultado<TDto>> ConsulteLista()
         {
             return ExecuteAcaoAutorizada(() =>
             {
                 var resultado = Servico().ConsulteLista();
-                return DtoResultado<T>.ObtenhaResultado(resultado, "Consulta realizada sem erros");
+                return DtoResultado<TDto>.ObtenhaResultado(resultado, "Consulta realizada sem erros");
             });
         }
 
@@ -49,12 +49,12 @@ namespace listelab_contrato.Controllers
         /// <returns>Retorna um objeto de sucesso ou falha com o registro encontrado, caso sucesso.</returns>
         [Authorize]
         [HttpGet("{id}")]
-        public ActionResult<DtoResultado<T>> ConsultePorId(string id)
+        public ActionResult<DtoResultado<TDto>> ConsultePorId(string id)
         {
             return ExecuteAcaoAutorizada(() =>
             {
                 var resultado = Servico().Consulte(id);
-                return DtoResultado<T>.ObtenhaResultado(resultado, "Consulta realizada sem erros");
+                return DtoResultado<TDto>.ObtenhaResultado(resultado, "Consulta realizada sem erros");
             });
         }
 
@@ -65,12 +65,12 @@ namespace listelab_contrato.Controllers
         /// <returns>Retorna objeto com resultado da requisição.</returns>
         [HttpPost]
         [Authorize(Roles = "Admin,Professor")]
-        public ActionResult<DtoResultado<T>> Cadastre([FromBody] T objeto)
+        public ActionResult<DtoResultado<TDto>> Cadastre([FromBody] TDto objeto)
         {
             return ExecuteAcaoAutorizada(() =>
             {
                 var resultado = Servico().Cadastre(objeto);
-                return DtoResultado<T>.ObtenhaResultado(resultado, "Cadastro realizado sem erros");
+                return DtoResultado<TDto>.ObtenhaResultado(resultado, "Cadastro realizado sem erros");
             });
         }
 
@@ -81,13 +81,13 @@ namespace listelab_contrato.Controllers
         /// <returns>Retorna objeto com resultado da requisição.</returns>
         [HttpPut]
         [Authorize(Roles = "Admin,Professor")]
-        public ActionResult<DtoResultado<T>> Atualize([FromBody] T objeto)
+        public ActionResult<DtoResultado<TDto>> Atualize([FromBody] TDto objeto)
         {
             return ExecuteAcaoAutorizada(() =>
             {
                 var resultado = Servico().Atualize(objeto);
 
-                return DtoResultado<T>.ObtenhaResultado(resultado, "Atualização realizada sem erros");
+                return DtoResultado<TDto>.ObtenhaResultado(resultado, "Atualização realizada sem erros");
             });
         }
 
@@ -98,12 +98,12 @@ namespace listelab_contrato.Controllers
         /// <returns>Retorna objeto com resultado da requisição.</returns>
         [HttpDelete("{id}")]
         [Authorize(Roles = "Admin,Professor")]
-        public ActionResult<DtoResultado<T>> Delete(string id)
+        public ActionResult<DtoResultado<TDto>> Delete(string id)
         {
             return ExecuteAcaoAutorizada(() =>
             {
                 Servico().Exclua(id);
-                return DtoResultado<T>.ObtenhaResultado("Exclusão realizada sem erros");
+                return DtoResultado<TDto>.ObtenhaResultado("Exclusão realizada sem erros");
             });
         }
 
@@ -112,15 +112,15 @@ namespace listelab_contrato.Controllers
         /// </summary>
         /// <param name="sucesso">Método quando a requisição aconteceu com sucesso.</param>
         /// <returns></returns>
-        protected ActionResult<DtoResultado<T>> ExecuteAcaoAutorizada(Func<ActionResult<DtoResultado<T>>> sucesso)
+        protected ActionResult<DtoResultado<TDto>> ExecuteAcaoAutorizada(Func<ActionResult<DtoResultado<TDto>>> sucesso)
         {
             try
             {
                 return sucesso();
-            } 
-            catch(Exception e)
+            }
+            catch (Exception e)
             {
-                return DtoResultado<T>.ObtenhaResultado(e);
+                return DtoResultado<TDto>.ObtenhaResultado(e);
             }
         }
     }

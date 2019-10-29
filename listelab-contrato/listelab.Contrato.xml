@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ListElab.Contrato</name>
+    </assembly>
+    <members>
+        <member name="T:ListElab.Contrato.Autenticacao.BearerAuthenticationHandler">
+            <summary>
+            Define as regras para autenticação.
+            </summary>
+        </member>
+        <member name="M:ListElab.Contrato.Autenticacao.BearerAuthenticationHandler.#ctor(Microsoft.Extensions.Options.IOptionsMonitor{ListElab.Contrato.Autenticacao.BearerAuthenticationOptions},Microsoft.Extensions.Logging.ILoggerFactory,System.Text.Encodings.Web.UrlEncoder,Microsoft.AspNetCore.Authentication.ISystemClock)">
+            <summary>
+            Construtor da classe que define as regras para autenticação.
+            </summary>
+            <param name="options">Opções para autenticação.</param>
+            <param name="logger">Arquivo de log para auteneticação.</param>
+            <param name="encoder">Tipo de encode para arquivo.</param>
+            <param name="clock">Tempo de autenticação.</param>
+        </member>
+        <member name="M:ListElab.Contrato.Autenticacao.BearerAuthenticationHandler.HandleAuthenticateAsync">
+            <summary>
+            Método para aplicar regras de autenticação.
+            </summary>
+            <returns>Se a autenticação aconteceu ou não.</returns>
+        </member>
+        <member name="T:ListElab.Contrato.Controllers.ControladorPadrao`3">
+            <summary>
+            Controller padrão.
+            </summary>
+            <typeparam name="TObjeto">Objeto a ser trafegado.</typeparam>
+            <typeparam name="S">Serviço do conceito.</typeparam>
+            <typeparam name="TDto">Dto a ser trafegado.</typeparam>
+        </member>
+        <member name="M:ListElab.Contrato.Controllers.ControladorPadrao`3.Servico">
+            <summary>
+            Retorna o serviço.
+            </summary>
+            <returns>A instância de serviço.</returns>
+        </member>
+        <member name="M:ListElab.Contrato.Controllers.ControladorPadrao`3.ConsulteLista">
+            <summary>
+            Lista todas os registros cadastrados.
+            </summary>
+            <returns>Retorna um objeto de sucesso ou falha e os registros cadastrados, caso sucesso.</returns>
+        </member>
+        <member name="M:ListElab.Contrato.Controllers.ControladorPadrao`3.ConsultePorId(System.String)">
+            <summary>
+            Consulta um registro passando o identificador único.
+            </summary>
+            <returns>Retorna um objeto de sucesso ou falha com o registro encontrado, caso sucesso.</returns>
+        </member>
+        <member name="M:ListElab.Contrato.Controllers.ControladorPadrao`3.Cadastre(`2)">
+            <summary>
+            Cadastra um registro novo no banco.
+            </summary>
+            <param name="objeto">O registro a ser cadastrado..</param>
+            <returns>Retorna objeto com resultado da requisição.</returns>
+        </member>
+        <member name="M:ListElab.Contrato.Controllers.ControladorPadrao`3.Atualize(`2)">
+            <summary>
+            Atualiza um registro existente no banco.
+            </summary>
+            <param name="objeto">O registro com seus novos dados e o id para identificação.</param>
+            <returns>Retorna objeto com resultado da requisição.</returns>
+        </member>
+        <member name="M:ListElab.Contrato.Controllers.ControladorPadrao`3.Delete(System.String)">
+            <summary>
+            Exclue um registro no banco.
+            </summary>
+            <param name="id">Id do registro que será excluído.</param>
+            <returns>Retorna objeto com resultado da requisição.</returns>
+        </member>
+        <member name="M:ListElab.Contrato.Controllers.ControladorPadrao`3.ExecuteAcaoAutorizada(System.Func{Microsoft.AspNetCore.Mvc.ActionResult{ListElab.Dominio.Dtos.DtoResultado{`2}}})">
+            <summary>
+            Executa o método para a requisição da api e retorna o resultado da requisição.
+            </summary>
+            <param name="sucesso">Método quando a requisição aconteceu com sucesso.</param>
+            <returns></returns>
+        </member>
+        <member name="T:ListElab.Contrato.Controllers.ListaController">
+            <summary>
+            Api para Lista
+            </summary>
+        </member>
+        <member name="M:ListElab.Contrato.Controllers.ListaController.ConsulteDiscursivasComFiltro(ListElab.Dominio.Dtos.Filtro.FiltroQuestao)">
+            <summary>
+            Retorna uma lista de questoes discursivas
+            </summary>
+            <param name="filtro">O filtro de questão.</param>
+            <returns>Retorna objeto de resposta de sucesso ou falha, contendo o objeto desejado, caso sucesso.</returns>
+        </member>
+        <member name="T:ListElab.Contrato.Controllers.QuestaoDiscursivaController">
+            <summary>
+            Api para o conceito de questão discursiva.
+            </summary>
+        </member>
+        <member name="M:ListElab.Contrato.Controllers.QuestaoDiscursivaController.ConsulteComFiltro(ListElab.Dominio.Dtos.Filtro.FiltroQuestao)">
+            <summary>
+            Retorna a questão discursiva do código informado.
+            </summary>
+            <param name="filtro">O filtro de questão.</param>
+            <returns>Retorna objeto de resposta de sucesso ou falha, contendo o objeto desejado, caso sucesso.</returns>
+        </member>
+        <member name="T:ListElab.Contrato.Controllers.UsuarioController">
+            <summary>
+            Api de usuário para efetuar login.
+            </summary>
+        </member>
+        <member name="M:ListElab.Contrato.Controllers.UsuarioController.Cadastre(ListElab.Dominio.Conceitos.UsuarioObj.Login)">
+            <summary>
+            Realiza login.
+            </summary>
+            <param name="login">O usuário buscando autenticação.</param>
+            <returns>Retorna objeto com resultado da requisição.</returns>
+        </member>
+    </members>
+</doc>

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace listelab_contrato.RequestObject
+namespace ListElab.Dominio.Dtos
 {
     /// <summary>
     /// Representa um objeto para transferência de dados.

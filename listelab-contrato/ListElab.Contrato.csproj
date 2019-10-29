@@ -3,12 +3,13 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
-    <RootNamespace>listelab_contrato</RootNamespace>
+    <RootNamespace>ListElab.Contrato</RootNamespace>
     <PublishWithAspNetCoreTargetManifest>false</PublishWithAspNetCoreTargetManifest>
+    <AssemblyName>ListElab.Contrato</AssemblyName>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>.\listelab-contrato.xml</DocumentationFile>
+    <DocumentationFile>.\listelab.Contrato.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -27,8 +28,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\listelab-dominio\listelab-dominio.csproj" />
-    <ProjectReference Include="..\listelab-servico\listelab-servico.csproj" />
+    <ProjectReference Include="..\listelab-dominio\ListElab.Dominio.csproj" />
+    <ProjectReference Include="..\listelab-servico\ListElab.Servico.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,16 +1,19 @@
-﻿using System;
+﻿using ListElab.Data.Repositorios;
+using ListElab.Dominio.Conceitos.QuestaoObj;
+using ListElab.Dominio.Conceitos.RespostaObj;
+using ListElab.Dominio.Dtos;
+using ListElab.Dominio.Dtos.Filtro;
+using ListElab.Dominio.InterfaceDeServico;
+using ListElab.Servico.Conversores;
+using ListElab.Servico.Conversores.Interfaces;
+using ListElab.Servico.Validacoes;
+using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using listelab_data.Repositorios;
-using listelab_dominio.Conceitos.Filtro;
-using listelab_dominio.Conceitos.QuestaoObj;
-using listelab_dominio.Conceitos.RespostaObj;
-using listelab_dominio.InterfaceDeServico;
-using listelab_servico.Validacoes;
 
-namespace listelab_servico.Servico
+namespace ListElab.Servico.ServicosImplementados
 {
-    public class ServicoQuestaoDiscursiva : ServicoPadrao<Questao<Discursiva>>, IServicoQuestaoDiscursiva
+    public class ServicoQuestaoDiscursiva : ServicoPadrao<Questao<Discursiva>, DtoQuestaoDiscursiva>, IServicoQuestaoDiscursiva
     {
         private IRepositorio<Questao<Discursiva>> _repositorio;
         private ValidacoesQuestaoDiscursiva _validador;
@@ -47,14 +50,22 @@ namespace listelab_servico.Servico
         {
             var filtroQuestao = filtro as FiltroQuestao;
 
+            var areaConhecimento = new ConversorAreaDeConhecimento().Converta(filtroQuestao.AreaDeConhecimento);
+            var disciplina = new ConversorDisciplina().Converta(filtroQuestao.Disciplina);
+
             Expression<Func<Questao<Discursiva>, bool>> query = questao => (questao.NivelDificuldade == filtroQuestao.NivelDificuldade)
-                || (questao.AreaDeConhecimento == filtroQuestao.AreaDeConhecimento)
+                || (questao.AreaDeConhecimento == areaConhecimento)
                 || (questao.Tipo == filtroQuestao.Tipo)
                 || (questao.TempoMaximoDeResposta <= filtroQuestao.TempoMaximoDeResposta)
                 || (questao.Usuario == filtroQuestao.Usuario)
-                || (questao.Disciplina == filtroQuestao.Disciplina);
+                || (questao.Disciplina == disciplina);
 
             return query;
+        }
+
+        protected override IConversor<DtoQuestaoDiscursiva, Questao<Discursiva>> Conversor()
+        {
+            return new ConversorQuestaoDiscursiva();
         }
     }
 }
