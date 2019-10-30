@@ -37,7 +37,6 @@ namespace ListElab.Servico.Conversores
             if (dto != null)
             {
                 questao = new Questao<Discursiva>();
-                questao.Id = dto.Id;
                 questao.NivelDificuldade = dto.NivelDificuldade;
                 questao.Tags = dto.Tags;
                 questao.TempoMaximoDeResposta = dto.TempoMaximoDeResposta;

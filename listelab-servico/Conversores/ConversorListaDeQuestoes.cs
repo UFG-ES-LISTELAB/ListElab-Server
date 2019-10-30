@@ -39,7 +39,6 @@ namespace ListElab.Servico.Conversores
             if (dto != null)
             {
                 lista = new ListaQuestoes();
-                lista.Id = dto.Id;
                 lista.NivelDificuldade = dto.NivelDificuldade;
                 lista.Tags = dto.Tags;
                 lista.Usuario = dto.Usuario;
