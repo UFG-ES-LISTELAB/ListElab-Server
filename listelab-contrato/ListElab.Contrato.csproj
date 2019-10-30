@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>.\listelab.Contrato.xml</DocumentationFile>
+    <DocumentationFile>.\ListElab.Contrato.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

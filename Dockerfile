@@ -39,7 +39,7 @@ FROM build AS publish
 RUN dotnet publish -c Release -f netcoreapp2.1 -o /app
 
 WORKDIR /src
-COPY listelab-contrato/listelab.Contrato.xml /app
+COPY listelab-contrato/ListElab.Contrato.xml /app
 
 FROM base AS final
 WORKDIR /app
