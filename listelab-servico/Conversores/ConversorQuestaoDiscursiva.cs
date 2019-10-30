@@ -2,6 +2,7 @@
 using ListElab.Dominio.Conceitos.RespostaObj;
 using ListElab.Dominio.Dtos;
 using ListElab.Servico.Conversores.Interfaces;
+using System;
 using System.Linq;
 
 namespace ListElab.Servico.Conversores
@@ -37,6 +38,12 @@ namespace ListElab.Servico.Conversores
             if (dto != null)
             {
                 questao = new Questao<Discursiva>();
+
+                if (dto.Id != null && dto.Id != Guid.Empty)
+                {
+                    questao.Id = dto.Id;
+                }
+
                 questao.NivelDificuldade = dto.NivelDificuldade;
                 questao.Tags = dto.Tags;
                 questao.TempoMaximoDeResposta = dto.TempoMaximoDeResposta;
