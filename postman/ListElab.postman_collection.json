@@ -177,7 +177,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"enunciado\": \"Teste Postman\",\n    \"areaDeConhecimento\": {\n        \"codigo\": \"10303006\",\n        \"descricao\": \"METODOLOGIA E TÉCNICAS DA COMPUTAÇÃO\"\n    },\n    \"nivelDificuldade\": 1,\n    \"tags\": [\n        \"Tag\"\n    ],\n    \"tipo\": 0,\n    \"tempoMaximoDeResposta\": 100,\n    \"respostaEsperada\": [\n        {\n            \"descricao\": \"Teste Postman\",\n            \"peso\": 3\n        },\n        {\n            \"descricao\": \"Pooostman\",\n            \"peso\": 2\n        }\n    ],\n    \"usuario\": \"professor@ufg.br\"\n}"
+							"raw": "{\n    \"enunciado\": \"Teste Postman\",\n    \"areaDeConhecimento\": {\n        \"codigo\": \"10303006\",\n        \"descricao\": \"METODOLOGIA E TÉCNICAS DA COMPUTAÇÃO\"\n    },\n    \"nivelDificuldade\": 1,\n    \"tags\": [\n        \"Tag\"\n    ],\n    \"tipo\": 0,\n    \"tempoMaximoDeResposta\": 100,\n    \"respostaEsperada\": [\n        {\n            \"descricao\": \"Teste Postman\",\n            \"peso\": 3\n        },\n        {\n            \"descricao\": \"Pooostman\",\n            \"peso\": 2\n        }\n    ],\n    \"usuario\": \"postman@ufg.br\"\n}"
 						},
 						"url": {
 							"raw": "{{ListElabUrl}}/api/QuestaoDiscursiva",
@@ -235,7 +235,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"enunciado\": \"Teste Postman Atualizado\",\n    \"areaDeConhecimento\": {\n        \"codigo\": \"10303006\",\n        \"descricao\": \"METODOLOGIA E TÉCNICAS DA COMPUTAÇÃO\"\n    },\n    \"nivelDificuldade\": 2,\n    \"tags\": [\n        \"Tag\"\n    ],\n    \"tipo\": 0,\n    \"tempoMaximoDeResposta\": 123456,\n    \"respostaEsperada\": [\n        {\n            \"descricao\": \"Teste Postman\",\n            \"peso\": 3\n        },\n        {\n            \"descricao\": \"Pooostman\",\n            \"peso\": 2\n        }\n    ],\n    \"usuario\": \"professor@ufg.br\",\n    \"id\": {{ObjectIdString}}\n}"
+							"raw": "{\n    \"enunciado\": \"Teste Postman Atualizado\",\n    \"areaDeConhecimento\": {\n        \"codigo\": \"10303006\",\n        \"descricao\": \"METODOLOGIA E TÉCNICAS DA COMPUTAÇÃO\"\n    },\n    \"nivelDificuldade\": 2,\n    \"tags\": [\n        \"Tag\"\n    ],\n    \"tipo\": 0,\n    \"tempoMaximoDeResposta\": 123456,\n    \"respostaEsperada\": [\n        {\n            \"descricao\": \"Teste Postman\",\n            \"peso\": 3\n        },\n        {\n            \"descricao\": \"Pooostman\",\n            \"peso\": 2\n        }\n    ],\n    \"usuario\": \"postman@ufg.br\",\n    \"id\": {{ObjectIdString}}\n}"
 						},
 						"url": {
 							"raw": "{{ListElabUrl}}/api/QuestaoDiscursiva",
@@ -308,7 +308,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"usuario\": \"professor@ufg.br\"\r\n}",
+							"raw": "{\r\n  \"usuario\": \"postman@ufg.br\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
