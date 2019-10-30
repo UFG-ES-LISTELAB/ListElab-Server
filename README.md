@@ -40,11 +40,11 @@ Todas as requisições devem ter no header a tag [Authorization] que deve conter
 
 A api foi dividida em camadas utilizando a seguinte organização:
 
-![diagrama do projetista](https://raw.githubusercontent.com/UFG-ES-LISTELAB/ListElab-Server/dev/diagramas/diagramas/visaoProjetista.png)
+![diagrama do projetista](https://raw.githubusercontent.com/UFG-ES-LISTELAB/ListElab-Server/dev/diagramas/visaoProjetista.png)
 
 As classes obedecem a seguinte organização:
 
-![diagrama de classes](https://raw.githubusercontent.com/UFG-ES-LISTELAB/ListElab-Server/dev/diagramas/diagramas/digramaDeClasses.jpg)
+![diagrama de classes](https://raw.githubusercontent.com/UFG-ES-LISTELAB/ListElab-Server/dev/diagramas/digramaDeClasses.jpg)
 
 ## Para rodar a api
 
