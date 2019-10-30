@@ -1,6 +1,7 @@
 ﻿using ListElab.Dominio.Conceitos.ListaObj;
 using ListElab.Dominio.Dtos;
 using ListElab.Servico.Conversores.Interfaces;
+using System;
 using System.Linq;
 
 namespace ListElab.Servico.Conversores
@@ -39,7 +40,12 @@ namespace ListElab.Servico.Conversores
             if (dto != null)
             {
                 lista = new ListaQuestoes();
-                lista.Id = dto.Id;
+
+                if (dto.Id != null && dto.Id != Guid.Empty)
+                {
+                    lista.Id = dto.Id;
+                }
+
                 lista.NivelDificuldade = dto.NivelDificuldade;
                 lista.Tags = dto.Tags;
                 lista.Usuario = dto.Usuario;
