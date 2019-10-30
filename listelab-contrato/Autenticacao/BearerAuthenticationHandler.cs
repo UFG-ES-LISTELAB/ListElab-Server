@@ -1,6 +1,4 @@
-﻿using ListElab.Contrato.Controllers;
-using ListElab.Dominio.Conceitos.UsuarioObj;
-using ListElab.Servico.ServicosImplementados;
+﻿using ListElab.Servico.ServicosImplementados;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
@@ -44,7 +42,7 @@ namespace ListElab.Contrato.Autenticacao
             if (urlAtual.ToString().Contains("swagger"))
             {
                 var tokenAutenticado = authenticationService.EfetueLogin("professor@ufg.br", "123456");
-                requisicao.Headers.Add("Authorization", new StringValues(string.Format("Bearer {0}", tokenAutenticado)));
+                requisicao.Headers.Add("Authorization", new StringValues(string.Format("Bearer {0}", tokenAutenticado.Token)));
             }
         }
         /// <summary>
