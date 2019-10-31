@@ -1,0 +1,25 @@
+dist: trusty
+
+branches:
+  only:
+  - master
+  - dev
+ 
+jobs:
+  include:
+    - stage: build docker image
+      script:
+      - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
+      - docker build --no-cache -t $DOCKER_USERNAME/listelab-server .
+      - docker images
+      - docker tag $DOCKER_USERNAME/listelab-server $DOCKER_USERNAME/listelab-server
+      - docker push $DOCKER_USERNAME/listelab-server
+
+after_success:
+  - wget https://raw.githubusercontent.com/DiscordHooks/travis-ci-discord-webhook/master/send.sh
+  - chmod +x send.sh
+  - ./send.sh success $WEBHOOK_URL
+after_failure:
+  - wget https://raw.githubusercontent.com/DiscordHooks/travis-ci-discord-webhook/master/send.sh
+  - chmod +x send.sh
+  - ./send.sh failure $WEBHOOK_URL

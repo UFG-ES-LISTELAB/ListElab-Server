@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using ListElab.Contrato.Autenticacao;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.Swagger;
+using System.IO;
 
-namespace listelab_contrato
+namespace ListElab.Contrato
 {
     public class Startup
     {
@@ -42,6 +38,27 @@ namespace listelab_contrato
             });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            var corsBuilder = new CorsPolicyBuilder();
+            corsBuilder.AllowAnyHeader();
+            corsBuilder.AllowAnyMethod();
+            corsBuilder.AllowAnyOrigin();
+            corsBuilder.AllowCredentials();
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("SiteCorsPolicy", corsBuilder.Build());
+            });
+
+            services.AddAuthentication(AuthenticationDefaults.BearerAuthenticationScheme)
+                    .AddScheme<BearerAuthenticationOptions, BearerAuthenticationHandler>(
+                        AuthenticationDefaults.BearerAuthenticationScheme,
+                        options =>
+                        {
+                            options.Realm = "ListElab";
+                        }
+                    );
+            services.AddSingleton<IPostConfigureOptions<BearerAuthenticationOptions>, BearerAuthenticationPostConfigureOptions>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,13 +75,14 @@ namespace listelab_contrato
             }
 
             app.UseHttpsRedirection();
+            app.UseAuthentication();
             app.UseMvc();
-
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Swagger Sample");
             });
+            app.UseCors("SiteCorsPolicy");
         }
     }
 }

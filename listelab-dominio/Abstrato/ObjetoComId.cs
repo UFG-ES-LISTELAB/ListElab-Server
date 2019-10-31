@@ -1,12 +1,18 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace listelab_dominio.Abstrato
+namespace ListElab.Dominio.Abstrato
 {
     public abstract class ObjetoComId
     {
+        public ObjetoComId()
+        {
+            Id = Guid.NewGuid();
+        }
+
         /// <summary>
         /// O id do objeto.
         /// </summary>
@@ -16,6 +22,7 @@ namespace listelab_dominio.Abstrato
         /// <summary>
         /// Código que representa o conceito.
         /// </summary>
+        [JsonIgnore]
         public int Codigo { get; set; }
 
         /// <summary>

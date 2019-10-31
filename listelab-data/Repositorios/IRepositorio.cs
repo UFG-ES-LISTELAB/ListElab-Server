@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace listelab_data.Repositorios
+namespace ListElab.Data.Repositorios
 {
     public interface IRepositorio<T>
     {
@@ -37,7 +37,14 @@ namespace listelab_data.Repositorios
         /// </summary>
         /// <param name="condicao">Filtro que indica qual será excluído.</param>
         /// <returns></returns>
-        T Consulte(Expression<Func<T, bool>> condicao);
+        List<T> Consulte(Expression<Func<T, bool>> condicao);
+
+        /// <summary>
+        /// Consulta o primeiro objeto genérico que atende uma condição.
+        /// </summary>
+        /// <param name="condicao">Filtro que indica qual será consultado.</param>
+        /// <returns></returns>
+        T ConsulteUm(Expression<Func<T, bool>> condicao);
 
         /// <summary>
         /// Verifica se um item está cadastrado.

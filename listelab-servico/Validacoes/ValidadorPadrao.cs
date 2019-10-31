@@ -1,28 +1,76 @@
 ﻿using FluentValidation;
-using listelab_data.Repositorios;
-using listelab_dominio.Abstrato;
+using ListElab.Data.Repositorios;
+using ListElab.Dominio.Abstrato;
+using System;
 
-namespace listelab_servico.Validacoes
+namespace ListElab.Servico.Validacoes
 {
+    /// <summary>
+    /// Validador padrão.
+    /// </summary>
+    /// <typeparam name="T">Conceito que será validado.</typeparam>
     public abstract class ValidadorPadrao<T> : AbstractValidator<T> where T : ObjetoComId
     {
-        private IRepositorio<T> _repositorio;
+        protected T objetoPersistido;
+        private IRepositorio<T> repositorio;
 
         public void Valide(T objeto)
         {
+            objetoPersistido = Repositorio().ConsulteUm(x => x.Id == objeto.Id);
+
             var resultado = Validate(objeto);
 
-            if(!resultado.IsValid)
+            if (!resultado.IsValid)
             {
                 throw new ValidationException(resultado.Errors[0].ErrorMessage);
             }
         }
 
-        public void AssineRegraItemNaoDuplicado()
+        /// <summary>
+        /// Número do requisito.
+        /// </summary>
+        public void AssineRegraIdDeveSerInformado()
         {
-            RuleFor(x => x.Codigo)
-                .Must(codigo => !Repositorio().ItemExiste(x => x.Codigo == codigo))
-                .WithMessage("Esse item já foi cadastrado");
+            RuleFor(objeto => objeto.Id)
+                .Must(id => id != Guid.Empty)
+                .WithMessage("O id deve ser informado na atualização");
+        }
+
+        /// <summary>
+        /// Número do requisito.
+        /// </summary>
+        public void AssineRegraConceitoExiste()
+        {
+            RuleFor(objeto => objeto.Id)
+                .Must(id => Repositorio().ItemExiste(x => x.Id == id))
+                .WithMessage("O id passado é inválido ou não representa um conceito cadastrado");
+        }
+
+        /// <summary>
+        /// Agrupamento de regras para cadastro.
+        /// </summary>
+        public void AssineRegrasCadastro()
+        {
+            AssineRegrasDeCadastro();
+        }
+
+        /// <summary>
+        /// Agrupamento de regras de atualização.
+        /// </summary>
+        public void AssineRegrasAtualizacao()
+        {
+            AssineRegraIdDeveSerInformado();
+            AssineRegraConceitoExiste();
+            AssineRegrasDeAtualizacao();
+        }
+
+        /// <summary>
+        /// Agrupamento de regras de exclusão.
+        /// </summary>
+        public void AssineRegrasExclusao()
+        {
+            AssineRegraConceitoExiste();
+            AssineRegrasDeExclusao();
         }
 
         protected abstract void AssineRegrasDeCadastro();
@@ -31,25 +79,9 @@ namespace listelab_servico.Validacoes
 
         protected abstract void AssineRegrasDeExclusao();
 
-        public void AssineRegrasCadastro()
-        {
-            AssineRegrasDeCadastro();
-            AssineRegraItemNaoDuplicado();
-        }
-
-        public void AssineRegrasAtualizacao()
-        {
-            AssineRegrasDeAtualizacao();
-        }
-
-        public void AssineRegrasExclusao()
-        {
-            AssineRegrasDeAtualizacao();
-        }
-
         protected IRepositorio<T> Repositorio()
         {
-            return _repositorio ?? (new Repositorio<T>());
+            return repositorio ?? (repositorio = new Repositorio<T>());
         }
     }
 }
