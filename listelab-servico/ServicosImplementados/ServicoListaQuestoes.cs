@@ -13,7 +13,7 @@ using System.Linq;
 
 namespace ListElab.Servico.ServicosImplementados
 {
-    public class ServicoListaQuestoes : ServicoPadrao<ListaQuestoes, DtoListaQuestoes>, IServicoListaQuestoes
+    public class ServicoListaQuestoes : ServicoCrudCompleto<ListaQuestoes, DtoListaQuestoes>, IServicoListaQuestoes
     {
         private IRepositorio<ListaQuestoes> _repositorio;
         private ValidacoesListaQuestoes _validador;

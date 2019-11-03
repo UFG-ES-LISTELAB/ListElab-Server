@@ -1,4 +1,7 @@
-﻿using ListElab.Dominio.Conceitos.ListaObj;
+﻿using ListElab.Data.Repositorios;
+using ListElab.Dominio.Conceitos.AreaDeConhecimentoObj;
+using ListElab.Dominio.Conceitos.DisciplinaObj;
+using ListElab.Dominio.Conceitos.ListaObj;
 using ListElab.Dominio.Dtos;
 using ListElab.Servico.Conversores.Interfaces;
 using System;
@@ -11,6 +14,9 @@ namespace ListElab.Servico.Conversores
     /// </summary>
     public class ConversorListaDeQuestoes : IConversor<DtoListaQuestoes, ListaQuestoes>
     {
+        private IRepositorio<Disciplina> repositorioDisciplina;
+        private IRepositorio<AreaDeConhecimento> repositorioAreaConhecimento;
+
         public DtoListaQuestoes Converta(ListaQuestoes objeto)
         {
             DtoListaQuestoes dto = null;
@@ -24,8 +30,9 @@ namespace ListElab.Servico.Conversores
                 dto.Tags = objeto.Tags;
                 dto.Usuario = objeto.Usuario;
                 dto.Titulo = objeto.Titulo;
-                dto.AreaDeConhecimento = new ConversorAreaDeConhecimento().Converta(objeto.AreaDeConhecimento);
-                dto.Disciplina = new ConversorDisciplina().Converta(objeto.Disciplina);
+                dto.ProntaParaAplicacao = objeto.ProntaParaAplicacao;
+                dto.AreaDeConhecimento = new DtoAreaDoConhecimento { Codigo = objeto.AreaDeConhecimento.Codigo, Descricao = objeto.AreaDeConhecimento.Descricao };
+                dto.Disciplina = new DtoDisciplina { Codigo = objeto.Disciplina.Codigo, Descricao = objeto.Disciplina.Descricao };
                 dto.Discursivas = objeto.Discursivas.Select(x => conversorQuestoes.Converta(x)).ToList();
             }
 
@@ -50,12 +57,23 @@ namespace ListElab.Servico.Conversores
                 lista.Tags = dto.Tags;
                 lista.Usuario = dto.Usuario;
                 lista.Titulo = dto.Titulo;
-                lista.AreaDeConhecimento = new ConversorAreaDeConhecimento().Converta(dto.AreaDeConhecimento).GetValueOrDefault();
-                lista.Disciplina = new ConversorDisciplina().Converta(dto.Disciplina).GetValueOrDefault();
+                lista.ProntaParaAplicacao = lista.ProntaParaAplicacao;
+                lista.AreaDeConhecimento = RepositorioAreaDeConhecimento().ConsulteUm(x => x.Codigo == dto.AreaDeConhecimento.Codigo);
+                lista.Disciplina = RepositorioDisciplina().ConsulteUm(x => x.Codigo == dto.Disciplina.Codigo);
                 lista.Discursivas = dto.Discursivas.Select(x => conversorQuestoes.Converta(x)).ToList();
             }
 
             return lista;
+        }
+
+        private IRepositorio<Disciplina> RepositorioDisciplina()
+        {
+            return repositorioDisciplina ?? (repositorioDisciplina = new Repositorio<Disciplina>());
+        }
+
+        private IRepositorio<AreaDeConhecimento> RepositorioAreaDeConhecimento()
+        {
+            return repositorioAreaConhecimento ?? (repositorioAreaConhecimento = new Repositorio<AreaDeConhecimento>());
         }
     }
 }

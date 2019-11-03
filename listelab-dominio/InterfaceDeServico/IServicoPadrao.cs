@@ -2,7 +2,7 @@
 
 namespace ListElab.Dominio.InterfaceDeServico
 {
-    public interface IServicoPadrao<TObjeto, TDto>
+    public interface IServicoCrudCompleto<TObjeto, TDto>
     {
         /// <summary>
         /// Cadastra um objeto de tipo genérico.

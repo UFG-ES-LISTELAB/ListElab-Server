@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace ListElab.Dominio.InterfaceDeServico
 {
-    public interface IServicoQuestaoDiscursiva : IServicoPadrao<Questao<Discursiva>, DtoQuestaoDiscursiva>
+    public interface IServicoQuestaoDiscursiva : IServicoCrudCompleto<Questao<Discursiva>, DtoQuestaoDiscursiva>
     {
         /// <summary>
         /// Consulta o primeiro objeto genérico que atende uma condição.

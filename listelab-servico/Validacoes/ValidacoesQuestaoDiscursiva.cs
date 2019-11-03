@@ -1,5 +1,7 @@
 ﻿using FluentValidation;
 using ListElab.Data.Repositorios;
+using ListElab.Dominio.Conceitos.AreaDeConhecimentoObj;
+using ListElab.Dominio.Conceitos.DisciplinaObj;
 using ListElab.Dominio.Conceitos.QuestaoObj;
 using ListElab.Dominio.Conceitos.RespostaObj;
 using ListElab.Dominio.Conceitos.UsuarioObj;
@@ -14,6 +16,9 @@ namespace ListElab.Servico.Validacoes
     /// </summary>
     public class ValidacoesQuestaoDiscursiva : ValidadorPadrao<Questao<Discursiva>>
     {
+        private IRepositorio<Disciplina> repositorioDisciplina;
+        private IRepositorio<AreaDeConhecimento> repositorioAreaConhecimento;
+
         /// <summary>
         /// Número do requisito.
         /// </summary>
@@ -89,6 +94,36 @@ namespace ListElab.Servico.Validacoes
 
         #endregion
 
+        #region VALIDAÇÕES ÁREA DE CONHECIMENTO
+
+        /// <summary>
+        /// Valida se a área de conhecimento foi informada.
+        /// </summary>
+        public void AssineRegraAreaDeConhecimentoFoiInformada()
+        {
+            RuleFor(questao => questao.AreaDeConhecimento)
+                .Must(x => x != null && !string.IsNullOrEmpty(x.Codigo))
+                .When(x => objetoPersistido != null)
+                .WithMessage("Área de conhecimento não informada ou inválida.");
+        }
+
+        #endregion
+
+        #region VALIDAÇÕES DISCIPLINA
+
+        /// <summary>
+        /// Verifica se a disciplina foi informada.
+        /// </summary>
+        public void AssineRegraDisciplinaFoiInformada()
+        {
+            RuleFor(questao => questao.Disciplina)
+                .Must(x => x != null && !string.IsNullOrEmpty(x.Codigo))
+                .When(x => objetoPersistido != null)
+                .WithMessage("Disciplina não informada ou inválida.");
+        }
+
+        #endregion
+
         /// <summary>
         /// Assina regras para o cenário de cadastro.
         /// </summary>
@@ -100,6 +135,8 @@ namespace ListElab.Servico.Validacoes
             AssineRegraAutorDaQuestaoExiste();
             AssineRegraTipoQuestaoDiscursiva();
             AssineRegraDificuldadeFoiInformadaEValida();
+            AssineRegraDisciplinaFoiInformada();
+            AssineRegraAreaDeConhecimentoFoiInformada();
         }
 
         /// <summary>
@@ -114,6 +151,8 @@ namespace ListElab.Servico.Validacoes
             AssineRegraAutorDaQuestaoNaoPodeSerAtualizado();
             AssineRegraTipoQuestaoDiscursiva();
             AssineRegraDificuldadeFoiInformadaEValida();
+            AssineRegraDisciplinaFoiInformada();
+            AssineRegraAreaDeConhecimentoFoiInformada();
         }
 
         /// <summary>
@@ -143,6 +182,16 @@ namespace ListElab.Servico.Validacoes
         private IRepositorio<Usuario> RepositorioUsuario()
         {
             return new Repositorio<Usuario>();
+        }
+
+        private IRepositorio<Disciplina> RepositorioDisciplina()
+        {
+            return repositorioDisciplina ?? (repositorioDisciplina = new Repositorio<Disciplina>());
+        }
+
+        private IRepositorio<AreaDeConhecimento> RepositorioAreaDeConhecimento()
+        {
+            return repositorioAreaConhecimento ?? (repositorioAreaConhecimento = new Repositorio<AreaDeConhecimento>());
         }
     }
 }

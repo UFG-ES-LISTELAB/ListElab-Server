@@ -31,6 +31,11 @@ namespace ListElab.Dominio.Dtos
         public DtoDisciplina Disciplina { get; set; }
 
         /// <summary>
+        /// Define se uma lista está pronta para ser aplicada.
+        /// </summary>
+        public bool ProntaParaAplicacao { get; set; }
+
+        /// <summary>
         /// O email do usuário que criou a lista.
         /// </summary>
         public string Usuario { get; set; }
