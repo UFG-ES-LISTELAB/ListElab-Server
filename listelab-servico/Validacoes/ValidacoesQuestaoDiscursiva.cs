@@ -103,7 +103,6 @@ namespace ListElab.Servico.Validacoes
         {
             RuleFor(questao => questao.AreaDeConhecimento)
                 .Must(x => x != null && !string.IsNullOrEmpty(x.Codigo))
-                .When(x => objetoPersistido != null)
                 .WithMessage("Área de conhecimento não informada ou inválida.");
         }
 
@@ -118,7 +117,6 @@ namespace ListElab.Servico.Validacoes
         {
             RuleFor(questao => questao.Disciplina)
                 .Must(x => x != null && !string.IsNullOrEmpty(x.Codigo))
-                .When(x => objetoPersistido != null)
                 .WithMessage("Disciplina não informada ou inválida.");
         }
 
