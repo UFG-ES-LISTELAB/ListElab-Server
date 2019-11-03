@@ -1,8 +1,5 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
-using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ListElab.Dominio.Abstrato
 {
@@ -18,12 +15,6 @@ namespace ListElab.Dominio.Abstrato
         /// </summary>
         [BsonId]
         public Guid Id { get; set; }
-
-        /// <summary>
-        /// Código que representa o conceito.
-        /// </summary>
-        [JsonIgnore]
-        public int Codigo { get; set; }
 
         /// <summary>
         /// Sobrescreve o método de hashcode para buscar pelo id.

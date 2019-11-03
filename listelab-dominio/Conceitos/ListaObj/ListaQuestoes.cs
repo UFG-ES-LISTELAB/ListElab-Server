@@ -1,5 +1,7 @@
 ﻿using ListElab.Dominio.Abstrato;
 using ListElab.Dominio.AtributosCustomizados;
+using ListElab.Dominio.Conceitos.AreaDeConhecimentoObj;
+using ListElab.Dominio.Conceitos.DisciplinaObj;
 using ListElab.Dominio.Conceitos.QuestaoObj;
 using ListElab.Dominio.Conceitos.RespostaObj;
 using ListElab.Dominio.Enumeradores;
@@ -21,6 +23,11 @@ namespace ListElab.Dominio.Conceitos.ListaObj
         public AreaDeConhecimento AreaDeConhecimento { get; set; }
 
         /// <summary>
+        /// Disciplina da questão.
+        /// </summary>
+        public Disciplina Disciplina { get; set; }
+
+        /// <summary>
         /// Representa o nível de dificuldade, indo de 1 à 5.
         /// </summary>
         public NivelDificuldade NivelDificuldade { get; set; }
@@ -31,14 +38,14 @@ namespace ListElab.Dominio.Conceitos.ListaObj
         public List<string> Tags { get; set; }
 
         /// <summary>
-        /// Disciplina da questão.
-        /// </summary>
-        public Disciplina Disciplina { get; set; }
-
-        /// <summary>
         /// O email do usuário que criou a lista.
         /// </summary>
         public string Usuario { get; set; }
+
+        /// <summary>
+        /// Define se uma lista está pronta para ser aplicada.
+        /// </summary>
+        public bool ProntaParaAplicacao { get; set; }
 
         /// <summary>
         /// Questões discursivas

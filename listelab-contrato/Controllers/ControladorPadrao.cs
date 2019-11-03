@@ -17,7 +17,7 @@ namespace ListElab.Contrato.Controllers
     [Route("api/[controller]")]
     [EnableCors("SiteCorsPolicy")]
     [ApiController]
-    public class ControladorPadrao<TObjeto, S, TDto> : ControllerBase where S : IServicoPadrao<TObjeto, TDto>
+    public class ControladorPadrao<TObjeto, S, TDto> : ControllerBase where S : IServicoCrudCompleto<TObjeto, TDto>
     {
         /// <summary>
         /// Retorna o serviço.

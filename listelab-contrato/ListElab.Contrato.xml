@@ -78,6 +78,19 @@
             <param name="sucesso">Método quando a requisição aconteceu com sucesso.</param>
             <returns></returns>
         </member>
+        <member name="M:ListElab.Contrato.Controllers.DisciplinaController.ConsulteLista">
+            <summary>
+            Lista todas os registros cadastrados.
+            </summary>
+            <returns>Retorna um objeto de sucesso ou falha e os registros cadastrados, caso sucesso.</returns>
+        </member>
+        <member name="M:ListElab.Contrato.Controllers.DisciplinaController.ExecuteAcaoAutorizada(System.Func{Microsoft.AspNetCore.Mvc.ActionResult{ListElab.Dominio.Dtos.DtoResultado{ListElab.Dominio.Conceitos.DisciplinaObj.Disciplina}}})">
+            <summary>
+            Executa o método para a requisição da api e retorna o resultado da requisição.
+            </summary>
+            <param name="sucesso">Método quando a requisição aconteceu com sucesso.</param>
+            <returns></returns>
+        </member>
         <member name="T:ListElab.Contrato.Controllers.ListaController">
             <summary>
             Api para Lista

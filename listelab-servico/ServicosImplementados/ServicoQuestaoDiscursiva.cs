@@ -13,7 +13,7 @@ using System.Linq.Expressions;
 
 namespace ListElab.Servico.ServicosImplementados
 {
-    public class ServicoQuestaoDiscursiva : ServicoPadrao<Questao<Discursiva>, DtoQuestaoDiscursiva>, IServicoQuestaoDiscursiva
+    public class ServicoQuestaoDiscursiva : ServicoCrudCompleto<Questao<Discursiva>, DtoQuestaoDiscursiva>, IServicoQuestaoDiscursiva
     {
         private IRepositorio<Questao<Discursiva>> _repositorio;
         private ValidacoesQuestaoDiscursiva _validador;
@@ -50,15 +50,15 @@ namespace ListElab.Servico.ServicosImplementados
         {
             var filtroQuestao = filtro as FiltroQuestao;
 
-            var areaConhecimento = new ConversorAreaDeConhecimento().Converta(filtroQuestao.AreaDeConhecimento);
-            var disciplina = new ConversorDisciplina().Converta(filtroQuestao.Disciplina);
+            filtroQuestao.AreaDeConhecimento = filtroQuestao.AreaDeConhecimento ?? new DtoAreaDoConhecimento();
+            filtroQuestao.Disciplina = filtroQuestao.Disciplina ?? new DtoDisciplina();
 
             Expression<Func<Questao<Discursiva>, bool>> query = questao => (questao.NivelDificuldade == filtroQuestao.NivelDificuldade)
-                || (questao.AreaDeConhecimento == areaConhecimento)
+                || (questao.AreaDeConhecimento.Codigo == filtroQuestao.AreaDeConhecimento.Codigo)
                 || (questao.Tipo == filtroQuestao.Tipo)
                 || (questao.TempoMaximoDeResposta <= filtroQuestao.TempoMaximoDeResposta)
                 || (questao.Usuario == filtroQuestao.Usuario)
-                || (questao.Disciplina == disciplina);
+                || (questao.Disciplina.Codigo == filtroQuestao.Disciplina.Codigo);
 
             return query;
         }

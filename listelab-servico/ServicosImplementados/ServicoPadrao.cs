@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace ListElab.Servico.ServicosImplementados
 {
-    public abstract class ServicoPadrao<TObjeto, TDto> : IServicoPadrao<TObjeto, TDto> where TObjeto : ObjetoComId
+    public abstract class ServicoCrudCompleto<TObjeto, TDto> : IServicoCrudCompleto<TObjeto, TDto> where TObjeto : ObjetoComId
     {
         /// <summary>
         /// Atualiza um objeto genérico no banco.

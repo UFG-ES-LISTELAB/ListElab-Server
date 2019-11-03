@@ -4,7 +4,7 @@ using ListElab.Dominio.Dtos.Filtro;
 
 namespace ListElab.Dominio.InterfaceDeServico
 {
-    public interface IServicoListaQuestoes : IServicoPadrao<ListaQuestoes, DtoListaQuestoes>
+    public interface IServicoListaQuestoes : IServicoCrudCompleto<ListaQuestoes, DtoListaQuestoes>
     {
         ListaQuestoes ConsulteQuestoes(FiltroQuestao filtro);
     }
