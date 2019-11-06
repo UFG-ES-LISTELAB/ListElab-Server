@@ -22,6 +22,11 @@ namespace ListElab.Dominio.Dtos
         public object Resultado { get; set; }
 
         /// <summary>
+        /// Campo validado.
+        /// </summary>
+        public string Campo { get; set; }
+
+        /// <summary>
         /// Retorna um objeto de exceção.
         /// </summary>
         /// <param name="e">A mensagem da exception gerada.</param>
@@ -32,6 +37,22 @@ namespace ListElab.Dominio.Dtos
             {
                 Mensagem = e.Message,
                 Resultado = null,
+                Sucesso = false
+            };
+        }
+
+        /// <summary>
+        /// Retorna um objeto de exceção.
+        /// </summary>
+        /// <param name="e">A mensagem da exception gerada.</param>
+        /// <returns>Retorna o objeto com o erro.</returns>
+        public static DtoResultado<T> ObtenhaResultado(Exception e, string campo)
+        {
+            return new DtoResultado<T>
+            {
+                Mensagem = e.Message,
+                Resultado = null,
+                Campo = campo,
                 Sucesso = false
             };
         }

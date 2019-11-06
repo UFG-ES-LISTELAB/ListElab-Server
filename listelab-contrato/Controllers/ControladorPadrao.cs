@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Linq;
 
 namespace ListElab.Contrato.Controllers
 {
@@ -19,13 +20,15 @@ namespace ListElab.Contrato.Controllers
     [ApiController]
     public class ControladorPadrao<TObjeto, S, TDto> : ControllerBase where S : IServicoCrudCompleto<TObjeto, TDto>
     {
+        private S servico;
+
         /// <summary>
         /// Retorna o serviço.
         /// </summary>
         /// <returns>A instância de serviço.</returns>
         protected S Servico()
         {
-            return FabricaGenerica.Crie<S>();
+            return servico != null ? servico : (servico = FabricaGenerica.Crie<S>());
         }
 
         /// <summary>
@@ -120,7 +123,8 @@ namespace ListElab.Contrato.Controllers
             }
             catch (Exception e)
             {
-                return DtoResultado<TDto>.ObtenhaResultado(e);
+                var erros = Servico().Erros;
+                return erros != null && erros.Any() ? erros.FirstOrDefault() : DtoResultado<TDto>.ObtenhaResultado(e);
             }
         }
     }

@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using FluentValidation.Results;
 using ListElab.Data.Repositorios;
 using ListElab.Dominio.Abstrato;
 using System;
@@ -14,16 +15,11 @@ namespace ListElab.Servico.Validacoes
         protected T objetoPersistido;
         private IRepositorio<T> repositorio;
 
-        public void Valide(T objeto)
+        public ValidationResult Valide(T objeto)
         {
             objetoPersistido = Repositorio().ConsulteUm(x => x.Id == objeto.Id);
 
-            var resultado = Validate(objeto);
-
-            if (!resultado.IsValid)
-            {
-                throw new ValidationException(resultado.Errors[0].ErrorMessage);
-            }
+            return Validate(objeto);
         }
 
         /// <summary>
