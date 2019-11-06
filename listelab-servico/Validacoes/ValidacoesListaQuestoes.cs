@@ -8,11 +8,17 @@ namespace ListElab.Servico.Validacoes
         protected override void AssineRegrasDeAtualizacao()
         {
             AssineRegraListaDeveTerTitulo();
+            AssineRegraListaDeveTerTags();
+            AssineRegraListaDeveTerUsuario();
+            AssineRegraListaDeveTerQuestoes();
         }
 
         protected override void AssineRegrasDeCadastro()
         {
             AssineRegraListaDeveTerTitulo();
+            AssineRegraListaDeveTerTags();
+            AssineRegraListaDeveTerUsuario();
+            AssineRegraListaDeveTerQuestoes();
         }
 
         private void AssineRegraListaDeveTerTitulo()
@@ -20,6 +26,27 @@ namespace ListElab.Servico.Validacoes
             RuleFor(x => x)
                 .Must(lista => !string.IsNullOrWhiteSpace(lista.Titulo))
                 .WithMessage("O título da lista de questões não pode ser nulo ou vazio!");
+        }
+
+        private void AssineRegraListaDeveTerTags()
+        {
+            RuleFor(x => x)
+                .Must(lista => lista.Tags.Count > 0 && lista.Tags != null)
+                .WithMessage("As tags da lista de questões não pode ser nulo ou vazio!");
+        }
+
+        private void AssineRegraListaDeveTerUsuario()
+        {
+            RuleFor(x => x)
+                .Must(lista => !string.IsNullOrWhiteSpace(lista.Usuario))
+                .WithMessage("O autor da lista de questões não pode ser nulo ou vazio!");
+        }
+
+        private void AssineRegraListaDeveTerQuestoes()
+        {
+            RuleFor(x => x)
+                .Must(lista => lista.Discursivas.Count > 0 && lista.Discursivas != null)
+                .WithMessage("A lista precisa conter ao menos uma questão!");
         }
 
         protected override void AssineRegrasDeExclusao()
