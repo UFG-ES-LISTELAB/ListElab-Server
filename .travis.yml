@@ -13,7 +13,7 @@ stages:
   
 jobs:
   include:
-    - stage: build dev docker image
+    - stage: set connection string
       script:
       - sed -i 's/$cstring/$CONNECTION_STRING/g' ./listelab-contrato/App.config.example
       - rm -f ./listelab-contrato/App.config
