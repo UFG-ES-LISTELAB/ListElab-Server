@@ -29,8 +29,17 @@ namespace ListElab.Servico.Conversores
                 dto.Tipo = objeto.Tipo;
                 dto.Usuario = objeto.Usuario;
                 dto.Enunciado = objeto.Enunciado;
-                dto.AreaDeConhecimento = new DtoAreaDoConhecimento { Codigo = objeto.AreaDeConhecimento.Codigo, Descricao = objeto.AreaDeConhecimento.Descricao };
-                dto.Disciplina = new DtoDisciplina { Codigo = objeto.Disciplina.Codigo, Descricao = objeto.Disciplina.Descricao };
+                
+                if (objeto.AreaDeConhecimento != null)
+                {
+                    dto.AreaDeConhecimento = new DtoAreaDoConhecimento { Codigo = objeto.AreaDeConhecimento.Codigo, Descricao = objeto.AreaDeConhecimento.Descricao };
+                }
+
+                if (objeto.Disciplina != null)
+                {
+                    dto.Disciplina = new DtoDisciplina { Codigo = objeto.Disciplina.Codigo, Descricao = objeto.Disciplina.Descricao };
+                }
+                
                 dto.RespostaEsperada = objeto.RespostaEsperada.PalavrasChaves.Select(x => new DtoPalavraChave { Descricao = x.Descricao, Peso = x.Peso }).ToList();
             }
 
@@ -56,8 +65,17 @@ namespace ListElab.Servico.Conversores
                 questao.Tipo = dto.Tipo;
                 questao.Usuario = dto.Usuario;
                 questao.Enunciado = dto.Enunciado;
-                questao.AreaDeConhecimento = RepositorioAreaDeConhecimento().ConsulteUm(x => x.Codigo == dto.AreaDeConhecimento.Codigo);
-                questao.Disciplina = RepositorioDisciplina().ConsulteUm(x => x.Codigo == dto.Disciplina.Codigo);
+
+                if (dto.AreaDeConhecimento != null)
+                {
+                    questao.AreaDeConhecimento = RepositorioAreaDeConhecimento().ConsulteUm(x => x.Codigo == dto.AreaDeConhecimento.Codigo);
+                }
+
+                if (dto.Disciplina != null)
+                {
+                    questao.Disciplina = RepositorioDisciplina().ConsulteUm(x => x.Codigo == dto.Disciplina.Codigo);
+                }
+
                 questao.RespostaEsperada = new Discursiva { PalavrasChaves = dto.RespostaEsperada.Select(x => new PalavraChave { Descricao = x.Descricao, Peso = x.Peso }).ToList() };
             }
 

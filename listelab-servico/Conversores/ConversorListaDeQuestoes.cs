@@ -31,8 +31,17 @@ namespace ListElab.Servico.Conversores
                 dto.Usuario = objeto.Usuario;
                 dto.Titulo = objeto.Titulo;
                 dto.ProntaParaAplicacao = objeto.ProntaParaAplicacao;
-                dto.AreaDeConhecimento = new DtoAreaDoConhecimento { Codigo = objeto.AreaDeConhecimento.Codigo, Descricao = objeto.AreaDeConhecimento.Descricao };
-                dto.Disciplina = new DtoDisciplina { Codigo = objeto.Disciplina.Codigo, Descricao = objeto.Disciplina.Descricao };
+
+                if (objeto.AreaDeConhecimento != null)
+                {
+                    dto.AreaDeConhecimento = new DtoAreaDoConhecimento { Codigo = objeto.AreaDeConhecimento.Codigo, Descricao = objeto.AreaDeConhecimento.Descricao };
+                }
+
+                if (objeto.Disciplina != null)
+                {
+                    dto.Disciplina = new DtoDisciplina { Codigo = objeto.Disciplina.Codigo, Descricao = objeto.Disciplina.Descricao };
+                }
+
                 dto.Discursivas = objeto.Discursivas.Select(x => conversorQuestoes.Converta(x)).ToList();
             }
 
@@ -58,8 +67,17 @@ namespace ListElab.Servico.Conversores
                 lista.Usuario = dto.Usuario;
                 lista.Titulo = dto.Titulo;
                 lista.ProntaParaAplicacao = lista.ProntaParaAplicacao;
-                lista.AreaDeConhecimento = RepositorioAreaDeConhecimento().ConsulteUm(x => x.Codigo == dto.AreaDeConhecimento.Codigo);
-                lista.Disciplina = RepositorioDisciplina().ConsulteUm(x => x.Codigo == dto.Disciplina.Codigo);
+
+                if (dto.AreaDeConhecimento != null)
+                {
+                    lista.AreaDeConhecimento = RepositorioAreaDeConhecimento().ConsulteUm(x => x.Codigo == dto.AreaDeConhecimento.Codigo);
+                }
+
+                if (dto.Disciplina != null)
+                {
+                    lista.Disciplina = RepositorioDisciplina().ConsulteUm(x => x.Codigo == dto.Disciplina.Codigo);
+                }
+
                 lista.Discursivas = dto.Discursivas.Select(x => conversorQuestoes.Converta(x)).ToList();
             }
 
