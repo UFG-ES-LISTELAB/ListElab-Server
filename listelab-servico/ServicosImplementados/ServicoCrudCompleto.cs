@@ -1,5 +1,6 @@
 ﻿using ListElab.Data.Repositorios;
 using ListElab.Dominio.Abstrato;
+using ListElab.Dominio.Dtos;
 using ListElab.Dominio.InterfaceDeServico;
 using ListElab.Servico.Conversores.Interfaces;
 using ListElab.Servico.Validacoes;
@@ -12,6 +13,11 @@ namespace ListElab.Servico.ServicosImplementados
     public abstract class ServicoCrudCompleto<TObjeto, TDto> : IServicoCrudCompleto<TObjeto, TDto> where TObjeto : ObjetoComId
     {
         /// <summary>
+        /// Representa uma lista de erros.
+        /// </summary>
+        public List<DtoResultado<TDto>> Erros { get; set; }
+
+        /// <summary>
         /// Atualiza um objeto genérico no banco.
         /// </summary>
         /// <param name="objeto">Objeto a ser atualizado.</param>
@@ -21,13 +27,23 @@ namespace ListElab.Servico.ServicosImplementados
 
             Validador().AssineRegrasAtualizacao();
 
-            Validador().Valide(objeto);
+            var resultado = Validador().Valide(objeto);
 
-            Repositorio().Atualize(x => x.Id == objeto.Id, objeto);
+            if (resultado.IsValid)
+            {
+                Repositorio().Atualize(x => x.Id == objeto.Id, objeto);
 
-            var dtoAtualizado = Conversor().Converta(objeto);
+                var dtoAtualizado = Conversor().Converta(objeto);
+                return dtoAtualizado;
+            }
+            else
+            {
+                Erros = resultado.Errors.Select(x => new DtoResultado<TDto> { Campo = x.PropertyName, Mensagem = x.ErrorMessage, Resultado = null, Sucesso = false }).ToList();
 
-            return dtoAtualizado;
+                throw new Exception("Ocorreu algum erro durante a validação.");
+            }
+
+
         }
 
         /// <summary>
@@ -40,13 +56,20 @@ namespace ListElab.Servico.ServicosImplementados
 
             Validador().AssineRegrasCadastro();
 
-            Validador().Valide(objeto);
+            var resultado = Validador().Valide(objeto);
 
-            Repositorio().Cadastre(objeto);
+            if (resultado.IsValid)
+            {
+                Repositorio().Cadastre(objeto);
 
-            var dtoCadastrado = Conversor().Converta(objeto);
+                return Conversor().Converta(objeto);
+            }
+            else
+            {
+                Erros = resultado.Errors.Select(x => new DtoResultado<TDto> { Campo = x.PropertyName, Mensagem = x.ErrorMessage, Resultado = null, Sucesso = false }).ToList();
 
-            return dtoCadastrado;
+                throw new Exception("Ocorreu algum erro durante a validação.");
+            }
         }
 
         /// <summary>
@@ -98,9 +121,19 @@ namespace ListElab.Servico.ServicosImplementados
 
                 objeto.Id = idConvertido;
 
-                Validador().Valide(objeto);
+                var resultado = Validador().Valide(objeto);
 
-                Repositorio().Exclua(x => x.Id == idConvertido);
+                if (resultado.IsValid)
+                {
+                    Repositorio().Exclua(x => x.Id == idConvertido);
+                }
+                else
+                {
+                    Erros = resultado.Errors.Select(x => new DtoResultado<TDto> { Campo = x.PropertyName, Mensagem = x.ErrorMessage, Resultado = null, Sucesso = false }).ToList();
+
+                    throw new Exception("Ocorreu algum erro durante a validação.");
+                }
+
             }
             else
             {

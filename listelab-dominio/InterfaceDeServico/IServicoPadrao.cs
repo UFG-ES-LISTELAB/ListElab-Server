@@ -1,9 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using ListElab.Dominio.Dtos;
+using System.Collections.Generic;
 
 namespace ListElab.Dominio.InterfaceDeServico
 {
     public interface IServicoCrudCompleto<TObjeto, TDto>
     {
+        /// <summary>
+        /// Representa uma lista de erros.
+        /// </summary>
+        List<DtoResultado<TDto>> Erros { get; set; }
+
         /// <summary>
         /// Cadastra um objeto de tipo genérico.
         /// </summary>
