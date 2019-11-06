@@ -4,10 +4,28 @@ branches:
   only:
   - master
   - dev
- 
+
+stages:
+- name: build dev docker image
+  if: branch = dev
+- name: build prod docker image
+  if: branch = master
+  
 jobs:
   include:
-    - stage: build docker image
+    - stage: build dev docker image
+      script:
+      - sed -i 's/$cstring/$CONNECTION_STRING/g' ./listelab-contrato/App.config.example
+      - rm -f ./listelab-contrato/App.config
+      - mv ./listelab-contrato/App.config.example ./listelab-contrato/App.config
+    - stage: build dev docker image
+      script:
+      - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
+      - docker build --no-cache -t $DOCKER_USERNAME/listelab-server:dev .
+      - docker images
+      - docker tag $DOCKER_USERNAME/listelab-server:dev $DOCKER_USERNAME/listelab-server:dev
+      - docker push $DOCKER_USERNAME/listelab-server:dev
+    - stage: build prod docker image
       script:
       - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
       - docker build --no-cache -t $DOCKER_USERNAME/listelab-server .
