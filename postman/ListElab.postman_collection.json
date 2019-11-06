@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "aaad515c-f51f-44f6-9b00-311b2dda9e41",
+		"_postman_id": "cec74315-1b70-4da0-a92b-c6c284adbeb2",
 		"name": "ListElab",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -308,7 +308,12 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"usuario\": \"postman@ufg.br\"\r\n}"
+							"raw": "{\r\n  \"usuario\": \"postman@ufg.br\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
 						"url": {
 							"raw": "{{ListElabUrl}}/api/QuestaoDiscursiva/consulte",
@@ -495,7 +500,12 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": ""
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
 						"url": {
 							"raw": "{{ListElabUrl}}/api/QuestaoDiscursiva/{{ObjectId}}",
@@ -623,7 +633,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"titulo\": \"Lista Postman\",\n    \"areaDeConhecimento\": {\n        \"codigo\": \"10303006\",\n        \"descricao\": \"METODOLOGIA E TÉCNICAS DA COMPUTAÇÃO\"\n    },\n    \"disciplina\": {\n        \"codigo\": \"INF0233\",\n        \"descricao\": \"Engenharia Econômica para Software\"\n    },\n    \"nivelDificuldade\": 1,\n    \"tags\": [\n        \"Postman\"\n    ],\n    \"discursivas\": [\n        {\n            \"enunciado\": \"Questão em Lista Postman\",\n            \"usuario\": \"postman@ufg.br\",\n            \"areaDeConhecimento\": {\n                \"codigo\": \"10303006\",\n                \"descricao\": \"METODOLOGIA E TÉCNICAS DA COMPUTAÇÃO\"\n            },\n            \"disciplina\": {\n                \"codigo\": \"INF0233\",\n                \"descricao\": \"Engenharia Econômica para Software\"\n            },\n            \"nivelDificuldade\": 1,\n            \"tags\": [\n                \"TagPostman\"\n            ],\n            \"tipo\": 0,\n            \"tempoMaximoDeResposta\": 100,\n            \"respostaEsperada\": [\n                {\n                    \"descricao\": \"Teste Postman\",\n                    \"peso\": 3\n                },\n                {\n                    \"descricao\": \"Pooostman\",\n                    \"peso\": 2\n                }\n            ]\n        }\n    ],\n    \"objetivas\": []\n}"
+							"raw": "{\n    \"titulo\": \"Lista Postman\",\n    \"areaDeConhecimento\": {\n        \"codigo\": \"10303006\",\n        \"descricao\": \"METODOLOGIA E TÉCNICAS DA COMPUTAÇÃO\"\n    },\n    \"disciplina\": {\n        \"codigo\": \"INF0233\",\n        \"descricao\": \"Engenharia Econômica para Software\"\n    },\n    \"nivelDificuldade\": 1,\n    \"tags\": [\n        \"Postman\"\n    ],\n    \"usuario\": \"postman@ufg.br\",\n    \"discursivas\": [\n        {\n            \"enunciado\": \"Questão em Lista Postman\",\n            \"usuario\": \"postman@ufg.br\",\n            \"areaDeConhecimento\": {\n                \"codigo\": \"10303006\",\n                \"descricao\": \"METODOLOGIA E TÉCNICAS DA COMPUTAÇÃO\"\n            },\n            \"disciplina\": {\n                \"codigo\": \"INF0233\",\n                \"descricao\": \"Engenharia Econômica para Software\"\n            },\n            \"nivelDificuldade\": 1,\n            \"tags\": [\n                \"TagPostman\"\n            ],\n            \"tipo\": 0,\n            \"tempoMaximoDeResposta\": 100,\n            \"respostaEsperada\": [\n                {\n                    \"descricao\": \"Teste Postman\",\n                    \"peso\": 3\n                },\n                {\n                    \"descricao\": \"Pooostman\",\n                    \"peso\": 2\n                }\n            ]\n        }\n    ],\n    \"objetivas\": []\n}"
 						},
 						"url": {
 							"raw": "{{ListElabUrl}}/api/Lista",
@@ -681,7 +691,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"titulo\": \"Lista Postman Atualizado\",\n    \"areaDeConhecimento\": {\n        \"codigo\": \"10300007\",\n        \"descricao\": \"METODOLOGIA E TÉCNICAS DA COMPUTAÇÃO\"\n    },\n    \"disciplina\": {\n        \"codigo\": \"INF0233\",\n        \"descricao\": \"Engenharia Econômica para Software\"\n    },\n    \"nivelDificuldade\": 1,\n    \"tags\": [\n        \"Postman\"\n    ],\n    \"discursivas\": [\n        {\n            \"enunciado\": \"Questão em Lista Postman\",\n            \"usuario\": \"postman@ufg.br\",\n            \"areaDeConhecimento\": {\n                \"codigo\": \"10303006\",\n                \"descricao\": \"METODOLOGIA E TÉCNICAS DA COMPUTAÇÃO\"\n            },\n            \"disciplina\": {\n                \"codigo\": \"INF0233\",\n                \"descricao\": \"Engenharia Econômica para Software\"\n            },\n            \"nivelDificuldade\": 1,\n            \"tags\": [\n                \"TagPostman\"\n            ],\n            \"tipo\": 0,\n            \"tempoMaximoDeResposta\": 100,\n            \"respostaEsperada\": [\n                {\n                    \"descricao\": \"Teste Postman\",\n                    \"peso\": 3\n                },\n                {\n                    \"descricao\": \"Pooostman\",\n                    \"peso\": 2\n                }\n            ]\n        }\n    ],\n    \"objetivas\": [],\n    \"id\": {{ObjectIdString}}\n}"
+							"raw": "{\n    \"titulo\": \"Lista Postman Atualizado\",\n    \"areaDeConhecimento\": {\n        \"codigo\": \"10300007\",\n        \"descricao\": \"METODOLOGIA E TÉCNICAS DA COMPUTAÇÃO\"\n    },\n    \"disciplina\": {\n        \"codigo\": \"INF0233\",\n        \"descricao\": \"Engenharia Econômica para Software\"\n    },\n    \"nivelDificuldade\": 1,\n    \"tags\": [\n        \"Postman\"\n    ],\n    \"usuario\": \"postman@ufg.br\",\n    \"discursivas\": [\n        {\n            \"enunciado\": \"Questão em Lista Postman\",\n            \"usuario\": \"postman@ufg.br\",\n            \"areaDeConhecimento\": {\n                \"codigo\": \"10303006\",\n                \"descricao\": \"METODOLOGIA E TÉCNICAS DA COMPUTAÇÃO\"\n            },\n            \"disciplina\": {\n                \"codigo\": \"INF0233\",\n                \"descricao\": \"Engenharia Econômica para Software\"\n            },\n            \"nivelDificuldade\": 1,\n            \"tags\": [\n                \"TagPostman\"\n            ],\n            \"tipo\": 0,\n            \"tempoMaximoDeResposta\": 100,\n            \"respostaEsperada\": [\n                {\n                    \"descricao\": \"Teste Postman\",\n                    \"peso\": 3\n                },\n                {\n                    \"descricao\": \"Pooostman\",\n                    \"peso\": 2\n                }\n            ]\n        }\n    ],\n    \"objetivas\": [],\n    \"id\": {{ObjectIdString}}\n}"
 						},
 						"url": {
 							"raw": "{{ListElabUrl}}/api/Lista",
@@ -757,7 +767,12 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": ""
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
 						"url": {
 							"raw": "{{ListElabUrl}}/api/Lista/{{ObjectId}}",
@@ -884,7 +899,12 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": ""
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
 						"url": {
 							"raw": "{{ListElabUrl}}/api/Lista/{{ObjectId}}",
@@ -955,7 +975,12 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"AreaDeConhecimento\": {\n\t\t\"codigo\": \"10302000\"\n\t},\n\t\"NivelDificuldade\": 1,\n\t\"Tipo\": 0,\n\t\"Disciplina\": {\n\t\n\t\t\"codigo\": \"INF0150\"\n\t}\n}"
+							"raw": "{\n\t\"AreaDeConhecimento\": {\n\t\t\"codigo\": \"10302000\"\n\t},\n\t\"NivelDificuldade\": 1,\n\t\"Tipo\": 0,\n\t\"Disciplina\": {\n\t\n\t\t\"codigo\": \"INF0150\"\n\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
 						"url": {
 							"raw": "{{ListElabUrl}}/api/Lista/filtro",
@@ -973,6 +998,64 @@
 					"response": []
 				}
 			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Disciplina",
+			"item": [
+				{
+					"name": "Disciplinas",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "df61ee05-36c3-49fb-83a4-bf3e2ec038a5",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna json com valor de 'sucesso' == true\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.sucesso).to.eql(true);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna json com uma ou mais disciplinas cadastradas\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.resultado.length).to.be.above(0);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{ListElabUrl}}/api/Lista",
+							"host": [
+								"{{ListElabUrl}}"
+							],
+							"path": [
+								"api",
+								"Lista"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{ListElabToken}}",
+						"type": "string"
+					}
+				]
+			},
 			"protocolProfileBehavior": {}
 		}
 	],
