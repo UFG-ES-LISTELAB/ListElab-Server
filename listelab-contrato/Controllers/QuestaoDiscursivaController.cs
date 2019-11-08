@@ -26,7 +26,7 @@ namespace ListElab.Contrato.Controllers
             return ExecuteAcaoAutorizada(() =>
             {
                 var resultado = Servico().Consulte(filtro);
-                return DtoResultado<DtoQuestaoDiscursiva>.ObtenhaResultado(resultado, "Consulta realizada sem erros");
+                return Ok(DtoResultado<DtoQuestaoDiscursiva>.ObtenhaResultado(resultado, "Consulta realizada sem erros"));
             });
         }
     }

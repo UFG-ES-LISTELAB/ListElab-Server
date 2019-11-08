@@ -1,4 +1,5 @@
-﻿using ListElab.Data.Repositorios;
+﻿using FluentValidation.Results;
+using ListElab.Data.Repositorios;
 using ListElab.Dominio.Abstrato;
 using ListElab.Dominio.Dtos;
 using ListElab.Dominio.InterfaceDeServico;
@@ -15,7 +16,7 @@ namespace ListElab.Servico.ServicosImplementados
         /// <summary>
         /// Representa uma lista de erros.
         /// </summary>
-        public List<DtoResultado<TDto>> Erros { get; set; }
+        public IList<DtoErro> Erros { get; set; }
 
         /// <summary>
         /// Atualiza um objeto genérico no banco.
@@ -29,21 +30,13 @@ namespace ListElab.Servico.ServicosImplementados
 
             var resultado = Validador().Valide(objeto);
 
-            if (resultado.IsValid)
+            return ExecuteAcaoDeServico(resultado, () =>
             {
                 Repositorio().Atualize(x => x.Id == objeto.Id, objeto);
 
                 var dtoAtualizado = Conversor().Converta(objeto);
                 return dtoAtualizado;
-            }
-            else
-            {
-                Erros = resultado.Errors.Select(x => new DtoResultado<TDto> { Campo = x.PropertyName, Mensagem = x.ErrorMessage, Resultado = null, Sucesso = false }).ToList();
-
-                throw new Exception("Ocorreu algum erro durante a validação.");
-            }
-
-
+            });
         }
 
         /// <summary>
@@ -58,18 +51,12 @@ namespace ListElab.Servico.ServicosImplementados
 
             var resultado = Validador().Valide(objeto);
 
-            if (resultado.IsValid)
+            return ExecuteAcaoDeServico(resultado, () =>
             {
                 Repositorio().Cadastre(objeto);
 
                 return Conversor().Converta(objeto);
-            }
-            else
-            {
-                Erros = resultado.Errors.Select(x => new DtoResultado<TDto> { Campo = x.PropertyName, Mensagem = x.ErrorMessage, Resultado = null, Sucesso = false }).ToList();
-
-                throw new Exception("Ocorreu algum erro durante a validação.");
-            }
+            });
         }
 
         /// <summary>
@@ -123,17 +110,10 @@ namespace ListElab.Servico.ServicosImplementados
 
                 var resultado = Validador().Valide(objeto);
 
-                if (resultado.IsValid)
+                ExecuteAcaoDeServico(resultado, () =>
                 {
                     Repositorio().Exclua(x => x.Id == idConvertido);
-                }
-                else
-                {
-                    Erros = resultado.Errors.Select(x => new DtoResultado<TDto> { Campo = x.PropertyName, Mensagem = x.ErrorMessage, Resultado = null, Sucesso = false }).ToList();
-
-                    throw new Exception("Ocorreu algum erro durante a validação.");
-                }
-
+                });
             }
             else
             {
@@ -146,5 +126,33 @@ namespace ListElab.Servico.ServicosImplementados
         protected abstract ValidadorPadrao<TObjeto> Validador();
 
         protected abstract IConversor<TDto, TObjeto> Conversor();
+
+        private TDto ExecuteAcaoDeServico(ValidationResult resultado, Func<TDto> acao)
+        {
+            if (resultado.IsValid)
+            {
+                return acao();
+            }
+            else
+            {
+                Erros = resultado.Errors.Select(x => new DtoErro { Campo = x.PropertyName, Mensagem = x.ErrorMessage }).ToList();
+
+                throw new Exception("Ocorreu algum erro durante a validação.");
+            }
+        }
+
+        private void ExecuteAcaoDeServico(ValidationResult resultado, Action acao)
+        {
+            if (resultado.IsValid)
+            {
+                acao();
+            }
+            else
+            {
+                Erros = resultado.Errors.Select(x => new DtoErro { Campo = x.PropertyName, Mensagem = x.ErrorMessage }).ToList();
+
+                throw new Exception("Ocorreu algum erro durante a validação.");
+            }
+        }
     }
 }

@@ -1,7 +1,5 @@
-﻿using ListElab.Dominio;
-using ListElab.Dominio.Conceitos.DisciplinaObj;
+﻿using ListElab.Dominio.Conceitos.DisciplinaObj;
 using ListElab.Dominio.Dtos;
-using ListElab.Dominio.InterfaceDeServico;
 using ListElab.Servico.ServicosImplementados;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
@@ -26,7 +24,7 @@ namespace ListElab.Contrato.Controllers
             return ExecuteAcaoAutorizada(() =>
             {
                 var resultado = new ServicoConsulte<Disciplina>().ConsulteLista();
-                return DtoResultado<Disciplina>.ObtenhaResultado(resultado, "Consulta realizada sem erros");
+                return Ok(DtoResultado<Disciplina>.ObtenhaResultado(resultado, "Consulta realizada sem erros"));
             });
         }
 
@@ -43,7 +41,7 @@ namespace ListElab.Contrato.Controllers
             }
             catch (Exception e)
             {
-                return DtoResultado<Disciplina>.ObtenhaResultado(e);
+                return BadRequest(DtoResultado<Disciplina>.ObtenhaResultado(e));
             }
         }
     }
