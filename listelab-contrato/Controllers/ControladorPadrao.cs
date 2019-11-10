@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace ListElab.Contrato.Controllers
@@ -42,7 +43,7 @@ namespace ListElab.Contrato.Controllers
             return ExecuteAcaoAutorizada(() =>
             {
                 var resultado = Servico().ConsulteLista();
-                return DtoResultado<TDto>.ObtenhaResultado(resultado, "Consulta realizada sem erros");
+                return Ok(DtoResultado<TDto>.ObtenhaResultado(resultado, "Consulta realizada sem erros"));
             });
         }
 
@@ -57,7 +58,7 @@ namespace ListElab.Contrato.Controllers
             return ExecuteAcaoAutorizada(() =>
             {
                 var resultado = Servico().Consulte(id);
-                return DtoResultado<TDto>.ObtenhaResultado(resultado, "Consulta realizada sem erros");
+                return Ok(DtoResultado<TDto>.ObtenhaResultado(resultado, "Consulta realizada sem erros"));
             });
         }
 
@@ -73,7 +74,7 @@ namespace ListElab.Contrato.Controllers
             return ExecuteAcaoAutorizada(() =>
             {
                 var resultado = Servico().Cadastre(objeto);
-                return DtoResultado<TDto>.ObtenhaResultado(resultado, "Cadastro realizado sem erros");
+                return Ok(DtoResultado<TDto>.ObtenhaResultado(resultado, "Cadastro realizado sem erros"));
             });
         }
 
@@ -90,7 +91,7 @@ namespace ListElab.Contrato.Controllers
             {
                 var resultado = Servico().Atualize(objeto);
 
-                return DtoResultado<TDto>.ObtenhaResultado(resultado, "Atualização realizada sem erros");
+                return Ok(DtoResultado<TDto>.ObtenhaResultado(resultado, "Atualização realizada sem erros"));
             });
         }
 
@@ -106,7 +107,7 @@ namespace ListElab.Contrato.Controllers
             return ExecuteAcaoAutorizada(() =>
             {
                 Servico().Exclua(id);
-                return DtoResultado<TDto>.ObtenhaResultado("Exclusão realizada sem erros");
+                return Ok(DtoResultado<TDto>.ObtenhaResultado("Exclusão realizada sem erros"));
             });
         }
 
@@ -123,8 +124,9 @@ namespace ListElab.Contrato.Controllers
             }
             catch (Exception e)
             {
-                var erros = Servico().Erros;
-                return erros != null && erros.Any() ? erros.FirstOrDefault() : DtoResultado<TDto>.ObtenhaResultado(e);
+                var erros = Servico().Erros != null && Servico().Erros.Any() ? Servico().Erros : new List<DtoErro> { new DtoErro { Campo = string.Empty, Mensagem = e.Message } };
+                var dtoResultado = DtoResultado<TDto>.ObtenhaResultado(e, erros.ToList());
+                return BadRequest(dtoResultado);
             }
         }
     }

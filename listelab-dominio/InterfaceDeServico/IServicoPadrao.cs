@@ -8,7 +8,7 @@ namespace ListElab.Dominio.InterfaceDeServico
         /// <summary>
         /// Representa uma lista de erros.
         /// </summary>
-        List<DtoResultado<TDto>> Erros { get; set; }
+        IList<DtoErro> Erros { get; set; }
 
         /// <summary>
         /// Cadastra um objeto de tipo genérico.

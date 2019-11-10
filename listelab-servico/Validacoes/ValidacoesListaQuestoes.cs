@@ -8,7 +8,6 @@ namespace ListElab.Servico.Validacoes
         protected override void AssineRegrasDeAtualizacao()
         {
             AssineRegraListaDeveTerTitulo();
-            AssineRegraListaDeveTerTags();
             AssineRegraListaDeveTerUsuario();
             AssineRegraListaDeveTerQuestoes();
         }
@@ -16,37 +15,29 @@ namespace ListElab.Servico.Validacoes
         protected override void AssineRegrasDeCadastro()
         {
             AssineRegraListaDeveTerTitulo();
-            AssineRegraListaDeveTerTags();
             AssineRegraListaDeveTerUsuario();
             AssineRegraListaDeveTerQuestoes();
         }
 
-        private void AssineRegraListaDeveTerTitulo()
+        public void AssineRegraListaDeveTerTitulo()
         {
-            RuleFor(x => x)
-                .Must(lista => !string.IsNullOrWhiteSpace(lista.Titulo))
-                .WithMessage("O título da lista de questões não pode ser nulo ou vazio!");
+            RuleFor(x => x.Titulo)
+                .Must(titulo => !string.IsNullOrWhiteSpace(titulo))
+                .WithMessage("O título da lista de questões deve ser informado");
         }
 
-        private void AssineRegraListaDeveTerTags()
+        public void AssineRegraListaDeveTerUsuario()
         {
-            RuleFor(x => x)
-                .Must(lista => lista.Tags.Count > 0 && lista.Tags != null)
-                .WithMessage("As tags da lista de questões não pode ser nulo ou vazio!");
+            RuleFor(x => x.Usuario)
+                .Must(usuario => !string.IsNullOrWhiteSpace(usuario))
+                .WithMessage("O autor da lista de questões deve ser informado");
         }
 
-        private void AssineRegraListaDeveTerUsuario()
+        public void AssineRegraListaDeveTerQuestoes()
         {
-            RuleFor(x => x)
-                .Must(lista => !string.IsNullOrWhiteSpace(lista.Usuario))
-                .WithMessage("O autor da lista de questões não pode ser nulo ou vazio!");
-        }
-
-        private void AssineRegraListaDeveTerQuestoes()
-        {
-            RuleFor(x => x)
-                .Must(lista => lista.Discursivas.Count > 0 && lista.Discursivas != null)
-                .WithMessage("A lista precisa conter ao menos uma questão!");
+            RuleFor(x => x.Id)
+                .Must((lista, id) => lista.Discursivas != null && lista.Discursivas.Count > 0)
+                .WithMessage("É preciso informar as questões que compõe uma lista, certifique-se de que os ids das questões foram repassados à requisição");
         }
 
         protected override void AssineRegrasDeExclusao()

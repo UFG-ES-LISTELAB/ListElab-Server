@@ -74,6 +74,7 @@ namespace ListElab.Servico.Conversores
                 if (dto.Disciplina != null)
                 {
                     questao.Disciplina = RepositorioDisciplina().ConsulteUm(x => x.Codigo == dto.Disciplina.Codigo);
+
                 }
 
                 questao.RespostaEsperada = new Discursiva { PalavrasChaves = dto.RespostaEsperada.Select(x => new PalavraChave { Descricao = x.Descricao, Peso = x.Peso }).ToList() };
