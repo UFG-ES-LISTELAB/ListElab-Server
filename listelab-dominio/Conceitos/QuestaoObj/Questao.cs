@@ -2,6 +2,7 @@
 using ListElab.Dominio.AtributosCustomizados;
 using ListElab.Dominio.Conceitos.AreaDeConhecimentoObj;
 using ListElab.Dominio.Conceitos.DisciplinaObj;
+using ListElab.Dominio.Conceitos.RespostaObj;
 using ListElab.Dominio.Enumeradores;
 using System.Collections.Generic;
 

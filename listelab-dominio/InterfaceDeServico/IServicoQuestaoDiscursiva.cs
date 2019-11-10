@@ -13,6 +13,6 @@ namespace ListElab.Dominio.InterfaceDeServico
         /// </summary>
         /// <param name="filtro">O filtro para trazer as questões.</param>
         /// <returns>A lista de questões que se adequam ao filtro.</returns>
-        List<Questao<Discursiva>> Consulte(FiltroQuestao filtro);
+        IEnumerable<DtoQuestaoDiscursiva> Consulte(Filtro filtro);
     }
 }

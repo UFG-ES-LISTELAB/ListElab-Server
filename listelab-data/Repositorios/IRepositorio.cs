@@ -20,11 +20,21 @@ namespace ListElab.Data.Repositorios
         void Cadastre(T objeto);
 
         /// <summary>
+        /// Consulte uma lista de conceitos que correspondem a um id.
+        /// </summary>
+        /// <param name="campo">O campo a ser pesquisado.</param>
+        /// <param name="ids">Os ids de a serem pesquisados.</param>
+        /// <returns></returns>
+        List<T> ConsulteListaDeIds(Expression<Func<T, Guid>> campo, Guid[] ids);
+
+        /// <summary>
         /// Atualiza um objeto genérico no banco.
         /// </summary>
         /// <param name="condicao">Condição para atualização.</param>
         /// <param name="objeto">Objeto a ser atualizado.</param>
         void Atualize(Expression<Func<T, bool>> condicao, T objeto);
+
+        List<T> Filtre(Expression<Func<T, bool>>[] condicao);
 
         /// <summary>
         /// Exclua todos os objetos que atendem determinada condição.
