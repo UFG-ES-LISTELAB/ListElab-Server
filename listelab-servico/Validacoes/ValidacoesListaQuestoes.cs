@@ -8,18 +8,36 @@ namespace ListElab.Servico.Validacoes
         protected override void AssineRegrasDeAtualizacao()
         {
             AssineRegraListaDeveTerTitulo();
+            AssineRegraListaDeveTerUsuario();
+            AssineRegraListaDeveTerQuestoes();
         }
 
         protected override void AssineRegrasDeCadastro()
         {
             AssineRegraListaDeveTerTitulo();
+            AssineRegraListaDeveTerUsuario();
+            AssineRegraListaDeveTerQuestoes();
         }
 
-        private void AssineRegraListaDeveTerTitulo()
+        public void AssineRegraListaDeveTerTitulo()
         {
-            RuleFor(x => x)
-                .Must(lista => !string.IsNullOrWhiteSpace(lista.Titulo))
-                .WithMessage("O título da lista de questões não pode ser nulo ou vazio!");
+            RuleFor(x => x.Titulo)
+                .Must(titulo => !string.IsNullOrWhiteSpace(titulo))
+                .WithMessage("O título da lista de questões deve ser informado");
+        }
+
+        public void AssineRegraListaDeveTerUsuario()
+        {
+            RuleFor(x => x.Usuario)
+                .Must(usuario => !string.IsNullOrWhiteSpace(usuario))
+                .WithMessage("O autor da lista de questões deve ser informado");
+        }
+
+        public void AssineRegraListaDeveTerQuestoes()
+        {
+            RuleFor(x => x.Id)
+                .Must((lista, id) => lista.Discursivas != null && lista.Discursivas.Count > 0)
+                .WithMessage("É preciso informar as questões que compõe uma lista, certifique-se de que os ids das questões foram repassados à requisição");
         }
 
         protected override void AssineRegrasDeExclusao()

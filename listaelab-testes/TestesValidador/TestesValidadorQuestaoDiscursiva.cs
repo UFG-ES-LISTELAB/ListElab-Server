@@ -1,10 +1,9 @@
-﻿using ListElab.Data.Repositorios;
+﻿using ListElab.Dominio.Conceitos.AreaDeConhecimentoObj;
+using ListElab.Dominio.Conceitos.DisciplinaObj;
 using ListElab.Dominio.Conceitos.QuestaoObj;
 using ListElab.Dominio.Conceitos.RespostaObj;
-using ListElab.Dominio.Conceitos.UsuarioObj;
 using ListElab.Dominio.Enumeradores;
 using ListElab.Servico.Validacoes;
-using Moq;
 using NUnit.Framework;
 using System.Collections.Generic;
 
@@ -89,18 +88,44 @@ namespace ListElab.Testes.TestesValidador
             ValideTeste(cenarioInvalido, questaoDiscursiva, _validador, "Informe um valor válido para nível de dificuldade");
         }
 
-        //[Test, Theory]
-        //public void TesteRegraAutorDaQuestaoExiste(bool autorExiste)
-        //{
-        //    var mock = new Mock<IRepositorio<Usuario>>();
+        [Test, Theory]
+        public void TesteRegraAreaDeConhecimentoFoiInformada(bool areaDoConhecimentoInformada, bool codigoInformado)
+        {
+            _validador.AssineRegraAreaDeConhecimentoFoiInformada();
 
-        //    mock.Setup(repo => repo.ItemExiste(x => x.Email == "saulo@ufg.br")).Returns(autorExiste);
+            var questaoDiscursiva = new Questao<Discursiva>();
 
-        //    var questaoDiscursiva = new Questao<Discursiva> { Usuario = "saulo@ufg.br" };
+            if (areaDoConhecimentoInformada)
+            {
+                questaoDiscursiva.AreaDeConhecimento = new AreaDeConhecimento();
+            }
 
-        //    _validador.AssineRegraAutorDaQuestaoExiste();
+            if (areaDoConhecimentoInformada && codigoInformado)
+            {
+                questaoDiscursiva.AreaDeConhecimento.Codigo = "100";
+            }
 
-        //    ValideTeste(!autorExiste, questaoDiscursiva, _validador, "O autor da questão não é um usuário válido");
-        //}
+            ValideTeste(!areaDoConhecimentoInformada || !codigoInformado, questaoDiscursiva, _validador, "Área de conhecimento não informada ou inválida.");
+        }
+
+        [Test, Theory]
+        public void TesteRegraDisciplinaFoiInformada(bool discipinaInformada, bool codigoInformado)
+        {
+            _validador.AssineRegraDisciplinaFoiInformada();
+
+            var questaoDiscursiva = new Questao<Discursiva>();
+
+            if (discipinaInformada)
+            {
+                questaoDiscursiva.Disciplina = new Disciplina();
+            }
+
+            if (discipinaInformada && codigoInformado)
+            {
+                questaoDiscursiva.Disciplina.Codigo = "100";
+            }
+
+            ValideTeste(!discipinaInformada || !codigoInformado, questaoDiscursiva, _validador, "Disciplina não informada ou inválida.");
+        }
     }
 }

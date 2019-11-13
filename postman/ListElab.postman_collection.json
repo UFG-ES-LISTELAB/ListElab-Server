@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "aaad515c-f51f-44f6-9b00-311b2dda9e41",
+		"_postman_id": "cec74315-1b70-4da0-a92b-c6c284adbeb2",
 		"name": "ListElab",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -38,6 +38,9 @@
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "noauth"
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -66,6 +69,64 @@
 					"response": []
 				}
 			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Disciplina",
+			"item": [
+				{
+					"name": "Disciplinas",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "df61ee05-36c3-49fb-83a4-bf3e2ec038a5",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna json com valor de 'sucesso' == true\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.sucesso).to.eql(true);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna json com uma ou mais disciplinas cadastradas\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.resultado.length).to.be.above(0);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{ListElabUrl}}/api/Lista",
+							"host": [
+								"{{ListElabUrl}}"
+							],
+							"path": [
+								"api",
+								"Lista"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{ListElabToken}}",
+						"type": "string"
+					}
+				]
+			},
 			"protocolProfileBehavior": {}
 		},
 		{
@@ -98,16 +159,6 @@
 						}
 					],
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{ListElabToken}}",
-									"type": "string"
-								}
-							]
-						},
 						"method": "GET",
 						"header": [
 							{
@@ -148,24 +199,14 @@
 									"});",
 									"",
 									"var jsonData = JSON.parse(responseBody);",
-									"postman.setEnvironmentVariable(\"ObjectId\", jsonData.resultado.id);",
-									"postman.setEnvironmentVariable(\"ObjectIdString\", \"\\\"\" + jsonData.resultado.id + \"\\\"\");"
+									"postman.setEnvironmentVariable(\"QuestaoId\", jsonData.resultado.id);",
+									"postman.setEnvironmentVariable(\"QuestaoIdString\", \"\\\"\" + jsonData.resultado.id + \"\\\"\");"
 								],
 								"type": "text/javascript"
 							}
 						}
 					],
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{ListElabToken}}",
-									"type": "string"
-								}
-							]
-						},
 						"method": "POST",
 						"header": [
 							{
@@ -177,7 +218,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"enunciado\": \"Teste Postman\",\n    \"areaDeConhecimento\": {\n        \"codigo\": \"10303006\",\n        \"descricao\": \"METODOLOGIA E TÉCNICAS DA COMPUTAÇÃO\"\n    },\n    \"nivelDificuldade\": 1,\n    \"tags\": [\n        \"Tag\"\n    ],\n    \"tipo\": 0,\n    \"tempoMaximoDeResposta\": 100,\n    \"respostaEsperada\": [\n        {\n            \"descricao\": \"Teste Postman\",\n            \"peso\": 3\n        },\n        {\n            \"descricao\": \"Pooostman\",\n            \"peso\": 2\n        }\n    ],\n    \"usuario\": \"postman@ufg.br\"\n}"
+							"raw": "{\n    \"enunciado\": \"Teste Postman\",\n    \"areaDeConhecimento\": {\n        \"codigo\": \"10303006\",\n        \"descricao\": \"METODOLOGIA E TÉCNICAS DA COMPUTAÇÃO\"\n    },\n    \"disciplina\": {\n        \"codigo\": \"INF0233\",\n        \"descricao\": \"Engenharia Econômica para Software\"\n    },\n    \"nivelDificuldade\": 1,\n    \"tags\": [\n        \"Tag\"\n    ],\n    \"tipo\": 0,\n    \"tempoMaximoDeResposta\": 100,\n    \"respostaEsperada\": [\n        {\n            \"descricao\": \"Teste Postman\",\n            \"peso\": 3\n        },\n        {\n            \"descricao\": \"Pooostman\",\n            \"peso\": 2\n        }\n    ],\n    \"usuario\": \"postman@ufg.br\"\n}"
 						},
 						"url": {
 							"raw": "{{ListElabUrl}}/api/QuestaoDiscursiva",
@@ -214,16 +255,6 @@
 						}
 					],
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{ListElabToken}}",
-									"type": "string"
-								}
-							]
-						},
 						"method": "PUT",
 						"header": [
 							{
@@ -235,7 +266,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"enunciado\": \"Teste Postman Atualizado\",\n    \"areaDeConhecimento\": {\n        \"codigo\": \"10303006\",\n        \"descricao\": \"METODOLOGIA E TÉCNICAS DA COMPUTAÇÃO\"\n    },\n    \"nivelDificuldade\": 2,\n    \"tags\": [\n        \"Tag\"\n    ],\n    \"tipo\": 0,\n    \"tempoMaximoDeResposta\": 123456,\n    \"respostaEsperada\": [\n        {\n            \"descricao\": \"Teste Postman\",\n            \"peso\": 3\n        },\n        {\n            \"descricao\": \"Pooostman\",\n            \"peso\": 2\n        }\n    ],\n    \"usuario\": \"postman@ufg.br\",\n    \"id\": {{ObjectIdString}}\n}"
+							"raw": "{\n    \"enunciado\": \"Teste Postman Atualizado\",\n    \"areaDeConhecimento\": {\n        \"codigo\": \"10303006\",\n        \"descricao\": \"METODOLOGIA E TÉCNICAS DA COMPUTAÇÃO\"\n    },\n    \"disciplina\": {\n        \"codigo\": \"INF0233\",\n        \"descricao\": \"Engenharia Econômica para Software\"\n    },\n    \"nivelDificuldade\": 2,\n    \"tags\": [\n        \"Tag\"\n    ],\n    \"tipo\": 0,\n    \"tempoMaximoDeResposta\": 123456,\n    \"respostaEsperada\": [\n        {\n            \"descricao\": \"Teste Postman\",\n            \"peso\": 3\n        },\n        {\n            \"descricao\": \"Pooostman\",\n            \"peso\": 2\n        }\n    ],\n    \"usuario\": \"postman@ufg.br\",\n    \"id\": {{QuestaoIdString}}\n}"
 						},
 						"url": {
 							"raw": "{{ListElabUrl}}/api/QuestaoDiscursiva",
@@ -251,7 +282,57 @@
 					"response": []
 				},
 				{
-					"name": "Consulte Q. Atualizada",
+					"name": "Consulte Questão",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "22454fac-f4f8-403a-9280-3e8a339e6777",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna json com valor de 'sucesso' == true\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.sucesso).to.eql(true);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna json com o resultado correto\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.resultado.enunciado).to.eql(\"Teste Postman Atualizado\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"type": "text",
+								"value": "",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{ListElabUrl}}/api/QuestaoDiscursiva/{{QuestaoId}}",
+							"host": [
+								"{{ListElabUrl}}"
+							],
+							"path": [
+								"api",
+								"QuestaoDiscursiva",
+								"{{QuestaoId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Filtre Questão",
 					"event": [
 						{
 							"listen": "test",
@@ -286,18 +367,11 @@
 							}
 						}
 					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{ListElabToken}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
+						"method": "GET",
 						"header": [
 							{
 								"key": "Content-Type",
@@ -308,214 +382,23 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"usuario\": \"postman@ufg.br\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": ""
 						},
 						"url": {
-							"raw": "{{ListElabUrl}}/api/QuestaoDiscursiva/consulte",
+							"raw": "{{ListElabUrl}}/api/QuestaoDiscursiva/filtro?usuario=postman@ufg.br",
 							"host": [
 								"{{ListElabUrl}}"
 							],
 							"path": [
 								"api",
 								"QuestaoDiscursiva",
-								"consulte"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Consulte por Id",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "22454fac-f4f8-403a-9280-3e8a339e6777",
-								"exec": [
-									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});",
-									"",
-									"pm.test(\"Requisição retorna json com valor de 'sucesso' == true\", function () {",
-									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.sucesso).to.eql(true);",
-									"});",
-									"",
-									"pm.test(\"Requisição retorna json com o resultado correto\", function () {",
-									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.resultado.enunciado).to.eql(\"Teste Postman Atualizado\");",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
+								"filtro"
+							],
+							"query": [
 								{
-									"key": "token",
-									"value": "{{ListElabToken}}",
-									"type": "string"
+									"key": "usuario",
+									"value": "postman@ufg.br"
 								}
-							]
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "",
-								"type": "text",
-								"value": "",
-								"disabled": true
-							}
-						],
-						"url": {
-							"raw": "{{ListElabUrl}}/api/QuestaoDiscursiva/{{ObjectId}}",
-							"host": [
-								"{{ListElabUrl}}"
-							],
-							"path": [
-								"api",
-								"QuestaoDiscursiva",
-								"{{ObjectId}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Delete Questao",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "bd3b303f-0918-4baa-bdcb-184e3bc1e34c",
-								"exec": [
-									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});",
-									"",
-									"pm.test(\"Requisição retorna json com valor de 'sucesso' == true\", function () {",
-									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.sucesso).to.eql(true);",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{ListElabToken}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json",
-								"disabled": true
-							}
-						],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
-						},
-						"url": {
-							"raw": "{{ListElabUrl}}/api/QuestaoDiscursiva/{{ObjectId}}",
-							"host": [
-								"{{ListElabUrl}}"
-							],
-							"path": [
-								"api",
-								"QuestaoDiscursiva",
-								"{{ObjectId}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Consulte Q. Deletada",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "22454fac-f4f8-403a-9280-3e8a339e6777",
-								"exec": [
-									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});",
-									"",
-									"pm.test(\"Requisição retorna json com valor de 'sucesso' == true\", function () {",
-									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.sucesso).to.eql(true);",
-									"});",
-									"",
-									"pm.test(\"Requisição NÂO retorna uma questão (pois foi deletada)\", function () {",
-									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.resultado).to.eql(null);",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{ListElabToken}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{ListElabUrl}}/api/QuestaoDiscursiva/{{ObjectId}}",
-							"host": [
-								"{{ListElabUrl}}"
-							],
-							"path": [
-								"api",
-								"QuestaoDiscursiva",
-								"{{ObjectId}}"
 							]
 						}
 					},
@@ -554,16 +437,6 @@
 						}
 					],
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{ListElabToken}}",
-									"type": "string"
-								}
-							]
-						},
 						"method": "GET",
 						"header": [
 							{
@@ -604,24 +477,14 @@
 									"});",
 									"",
 									"var jsonData = JSON.parse(responseBody);",
-									"postman.setEnvironmentVariable(\"ObjectId\", jsonData.resultado.id);",
-									"postman.setEnvironmentVariable(\"ObjectIdString\", \"\\\"\" + jsonData.resultado.id + \"\\\"\");"
+									"postman.setEnvironmentVariable(\"ListaId\", jsonData.resultado.id);",
+									"postman.setEnvironmentVariable(\"ListaIdString\", \"\\\"\" + jsonData.resultado.id + \"\\\"\");"
 								],
 								"type": "text/javascript"
 							}
 						}
 					],
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{ListElabToken}}",
-									"type": "string"
-								}
-							]
-						},
 						"method": "POST",
 						"header": [
 							{
@@ -633,7 +496,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"titulo\": \"Lista Postman\",\n    \"areaDeConhecimento\": {\n        \"codigo\": \"10303006\",\n        \"descricao\": \"METODOLOGIA E TÉCNICAS DA COMPUTAÇÃO\"\n    },\n    \"nivelDificuldade\": 1,\n    \"tags\": [\n        \"Postman\"\n    ],\n    \"discursivas\": [\n        {\n            \"enunciado\": \"Questão em Lista Postman\",\n            \"usuario\": \"professor@ufg.br\",\n            \"areaDeConhecimento\": {\n                \"codigo\": \"10303006\",\n                \"descricao\": \"METODOLOGIA E TÉCNICAS DA COMPUTAÇÃO\"\n            },\n            \"nivelDificuldade\": 1,\n            \"tags\": [\n                \"TagPostman\"\n            ],\n            \"tipo\": 0,\n            \"tempoMaximoDeResposta\": 100,\n            \"respostaEsperada\": [\n                {\n                    \"descricao\": \"Teste Postman\",\n                    \"peso\": 3\n                },\n                {\n                    \"descricao\": \"Pooostman\",\n                    \"peso\": 2\n                }\n            ]\n        }\n    ],\n    \"objetivas\": []\n}"
+							"raw": "{\r\n  \"titulo\": \"Lista Postman\",\r\n  \"prontaParaAplicacao\": false,\r\n  \"usuario\": \"professor@ufg.br\",\r\n  \"questoes\": [\r\n    {\r\n      \"id\": {{QuestaoIdString}}\r\n    }\r\n  ]\r\n}"
 						},
 						"url": {
 							"raw": "{{ListElabUrl}}/api/Lista",
@@ -670,16 +533,6 @@
 						}
 					],
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{ListElabToken}}",
-									"type": "string"
-								}
-							]
-						},
 						"method": "PUT",
 						"header": [
 							{
@@ -691,7 +544,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"titulo\": \"Lista Postman Atualizado\",\n    \"areaDeConhecimento\": {\n        \"codigo\": \"10300007\",\n        \"descricao\": \"METODOLOGIA E TÉCNICAS DA COMPUTAÇÃO\"\n    },\n    \"nivelDificuldade\": 1,\n    \"tags\": [\n        \"Postman\"\n    ],\n    \"discursivas\": [\n        {\n            \"enunciado\": \"Questão em Lista Postman\",\n            \"usuario\": \"postman@ufg.br\",\n            \"areaDeConhecimento\": {\n                \"codigo\": \"10303006\",\n                \"descricao\": \"METODOLOGIA E TÉCNICAS DA COMPUTAÇÃO\"\n            },\n            \"nivelDificuldade\": 1,\n            \"tags\": [\n                \"TagPostman\"\n            ],\n            \"tipo\": 0,\n            \"tempoMaximoDeResposta\": 100,\n            \"respostaEsperada\": [\n                {\n                    \"descricao\": \"Teste Postman\",\n                    \"peso\": 3\n                },\n                {\n                    \"descricao\": \"Pooostman\",\n                    \"peso\": 2\n                }\n            ]\n        }\n    ],\n    \"objetivas\": [],\n    \"id\": {{ObjectIdString}}\n}"
+							"raw": "{\r\n  \"titulo\": \"Lista Postman Atualizado\",\r\n  \"prontaParaAplicacao\": false,\r\n  \"usuario\": \"postman@ufg.br\",\r\n  \"questoes\": [\r\n    {\r\n      \"id\": {{QuestaoIdString}}\r\n    }\r\n  ],\r\n  \"id\": {{ListaIdString}}\r\n}"
 						},
 						"url": {
 							"raw": "{{ListElabUrl}}/api/Lista",
@@ -707,7 +560,7 @@
 					"response": []
 				},
 				{
-					"name": "Lista Atualizada (por id)",
+					"name": "Consulte Lista",
 					"event": [
 						{
 							"listen": "test",
@@ -728,14 +581,9 @@
 									"    pm.expect(jsonData.resultado.titulo).to.eql(\"Lista Postman Atualizado\");",
 									"});",
 									"",
-									"pm.test(\"Requisição retorna lista pedida com área de conhecimento atualizada\", function () {",
-									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.resultado.areaDeConhecimento.codigo).to.eql(\"10300007\");",
-									"});",
-									"",
 									"pm.test(\"Requisição retorna lista pedida com questão discursiva atualizada\", function () {",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.resultado.discursivas[0].usuario).to.eql(\"postman@ufg.br\");",
+									"    pm.expect(jsonData.resultado.usuario).to.eql(\"postman@ufg.br\");",
 									"});"
 								],
 								"type": "text/javascript"
@@ -746,16 +594,6 @@
 						"disableBodyPruning": true
 					},
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{ListElabToken}}",
-									"type": "string"
-								}
-							]
-						},
 						"method": "GET",
 						"header": [
 							{
@@ -767,27 +605,103 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": ""
 						},
 						"url": {
-							"raw": "{{ListElabUrl}}/api/Lista/{{ObjectId}}",
+							"raw": "{{ListElabUrl}}/api/Lista/{{ListaId}}",
 							"host": [
 								"{{ListElabUrl}}"
 							],
 							"path": [
 								"api",
 								"Lista",
-								"{{ObjectId}}"
+								"{{ListaId}}"
 							]
 						}
 					},
 					"response": []
 				},
+				{
+					"name": "Filtre Lista",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "fd8d0ebe-96a6-43c2-99cb-c3edd1e13ca2",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna json com valor de 'sucesso' == true\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.sucesso).to.eql(true);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna json com pelo menos uma lista\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.resultado.length).to.be.above(0);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "c0f30421-da1e-4811-b248-a8cbd45fb534",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{ListElabUrl}}/api/Lista/filtro?usuario=postman@ufg.br",
+							"host": [
+								"{{ListElabUrl}}"
+							],
+							"path": [
+								"api",
+								"Lista",
+								"filtro"
+							],
+							"query": [
+								{
+									"key": "usuario",
+									"value": "postman@ufg.br"
+								}
+							]
+						},
+						"description": "Dado um filtro passado na requisição, retorna uma lista com questões discursivas e objetivas baseadas nos itens do filtro."
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Delete",
+			"item": [
 				{
 					"name": "Delete Lista",
 					"event": [
@@ -810,16 +724,6 @@
 						}
 					],
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{ListElabToken}}",
-									"type": "string"
-								}
-							]
-						},
 						"method": "DELETE",
 						"header": [
 							{
@@ -835,14 +739,14 @@
 							"formdata": []
 						},
 						"url": {
-							"raw": "{{ListElabUrl}}/api/Lista/{{ObjectId}}",
+							"raw": "{{ListElabUrl}}/api/Lista/{{ListaId}}",
 							"host": [
 								"{{ListElabUrl}}"
 							],
 							"path": [
 								"api",
 								"Lista",
-								"{{ObjectId}}"
+								"{{ListaId}}"
 							]
 						}
 					},
@@ -878,16 +782,6 @@
 						"disableBodyPruning": true
 					},
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{ListElabToken}}",
-									"type": "string"
-								}
-							]
-						},
 						"method": "GET",
 						"header": [
 							{
@@ -899,34 +793,79 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": ""
 						},
 						"url": {
-							"raw": "{{ListElabUrl}}/api/Lista/{{ObjectId}}",
+							"raw": "{{ListElabUrl}}/api/Lista/{{ListaId}}",
 							"host": [
 								"{{ListElabUrl}}"
 							],
 							"path": [
 								"api",
 								"Lista",
-								"{{ObjectId}}"
+								"{{ListaId}}"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Consulte questões por filtro",
+					"name": "Delete Questao",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
-								"id": "fd8d0ebe-96a6-43c2-99cb-c3edd1e13ca2",
+								"id": "bd3b303f-0918-4baa-bdcb-184e3bc1e34c",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna json com valor de 'sucesso' == true\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.sucesso).to.eql(true);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{ListElabUrl}}/api/QuestaoDiscursiva/{{QuestaoId}}",
+							"host": [
+								"{{ListElabUrl}}"
+							],
+							"path": [
+								"api",
+								"QuestaoDiscursiva",
+								"{{QuestaoId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consulte Q. Deletada",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "22454fac-f4f8-403a-9280-3e8a339e6777",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
@@ -937,68 +876,80 @@
 									"    pm.expect(jsonData.sucesso).to.eql(true);",
 									"});",
 									"",
-									""
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"id": "c0f30421-da1e-4811-b248-a8cbd45fb534",
-								"exec": [
-									""
+									"pm.test(\"Requisição NÂO retorna uma questão (pois foi deletada)\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.resultado).to.eql(null);",
+									"});"
 								],
 								"type": "text/javascript"
 							}
 						}
 					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{ListElabToken}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
+						"method": "GET",
 						"header": [
 							{
 								"key": "Content-Type",
 								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
+								"type": "text",
+								"value": "application/json"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"AreaDeConhecimento\": {\n\t\t\"codigo\": \"10302000\"\n\t},\n\t\"NivelDificuldade\": 1,\n\t\"Tipo\": 0,\n\t\"Disciplina\": {\n\t\n\t\t\"codigo\": \"INF0150\"\n\t}\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": ""
 						},
 						"url": {
-							"raw": "{{ListElabUrl}}/api/Lista/filtro",
+							"raw": "{{ListElabUrl}}/api/QuestaoDiscursiva/{{QuestaoId}}",
 							"host": [
 								"{{ListElabUrl}}"
 							],
 							"path": [
 								"api",
-								"Lista",
-								"filtro"
+								"QuestaoDiscursiva",
+								"{{QuestaoId}}"
 							]
-						},
-						"description": "Dado um filtro passado na requisição, retorna uma lista com questões discursivas e objetivas baseadas nos itens do filtro."
+						}
 					},
 					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{ListElabToken}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "2c726f5e-2d25-4feb-b3fe-1b7db455d91a",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "6c029ba3-4e01-4cc1-952e-d25d28cd1d05",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
 		}
 	],
 	"protocolProfileBehavior": {}

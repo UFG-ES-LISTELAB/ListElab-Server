@@ -9,14 +9,25 @@ using ListElab.Servico.Conversores.Interfaces;
 using ListElab.Servico.Validacoes;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 
 namespace ListElab.Servico.ServicosImplementados
 {
-    public class ServicoQuestaoDiscursiva : ServicoPadrao<Questao<Discursiva>, DtoQuestaoDiscursiva>, IServicoQuestaoDiscursiva
+    public class ServicoQuestaoDiscursiva : ServicoCrudCompleto<Questao<Discursiva>, DtoQuestaoDiscursiva>, IServicoQuestaoDiscursiva
     {
         private IRepositorio<Questao<Discursiva>> _repositorio;
         private ValidacoesQuestaoDiscursiva _validador;
+
+        /// <summary>
+        /// Consulta o primeiro objeto genérico que atende uma condição.
+        /// </summary>
+        /// <param name="filtro">O filtro para trazer as questões.</param>
+        /// <returns>A lista de questões que se adequam ao filtro.</returns>
+        public IEnumerable<DtoQuestaoDiscursiva> Consulte(Filtro filtro)
+        {
+            return Repositorio().Filtre(ApliqueFiltro(filtro).ToArray()).Select(x => Conversor().Converta(x));
+        }
 
         /// <summary>
         /// Retorna o repositório de questões discursivas.
@@ -36,31 +47,71 @@ namespace ListElab.Servico.ServicosImplementados
             return _validador ?? (_validador = new ValidacoesQuestaoDiscursiva());
         }
 
-        /// <summary>
-        /// Consulta o primeiro objeto genérico que atende uma condição.
-        /// </summary>
-        /// <param name="filtro">O filtro para trazer as questões.</param>
-        /// <returns>A lista de questões que se adequam ao filtro.</returns>
-        public List<Questao<Discursiva>> Consulte(FiltroQuestao filtro)
+        private List<Expression<Func<Questao<Discursiva>, bool>>> ApliqueFiltro(Filtro filtro)
         {
-            return Repositorio().Consulte(ApliqueFiltro(filtro));
-        }
+            var querys = new List<Expression<Func<Questao<Discursiva>, bool>>>();
 
-        private Expression<Func<Questao<Discursiva>, bool>> ApliqueFiltro(Filtro filtro)
-        {
-            var filtroQuestao = filtro as FiltroQuestao;
+            filtro.AreaDeConhecimento = filtro.AreaDeConhecimento ?? new DtoAreaDoConhecimento();
+            filtro.Disciplina = filtro.Disciplina ?? new DtoDisciplina();
 
-            var areaConhecimento = new ConversorAreaDeConhecimento().Converta(filtroQuestao.AreaDeConhecimento);
-            var disciplina = new ConversorDisciplina().Converta(filtroQuestao.Disciplina);
+            if (filtro.AreaDeConhecimento.Codigo != null)
+            {
+                querys.Add(questao => questao.AreaDeConhecimento.Codigo == filtro.AreaDeConhecimento.Codigo);
+            }
 
-            Expression<Func<Questao<Discursiva>, bool>> query = questao => (questao.NivelDificuldade == filtroQuestao.NivelDificuldade)
-                || (questao.AreaDeConhecimento == areaConhecimento)
-                || (questao.Tipo == filtroQuestao.Tipo)
-                || (questao.TempoMaximoDeResposta <= filtroQuestao.TempoMaximoDeResposta)
-                || (questao.Usuario == filtroQuestao.Usuario)
-                || (questao.Disciplina == disciplina);
+            if (filtro.NivelDificuldade != null)
+            {
+                querys.Add(questao => questao.NivelDificuldade == filtro.NivelDificuldade);
 
-            return query;
+            }
+
+            if (filtro.Disciplina.Codigo != null)
+            {
+                querys.Add(questao => questao.Disciplina.Codigo == filtro.Disciplina.Codigo);
+
+            }
+
+            if (filtro.Tipo != null)
+            {
+                querys.Add(questao => questao.Tipo == filtro.Tipo);
+
+            }
+
+            if (filtro.Usuario != null)
+            {
+                querys.Add(questao => questao.Usuario == filtro.Usuario);
+
+            }
+
+            if (filtro.TempoEsperadoResposta != 0)
+            {
+                querys.Add(questao => questao.TempoMaximoDeResposta <= filtro.TempoEsperadoResposta);
+
+            }
+
+            if (filtro.Tags != null && filtro.Tags.Any())
+            {
+                querys.Add(questao => questao.Tags.All(tag => filtro.Tags.Contains(tag)));
+            }
+
+            if (filtro.Enunciado != null && filtro.Enunciado.Any())
+            {
+                querys.Add(questao => filtro.Enunciado.All(enunciado => questao.Enunciado.Contains(enunciado)));
+            }
+
+            if (filtro.Id != null)
+            {
+                if (Guid.TryParse(filtro.Id, out var id))
+                {
+                    querys.Add(questao => questao.Id == id);
+                }
+                else
+                {
+                    throw new Exception("Não foi passado um id válido para a questão.");
+                }
+            }
+
+            return querys;
         }
 
         protected override IConversor<DtoQuestaoDiscursiva, Questao<Discursiva>> Conversor()

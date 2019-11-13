@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ListElab.Dominio.Dtos
 {
@@ -22,6 +23,27 @@ namespace ListElab.Dominio.Dtos
         public object Resultado { get; set; }
 
         /// <summary>
+        /// Erros retornados na requisição.
+        /// </summary>
+        public List<DtoErro> Erros;
+
+        /// <summary>
+        /// Retorna um objeto de exceção.
+        /// </summary>
+        /// <param name="e">A mensagem da exception gerada.</param>
+        /// <returns>Retorna o objeto com o erro.</returns>
+        public static DtoResultado<T> ObtenhaResultado(Exception e, List<DtoErro> erros)
+        {
+            return new DtoResultado<T>
+            {
+                Mensagem = e.Message,
+                Resultado = null,
+                Erros = erros,
+                Sucesso = false
+            };
+        }
+
+        /// <summary>
         /// Retorna um objeto de exceção.
         /// </summary>
         /// <param name="e">A mensagem da exception gerada.</param>
@@ -32,6 +54,7 @@ namespace ListElab.Dominio.Dtos
             {
                 Mensagem = e.Message,
                 Resultado = null,
+                Erros = new List<DtoErro> { new DtoErro { Mensagem = e.Message } },
                 Sucesso = false
             };
         }

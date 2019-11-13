@@ -4,7 +4,7 @@ using ListElab.Dominio.Dtos;
 
 namespace ListElab.Dominio.InterfaceDeServico
 {
-    public interface IServicoQuestaoObjetiva : IServicoPadrao<Questao<Objetiva>, DtoQuestaoDiscursiva>
+    public interface IServicoQuestaoObjetiva : IServicoCrudCompleto<Questao<Objetiva>, DtoQuestaoDiscursiva>
     {
     }
 }

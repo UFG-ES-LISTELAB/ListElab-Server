@@ -1,5 +1,9 @@
-﻿using ListElab.Dominio.Conceitos.ListaObj;
+﻿using ListElab.Data.Repositorios;
+using ListElab.Dominio.Conceitos.ListaObj;
+using ListElab.Dominio.Conceitos.QuestaoObj;
+using ListElab.Dominio.Conceitos.RespostaObj;
 using ListElab.Dominio.Dtos;
+using ListElab.Dominio.Enumeradores;
 using ListElab.Servico.Conversores.Interfaces;
 using System;
 using System.Linq;
@@ -11,6 +15,8 @@ namespace ListElab.Servico.Conversores
     /// </summary>
     public class ConversorListaDeQuestoes : IConversor<DtoListaQuestoes, ListaQuestoes>
     {
+        private IRepositorio<Questao<Discursiva>> repositorioQuestao;
+
         public DtoListaQuestoes Converta(ListaQuestoes objeto)
         {
             DtoListaQuestoes dto = null;
@@ -20,13 +26,11 @@ namespace ListElab.Servico.Conversores
             {
                 dto = new DtoListaQuestoes();
                 dto.Id = objeto.Id;
-                dto.NivelDificuldade = objeto.NivelDificuldade;
-                dto.Tags = objeto.Tags;
                 dto.Usuario = objeto.Usuario;
                 dto.Titulo = objeto.Titulo;
-                dto.AreaDeConhecimento = new ConversorAreaDeConhecimento().Converta(objeto.AreaDeConhecimento);
-                dto.Disciplina = new ConversorDisciplina().Converta(objeto.Disciplina);
-                dto.Discursivas = objeto.Discursivas.Select(x => conversorQuestoes.Converta(x)).ToList();
+                dto.ProntaParaAplicacao = objeto.ProntaParaAplicacao;
+
+                dto.Questoes = objeto.Discursivas.Select(x => conversorQuestoes.Converta(x)).ToList();
             }
 
             return dto;
@@ -46,16 +50,26 @@ namespace ListElab.Servico.Conversores
                     lista.Id = dto.Id;
                 }
 
-                lista.NivelDificuldade = dto.NivelDificuldade;
-                lista.Tags = dto.Tags;
+                var questoes = RepositorioQuestao().ConsulteListaDeIds(x => x.Id, dto.Questoes.Select(x => x.Id).ToArray());
+
+                var nivelDificuldade = dto.Questoes.Sum(x => (int)x.NivelDificuldade) / dto.Questoes.Count;
+                lista.NivelDificuldade = nivelDificuldade == 0 ? 1 : nivelDificuldade;
                 lista.Usuario = dto.Usuario;
                 lista.Titulo = dto.Titulo;
-                lista.AreaDeConhecimento = new ConversorAreaDeConhecimento().Converta(dto.AreaDeConhecimento).GetValueOrDefault();
-                lista.Disciplina = new ConversorDisciplina().Converta(dto.Disciplina).GetValueOrDefault();
-                lista.Discursivas = dto.Discursivas.Select(x => conversorQuestoes.Converta(x)).ToList();
+                lista.ProntaParaAplicacao = lista.ProntaParaAplicacao;
+                lista.AreasDeConhecimento = questoes.Select(x => x.AreaDeConhecimento.Codigo).ToList();
+                lista.TempoEsperadoResposta = questoes.Sum(x => x.TempoMaximoDeResposta);
+                lista.Tags = questoes.SelectMany(x => x.Tags).ToList();
+                lista.Disciplinas = questoes.Select(x => x.Disciplina.Codigo).ToList();
+                lista.Discursivas = questoes.Where(x => x.Tipo == TipoQuestao.Discursiva).ToList();
             }
 
             return lista;
+        }
+
+        private IRepositorio<Questao<Discursiva>> RepositorioQuestao()
+        {
+            return repositorioQuestao ?? (repositorioQuestao = new Repositorio<Questao<Discursiva>>());
         }
     }
 }

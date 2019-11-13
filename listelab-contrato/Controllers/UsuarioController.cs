@@ -29,11 +29,11 @@ namespace ListElab.Contrato.Controllers
             {
                 var servico = new ServicoBearerAuthentication();
                 var usuario = servico.EfetueLogin(login.Email, login.Password);
-                return DtoResultado<Usuario>.ObtenhaResultado(usuario, "Usuário logado");
+                return Ok(DtoResultado<Usuario>.ObtenhaResultado(usuario, "Usuário logado"));
             }
             catch (Exception e)
             {
-                return DtoResultado<Usuario>.ObtenhaResultado(e);
+                return BadRequest(DtoResultado<Usuario>.ObtenhaResultado(e));
             }
         }
     }

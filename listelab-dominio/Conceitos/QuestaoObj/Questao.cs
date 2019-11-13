@@ -1,5 +1,8 @@
 ﻿using ListElab.Dominio.Abstrato;
 using ListElab.Dominio.AtributosCustomizados;
+using ListElab.Dominio.Conceitos.AreaDeConhecimentoObj;
+using ListElab.Dominio.Conceitos.DisciplinaObj;
+using ListElab.Dominio.Conceitos.RespostaObj;
 using ListElab.Dominio.Enumeradores;
 using System.Collections.Generic;
 
@@ -27,14 +30,14 @@ namespace ListElab.Dominio.Conceitos.QuestaoObj
         public AreaDeConhecimento AreaDeConhecimento { get; set; }
 
         /// <summary>
-        /// Representa o nível de dificuldade, indo de 1 à 5.
-        /// </summary>
-        public NivelDificuldade NivelDificuldade { get; set; }
-
-        /// <summary>
         /// Disciplina da questão.
         /// </summary>
         public Disciplina Disciplina { get; set; }
+
+        /// <summary>
+        /// Representa o nível de dificuldade, indo de 1 à 5.
+        /// </summary>
+        public NivelDificuldade NivelDificuldade { get; set; }
 
         /// <summary>
         /// Tags para pesquisa da questão

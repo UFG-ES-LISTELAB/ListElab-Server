@@ -2,6 +2,7 @@
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 
 namespace ListElab.Data.Repositorios
@@ -49,6 +50,31 @@ namespace ListElab.Data.Repositorios
         public T ConsulteUm(Expression<Func<T, bool>> condicao)
         {
             return Collection().Find(condicao).FirstOrDefault();
+        }
+
+        public List<T> Filtre(Expression<Func<T, bool>>[] condicao)
+        {
+            var builder = Builders<T>.Filter;
+
+            var listaFiltro = condicao.ToList().Select(x => builder.Where(x));
+
+            var filtro = builder.And(listaFiltro);
+
+            return Collection().Find(filtro).ToList();
+        }
+
+        /// <summary>
+        /// Consulte uma lista de conceitos que correspondem a um id.
+        /// </summary>
+        /// <param name="campo">O campo a ser pesquisado.</param>
+        /// <param name="ids">Os ids de a serem pesquisados.</param>
+        /// <returns></returns>
+        public List<T> ConsulteListaDeIds(Expression<Func<T, Guid>> campo, Guid[] ids)
+        {
+            var definicaoDeFiltro = new FilterDefinitionBuilder<T>();
+            var filtro = definicaoDeFiltro.In(campo, ids);
+
+            return Collection().Find(filtro).ToList();
         }
 
         public bool ItemExiste(Expression<Func<T, bool>> condicao)
