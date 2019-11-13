@@ -52,7 +52,7 @@ namespace ListaElab.Testes.TestesValidador
 
             var listaQuestoes = new ListaQuestoes();
 
-            listaQuestoes.Discursivas = temQuestoes ? new List<Questao<Discursiva>> { new Questao<Discursiva>() } : null;
+            listaQuestoes.Questoes = temQuestoes ? new List<QuestaoDaLista> { new QuestaoDaLista() } : null;
 
             ValideTeste(!temQuestoes, listaQuestoes, _validador, "É preciso informar as questões que compõe uma lista, certifique-se de que os ids das questões foram repassados à requisição");
         }

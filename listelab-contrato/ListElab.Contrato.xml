@@ -24,6 +24,24 @@
             </summary>
             <returns>Se a autenticação aconteceu ou não.</returns>
         </member>
+        <member name="T:ListElab.Contrato.Controllers.AreaDeConhecimentoController">
+            <summary>
+            Controlador de área de conhecimento.
+            </summary>
+        </member>
+        <member name="M:ListElab.Contrato.Controllers.AreaDeConhecimentoController.ConsulteLista">
+            <summary>
+            Lista todas os registros cadastrados.
+            </summary>
+            <returns>Retorna um objeto de sucesso ou falha e os registros cadastrados, caso sucesso.</returns>
+        </member>
+        <member name="M:ListElab.Contrato.Controllers.AreaDeConhecimentoController.ExecuteAcaoAutorizada(System.Func{Microsoft.AspNetCore.Mvc.ActionResult{ListElab.Dominio.Dtos.DtoResultado{ListElab.Dominio.Conceitos.AreaDeConhecimentoObj.AreaDeConhecimento}}})">
+            <summary>
+            Executa o método para a requisição da api e retorna o resultado da requisição.
+            </summary>
+            <param name="sucesso">Método quando a requisição aconteceu com sucesso.</param>
+            <returns></returns>
+        </member>
         <member name="T:ListElab.Contrato.Controllers.ControladorPadrao`3">
             <summary>
             Controller padrão.

@@ -6,6 +6,7 @@ using ListElab.Dominio.Dtos;
 using ListElab.Dominio.Enumeradores;
 using ListElab.Servico.Conversores.Interfaces;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace ListElab.Servico.Conversores
@@ -30,7 +31,7 @@ namespace ListElab.Servico.Conversores
                 dto.Titulo = objeto.Titulo;
                 dto.ProntaParaAplicacao = objeto.ProntaParaAplicacao;
 
-                dto.Questoes = objeto.Discursivas.Select(x => conversorQuestoes.Converta(x)).ToList();
+                dto.Questoes = objeto.Questoes.Select(x => new DtoQuestaoDaLista { Questao = conversorQuestoes.Converta(x.Questao), Numero = x.Numero, Peso = x.Peso }).ToList();
             }
 
             return dto;
@@ -50,18 +51,29 @@ namespace ListElab.Servico.Conversores
                     lista.Id = dto.Id;
                 }
 
-                var questoes = RepositorioQuestao().ConsulteListaDeIds(x => x.Id, dto.Questoes.Select(x => x.Id).ToArray());
+                var questoes = new List<QuestaoDaLista>();
 
-                var nivelDificuldade = dto.Questoes.Sum(x => (int)x.NivelDificuldade) / dto.Questoes.Count;
+                foreach (var questao in dto.Questoes)
+                {
+                    var questaLista = new QuestaoDaLista();
+
+                    questaLista.Numero = questao.Numero;
+                    questaLista.Peso = questao.Peso;
+                    questaLista.Questao = RepositorioQuestao().ConsulteUm(x => x.Id == questao.Questao.Id);
+
+                    questoes.Add(questaLista);
+                }
+
+                var nivelDificuldade = dto.Questoes.Sum(x => (int)x.Questao.NivelDificuldade) / dto.Questoes.Count;
                 lista.NivelDificuldade = nivelDificuldade == 0 ? 1 : nivelDificuldade;
                 lista.Usuario = dto.Usuario;
                 lista.Titulo = dto.Titulo;
                 lista.ProntaParaAplicacao = lista.ProntaParaAplicacao;
-                lista.AreasDeConhecimento = questoes.Select(x => x.AreaDeConhecimento.Codigo).ToList();
-                lista.TempoEsperadoResposta = questoes.Sum(x => x.TempoMaximoDeResposta);
-                lista.Tags = questoes.SelectMany(x => x.Tags).ToList();
-                lista.Disciplinas = questoes.Select(x => x.Disciplina.Codigo).ToList();
-                lista.Discursivas = questoes.Where(x => x.Tipo == TipoQuestao.Discursiva).ToList();
+                lista.AreasDeConhecimento = questoes.Select(x => x.Questao.AreaDeConhecimento.Codigo).ToList();
+                lista.TempoEsperadoResposta = questoes.Sum(x => x.Questao.TempoMaximoDeResposta);
+                lista.Tags = questoes.SelectMany(x => x.Questao.Tags).ToList();
+                lista.Disciplinas = questoes.Select(x => x.Questao.Disciplina.Codigo).ToList();
+                lista.Questoes = questoes.Where(x => x.Questao.Tipo == TipoQuestao.Discursiva).ToList();
             }
 
             return lista;

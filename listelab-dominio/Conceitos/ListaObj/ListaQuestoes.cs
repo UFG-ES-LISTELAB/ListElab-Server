@@ -1,7 +1,5 @@
 ﻿using ListElab.Dominio.Abstrato;
 using ListElab.Dominio.AtributosCustomizados;
-using ListElab.Dominio.Conceitos.QuestaoObj;
-using ListElab.Dominio.Conceitos.RespostaObj;
 using System.Collections.Generic;
 
 namespace ListElab.Dominio.Conceitos.ListaObj
@@ -52,6 +50,6 @@ namespace ListElab.Dominio.Conceitos.ListaObj
         /// <summary>
         /// Questões discursivas
         /// </summary>
-        public List<Questao<Discursiva>> Discursivas { get; set; }
+        public List<QuestaoDaLista> Questoes { get; set; }
     }
 }

@@ -1,5 +1,4 @@
-﻿using ListElab.Dominio.Enumeradores;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace ListElab.Dominio.Dtos
 {
@@ -23,6 +22,6 @@ namespace ListElab.Dominio.Dtos
         /// <summary>
         /// Questões discursivas
         /// </summary>
-        public List<DtoQuestaoDiscursiva> Questoes { get; set; }
+        public List<DtoQuestaoDaLista> Questoes { get; set; }
     }
 }
