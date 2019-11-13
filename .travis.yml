@@ -13,13 +13,11 @@ stages:
   
 jobs:
   include:
-    - stage: set connection string
-      script:
-      - sed -i 's/$cstring/$CONNECTION_STRING/g' ./listelab-contrato/App.config.example
-      - rm -f ./listelab-contrato/App.config
-      - mv ./listelab-contrato/App.config.example ./listelab-contrato/App.config
     - stage: build dev docker image
       script:
+      - sed -i 's/$cstring/$CONNECTION_STRING_DEV/g' ./listelab-contrato/App.config.example
+      - rm -f ./listelab-contrato/App.config
+      - mv ./listelab-contrato/App.config.example ./listelab-contrato/App.config
       - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
       - docker build --no-cache -t $DOCKER_USERNAME/listelab-server:dev .
       - docker images
@@ -27,6 +25,9 @@ jobs:
       - docker push $DOCKER_USERNAME/listelab-server:dev
     - stage: build prod docker image
       script:
+      - sed -i 's/$cstring/$CONNECTION_STRING_PROD/g' ./listelab-contrato/App.config.example
+      - rm -f ./listelab-contrato/App.config
+      - mv ./listelab-contrato/App.config.example ./listelab-contrato/App.config
       - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
       - docker build --no-cache -t $DOCKER_USERNAME/listelab-server .
       - docker images
