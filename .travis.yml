@@ -15,7 +15,7 @@ jobs:
   include:
     - stage: build dev docker image
       script:
-      - sed -i 's/$cstring/$CONNECTION_STRING_DEV/g' ./listelab-contrato/App.config.example
+      - sed -i 's)$cstring)'"$CONNECTION_STRING_DEV"')g' ./listelab-contrato/App.config.example
       - rm -f ./listelab-contrato/App.config
       - mv ./listelab-contrato/App.config.example ./listelab-contrato/App.config
       - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
@@ -25,7 +25,7 @@ jobs:
       - docker push $DOCKER_USERNAME/listelab-server:dev
     - stage: build prod docker image
       script:
-      - sed -i 's/$cstring/$CONNECTION_STRING_PROD/g' ./listelab-contrato/App.config.example
+      - sed -i 's)$cstring)'"$CONNECTION_STRING_PROD"')g' ./listelab-contrato/App.config.example
       - rm -f ./listelab-contrato/App.config
       - mv ./listelab-contrato/App.config.example ./listelab-contrato/App.config
       - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
