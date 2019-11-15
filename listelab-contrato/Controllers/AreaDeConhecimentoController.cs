@@ -1,17 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using ListElab.Dominio.Conceitos.AreaDeConhecimentoObj;
+﻿using ListElab.Dominio.Conceitos.AreaDeConhecimentoObj;
 using ListElab.Dominio.Dtos;
 using ListElab.Servico.ServicosImplementados;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace ListElab.Contrato.Controllers
 {
+    /// <summary>
+    /// Controlador de área de conhecimento.
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     [EnableCors("SiteCorsPolicy")]
