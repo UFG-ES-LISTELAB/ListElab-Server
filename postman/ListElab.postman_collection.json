@@ -67,6 +67,58 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Login Incorreto",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f1063a05-aa70-439c-9bc8-423f2d1b27e6",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna json com valor de 'sucesso' == false\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.sucesso).to.eql(false);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\":\"abcdefghijk@ufg.br\",\n\t\"password\":\"senhaErrada1234\"\n}"
+						},
+						"url": {
+							"raw": "{{ListElabUrl}}/api/Usuario/login",
+							"host": [
+								"{{ListElabUrl}}"
+							],
+							"path": [
+								"api",
+								"Usuario",
+								"login"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
@@ -104,13 +156,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{ListElabUrl}}/api/Lista",
+							"raw": "{{ListElabUrl}}/api/Disciplina",
 							"host": [
 								"{{ListElabUrl}}"
 							],
 							"path": [
 								"api",
-								"Lista"
+								"Disciplina"
 							]
 						}
 					},
@@ -130,7 +182,65 @@
 			"protocolProfileBehavior": {}
 		},
 		{
-			"name": "QuestaoDiscursiva",
+			"name": "Área de Conhecimento",
+			"item": [
+				{
+					"name": "AreaDeConhecimento",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "df61ee05-36c3-49fb-83a4-bf3e2ec038a5",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna json com valor de 'sucesso' == true\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.sucesso).to.eql(true);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna json com uma ou mais disciplinas cadastradas\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.resultado.length).to.be.above(0);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{ListElabUrl}}/api/AreaDeConhecimento",
+							"host": [
+								"{{ListElabUrl}}"
+							],
+							"path": [
+								"api",
+								"AreaDeConhecimento"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{ListElabToken}}",
+						"type": "string"
+					}
+				]
+			},
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Questão Discursiva",
 			"item": [
 				{
 					"name": "Questao Discursiva",
@@ -496,7 +606,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"titulo\": \"Lista Postman\",\r\n  \"prontaParaAplicacao\": false,\r\n  \"usuario\": \"professor@ufg.br\",\r\n  \"questoes\": [\r\n    {\r\n      \"id\": {{QuestaoIdString}}\r\n    }\r\n  ]\r\n}"
+							"raw": "{\r\n\t\"titulo\": \"Lista Postman\",\r\n\t\"prontaParaAplicacao\": false,\r\n\t\"usuario\": \"postman@ufg.br\",\r\n\t\"questoes\": [{\r\n\t\t\"numero\": 1,\r\n\t\t\"peso\": 3,\r\n\t\t\"questao\": {\r\n\t\t\t\"id\": {{QuestaoIdString}}\r\n\t\t}\r\n\t}]\r\n}"
 						},
 						"url": {
 							"raw": "{{ListElabUrl}}/api/Lista",
@@ -526,6 +636,11 @@
 									"pm.test(\"Requisição retorna json com valor de 'sucesso' == true\", function () {",
 									"    var jsonData = pm.response.json();",
 									"    pm.expect(jsonData.sucesso).to.eql(true);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna lista com título atualizado\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.resultado.titulo).to.eql(\"Lista Postman Atualizado\");",
 									"});"
 								],
 								"type": "text/javascript"
@@ -544,7 +659,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"titulo\": \"Lista Postman Atualizado\",\r\n  \"prontaParaAplicacao\": false,\r\n  \"usuario\": \"postman@ufg.br\",\r\n  \"questoes\": [\r\n    {\r\n      \"id\": {{QuestaoIdString}}\r\n    }\r\n  ],\r\n  \"id\": {{ListaIdString}}\r\n}"
+							"raw": "{\r\n\t\"titulo\": \"Lista Postman Atualizado\",\r\n\t\"prontaParaAplicacao\": false,\r\n\t\"usuario\": \"postman@ufg.br\",\r\n\t\"questoes\": [{\r\n\t\t\"numero\": 1,\r\n\t\t\"peso\": 4,\r\n\t\t\"questao\": {\r\n\t\t\t\"id\": {{QuestaoIdString}}\r\n\t\t}\r\n\t}],\r\n\t\"id\": {{ListaIdString}}\r\n}"
 						},
 						"url": {
 							"raw": "{{ListElabUrl}}/api/Lista",
