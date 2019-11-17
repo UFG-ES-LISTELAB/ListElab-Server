@@ -606,7 +606,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\t\"titulo\": \"Lista Postman\",\r\n\t\"prontaParaAplicacao\": false,\r\n\t\"usuario\": \"postman@ufg.br\",\r\n\t\"questoes\": [{\r\n\t\t\"numero\": 1,\r\n\t\t\"peso\": 3,\r\n\t\t\"questao\": {\r\n\t\t\t\"id\": {{QuestaoIdString}}\r\n\t\t}\r\n\t}]\r\n}"
+							"raw": "{\r\n\t\"titulo\": \"Lista Postman\",\r\n\t\"prontaParaAplicacao\": false,\r\n\t\"usuario\": \"postman@ufg.br\",\r\n\t\"questoesDiscursiva\": [{\r\n\t\t\"numero\": 1,\r\n\t\t\"peso\": 3,\r\n\t\t\"questao\": {\r\n\t\t\t\"id\": {{QuestaoIdString}}\r\n\t\t}\r\n\t}],\r\n\t\"questoesMultiplaEscolha\":[]\r\n}"
 						},
 						"url": {
 							"raw": "{{ListElabUrl}}/api/Lista",
@@ -659,7 +659,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\t\"titulo\": \"Lista Postman Atualizado\",\r\n\t\"prontaParaAplicacao\": false,\r\n\t\"usuario\": \"postman@ufg.br\",\r\n\t\"questoes\": [{\r\n\t\t\"numero\": 1,\r\n\t\t\"peso\": 4,\r\n\t\t\"questao\": {\r\n\t\t\t\"id\": {{QuestaoIdString}}\r\n\t\t}\r\n\t}],\r\n\t\"id\": {{ListaIdString}}\r\n}"
+							"raw": "{\r\n\t\"titulo\": \"Lista Postman Atualizado\",\r\n\t\"prontaParaAplicacao\": false,\r\n\t\"usuario\": \"postman@ufg.br\",\r\n\t\"questoesDiscursiva\": [{\r\n\t\t\"numero\": 1,\r\n\t\t\"peso\": 4,\r\n\t\t\"questao\": {\r\n\t\t\t\"id\": {{QuestaoIdString}}\r\n\t\t}\r\n\t}],\r\n\t\"questoesMultiplaEscolha\": [],\r\n\t\"id\": {{ListaIdString}}\r\n}"
 						},
 						"url": {
 							"raw": "{{ListElabUrl}}/api/Lista",
