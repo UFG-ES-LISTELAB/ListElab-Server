@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ListElab.Dominio.Dtos
+﻿namespace ListElab.Dominio.Dtos
 {
-    public class DtoQuestaoDaLista
+    public class DtoQuestaoDaLista<TDtoQuestao>
     {
         /// <summary>
         /// Número da questão dentro da lista.
@@ -19,6 +15,6 @@ namespace ListElab.Dominio.Dtos
         /// <summary>
         /// Questão da lista.
         /// </summary>
-        public DtoQuestaoDiscursiva Questao { get; set; }
+        public TDtoQuestao Questao { get; set; }
     }
 }

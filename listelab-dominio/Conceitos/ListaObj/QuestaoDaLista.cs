@@ -6,7 +6,7 @@ namespace ListElab.Dominio.Conceitos.ListaObj
     /// <summary>
     /// Representa questões que compõe uma lista.
     /// </summary>
-    public class QuestaoDaLista
+    public class QuestaoDaLista<TResposta>
     {
         /// <summary>
         /// Número da questão dentro da lista.
@@ -21,6 +21,6 @@ namespace ListElab.Dominio.Conceitos.ListaObj
         /// <summary>
         /// Questão da lista.
         /// </summary>
-        public Questao<Discursiva> Questao { get; set; }
+        public Questao<TResposta> Questao { get; set; }
     }
 }

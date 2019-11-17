@@ -8,6 +8,7 @@ using ListElab.Servico.Validacoes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace ListElab.Servico.ServicosImplementados
 {
@@ -72,7 +73,7 @@ namespace ListElab.Servico.ServicosImplementados
             {
                 if (Guid.TryParse(id, out Guid idConvertido))
                 {
-                    resultado = Repositorio().ConsulteUm(x => x.Id == idConvertido);
+                    resultado = Repositorio().ConsulteUm(CondicaoConsulteUm(idConvertido));
                 }
             }
             catch (Exception)
@@ -89,7 +90,7 @@ namespace ListElab.Servico.ServicosImplementados
         /// <returns>Retorna uma coleção de objetos genéricos.</returns>
         public virtual IList<TDto> ConsulteLista()
         {
-            return Repositorio().ConsulteLista(x => true).Select(x => Conversor().Converta(x)).ToList();
+            return Repositorio().ConsulteLista(CondicaoDeConsulta()).Select(x => Conversor().Converta(x)).ToList();
         }
 
         /// <summary>
@@ -126,6 +127,25 @@ namespace ListElab.Servico.ServicosImplementados
         protected abstract ValidadorPadrao<TObjeto> Validador();
 
         protected abstract IConversor<TDto, TObjeto> Conversor();
+
+        /// <summary>
+        /// Método que define a condição para consultar lista.
+        /// </summary>
+        /// <returns>Retorna a condição para consultar lista.</returns>
+        protected virtual Expression<Func<TObjeto, bool>> CondicaoDeConsulta()
+        {
+            return x => true;
+        }
+
+        /// <summary>
+        /// Condição para consultar uma lista.
+        /// </summary>
+        /// <param name="idConvertido">Id de pesquisa.</param>
+        /// <returns>Retorna a condição de pesquisa.</returns>
+        protected virtual Expression<Func<TObjeto, bool>> CondicaoConsulteUm(Guid idConvertido)
+        {
+            return x => x.Id == idConvertido;
+        }
 
         private TDto ExecuteAcaoDeServico(ValidationResult resultado, Func<TDto> acao)
         {

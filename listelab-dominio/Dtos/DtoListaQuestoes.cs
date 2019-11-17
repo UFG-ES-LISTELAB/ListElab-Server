@@ -22,6 +22,11 @@ namespace ListElab.Dominio.Dtos
         /// <summary>
         /// Questões discursivas
         /// </summary>
-        public List<DtoQuestaoDaLista> Questoes { get; set; }
+        public List<DtoQuestaoDaLista<DtoQuestaoDiscursiva>> QuestoesDiscursiva { get; set; }
+
+        /// <summary>
+        /// Questões de múltipla escolha.
+        /// </summary>
+        public List<DtoQuestaoDaLista<DtoQuestaoMultiplaEscolha>> QuestoesMultiplaEscolha { get; set; }
     }
 }
