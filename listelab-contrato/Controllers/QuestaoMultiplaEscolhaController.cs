@@ -11,15 +11,17 @@ using System.Linq;
 namespace ListElab.Contrato.Controllers
 {
     /// <summary>
-    /// Api para o conceito de questão discursiva.
+    /// Api para conceito de questão multiplha escolha. 
     /// </summary>
-    public class QuestaoDiscursivaController : ControladorPadrao<Questao<Discursiva>, IServicoQuestao<Discursiva, DtoQuestaoDiscursiva>, DtoQuestaoDiscursiva>
+    [Route("api/[controller]")]
+    [ApiController]
+    public class QuestaoMultiplaEscolhaController : ControladorPadrao<Questao<MultiplaEscolha>, IServicoQuestao<MultiplaEscolha, DtoQuestaoMultiplaEscolha>, DtoQuestaoMultiplaEscolha>
     {
         /// <summary>
         /// Filtro de questões. Funciona de forma cumulativa. Se eu escolher nivel de dificuldade 'Fácil' e Tempo Máximo de Resposta 10 minutos, então 
         /// o a api só retornar questões que atendem aos dois filtros. Não é preciso preencher todos os filtros, somente àqueles que se deseja usar.
         /// </summary>
-        /// <param name="enunciado">Adicione palavras que podem conter no enunciado.</param>
+        /// <param name="enunciado">Adicone palavras que podem conter no enunciado.</param>
         /// <param name="nivelDificuldade">1 - 'Muito Fácil'; 2 - 'Fácil', 3 - 'Médio', 4 - 'Difícil', 5 - 'Muito Difícil'</param>
         /// <param name="disciplina">Deve-se passar o código da disciplina desejada.</param>
         /// <param name="areaDeConhecimento">Deve-se passar o código da área de conhecimento desejada.</param>
@@ -31,7 +33,7 @@ namespace ListElab.Contrato.Controllers
         [HttpGet]
         [Authorize]
         [Route("filtro")]
-        public ActionResult<DtoResultado<DtoQuestaoDiscursiva>> ConsulteComFiltro(
+        public ActionResult<DtoResultado<DtoQuestaoMultiplaEscolha>> ConsulteComFiltro(
             string enunciado = null,
             int nivelDificuldade = -1,
             string disciplina = null,
@@ -50,7 +52,7 @@ namespace ListElab.Contrato.Controllers
                     Disciplina = new DtoDisciplina { Codigo = disciplina },
                     NivelDificuldade = nivelDificuldade != -1 ? (NivelDificuldade)nivelDificuldade : new NivelDificuldade?(),
                     TempoEsperadoResposta = tempoEsperadoResposta,
-                    Tipo = TipoQuestao.Discursiva,
+                    Tipo = TipoQuestao.MultiplaEscolha,
                     Usuario = usuario,
                     Enunciado = string.IsNullOrEmpty(enunciado) ? null : enunciado.Split(" ").ToList(),
                     Tags = tags.ToList(),
@@ -59,7 +61,7 @@ namespace ListElab.Contrato.Controllers
 
                 var resultado = Servico().Consulte(filtro);
 
-                return Ok(DtoResultado<DtoQuestaoDiscursiva>.ObtenhaResultado(resultado, "Consulta realizada sem erros"));
+                return Ok(DtoResultado<DtoListaQuestoes>.ObtenhaResultado(resultado, "Consulta realizada sem erros"));
             });
         }
     }

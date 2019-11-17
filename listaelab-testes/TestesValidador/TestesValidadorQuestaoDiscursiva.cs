@@ -67,7 +67,7 @@ namespace ListElab.Testes.TestesValidador
         }
 
         [Test, Sequential]
-        public void TesteRegraTipoQuestaoDiscursiva([Values(TipoQuestao.Discursiva, TipoQuestao.Objetiva)] TipoQuestao tipoQuestao,
+        public void TesteRegraTipoQuestaoDiscursiva([Values(TipoQuestao.Discursiva, TipoQuestao.MultiplaEscolha)] TipoQuestao tipoQuestao,
                                                     [Values(false, true)] bool cenarioInvalido)
         {
             validador.AssineRegraTipoQuestaoDiscursiva();
