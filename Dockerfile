@@ -17,6 +17,7 @@ COPY listelab-dominio/*.csproj ./listelab-dominio/
 COPY listaelab-testes/*.csproj ./listaelab-testes/
 
 RUN dotnet tool install --global dotnet-sonarscanner --version 4.7.1
+ENV PATH="${PATH}:/root/.dotnet/tools"
 RUN dotnet sonarscanner begin -k:"UFG-ES-LISTELAB_ListElab-Server" -d:sonar.login="$sonarlogin" -d:sonar.organization="ufg-es-listelab"
 
 RUN dotnet restore

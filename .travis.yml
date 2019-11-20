@@ -4,11 +4,11 @@ branches:
   only:
   - master
   - dev
-  - feature/Integracao_Sonar
+  - /feature*/
 
 stages:
-- name: build dev docker image
-  if: branch = feature/Integracao_Sonar
+- name: build feature
+  if: branch = feature*
 - name: build dev docker image
   if: branch = dev
 - name: build prod docker image
@@ -16,6 +16,13 @@ stages:
   
 jobs:
   include:
+    - stage: build feature
+      script: 
+      - sed -i 's)$sonarlogin)'"$SONAR_TOKEN"')g' ./Dockerfile
+      - sed -i 's)$cstring)'"$CONNECTION_STRING_DEV"')g' ./listelab-contrato/App.config.example
+      - rm -f ./listelab-contrato/App.config
+      - mv ./listelab-contrato/App.config.example ./listelab-contrato/App.config
+      - docker build --no-cache -t $DOCKER_USERNAME/listelab-server:dev .
     - stage: build dev docker image
       script:
       - sed -i 's)$sonarlogin)'"$SONAR_TOKEN"')g' ./Dockerfile
