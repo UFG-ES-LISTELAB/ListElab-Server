@@ -392,7 +392,7 @@
 			"name": "Área de Conhecimento",
 			"item": [
 				{
-					"name": "AreaDeConhecimento",
+					"name": "Area de Conhecimento",
 					"event": [
 						{
 							"listen": "test",
@@ -699,7 +699,12 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": ""
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
 						"url": {
 							"raw": "{{ListElabUrl}}/api/QuestaoDiscursiva/filtro?usuario=postman@ufg.br",
@@ -1003,6 +1008,66 @@
 			"protocolProfileBehavior": {}
 		},
 		{
+			"name": "Questão (Filtro)",
+			"item": [
+				{
+					"name": "Filtre Todas as Questões",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ae0b2b03-11b4-406e-8752-2e9aefa577f6",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna json com valor de 'sucesso' == true\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.sucesso).to.eql(true);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna APENAS uma questão discursiva\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.resultado.discursiva.length).to.eql(1);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna APENAS uma questão de múltipla escolha\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.resultado.multiplaEscolha.length).to.eql(1);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{ListElabUrl}}/api/Questao/filtro?usuario=postman@ufg.br",
+							"host": [
+								"{{ListElabUrl}}"
+							],
+							"path": [
+								"api",
+								"Questao",
+								"filtro"
+							],
+							"query": [
+								{
+									"key": "usuario",
+									"value": "postman@ufg.br"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
 			"name": "Lista",
 			"item": [
 				{
@@ -1205,7 +1270,12 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": ""
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
 						"url": {
 							"raw": "{{ListElabUrl}}/api/Lista/{{ListaId}}",
@@ -1273,7 +1343,12 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": ""
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
 						"url": {
 							"raw": "{{ListElabUrl}}/api/Lista/filtro?usuario=postman@ufg.br",
@@ -1393,7 +1468,12 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": ""
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
 						"url": {
 							"raw": "{{ListElabUrl}}/api/Lista/{{ListaId}}",
@@ -1500,7 +1580,12 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": ""
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
 						"url": {
 							"raw": "{{ListElabUrl}}/api/QuestaoDiscursiva/{{QuestaoDiscursivaId}}",
