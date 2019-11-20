@@ -13,12 +13,12 @@ namespace ListaElab.Testes.TestesValidador
     /// </summary>
     public class TestesValidadorListaQuestoes : TesteBase<ListaQuestoes>
     {
-        private ValidacoesListaQuestoes _validador;
+        private ValidacoesListaQuestoes validador;
 
         [SetUp]
         public void AntesDoTeste()
         {
-            _validador = new ValidacoesListaQuestoes();
+            validador = new ValidacoesListaQuestoes();
         }
 
         [Test, Sequential]
@@ -26,11 +26,11 @@ namespace ListaElab.Testes.TestesValidador
             [Values(null, "", "Titulo.", " ")] string titulo,
             [Values(true, true, false, true)] bool cenarioInvalido)
         {
-            _validador.AssineRegraListaDeveTerTitulo();
+            validador.AssineRegraListaDeveTerTitulo();
 
             var listaQuestoes = new ListaQuestoes { Titulo = titulo };
 
-            ValideTeste(cenarioInvalido, listaQuestoes, _validador, "O título da lista de questões deve ser informado");
+            ValideTeste(cenarioInvalido, listaQuestoes, validador, "O título da lista de questões deve ser informado");
         }
 
         [Test, Sequential]
@@ -38,23 +38,23 @@ namespace ListaElab.Testes.TestesValidador
             [Values(null, "", "Titulo.", " ")] string usuario,
             [Values(true, true, false, true)] bool cenarioInvalido)
         {
-            _validador.AssineRegraListaDeveTerUsuario();
+            validador.AssineRegraListaDeveTerUsuario();
 
             var listaQuestoes = new ListaQuestoes { Usuario = usuario };
 
-            ValideTeste(cenarioInvalido, listaQuestoes, _validador, "O autor da lista de questões deve ser informado");
+            ValideTeste(cenarioInvalido, listaQuestoes, validador, "O autor da lista de questões deve ser informado");
         }
 
         [Test, Theory]
         public void TesteRegraListaDeveTerQuestoes(bool temQuestoes)
         {
-            _validador.AssineRegraListaDeveTerQuestoes();
+            validador.AssineRegraListaDeveTerQuestoes();
 
             var listaQuestoes = new ListaQuestoes();
 
-            listaQuestoes.Discursivas = temQuestoes ? new List<Questao<Discursiva>> { new Questao<Discursiva>() } : null;
+            listaQuestoes.QuestoesDiscursivas = temQuestoes ? new List<QuestaoDaLista<Discursiva>> { new QuestaoDaLista<Discursiva>() } : null;
 
-            ValideTeste(!temQuestoes, listaQuestoes, _validador, "É preciso informar as questões que compõe uma lista, certifique-se de que os ids das questões foram repassados à requisição");
+            ValideTeste(!temQuestoes, listaQuestoes, validador, "É preciso informar as questões que compõe uma lista, certifique-se de que os ids das questões foram repassados à requisição");
         }
     }
 }
