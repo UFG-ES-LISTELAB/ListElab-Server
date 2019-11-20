@@ -8,7 +8,7 @@ branches:
 
 stages:
 - name: build feature
-  if: branch = feature*
+  if: branch =~ feature*
 - name: build dev docker image
   if: branch = dev
 - name: build prod docker image
