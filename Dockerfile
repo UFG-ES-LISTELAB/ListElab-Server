@@ -16,18 +16,11 @@ COPY listelab-data/*.csproj ./listelab-data/
 COPY listelab-dominio/*.csproj ./listelab-dominio/
 COPY listaelab-testes/*.csproj ./listaelab-testes/
 
-RUN dotnet tool install --global dotnet-sonarscanner --version 4.7.1
-ENV PATH="${PATH}:/root/.dotnet/tools"
-
 COPY . .
 WORKDIR /src
 
-RUN dotnet sonarscanner begin -k:"UFG-ES-LISTELAB_ListElab-Server" -d:sonar.login="$sonarlogin" -o:"ufg-es-listelab" -d:sonar.host.url="https://sonarcloud.io" -d:sonar.language="cs"
-
 RUN dotnet build -c Release -f netcoreapp2.1 -o /app
 RUN dotnet test -c Release -f netcoreapp2.1
-
-RUN dotnet sonarscanner end -d:sonar.login="$sonarlogin"
 
 WORKDIR /src
 FROM build AS publish
