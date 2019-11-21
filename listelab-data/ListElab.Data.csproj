@@ -5,6 +5,7 @@
     <RootNamespace>ListElab.Data</RootNamespace>
     <PublishWithAspNetCoreTargetManifest>false</PublishWithAspNetCoreTargetManifest>
     <AssemblyName>ListElab.Data</AssemblyName>
+    <DepsFileGenerationMode>old</DepsFileGenerationMode>
   </PropertyGroup>
 
   <ItemGroup>

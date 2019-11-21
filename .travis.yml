@@ -4,8 +4,11 @@ branches:
   only:
   - master
   - dev
+  - /feature*/
 
 stages:
+- name: build feature
+  if: branch =~ feature*
 - name: build dev docker image
   if: branch = dev
 - name: build prod docker image
@@ -13,12 +16,20 @@ stages:
   
 jobs:
   include:
+    - stage: build feature
+      script: 
+      - sed -i 's)$cstring)'"$CONNECTION_STRING_DEV"')g' ./listelab-contrato/App.config.example
+      - rm -f ./listelab-contrato/App.config
+      - mv ./listelab-contrato/App.config.example ./listelab-contrato/App.config
+      - docker run --name dotnet-scanner -it --rm -v $(pwd):/project -e PROJECT_ORGANIZATION=ufg-es-listelab -e PROJECT_KEY=UFG-ES-LISTELAB_ListElab-Server -e HOST=https://sonarcloud.io -e LOGIN_KEY=$SONAR_TOKEN gustavobatista/docker-dotnet-sonarscanner
+      - docker build --no-cache -t $DOCKER_USERNAME/listelab-server:dev .
     - stage: build dev docker image
       script:
       - sed -i 's)$cstring)'"$CONNECTION_STRING_DEV"')g' ./listelab-contrato/App.config.example
       - rm -f ./listelab-contrato/App.config
       - mv ./listelab-contrato/App.config.example ./listelab-contrato/App.config
       - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
+      - docker run --name dotnet-scanner -it --rm -v $(pwd):/project -e PROJECT_ORGANIZATION=ufg-es-listelab -e PROJECT_KEY=UFG-ES-LISTELAB_ListElab-Server -e HOST=https://sonarcloud.io -e LOGIN_KEY=$SONAR_TOKEN gustavobatista/docker-dotnet-sonarscanner
       - docker build --no-cache -t $DOCKER_USERNAME/listelab-server:dev .
       - docker images
       - docker tag $DOCKER_USERNAME/listelab-server:dev $DOCKER_USERNAME/listelab-server:dev
@@ -29,6 +40,7 @@ jobs:
       - rm -f ./listelab-contrato/App.config
       - mv ./listelab-contrato/App.config.example ./listelab-contrato/App.config
       - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
+      - docker run --name dotnet-scanner -it --rm -v $(pwd):/project -e PROJECT_ORGANIZATION=ufg-es-listelab -e PROJECT_KEY=UFG-ES-LISTELAB_ListElab-Server -e HOST=https://sonarcloud.io -e LOGIN_KEY=$SONAR_TOKEN gustavobatista/docker-dotnet-sonarscanner
       - docker build --no-cache -t $DOCKER_USERNAME/listelab-server .
       - docker images
       - docker tag $DOCKER_USERNAME/listelab-server $DOCKER_USERNAME/listelab-server
