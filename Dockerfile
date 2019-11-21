@@ -18,7 +18,7 @@ COPY listaelab-testes/*.csproj ./listaelab-testes/
 
 RUN dotnet tool install --global dotnet-sonarscanner --version 4.7.1
 ENV PATH="${PATH}:/root/.dotnet/tools"
-RUN dotnet sonarscanner begin -k:"UFG-ES-LISTELAB_ListElab-Server" -d:sonar.login="$sonarlogin" -o:sonar.organization="ufg-es-listelab"
+RUN dotnet sonarscanner begin -k:"UFG-ES-LISTELAB_ListElab-Server" -d:sonar.login="$sonarlogin" -o:sonar.organization="ufg-es-listelab" -d:sonar.host.url="https://sonarcloud.io" -d:sonar.language="cs"
 
 RUN dotnet restore
 COPY . .
