@@ -16,9 +16,21 @@ COPY listelab-data/*.csproj ./listelab-data/
 COPY listelab-dominio/*.csproj ./listelab-dominio/
 COPY listaelab-testes/*.csproj ./listaelab-testes/
 
+RUN dotnet restore
 COPY . .
-WORKDIR /src
+WORKDIR /src/listelab-servico
+RUN dotnet build -c Release -f netcoreapp2.1 -o /app
 
+WORKDIR /src/listelab-contrato
+RUN dotnet build -c Release -f netcoreapp2.1 -o /app
+
+WORKDIR /src/listelab-data
+RUN dotnet build -c Release -f netcoreapp2.1 -o /app
+
+WORKDIR /src/listelab-dominio
+RUN dotnet build -c Release -f netcoreapp2.1 -o /app
+
+WORKDIR /src/listaelab-testes
 RUN dotnet build -c Release -f netcoreapp2.1 -o /app
 RUN dotnet test -c Release -f netcoreapp2.1
 
