@@ -23,6 +23,7 @@ namespace ListElab.Contrato.Controllers
     {
         IServicoQuestao<MultiplaEscolha, DtoQuestaoMultiplaEscolha> servicoMultiplaEscolha;
         IServicoQuestao<Discursiva, DtoQuestaoDiscursiva> servicoDiscursiva;
+        IServicoQuestao<AssociacaoDeColunas, DtoQuestaoAssociacaoDeColunas> servicoAssociacao;
 
         /// <summary>
         /// Retorna um serviço de questão do tipo múltipla escolha.
@@ -88,13 +89,19 @@ namespace ListElab.Contrato.Controllers
             {
                 filtro.Tipo = TipoQuestao.Discursiva;
                 var retorno = FabricaGenerica.Crie<IServicoQuestao<Discursiva, DtoQuestaoDiscursiva>>().Consulte(filtro);
-                return Ok(DtoResultado<JObject>.ObtenhaResultado(new { Discursiva = retorno, MultiplaEscolha = new List<JObject>() }, "Consulta realizada sem erros"));
+                return Ok(DtoResultado<JObject>.ObtenhaResultado(new { Discursiva = retorno, MultiplaEscolha = new List<JObject>(), AssociacaoDeColunas = new List<JObject>() }, "Consulta realizada sem erros"));
             }
             else if (tipo == 1)
             {
                 filtro.Tipo = TipoQuestao.MultiplaEscolha;
                 var retorno = FabricaGenerica.Crie<IServicoQuestao<MultiplaEscolha, DtoQuestaoMultiplaEscolha>>().Consulte(filtro);
-                return Ok(DtoResultado<JObject>.ObtenhaResultado(new { Discursiva = new List<JObject>(), MultiplaEscolha = retorno }, "Consulta realizada sem erros"));
+                return Ok(DtoResultado<JObject>.ObtenhaResultado(new { Discursiva = new List<JObject>(), MultiplaEscolha = retorno, AssociacaoDeColunas = new List<JObject>() }, "Consulta realizada sem erros"));
+            }
+            else if(tipo == 2)
+            {
+                filtro.Tipo = TipoQuestao.Associacao;
+                var retorno = FabricaGenerica.Crie<IServicoQuestao<AssociacaoDeColunas, DtoQuestaoAssociacaoDeColunas>>().Consulte(filtro);
+                return Ok(DtoResultado<JObject>.ObtenhaResultado(new { Discursiva = new List<JObject>(), MultiplaEscolha = new List<JObject>(), AssociacaoDeColunas = retorno }, "Consulta realizada sem erros"));
             }
             else
             {
@@ -102,8 +109,10 @@ namespace ListElab.Contrato.Controllers
                 var retornoQuestaoDiscursiva = FabricaGenerica.Crie<IServicoQuestao<Discursiva, DtoQuestaoDiscursiva>>().Consulte(filtro);
                 filtro.Tipo = TipoQuestao.MultiplaEscolha;
                 var retornoQuestaoMultiplaEscolha = FabricaGenerica.Crie<IServicoQuestao<MultiplaEscolha, DtoQuestaoMultiplaEscolha>>().Consulte(filtro);
+                filtro.Tipo = TipoQuestao.Associacao;
+                var retornoAssociacao = FabricaGenerica.Crie<IServicoQuestao<AssociacaoDeColunas, DtoQuestaoAssociacaoDeColunas>>().Consulte(filtro);
 
-                return Ok(DtoResultado<JObject>.ObtenhaResultado(new { Discursiva = retornoQuestaoDiscursiva, MultiplaEscolha = retornoQuestaoMultiplaEscolha }, "Consulta realizada sem erros"));
+                return Ok(DtoResultado<JObject>.ObtenhaResultado(new { Discursiva = retornoQuestaoDiscursiva, MultiplaEscolha = retornoQuestaoMultiplaEscolha, AssociacaoDeColunas = retornoAssociacao }, "Consulta realizada sem erros"));
             }
         }
     }

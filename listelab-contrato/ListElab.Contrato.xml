@@ -128,6 +128,11 @@
             <param name="tags">Busca as tags das questões e traz as listas que possuem questões com as tags passada.</param>
             <returns></returns>
         </member>
+        <member name="T:ListElab.Contrato.Controllers.QuestaoAssociacaoDeColunasController">
+            <summary>
+            Api que representa questões de associação de coluna.
+            </summary>
+        </member>
         <member name="T:ListElab.Contrato.Controllers.QuestaoController">
             <summary>
             Controller de questão.
@@ -166,40 +171,10 @@
             Api para o conceito de questão discursiva.
             </summary>
         </member>
-        <member name="M:ListElab.Contrato.Controllers.QuestaoDiscursivaController.ConsulteComFiltro(System.String,System.Int32,System.String,System.String,System.Int32,System.String,System.String,System.String[])">
-            <summary>
-            Filtro de questões. Funciona de forma cumulativa. Se eu escolher nivel de dificuldade 'Fácil' e Tempo Máximo de Resposta 10 minutos, então 
-            o a api só retornar questões que atendem aos dois filtros. Não é preciso preencher todos os filtros, somente àqueles que se deseja usar.
-            </summary>
-            <param name="enunciado">Adicione palavras que podem conter no enunciado.</param>
-            <param name="nivelDificuldade">1 - 'Muito Fácil'; 2 - 'Fácil', 3 - 'Médio', 4 - 'Difícil', 5 - 'Muito Difícil'</param>
-            <param name="disciplina">Deve-se passar o código da disciplina desejada.</param>
-            <param name="areaDeConhecimento">Deve-se passar o código da área de conhecimento desejada.</param>
-            <param name="tempoEsperadoResposta">Tempo máximo de resposta expresso em minutos.</param>
-            <param name="usuario">Autor da questão.</param>
-            <param name="id">O id da questão, caso precise só de uma.</param>
-            <param name="tags">Uma lista de tags que o professor pode colocar para identificar uma questão ao cadastrá-la.</param>
-            <returns></returns>
-        </member>
         <member name="T:ListElab.Contrato.Controllers.QuestaoMultiplaEscolhaController">
             <summary>
             Api para conceito de questão multiplha escolha. 
             </summary>
-        </member>
-        <member name="M:ListElab.Contrato.Controllers.QuestaoMultiplaEscolhaController.ConsulteComFiltro(System.String,System.Int32,System.String,System.String,System.Int32,System.String,System.String,System.String[])">
-            <summary>
-            Filtro de questões. Funciona de forma cumulativa. Se eu escolher nivel de dificuldade 'Fácil' e Tempo Máximo de Resposta 10 minutos, então 
-            o a api só retornar questões que atendem aos dois filtros. Não é preciso preencher todos os filtros, somente àqueles que se deseja usar.
-            </summary>
-            <param name="enunciado">Adicone palavras que podem conter no enunciado.</param>
-            <param name="nivelDificuldade">1 - 'Muito Fácil'; 2 - 'Fácil', 3 - 'Médio', 4 - 'Difícil', 5 - 'Muito Difícil'</param>
-            <param name="disciplina">Deve-se passar o código da disciplina desejada.</param>
-            <param name="areaDeConhecimento">Deve-se passar o código da área de conhecimento desejada.</param>
-            <param name="tempoEsperadoResposta">Tempo máximo de resposta expresso em minutos.</param>
-            <param name="usuario">Autor da questão.</param>
-            <param name="id">O id da questão, caso precise só de uma.</param>
-            <param name="tags">Uma lista de tags que o professor pode colocar para identificar uma questão ao cadastrá-la.</param>
-            <returns></returns>
         </member>
         <member name="T:ListElab.Contrato.Controllers.UsuarioController">
             <summary>
