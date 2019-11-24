@@ -9,6 +9,16 @@ namespace ListElab.Dominio.Conceitos.ListaObj
     public class ListaQuestoes : ObjetoComId
     {
         /// <summary>
+        /// Construtor da classe de lista de questões.
+        /// </summary>
+        public ListaQuestoes()
+        {
+            QuestoesAssociacaoDeColunas = new List<QuestaoDaLista<AssociacaoDeColunas>>();
+            QuestoesDiscursivas = new List<QuestaoDaLista<Discursiva>>();
+            QuestoesMultiplaEscolha = new List<QuestaoDaLista<MultiplaEscolha>>();
+        }
+
+        /// <summary>
         /// Título da lista.
         /// </summary>
         public string Titulo { get; set; }
@@ -57,5 +67,10 @@ namespace ListElab.Dominio.Conceitos.ListaObj
         /// Questões múltipla escolha.
         /// </summary>
         public List<QuestaoDaLista<MultiplaEscolha>> QuestoesMultiplaEscolha { get; set; }
+
+        /// <summary>
+        /// Questões múltipla escolha.
+        /// </summary>
+        public List<QuestaoDaLista<AssociacaoDeColunas>> QuestoesAssociacaoDeColunas { get; set; }
     }
 }

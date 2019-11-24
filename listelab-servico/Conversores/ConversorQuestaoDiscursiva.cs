@@ -9,6 +9,11 @@ namespace ListElab.Servico.Conversores
 {
     public class ConversorQuestaoDiscursiva : IConversor<DtoQuestaoDiscursiva, Questao<Discursiva>>
     {
+        /// <summary>
+        /// Converte uma questão de objeto para dto.
+        /// </summary>
+        /// <param name="objeto">A questão a ser convertida.</param>
+        /// <returns>O Dto que representa a questão.</returns>
         public DtoQuestaoDiscursiva Converta(Questao<Discursiva> objeto)
         {
             DtoQuestaoDiscursiva dto = null;
@@ -25,6 +30,11 @@ namespace ListElab.Servico.Conversores
             return dto;
         }
 
+        /// <summary>
+        /// Converte um dto de questão para seu objeto.
+        /// </summary>
+        /// <param name="dto">Dto a ser convertido.</param>
+        /// <returns>Retorna o objeto convertido.</returns>
         public Questao<Discursiva> Converta(DtoQuestaoDiscursiva dto)
         {
             Questao<Discursiva> objeto = null;

@@ -28,5 +28,10 @@ namespace ListElab.Dominio.Dtos
         /// Questões de múltipla escolha.
         /// </summary>
         public List<DtoQuestaoDaLista<DtoQuestaoMultiplaEscolha>> QuestoesMultiplaEscolha { get; set; }
+
+        /// <summary>
+        /// Questões de associação de colunas.
+        /// </summary>
+        public List<DtoQuestaoDaLista<DtoQuestaoAssociacaoDeColunas>> QuestoesAssociacaoDeColunas { get; set; }
     }
 }
