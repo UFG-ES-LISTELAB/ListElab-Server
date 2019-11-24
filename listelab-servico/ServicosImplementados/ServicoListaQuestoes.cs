@@ -81,6 +81,11 @@ namespace ListElab.Servico.ServicosImplementados
                 }
             }
 
+            if (!querys.Any())
+            {
+                querys.Add(x => true);
+            }
+
             return querys;
         }
 
