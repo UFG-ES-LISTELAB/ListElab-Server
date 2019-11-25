@@ -2,10 +2,7 @@
 using ListElab.Dominio.Conceitos.RespostaObj;
 using ListElab.Dominio.Dtos;
 using ListElab.Servico.Conversores.Interfaces;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace ListElab.Servico.Conversores
 {
@@ -14,6 +11,11 @@ namespace ListElab.Servico.Conversores
     /// </summary>
     public class ConversorQuestaoMultiplaEscolha : IConversor<DtoQuestaoMultiplaEscolha, Questao<MultiplaEscolha>>
     {
+        /// <summary>
+        /// Converte uma questão de objeto para dto.
+        /// </summary>
+        /// <param name="objeto">A questão a ser convertida.</param>
+        /// <returns>O Dto que representa a questão.</returns>
         public DtoQuestaoMultiplaEscolha Converta(Questao<MultiplaEscolha> objeto)
         {
             DtoQuestaoMultiplaEscolha dto = null;
@@ -28,6 +30,11 @@ namespace ListElab.Servico.Conversores
             return dto;
         }
 
+        /// <summary>
+        /// Converte um dto de questão para seu objeto.
+        /// </summary>
+        /// <param name="dto">Dto a ser convertido.</param>
+        /// <returns>Retorna o objeto convertido.</returns>
         public Questao<MultiplaEscolha> Converta(DtoQuestaoMultiplaEscolha dto)
         {
             Questao<MultiplaEscolha> objeto = null;

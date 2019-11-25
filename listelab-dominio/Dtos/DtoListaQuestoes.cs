@@ -33,5 +33,10 @@ namespace ListElab.Dominio.Dtos
         /// Questões de associação de colunas.
         /// </summary>
         public List<DtoQuestaoDaLista<DtoQuestaoAssociacaoDeColunas>> QuestoesAssociacaoDeColunas { get; set; }
+
+        /// <summary>
+        /// Questões de Verdadeiro ou falso.
+        /// </summary>
+        public List<DtoQuestaoDaLista<DtoQuestaoVerdadeiroOuFalso>> QuestoesVerdadeiroOuFalso { get; set; }
     }
 }

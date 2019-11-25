@@ -176,6 +176,11 @@
             Api para conceito de questão multiplha escolha. 
             </summary>
         </member>
+        <member name="T:ListElab.Contrato.Controllers.QuestaoVerdadeiroOuFalsoController">
+            <summary>
+            Api para conceito de questão verdadeiro ou falso.
+            </summary>
+        </member>
         <member name="T:ListElab.Contrato.Controllers.UsuarioController">
             <summary>
             Api de usuário para efetuar login.

@@ -4,6 +4,7 @@
     {
         Discursiva = 0,
         MultiplaEscolha = 1,
-        Associacao = 2
+        Associacao = 2,
+        VerdadeiroOuFalso = 3
     }
 }

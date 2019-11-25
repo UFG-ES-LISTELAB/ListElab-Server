@@ -1,5 +1,8 @@
 ﻿namespace ListElab.Dominio.Conceitos.RespostaObj
 {
+    /// <summary>
+    /// Representa uma escolha de uma questão.
+    /// </summary>
     public class Escolha
     {
         /// <summary>

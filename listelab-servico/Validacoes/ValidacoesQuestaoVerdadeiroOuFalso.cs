@@ -5,23 +5,23 @@ using ListElab.Dominio.Enumeradores;
 namespace ListElab.Servico.Validacoes
 {
     /// <summary>
-    /// Validador de questões de múltipla escolha.
+    /// Classe que agrupa todas as validações de negócio de questões verdadeiras ou falsas.
     /// </summary>
-    public class ValidacoesQuestaoMultiplaEscolha : ValidacoesQuestao<MultiplaEscolha>
+    public class ValidacoesQuestaoVerdadeiroOuFalso : ValidacoesQuestao<VerdadeiroOuFalso>
     {
         /// <summary>
         /// Tipo de questão deve ser múltipla escolha.
         /// </summary>
-        public void AssineRegraTipoQuestaoMultiplaEscolha()
+        public void AssineRegraTipoQuestaoVerdadeiroOuFalso()
         {
             RuleFor(questao => questao.Tipo)
-                .Must(tipo => tipo == TipoQuestao.MultiplaEscolha)
-                .WithMessage("O tipo de questão deve ser 'Múltipla Escolha'");
+                .Must(tipo => tipo == TipoQuestao.VerdadeiroOuFalso)
+                .WithMessage("O tipo de questão deve ser 'Verdadeiro ou Falso'");
         }
 
         protected override void AssineRegrasDeAtualizacao()
         {
-            AssineRegraTipoQuestaoMultiplaEscolha();
+            AssineRegraTipoQuestaoVerdadeiroOuFalso();
             AssineRegraDeveTerEnunciado();
             AssineRegraAutorDaQuestaoInformadoEValido();
             AssineRegraAutorDaQuestaoExiste();
@@ -33,7 +33,7 @@ namespace ListElab.Servico.Validacoes
 
         protected override void AssineRegrasDeCadastro()
         {
-            AssineRegraTipoQuestaoMultiplaEscolha();
+            AssineRegraTipoQuestaoVerdadeiroOuFalso();
             AssineRegraDeveTerEnunciado();
             AssineRegraAutorDaQuestaoInformadoEValido();
             AssineRegraAutorDaQuestaoExiste();
