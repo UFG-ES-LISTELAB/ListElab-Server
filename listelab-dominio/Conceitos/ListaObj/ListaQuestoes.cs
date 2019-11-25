@@ -16,6 +16,7 @@ namespace ListElab.Dominio.Conceitos.ListaObj
             QuestoesAssociacaoDeColunas = new List<QuestaoDaLista<AssociacaoDeColunas>>();
             QuestoesDiscursivas = new List<QuestaoDaLista<Discursiva>>();
             QuestoesMultiplaEscolha = new List<QuestaoDaLista<MultiplaEscolha>>();
+            QuestoesVerdadeiroOuFalso = new List<QuestaoDaLista<VerdadeiroOuFalso>>();
         }
 
         /// <summary>
@@ -69,8 +70,13 @@ namespace ListElab.Dominio.Conceitos.ListaObj
         public List<QuestaoDaLista<MultiplaEscolha>> QuestoesMultiplaEscolha { get; set; }
 
         /// <summary>
-        /// Questões múltipla escolha.
+        /// Questões associação de colunas.
         /// </summary>
         public List<QuestaoDaLista<AssociacaoDeColunas>> QuestoesAssociacaoDeColunas { get; set; }
+
+        /// <summary>
+        /// Questões verdadeiro e falso.
+        /// </summary>
+        public List<QuestaoDaLista<VerdadeiroOuFalso>> QuestoesVerdadeiroOuFalso { get; set; }
     }
 }
