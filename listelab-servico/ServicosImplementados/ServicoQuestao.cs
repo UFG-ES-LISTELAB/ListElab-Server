@@ -57,12 +57,18 @@ namespace ListElab.Servico.ServicosImplementados
 
             if (filtro.Tags != null && filtro.Tags.Any())
             {
-                querys.Add(questao => questao.Tags.All(tag => filtro.Tags.Contains(tag)));
+                foreach (var tag in filtro.Tags)
+                {
+                    querys.Add(questao => questao.Tags.Contains(tag));
+                }
             }
 
             if (filtro.Enunciado != null && filtro.Enunciado.Any())
             {
-                querys.Add(questao => filtro.Enunciado.All(enunciado => questao.Enunciado.Contains(enunciado)));
+                foreach (var enunciado in filtro.Enunciado)
+                {
+                    querys.Add(questao => questao.Enunciado.ToUpper().Contains(enunciado.ToUpper()));
+                }
             }
 
             if (filtro.Id != null)
