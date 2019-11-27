@@ -66,7 +66,10 @@ namespace ListElab.Servico.ServicosImplementados
 
             if (filtro.Tags != null && filtro.Tags.Any())
             {
-                querys.Add(lista => filtro.Tags.Any(tag => lista.Tags.Contains(tag)));
+                foreach (var tag in filtro.Tags)
+                {
+                    querys.Add(lista => lista.Tags.Contains(tag));
+                }
             }
 
             if (filtro.Id != null)
@@ -79,6 +82,11 @@ namespace ListElab.Servico.ServicosImplementados
                 {
                     throw new Exception("Não foi passado um id válido para a lista.");
                 }
+            }
+
+            if (!querys.Any())
+            {
+                querys.Add(x => true);
             }
 
             return querys;

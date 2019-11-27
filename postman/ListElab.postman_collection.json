@@ -67,6 +67,202 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Login Incorreto",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f1063a05-aa70-439c-9bc8-423f2d1b27e6",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna json com valor de 'sucesso' == false\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.sucesso).to.eql(false);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\":\"abcdefghijk@ufg.br\",\n\t\"password\":\"senhaErrada1234\"\n}"
+						},
+						"url": {
+							"raw": "{{ListElabUrl}}/api/Usuario/login",
+							"host": [
+								"{{ListElabUrl}}"
+							],
+							"path": [
+								"api",
+								"Usuario",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Pré-Testes (Setup)",
+			"item": [
+				{
+					"name": "Filtre Questões de Teste",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ae0b2b03-11b4-406e-8752-2e9aefa577f6",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna json com valor de 'sucesso' == true\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.sucesso).to.eql(true);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna NENHUMA questão discursiva\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.resultado.discursiva.length).to.eql(0);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna NENHUMA questão de múltipla escolha\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.resultado.multiplaEscolha.length).to.eql(0);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna NENHUMA questão de associação de colunas\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.resultado.associacaoDeColunas.length).to.eql(0);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna NENHUMA questão de V ou F\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.resultado.verdadeiroOuFalso.length).to.eql(0);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{ListElabUrl}}/api/Questao/filtro?usuario=postman@ufg.br",
+							"host": [
+								"{{ListElabUrl}}"
+							],
+							"path": [
+								"api",
+								"Questao",
+								"filtro"
+							],
+							"query": [
+								{
+									"key": "usuario",
+									"value": "postman@ufg.br"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Filtre Lista de Teste",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "fd8d0ebe-96a6-43c2-99cb-c3edd1e13ca2",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna json com valor de 'sucesso' == true\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.sucesso).to.eql(true);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna json com NENHUMA lista\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.resultado.length).to.eql(0);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "c0f30421-da1e-4811-b248-a8cbd45fb534",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{ListElabUrl}}/api/Lista/filtro?usuario=postman@ufg.br",
+							"host": [
+								"{{ListElabUrl}}"
+							],
+							"path": [
+								"api",
+								"Lista",
+								"filtro"
+							],
+							"query": [
+								{
+									"key": "usuario",
+									"value": "postman@ufg.br"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
@@ -104,13 +300,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{ListElabUrl}}/api/Lista",
+							"raw": "{{ListElabUrl}}/api/Disciplina",
 							"host": [
 								"{{ListElabUrl}}"
 							],
 							"path": [
 								"api",
-								"Lista"
+								"Disciplina"
 							]
 						}
 					},
@@ -130,7 +326,65 @@
 			"protocolProfileBehavior": {}
 		},
 		{
-			"name": "QuestaoDiscursiva",
+			"name": "Área de Conhecimento",
+			"item": [
+				{
+					"name": "Area de Conhecimento",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "df61ee05-36c3-49fb-83a4-bf3e2ec038a5",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna json com valor de 'sucesso' == true\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.sucesso).to.eql(true);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna json com uma ou mais disciplinas cadastradas\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.resultado.length).to.be.above(0);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{ListElabUrl}}/api/AreaDeConhecimento",
+							"host": [
+								"{{ListElabUrl}}"
+							],
+							"path": [
+								"api",
+								"AreaDeConhecimento"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{ListElabToken}}",
+						"type": "string"
+					}
+				]
+			},
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Questão Discursiva",
 			"item": [
 				{
 					"name": "Questao Discursiva",
@@ -182,7 +436,7 @@
 					"response": []
 				},
 				{
-					"name": "Cadastre Questão",
+					"name": "Cadastre Questão Discursiva",
 					"event": [
 						{
 							"listen": "test",
@@ -199,8 +453,8 @@
 									"});",
 									"",
 									"var jsonData = JSON.parse(responseBody);",
-									"postman.setEnvironmentVariable(\"QuestaoId\", jsonData.resultado.id);",
-									"postman.setEnvironmentVariable(\"QuestaoIdString\", \"\\\"\" + jsonData.resultado.id + \"\\\"\");"
+									"postman.setEnvironmentVariable(\"QuestaoDiscursivaId\", jsonData.resultado.id);",
+									"postman.setEnvironmentVariable(\"QuestaoDiscursivaIdString\", \"\\\"\" + jsonData.resultado.id + \"\\\"\");"
 								],
 								"type": "text/javascript"
 							}
@@ -234,7 +488,7 @@
 					"response": []
 				},
 				{
-					"name": "Atualize Questão",
+					"name": "Atualize Questão Discursiva",
 					"event": [
 						{
 							"listen": "test",
@@ -266,7 +520,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"enunciado\": \"Teste Postman Atualizado\",\n    \"areaDeConhecimento\": {\n        \"codigo\": \"10303006\",\n        \"descricao\": \"METODOLOGIA E TÉCNICAS DA COMPUTAÇÃO\"\n    },\n    \"disciplina\": {\n        \"codigo\": \"INF0233\",\n        \"descricao\": \"Engenharia Econômica para Software\"\n    },\n    \"nivelDificuldade\": 2,\n    \"tags\": [\n        \"Tag\"\n    ],\n    \"tipo\": 0,\n    \"tempoMaximoDeResposta\": 123456,\n    \"respostaEsperada\": [\n        {\n            \"descricao\": \"Teste Postman\",\n            \"peso\": 3\n        },\n        {\n            \"descricao\": \"Pooostman\",\n            \"peso\": 2\n        }\n    ],\n    \"usuario\": \"postman@ufg.br\",\n    \"id\": {{QuestaoIdString}}\n}"
+							"raw": "{\n    \"enunciado\": \"Teste Postman Atualizado\",\n    \"areaDeConhecimento\": {\n        \"codigo\": \"10303006\",\n        \"descricao\": \"METODOLOGIA E TÉCNICAS DA COMPUTAÇÃO\"\n    },\n    \"disciplina\": {\n        \"codigo\": \"INF0233\",\n        \"descricao\": \"Engenharia Econômica para Software\"\n    },\n    \"nivelDificuldade\": 2,\n    \"tags\": [\n        \"Tag\"\n    ],\n    \"tipo\": 0,\n    \"tempoMaximoDeResposta\": 123456,\n    \"respostaEsperada\": [\n        {\n            \"descricao\": \"Teste Postman\",\n            \"peso\": 3\n        },\n        {\n            \"descricao\": \"Pooostman\",\n            \"peso\": 2\n        }\n    ],\n    \"usuario\": \"postman@ufg.br\",\n    \"id\": {{QuestaoDiscursivaIdString}}\n}"
 						},
 						"url": {
 							"raw": "{{ListElabUrl}}/api/QuestaoDiscursiva",
@@ -282,7 +536,7 @@
 					"response": []
 				},
 				{
-					"name": "Consulte Questão",
+					"name": "Consulte Questão Discursiva",
 					"event": [
 						{
 							"listen": "test",
@@ -318,21 +572,27 @@
 							}
 						],
 						"url": {
-							"raw": "{{ListElabUrl}}/api/QuestaoDiscursiva/{{QuestaoId}}",
+							"raw": "{{ListElabUrl}}/api/QuestaoDiscursiva/{{QuestaoDiscursivaId}}",
 							"host": [
 								"{{ListElabUrl}}"
 							],
 							"path": [
 								"api",
 								"QuestaoDiscursiva",
-								"{{QuestaoId}}"
+								"{{QuestaoDiscursivaId}}"
 							]
 						}
 					},
 					"response": []
-				},
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Questão Múltipla Escolha",
+			"item": [
 				{
-					"name": "Filtre Questão",
+					"name": "Questao Multipla Escolha",
 					"event": [
 						{
 							"listen": "test",
@@ -348,30 +608,65 @@
 									"    pm.expect(jsonData.sucesso).to.eql(true);",
 									"});",
 									"",
-									"pm.test(\"Requisição retorna APENAS uma questão pedida\", function () {",
+									"pm.test(\"Requisição retorna json com uma ou mais questões cadastradas\", function () {",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.resultado.length).to.eql(1);",
-									"});",
-									"",
-									"pm.test(\"Requisição retorna questão pedida com título atualizado\", function () {",
-									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.resultado[0].enunciado).to.eql(\"Teste Postman Atualizado\");",
-									"});",
-									"",
-									"pm.test(\"Requisição retorna questão pedida com tempo máximo atualizado\", function () {",
-									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.resultado[0].tempoMaximoDeResposta).to.eql(123456);",
+									"    pm.expect(jsonData.resultado.length).to.be.above(0);",
 									"});"
 								],
 								"type": "text/javascript"
 							}
 						}
 					],
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{ListElabUrl}}/api/QuestaoMultiplaEscolha",
+							"host": [
+								"{{ListElabUrl}}"
+							],
+							"path": [
+								"api",
+								"QuestaoMultiplaEscolha"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastre Questão Múltipla Escolha",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "bd3b303f-0918-4baa-bdcb-184e3bc1e34c",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna json com valor de 'sucesso' == true\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.sucesso).to.eql(true);",
+									"});",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"QuestaoMultiplaEscolhaId\", jsonData.resultado.id);",
+									"postman.setEnvironmentVariable(\"QuestaoMultiplaEscolhaIdString\", \"\\\"\" + jsonData.resultado.id + \"\\\"\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
 						"header": [
 							{
 								"key": "Content-Type",
@@ -382,16 +677,587 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": ""
+							"raw": "{\n    \"respostaEsperada\": [\n        {\n            \"descricao\": \"Errada 1\",\n            \"correta\": false\n        },\n        {\n            \"descricao\": \"Errada 2\",\n            \"correta\": false\n        },\n        {\n            \"descricao\": \"Certa 1\",\n            \"correta\": true\n        },\n        {\n            \"descricao\": \"Errada 3\",\n            \"correta\": false\n        }\n    ],\n    \"enunciado\": \"Questão ME\",\n    \"usuario\": \"postman@ufg.br\",\n    \"areaDeConhecimento\": {\n        \"codigo\": \"10303022\",\n        \"descricao\": \"ENGENHARIA DE SOFTWARE\"\n    },\n    \"nivelDificuldade\": 2,\n    \"disciplina\": {\n        \"codigo\": \"INF0150\",\n        \"descricao\": \"Prática em Engenharia de Software\"\n    },\n    \"tags\": [\n        \"EngenhariaDeSoftware\",\n        \"PráticaEngenhariaDeSoftware\"\n    ],\n    \"tipo\": 1,\n    \"tempoMaximoDeResposta\": 10\n}"
 						},
 						"url": {
-							"raw": "{{ListElabUrl}}/api/QuestaoDiscursiva/filtro?usuario=postman@ufg.br",
+							"raw": "{{ListElabUrl}}/api/QuestaoMultiplaEscolha",
 							"host": [
 								"{{ListElabUrl}}"
 							],
 							"path": [
 								"api",
-								"QuestaoDiscursiva",
+								"QuestaoMultiplaEscolha"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualize Questão Múltipla Escolha",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "bd3b303f-0918-4baa-bdcb-184e3bc1e34c",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna json com valor de 'sucesso' == true\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.sucesso).to.eql(true);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"respostaEsperada\": [\n        {\n            \"descricao\": \"Errada 1\",\n            \"correta\": false\n        },\n        {\n            \"descricao\": \"Errada 2\",\n            \"correta\": false\n        },\n        {\n            \"descricao\": \"Certa 1\",\n            \"correta\": true\n        },\n        {\n            \"descricao\": \"Errada 3\",\n            \"correta\": false\n        }\n    ],\n    \"enunciado\": \"Questão ME Atualizado\",\n    \"usuario\": \"postman@ufg.br\",\n    \"areaDeConhecimento\": {\n        \"codigo\": \"10303022\",\n        \"descricao\": \"ENGENHARIA DE SOFTWARE\"\n    },\n    \"nivelDificuldade\": 3,\n    \"disciplina\": {\n        \"codigo\": \"INF0150\",\n        \"descricao\": \"Prática em Engenharia de Software\"\n    },\n    \"tags\": [\n        \"EngenhariaDeSoftware\",\n        \"PráticaEngenhariaDeSoftware\"\n    ],\n    \"tipo\": 1,\n    \"tempoMaximoDeResposta\": 123456,\n    \"id\": {{QuestaoMultiplaEscolhaIdString}}\n}"
+						},
+						"url": {
+							"raw": "{{ListElabUrl}}/api/QuestaoMultiplaEscolha",
+							"host": [
+								"{{ListElabUrl}}"
+							],
+							"path": [
+								"api",
+								"QuestaoMultiplaEscolha"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consulte Questão Múltipla Escolha",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "22454fac-f4f8-403a-9280-3e8a339e6777",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna json com valor de 'sucesso' == true\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.sucesso).to.eql(true);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna json com o resultado correto\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.resultado.enunciado).to.eql(\"Questão ME Atualizado\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"type": "text",
+								"value": "",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{ListElabUrl}}/api/QuestaoMultiplaEscolha/{{QuestaoMultiplaEscolhaId}}",
+							"host": [
+								"{{ListElabUrl}}"
+							],
+							"path": [
+								"api",
+								"QuestaoMultiplaEscolha",
+								"{{QuestaoMultiplaEscolhaId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Questão Associação de Colunas",
+			"item": [
+				{
+					"name": "Questao Associação de Colunas",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "22454fac-f4f8-403a-9280-3e8a339e6777",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna json com valor de 'sucesso' == true\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.sucesso).to.eql(true);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna json com uma ou mais questões cadastradas\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.resultado.length).to.be.above(0);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{ListElabUrl}}/api/QuestaoAssociacaoDeColunas",
+							"host": [
+								"{{ListElabUrl}}"
+							],
+							"path": [
+								"api",
+								"QuestaoAssociacaoDeColunas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastre Questão Associação de Colunas",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "bd3b303f-0918-4baa-bdcb-184e3bc1e34c",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna json com valor de 'sucesso' == true\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.sucesso).to.eql(true);",
+									"});",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"QuestaoAssociacaoDeColunasId\", jsonData.resultado.id);",
+									"postman.setEnvironmentVariable(\"QuestaoAssociacaoDeColunasIdString\", \"\\\"\" + jsonData.resultado.id + \"\\\"\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"respostaEsperada\": [\n        {\n            \"colunaPrincipal\": {\n                \"letra\": \"A\",\n                \"descricao\": \"Azul\"\n            },\n            \"colunaAssociada\": {\n                \"letra\": \"A\",\n                \"descricao\": \"Cor\"\n            }\n        },\n        {\n            \"colunaPrincipal\": {\n                \"letra\": \"B\",\n                \"descricao\": \"Maçã\"\n            },\n            \"colunaAssociada\": {\n                \"letra\": \"B\",\n                \"descricao\": \"Fruta\"\n            }\n        }\n    ],\n    \"enunciado\": \"Questão Associação\",\n    \"usuario\": \"postman@ufg.br\",\n    \"areaDeConhecimento\": {\n        \"codigo\": \"10303049\",\n        \"descricao\": \"SISTEMAS DE INFORMAÇÃO\"\n    },\n    \"nivelDificuldade\": 1,\n    \"disciplina\": {\n        \"codigo\": \"INF0089\",\n        \"descricao\": \"Integração 2\"\n    },\n    \"tags\": [\n        \"Postman\"\n    ],\n    \"tipo\": 2,\n    \"tempoMaximoDeResposta\": 2\n}"
+						},
+						"url": {
+							"raw": "{{ListElabUrl}}/api/QuestaoAssociacaoDeColunas",
+							"host": [
+								"{{ListElabUrl}}"
+							],
+							"path": [
+								"api",
+								"QuestaoAssociacaoDeColunas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualize Questão Associação de Colunas",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "bd3b303f-0918-4baa-bdcb-184e3bc1e34c",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna json com valor de 'sucesso' == true\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.sucesso).to.eql(true);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"respostaEsperada\": [\n        {\n            \"colunaPrincipal\": {\n                \"letra\": \"A\",\n                \"descricao\": \"Azul\"\n            },\n            \"colunaAssociada\": {\n                \"letra\": \"A\",\n                \"descricao\": \"Cor\"\n            }\n        },\n        {\n            \"colunaPrincipal\": {\n                \"letra\": \"B\",\n                \"descricao\": \"Maçã\"\n            },\n            \"colunaAssociada\": {\n                \"letra\": \"B\",\n                \"descricao\": \"Fruta\"\n            }\n        },\n        {\n            \"colunaPrincipal\": {\n                \"letra\": \"C\",\n                \"descricao\": \"Windows\"\n            },\n            \"colunaAssociada\": {\n                \"letra\": \"C\",\n                \"descricao\": \"Software\"\n            }\n        }\n    ],\n    \"enunciado\": \"Questão Associação Atualizado\",\n    \"usuario\": \"postman@ufg.br\",\n    \"areaDeConhecimento\": {\n        \"codigo\": \"10303049\",\n        \"descricao\": \"SISTEMAS DE INFORMAÇÃO\"\n    },\n    \"nivelDificuldade\": 1,\n    \"disciplina\": {\n        \"codigo\": \"INF0089\",\n        \"descricao\": \"Integração 2\"\n    },\n    \"tags\": [\n        \"Postman\"\n    ],\n    \"tipo\": 2,\n    \"tempoMaximoDeResposta\": 2,\n    \"id\": {{QuestaoAssociacaoDeColunasIdString}}\n}"
+						},
+						"url": {
+							"raw": "{{ListElabUrl}}/api/QuestaoAssociacaoDeColunas",
+							"host": [
+								"{{ListElabUrl}}"
+							],
+							"path": [
+								"api",
+								"QuestaoAssociacaoDeColunas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consulte Questão Associação de Colunas",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "22454fac-f4f8-403a-9280-3e8a339e6777",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna json com valor de 'sucesso' == true\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.sucesso).to.eql(true);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna json com o resultado correto\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.resultado.enunciado).to.eql(\"Questão Associação Atualizado\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"type": "text",
+								"value": "",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{ListElabUrl}}/api/QuestaoAssociacaoDeColunas/{{QuestaoAssociacaoDeColunasId}}",
+							"host": [
+								"{{ListElabUrl}}"
+							],
+							"path": [
+								"api",
+								"QuestaoAssociacaoDeColunas",
+								"{{QuestaoAssociacaoDeColunasId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Questão Verdadeiro ou Falso",
+			"item": [
+				{
+					"name": "Questao V ou F",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "22454fac-f4f8-403a-9280-3e8a339e6777",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna json com valor de 'sucesso' == true\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.sucesso).to.eql(true);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna json com uma ou mais questões cadastradas\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.resultado.length).to.be.above(0);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"type": "text",
+								"value": "",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{ListElabUrl}}/api/QuestaoVerdadeiroOuFalso",
+							"host": [
+								"{{ListElabUrl}}"
+							],
+							"path": [
+								"api",
+								"QuestaoVerdadeiroOuFalso"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastre Questão V ou F",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "bd3b303f-0918-4baa-bdcb-184e3bc1e34c",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna json com valor de 'sucesso' == true\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.sucesso).to.eql(true);",
+									"});",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"QuestaoVerdadeiroOuFalsoId\", jsonData.resultado.id);",
+									"postman.setEnvironmentVariable(\"QuestaoVerdadeiroOuFalsoIdString\", \"\\\"\" + jsonData.resultado.id + \"\\\"\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n      \"respostaEsperada\": [\r\n        {\r\n          \"descricao\": \"Opção A\",\r\n          \"correta\": false\r\n        },\r\n        {\r\n          \"descricao\": \"Opção B\",\r\n          \"correta\": true\r\n        }\r\n      ],\r\n      \"enunciado\": \"Questão V ou F\",\r\n      \"usuario\": \"postman@ufg.br\",\r\n      \"areaDeConhecimento\": {\r\n        \"codigo\": \"10303022\",\r\n        \"descricao\": \"ENGENHARIA DE SOFTWARE\"\r\n      },\r\n      \"nivelDificuldade\": 1,\r\n      \"disciplina\": {\r\n        \"codigo\": \"INF0150\",\r\n        \"descricao\": \"Prática em Engenharia de Software\"\r\n      },\r\n      \"tags\": [\r\n        \"Postman\"\r\n      ],\r\n      \"tipo\": 3,\r\n      \"tempoMaximoDeResposta\": 2\r\n    }"
+						},
+						"url": {
+							"raw": "{{ListElabUrl}}/api/QuestaoVerdadeiroOuFalso",
+							"host": [
+								"{{ListElabUrl}}"
+							],
+							"path": [
+								"api",
+								"QuestaoVerdadeiroOuFalso"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualize Questão V ou F",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "bd3b303f-0918-4baa-bdcb-184e3bc1e34c",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna json com valor de 'sucesso' == true\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.sucesso).to.eql(true);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n      \"respostaEsperada\": [\r\n        {\r\n          \"descricao\": \"Opção A\",\r\n          \"correta\": false\r\n        },\r\n        {\r\n          \"descricao\": \"Opção B\",\r\n          \"correta\": true\r\n        },\r\n        {\r\n          \"descricao\": \"Opção C\",\r\n          \"correta\": true\r\n        }\r\n      ],\r\n      \"enunciado\": \"Questão V ou F Atualizado\",\r\n      \"usuario\": \"postman@ufg.br\",\r\n      \"areaDeConhecimento\": {\r\n        \"codigo\": \"10303022\",\r\n        \"descricao\": \"ENGENHARIA DE SOFTWARE\"\r\n      },\r\n      \"nivelDificuldade\": 1,\r\n      \"disciplina\": {\r\n        \"codigo\": \"INF0150\",\r\n        \"descricao\": \"Prática em Engenharia de Software\"\r\n      },\r\n      \"tags\": [\r\n        \"Postman\"\r\n      ],\r\n      \"tipo\": 3,\r\n      \"tempoMaximoDeResposta\": 2,\r\n      \"id\": {{QuestaoVerdadeiroOuFalsoIdString}}\r\n    }"
+						},
+						"url": {
+							"raw": "{{ListElabUrl}}/api/QuestaoVerdadeiroOuFalso",
+							"host": [
+								"{{ListElabUrl}}"
+							],
+							"path": [
+								"api",
+								"QuestaoVerdadeiroOuFalso"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consulte Questão V ou F",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "22454fac-f4f8-403a-9280-3e8a339e6777",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna json com valor de 'sucesso' == true\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.sucesso).to.eql(true);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna json com o resultado correto\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.resultado.enunciado).to.eql(\"Questão V ou F Atualizado\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"type": "text",
+								"value": "",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{ListElabUrl}}/api/QuestaoVerdadeiroOuFalso/{{QuestaoVerdadeiroOuFalsoId}}",
+							"host": [
+								"{{ListElabUrl}}"
+							],
+							"path": [
+								"api",
+								"QuestaoVerdadeiroOuFalso",
+								"{{QuestaoVerdadeiroOuFalsoId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Questão (Filtro)",
+			"item": [
+				{
+					"name": "Filtre Todas as Questões",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ae0b2b03-11b4-406e-8752-2e9aefa577f6",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna json com valor de 'sucesso' == true\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.sucesso).to.eql(true);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna APENAS uma questão discursiva\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.resultado.discursiva.length).to.eql(1);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna APENAS uma questão de múltipla escolha\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.resultado.multiplaEscolha.length).to.eql(1);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna APENAS uma questão de associação de colunas\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.resultado.associacaoDeColunas.length).to.eql(1);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna APENAS uma questão de V ou F\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.resultado.verdadeiroOuFalso.length).to.eql(1);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{ListElabUrl}}/api/Questao/filtro?usuario=postman@ufg.br",
+							"host": [
+								"{{ListElabUrl}}"
+							],
+							"path": [
+								"api",
+								"Questao",
 								"filtro"
 							],
 							"query": [
@@ -496,7 +1362,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"titulo\": \"Lista Postman\",\r\n  \"prontaParaAplicacao\": false,\r\n  \"usuario\": \"professor@ufg.br\",\r\n  \"questoes\": [\r\n    {\r\n      \"id\": {{QuestaoIdString}}\r\n    }\r\n  ]\r\n}"
+							"raw": "{\r\n\t\"titulo\": \"Lista Postman\",\r\n\t\"prontaParaAplicacao\": false,\r\n\t\"usuario\": \"postman@ufg.br\",\r\n\t\"questoesDiscursiva\": [{\r\n\t\t\"numero\": 1,\r\n\t\t\"peso\": 3,\r\n\t\t\"questao\": {\r\n\t\t\t\"id\": {{QuestaoDiscursivaIdString}}\r\n\t\t}\r\n\t}],\r\n\t\"questoesMultiplaEscolha\":[{\r\n\t\t\"numero\": 2,\r\n\t\t\"peso\": 1,\r\n\t\t\"questao\": {\r\n\t\t\t\"id\": {{QuestaoMultiplaEscolhaIdString}}\r\n\t\t}\r\n\t}],\r\n\t\"questoesAssociacaoDeColunas\": [{\r\n\t\t\"numero\": 3,\r\n\t\t\"peso\": 1,\r\n\t\t\"questao\": {\r\n\t\t\t\"id\": {{QuestaoAssociacaoDeColunasIdString}}\r\n\t\t}\r\n\t}],\r\n\t\"questoesVerdadeiroOuFalso\": [{\r\n\t\t\"numero\": 4,\r\n\t\t\"peso\": 2,\r\n\t\t\"questao\": {\r\n\t\t\t\"id\": {{QuestaoVerdadeiroOuFalsoIdString}}\r\n\t\t}\r\n\t}]\r\n}"
 						},
 						"url": {
 							"raw": "{{ListElabUrl}}/api/Lista",
@@ -526,6 +1392,11 @@
 									"pm.test(\"Requisição retorna json com valor de 'sucesso' == true\", function () {",
 									"    var jsonData = pm.response.json();",
 									"    pm.expect(jsonData.sucesso).to.eql(true);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna lista com título atualizado\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.resultado.titulo).to.eql(\"Lista Postman Atualizado\");",
 									"});"
 								],
 								"type": "text/javascript"
@@ -544,7 +1415,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"titulo\": \"Lista Postman Atualizado\",\r\n  \"prontaParaAplicacao\": false,\r\n  \"usuario\": \"postman@ufg.br\",\r\n  \"questoes\": [\r\n    {\r\n      \"id\": {{QuestaoIdString}}\r\n    }\r\n  ],\r\n  \"id\": {{ListaIdString}}\r\n}"
+							"raw": "{\r\n\t\"titulo\": \"Lista Postman Atualizado\",\r\n\t\"prontaParaAplicacao\": false,\r\n\t\"usuario\": \"postman@ufg.br\",\r\n\t\"questoesDiscursiva\": [{\r\n\t\t\"numero\": 1,\r\n\t\t\"peso\": 4,\r\n\t\t\"questao\": {\r\n\t\t\t\"id\": {{QuestaoDiscursivaIdString}}\r\n\t\t}\r\n\t}],\r\n\t\"questoesMultiplaEscolha\": [],\r\n\t\"questoesAssociacaoDeColunas\": [],\r\n\t\"questoesVerdadeiroOuFalso\": [],\r\n\t\"id\": {{ListaIdString}}\r\n}"
 						},
 						"url": {
 							"raw": "{{ListElabUrl}}/api/Lista",
@@ -605,7 +1476,12 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": ""
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
 						"url": {
 							"raw": "{{ListElabUrl}}/api/Lista/{{ListaId}}",
@@ -673,7 +1549,12 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": ""
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
 						"url": {
 							"raw": "{{ListElabUrl}}/api/Lista/filtro?usuario=postman@ufg.br",
@@ -700,7 +1581,7 @@
 			"protocolProfileBehavior": {}
 		},
 		{
-			"name": "Delete",
+			"name": "Pós-Testes (Teardown)",
 			"item": [
 				{
 					"name": "Delete Lista",
@@ -769,7 +1650,7 @@
 									"    pm.expect(jsonData.sucesso).to.eql(true);",
 									"});",
 									"",
-									"pm.test(\"Requisição NÂO retorna uma questão (pois foi deletada)\", function () {",
+									"pm.test(\"Requisição NÃO retorna uma questão (pois foi deletada)\", function () {",
 									"    var jsonData = pm.response.json();",
 									"    pm.expect(jsonData.resultado).to.eql(null);",
 									"});"
@@ -793,7 +1674,12 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": ""
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
 						"url": {
 							"raw": "{{ListElabUrl}}/api/Lista/{{ListaId}}",
@@ -810,7 +1696,7 @@
 					"response": []
 				},
 				{
-					"name": "Delete Questao",
+					"name": "Delete Questao Discursiva",
 					"event": [
 						{
 							"listen": "test",
@@ -846,21 +1732,21 @@
 							"formdata": []
 						},
 						"url": {
-							"raw": "{{ListElabUrl}}/api/QuestaoDiscursiva/{{QuestaoId}}",
+							"raw": "{{ListElabUrl}}/api/QuestaoDiscursiva/{{QuestaoDiscursivaId}}",
 							"host": [
 								"{{ListElabUrl}}"
 							],
 							"path": [
 								"api",
 								"QuestaoDiscursiva",
-								"{{QuestaoId}}"
+								"{{QuestaoDiscursivaId}}"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Consulte Q. Deletada",
+					"name": "Consulte Q. Discursiva Deletada",
 					"event": [
 						{
 							"listen": "test",
@@ -876,7 +1762,119 @@
 									"    pm.expect(jsonData.sucesso).to.eql(true);",
 									"});",
 									"",
-									"pm.test(\"Requisição NÂO retorna uma questão (pois foi deletada)\", function () {",
+									"pm.test(\"Requisição NÃO retorna uma questão (pois foi deletada)\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.resultado).to.eql(null);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ListElabUrl}}/api/QuestaoDiscursiva/{{QuestaoDiscursivaId}}",
+							"host": [
+								"{{ListElabUrl}}"
+							],
+							"path": [
+								"api",
+								"QuestaoDiscursiva",
+								"{{QuestaoDiscursivaId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Questao Múltipla Escolha",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "bd3b303f-0918-4baa-bdcb-184e3bc1e34c",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna json com valor de 'sucesso' == true\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.sucesso).to.eql(true);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{ListElabUrl}}/api/QuestaoMultiplaEscolha/{{QuestaoMultiplaEscolhaId}}",
+							"host": [
+								"{{ListElabUrl}}"
+							],
+							"path": [
+								"api",
+								"QuestaoMultiplaEscolha",
+								"{{QuestaoMultiplaEscolhaId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consulte Q. Múltipla Escolha Deletada",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "22454fac-f4f8-403a-9280-3e8a339e6777",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna json com valor de 'sucesso' == true\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.sucesso).to.eql(true);",
+									"});",
+									"",
+									"pm.test(\"Requisição NÃO retorna uma questão (pois foi deletada)\", function () {",
 									"    var jsonData = pm.response.json();",
 									"    pm.expect(jsonData.resultado).to.eql(null);",
 									"});"
@@ -903,14 +1901,292 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{ListElabUrl}}/api/QuestaoDiscursiva/{{QuestaoId}}",
+							"raw": "{{ListElabUrl}}/api/QuestaoMultiplaEscolha/{{QuestaoMultiplaEscolhaId}}",
 							"host": [
 								"{{ListElabUrl}}"
 							],
 							"path": [
 								"api",
-								"QuestaoDiscursiva",
-								"{{QuestaoId}}"
+								"QuestaoMultiplaEscolha",
+								"{{QuestaoMultiplaEscolhaId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Questao Associação de Colunas",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "bd3b303f-0918-4baa-bdcb-184e3bc1e34c",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna json com valor de 'sucesso' == true\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.sucesso).to.eql(true);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{ListElabUrl}}/api/QuestaoAssociacaoDeColunas/{{QuestaoAssociacaoDeColunasId}}",
+							"host": [
+								"{{ListElabUrl}}"
+							],
+							"path": [
+								"api",
+								"QuestaoAssociacaoDeColunas",
+								"{{QuestaoAssociacaoDeColunasId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consulte Q. Associação de Colunas Deletada",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "22454fac-f4f8-403a-9280-3e8a339e6777",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna json com valor de 'sucesso' == true\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.sucesso).to.eql(true);",
+									"});",
+									"",
+									"pm.test(\"Requisição NÃO retorna uma questão (pois foi deletada)\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.resultado).to.eql(null);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{ListElabUrl}}/api/QuestaoAssociacaoDeColunas/{{QuestaoAssociacaoDeColunasId}}",
+							"host": [
+								"{{ListElabUrl}}"
+							],
+							"path": [
+								"api",
+								"QuestaoAssociacaoDeColunas",
+								"{{QuestaoAssociacaoDeColunasId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Questao Verdadeiro ou Falso",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "bd3b303f-0918-4baa-bdcb-184e3bc1e34c",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna json com valor de 'sucesso' == true\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.sucesso).to.eql(true);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{ListElabUrl}}/api/QuestaoVerdadeiroOuFalso/{{QuestaoVerdadeiroOuFalsoId}}",
+							"host": [
+								"{{ListElabUrl}}"
+							],
+							"path": [
+								"api",
+								"QuestaoVerdadeiroOuFalso",
+								"{{QuestaoVerdadeiroOuFalsoId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consulte Q. Verdadeiro ou Falso Deletada",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "22454fac-f4f8-403a-9280-3e8a339e6777",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna json com valor de 'sucesso' == true\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.sucesso).to.eql(true);",
+									"});",
+									"",
+									"pm.test(\"Requisição NÃO retorna uma questão (pois foi deletada)\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.resultado).to.eql(null);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{ListElabUrl}}/api/QuestaoVerdadeiroOuFalso/{{QuestaoVerdadeiroOuFalsoId}}",
+							"host": [
+								"{{ListElabUrl}}"
+							],
+							"path": [
+								"api",
+								"QuestaoVerdadeiroOuFalso",
+								"{{QuestaoVerdadeiroOuFalsoId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Filtre Todas as Questões Deletadas",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ae0b2b03-11b4-406e-8752-2e9aefa577f6",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna json com valor de 'sucesso' == true\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.sucesso).to.eql(true);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna NENHUMA questão discursiva\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.resultado.discursiva.length).to.eql(0);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna NENHUMA questão de múltipla escolha\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.resultado.multiplaEscolha.length).to.eql(0);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna NENHUMA questão de associação de colunas\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.resultado.associacaoDeColunas.length).to.eql(0);",
+									"});",
+									"",
+									"pm.test(\"Requisição retorna NENHUMA questão de V ou F\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.resultado.verdadeiroOuFalso.length).to.eql(0);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{ListElabUrl}}/api/Questao/filtro?usuario=postman@ufg.br",
+							"host": [
+								"{{ListElabUrl}}"
+							],
+							"path": [
+								"api",
+								"Questao",
+								"filtro"
+							],
+							"query": [
+								{
+									"key": "usuario",
+									"value": "postman@ufg.br"
+								}
 							]
 						}
 					},

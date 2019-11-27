@@ -3,6 +3,8 @@
     public enum TipoQuestao
     {
         Discursiva = 0,
-        Objetiva = 1
+        MultiplaEscolha = 1,
+        Associacao = 2,
+        VerdadeiroOuFalso = 3
     }
 }

@@ -28,7 +28,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\listelab-dominio\ListElab.Dominio.csproj" />
     <ProjectReference Include="..\listelab-servico\ListElab.Servico.csproj" />
   </ItemGroup>
 

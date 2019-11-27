@@ -1,6 +1,5 @@
 ﻿using ListElab.Dominio.Abstrato;
 using ListElab.Dominio.AtributosCustomizados;
-using ListElab.Dominio.Conceitos.QuestaoObj;
 using ListElab.Dominio.Conceitos.RespostaObj;
 using System.Collections.Generic;
 
@@ -9,6 +8,17 @@ namespace ListElab.Dominio.Conceitos.ListaObj
     [Colecao(Nome = "listas")]
     public class ListaQuestoes : ObjetoComId
     {
+        /// <summary>
+        /// Construtor da classe de lista de questões.
+        /// </summary>
+        public ListaQuestoes()
+        {
+            QuestoesAssociacaoDeColunas = new List<QuestaoDaLista<AssociacaoDeColunas>>();
+            QuestoesDiscursivas = new List<QuestaoDaLista<Discursiva>>();
+            QuestoesMultiplaEscolha = new List<QuestaoDaLista<MultiplaEscolha>>();
+            QuestoesVerdadeiroOuFalso = new List<QuestaoDaLista<VerdadeiroOuFalso>>();
+        }
+
         /// <summary>
         /// Título da lista.
         /// </summary>
@@ -50,8 +60,23 @@ namespace ListElab.Dominio.Conceitos.ListaObj
         public List<string> Disciplinas { get; set; }
 
         /// <summary>
-        /// Questões discursivas
+        /// Questões discursivas.
         /// </summary>
-        public List<Questao<Discursiva>> Discursivas { get; set; }
+        public List<QuestaoDaLista<Discursiva>> QuestoesDiscursivas { get; set; }
+
+        /// <summary>
+        /// Questões múltipla escolha.
+        /// </summary>
+        public List<QuestaoDaLista<MultiplaEscolha>> QuestoesMultiplaEscolha { get; set; }
+
+        /// <summary>
+        /// Questões associação de colunas.
+        /// </summary>
+        public List<QuestaoDaLista<AssociacaoDeColunas>> QuestoesAssociacaoDeColunas { get; set; }
+
+        /// <summary>
+        /// Questões verdadeiro e falso.
+        /// </summary>
+        public List<QuestaoDaLista<VerdadeiroOuFalso>> QuestoesVerdadeiroOuFalso { get; set; }
     }
 }

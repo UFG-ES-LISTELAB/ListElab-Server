@@ -12,12 +12,12 @@ namespace ListElab.Testes.TestesValidador
     [TestFixture]
     public class TestesValidadorQuestaoDiscursiva : TesteBase<Questao<Discursiva>>
     {
-        private ValidacoesQuestaoDiscursiva _validador;
+        private ValidacoesQuestaoDiscursiva validador;
 
         [SetUp]
         public void AntesDoTeste()
         {
-            _validador = new ValidacoesQuestaoDiscursiva();
+            validador = new ValidacoesQuestaoDiscursiva();
         }
 
         [Test, Sequential]
@@ -25,17 +25,17 @@ namespace ListElab.Testes.TestesValidador
             [Values(null, "", "Enunciado.", " ")] string enunciado,
             [Values(true, true, false, true)] bool cenarioInvalido)
         {
-            _validador.AssineRegraDeveTerEnunciado();
+            validador.AssineRegraDeveTerEnunciado();
 
             var questaoDiscursiva = new Questao<Discursiva> { Enunciado = enunciado };
 
-            ValideTeste(cenarioInvalido, questaoDiscursiva, _validador, "O enunciado da questão deve ser informado");
+            ValideTeste(cenarioInvalido, questaoDiscursiva, validador, "O enunciado da questão deve ser informado");
         }
 
         [Test, Theory]
         public void TesteRegraPalavraChaveInformado(bool palavraChaveInformado)
         {
-            _validador.AssineRegraPalavraChaveInformada();
+            validador.AssineRegraPalavraChaveInformada();
 
             var questaoDiscursiva = palavraChaveInformado ? new Questao<Discursiva>()
             {
@@ -52,46 +52,46 @@ namespace ListElab.Testes.TestesValidador
                 }
             } : new Questao<Discursiva> { RespostaEsperada = new Discursiva() };
 
-            ValideTeste(!palavraChaveInformado, questaoDiscursiva, _validador, "Pelo menos uma palavra chave deve ser informada");
+            ValideTeste(!palavraChaveInformado, questaoDiscursiva, validador, "Pelo menos uma palavra chave deve ser informada");
         }
 
         [Test, Sequential]
         public void TesteRegraAutorDaQuestaoInformadoEValido([Values("", " ", null, "saulo@gmail.com", "saulo@ufg.br")] string autor,
                                                              [Values(true, true, true, true, false)] bool cenarioInvalido)
         {
-            _validador.AssineRegraAutorDaQuestaoInformadoEValido();
+            validador.AssineRegraAutorDaQuestaoInformadoEValido();
 
             var questaoDiscursiva = new Questao<Discursiva> { Usuario = autor };
 
-            ValideTeste(cenarioInvalido, questaoDiscursiva, _validador, "O autor da questão deve ser um usuário válido");
+            ValideTeste(cenarioInvalido, questaoDiscursiva, validador, "O autor da questão deve ser um usuário válido");
         }
 
         [Test, Sequential]
-        public void TesteRegraTipoQuestaoDiscursiva([Values(TipoQuestao.Discursiva, TipoQuestao.Objetiva)] TipoQuestao tipoQuestao,
+        public void TesteRegraTipoQuestaoDiscursiva([Values(TipoQuestao.Discursiva, TipoQuestao.MultiplaEscolha)] TipoQuestao tipoQuestao,
                                                     [Values(false, true)] bool cenarioInvalido)
         {
-            _validador.AssineRegraTipoQuestaoDiscursiva();
+            validador.AssineRegraTipoQuestaoDiscursiva();
 
             var questaoDiscursiva = new Questao<Discursiva> { Tipo = tipoQuestao };
 
-            ValideTeste(cenarioInvalido, questaoDiscursiva, _validador, "O tipo de questão deve ser 'Discursiva'");
+            ValideTeste(cenarioInvalido, questaoDiscursiva, validador, "O tipo de questão deve ser 'Discursiva'");
         }
 
         [Test, Sequential]
         public void TesteRegraDificuldadeFoiInformadaEValida([Values(1, 5, 6)] int dificuldade,
                                                              [Values(false, false, true)] bool cenarioInvalido)
         {
-            _validador.AssineRegraDificuldadeFoiInformadaEValida();
+            validador.AssineRegraDificuldadeFoiInformadaEValida();
 
             var questaoDiscursiva = new Questao<Discursiva> { NivelDificuldade = (NivelDificuldade)dificuldade };
 
-            ValideTeste(cenarioInvalido, questaoDiscursiva, _validador, "Informe um valor válido para nível de dificuldade");
+            ValideTeste(cenarioInvalido, questaoDiscursiva, validador, "Informe um valor válido para nível de dificuldade");
         }
 
         [Test, Theory]
         public void TesteRegraAreaDeConhecimentoFoiInformada(bool areaDoConhecimentoInformada, bool codigoInformado)
         {
-            _validador.AssineRegraAreaDeConhecimentoFoiInformada();
+            validador.AssineRegraAreaDeConhecimentoFoiInformada();
 
             var questaoDiscursiva = new Questao<Discursiva>();
 
@@ -105,13 +105,13 @@ namespace ListElab.Testes.TestesValidador
                 questaoDiscursiva.AreaDeConhecimento.Codigo = "100";
             }
 
-            ValideTeste(!areaDoConhecimentoInformada || !codigoInformado, questaoDiscursiva, _validador, "Área de conhecimento não informada ou inválida.");
+            ValideTeste(!areaDoConhecimentoInformada || !codigoInformado, questaoDiscursiva, validador, "Área de conhecimento não informada ou inválida.");
         }
 
         [Test, Theory]
         public void TesteRegraDisciplinaFoiInformada(bool discipinaInformada, bool codigoInformado)
         {
-            _validador.AssineRegraDisciplinaFoiInformada();
+            validador.AssineRegraDisciplinaFoiInformada();
 
             var questaoDiscursiva = new Questao<Discursiva>();
 
@@ -125,7 +125,7 @@ namespace ListElab.Testes.TestesValidador
                 questaoDiscursiva.Disciplina.Codigo = "100";
             }
 
-            ValideTeste(!discipinaInformada || !codigoInformado, questaoDiscursiva, _validador, "Disciplina não informada ou inválida.");
+            ValideTeste(!discipinaInformada || !codigoInformado, questaoDiscursiva, validador, "Disciplina não informada ou inválida.");
         }
     }
 }

@@ -1,9 +1,9 @@
-﻿namespace ListElab.Dominio.Conceitos.RespostaObj
+﻿namespace ListElab.Dominio.Dtos
 {
     /// <summary>
-    /// Representa uma escolha de uma questão.
+    /// Dto de escolha.
     /// </summary>
-    public class Escolha
+    public class DtoEscolha
     {
         /// <summary>
         /// Descrição da escolha.

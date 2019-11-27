@@ -1,96 +1,58 @@
-﻿using ListElab.Data.Repositorios;
-using ListElab.Dominio.Conceitos.AreaDeConhecimentoObj;
-using ListElab.Dominio.Conceitos.DisciplinaObj;
-using ListElab.Dominio.Conceitos.QuestaoObj;
+﻿using ListElab.Dominio.Conceitos.QuestaoObj;
 using ListElab.Dominio.Conceitos.RespostaObj;
 using ListElab.Dominio.Dtos;
 using ListElab.Servico.Conversores.Interfaces;
-using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace ListElab.Servico.Conversores
 {
     public class ConversorQuestaoDiscursiva : IConversor<DtoQuestaoDiscursiva, Questao<Discursiva>>
     {
-        private IRepositorio<Disciplina> repositorioDisciplina;
-        private IRepositorio<AreaDeConhecimento> repositorioAreaConhecimento;
-
+        /// <summary>
+        /// Converte uma questão de objeto para dto.
+        /// </summary>
+        /// <param name="objeto">A questão a ser convertida.</param>
+        /// <returns>O Dto que representa a questão.</returns>
         public DtoQuestaoDiscursiva Converta(Questao<Discursiva> objeto)
         {
             DtoQuestaoDiscursiva dto = null;
 
             if (objeto != null)
             {
-                dto = new DtoQuestaoDiscursiva();
-                dto.Id = objeto.Id;
-                dto.NivelDificuldade = objeto.NivelDificuldade;
-                dto.Tags = objeto.Tags;
-                dto.TempoMaximoDeResposta = objeto.TempoMaximoDeResposta;
-                dto.Tipo = objeto.Tipo;
-                dto.Usuario = objeto.Usuario;
-                dto.Enunciado = objeto.Enunciado;
-                
-                if (objeto.AreaDeConhecimento != null)
-                {
-                    dto.AreaDeConhecimento = new DtoAreaDoConhecimento { Codigo = objeto.AreaDeConhecimento.Codigo, Descricao = objeto.AreaDeConhecimento.Descricao };
-                }
+                dto = ConversorQuestao().Converta(objeto);
 
-                if (objeto.Disciplina != null)
-                {
-                    dto.Disciplina = new DtoDisciplina { Codigo = objeto.Disciplina.Codigo, Descricao = objeto.Disciplina.Descricao };
-                }
-                
-                dto.RespostaEsperada = objeto.RespostaEsperada.PalavrasChaves.Select(x => new DtoPalavraChave { Descricao = x.Descricao, Peso = x.Peso }).ToList();
+                dto.RespostaEsperada = new List<DtoPalavraChave>();
+
+                dto.RespostaEsperada = objeto.RespostaEsperada.PalavrasChaves.Select(palavraChave => new DtoPalavraChave { Descricao = palavraChave.Descricao, Peso = palavraChave.Peso }).ToList();
             }
 
             return dto;
         }
 
+        /// <summary>
+        /// Converte um dto de questão para seu objeto.
+        /// </summary>
+        /// <param name="dto">Dto a ser convertido.</param>
+        /// <returns>Retorna o objeto convertido.</returns>
         public Questao<Discursiva> Converta(DtoQuestaoDiscursiva dto)
         {
-            Questao<Discursiva> questao = null;
+            Questao<Discursiva> objeto = null;
 
             if (dto != null)
             {
-                questao = new Questao<Discursiva>();
+                objeto = ConversorQuestao().Converta(dto);
 
-                if (dto.Id != null && dto.Id != Guid.Empty)
-                {
-                    questao.Id = dto.Id;
-                }
-
-                questao.NivelDificuldade = dto.NivelDificuldade;
-                questao.Tags = dto.Tags;
-                questao.TempoMaximoDeResposta = dto.TempoMaximoDeResposta;
-                questao.Tipo = dto.Tipo;
-                questao.Usuario = dto.Usuario;
-                questao.Enunciado = dto.Enunciado;
-
-                if (dto.AreaDeConhecimento != null)
-                {
-                    questao.AreaDeConhecimento = RepositorioAreaDeConhecimento().ConsulteUm(x => x.Codigo == dto.AreaDeConhecimento.Codigo);
-                }
-
-                if (dto.Disciplina != null)
-                {
-                    questao.Disciplina = RepositorioDisciplina().ConsulteUm(x => x.Codigo == dto.Disciplina.Codigo);
-
-                }
-
-                questao.RespostaEsperada = new Discursiva { PalavrasChaves = dto.RespostaEsperada.Select(x => new PalavraChave { Descricao = x.Descricao, Peso = x.Peso }).ToList() };
+                objeto.RespostaEsperada = new Discursiva();
+                objeto.RespostaEsperada.PalavrasChaves = dto.RespostaEsperada.Select(dtoPalavra => new PalavraChave { Descricao = dtoPalavra.Descricao, Peso = dtoPalavra.Peso }).ToList();
             }
 
-            return questao;
+            return objeto;
         }
 
-        private IRepositorio<Disciplina> RepositorioDisciplina()
+        private ConversorQuestao<Discursiva, DtoQuestaoDiscursiva> ConversorQuestao()
         {
-            return repositorioDisciplina ?? (repositorioDisciplina = new Repositorio<Disciplina>());
-        }
-
-        private IRepositorio<AreaDeConhecimento> RepositorioAreaDeConhecimento()
-        {
-            return repositorioAreaConhecimento ?? (repositorioAreaConhecimento = new Repositorio<AreaDeConhecimento>());
+            return new ConversorQuestao<Discursiva, DtoQuestaoDiscursiva>();
         }
     }
 }

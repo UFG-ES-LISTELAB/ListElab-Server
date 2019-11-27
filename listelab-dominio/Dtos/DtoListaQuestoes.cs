@@ -1,5 +1,4 @@
-﻿using ListElab.Dominio.Enumeradores;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace ListElab.Dominio.Dtos
 {
@@ -23,6 +22,21 @@ namespace ListElab.Dominio.Dtos
         /// <summary>
         /// Questões discursivas
         /// </summary>
-        public List<DtoQuestaoDiscursiva> Questoes { get; set; }
+        public List<DtoQuestaoDaLista<DtoQuestaoDiscursiva>> QuestoesDiscursiva { get; set; }
+
+        /// <summary>
+        /// Questões de múltipla escolha.
+        /// </summary>
+        public List<DtoQuestaoDaLista<DtoQuestaoMultiplaEscolha>> QuestoesMultiplaEscolha { get; set; }
+
+        /// <summary>
+        /// Questões de associação de colunas.
+        /// </summary>
+        public List<DtoQuestaoDaLista<DtoQuestaoAssociacaoDeColunas>> QuestoesAssociacaoDeColunas { get; set; }
+
+        /// <summary>
+        /// Questões de Verdadeiro ou falso.
+        /// </summary>
+        public List<DtoQuestaoDaLista<DtoQuestaoVerdadeiroOuFalso>> QuestoesVerdadeiroOuFalso { get; set; }
     }
 }
