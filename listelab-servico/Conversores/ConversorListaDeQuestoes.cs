@@ -21,13 +21,19 @@ namespace ListElab.Servico.Conversores
         private IRepositorio<Questao<AssociacaoDeColunas>> repositorioQuestaoAssociacaoDeColunas;
         private IRepositorio<Questao<VerdadeiroOuFalso>> repositorioQuestaoVerdadeiroOuFalso;
 
+        private List<QuestaoDaLista<Discursiva>> questoesDiscursiva;
+        private List<QuestaoDaLista<MultiplaEscolha>> questoesMultiplaEscolha;
+        private List<QuestaoDaLista<AssociacaoDeColunas>> questoesAssociacaoColunas;
+        private List<QuestaoDaLista<VerdadeiroOuFalso>> questoesVerdadeiroOuFalso;
+
+        /// <summary>
+        /// Converte uma lista para seu dto.
+        /// </summary>
+        /// <param name="objeto">O objeto a ser convertido.</param>
+        /// <returns>O Dto convertido.</returns>
         public DtoListaQuestoes Converta(ListaQuestoes objeto)
         {
             DtoListaQuestoes dto = null;
-            var conversorQuestoesDiscursiva = new ConversorQuestao<Discursiva, DtoQuestaoDiscursiva>();
-            var conversorQuestoesMultiplaEscolha = new ConversorQuestao<MultiplaEscolha, DtoQuestaoMultiplaEscolha>();
-            var conversorAssociacaoDeColunas = new ConversorQuestao<AssociacaoDeColunas, DtoQuestaoAssociacaoDeColunas>();
-            var conversorVerdadeiroOuFalso = new ConversorQuestao<VerdadeiroOuFalso, DtoQuestaoVerdadeiroOuFalso>();
 
             if (objeto != null)
             {
@@ -36,23 +42,31 @@ namespace ListElab.Servico.Conversores
                 dto.Usuario = objeto.Usuario;
                 dto.Titulo = objeto.Titulo;
                 dto.ProntaParaAplicacao = objeto.ProntaParaAplicacao;
+                dto.NivelDeDificuldade = objeto.NivelDificuldade;
 
-                dto.QuestoesDiscursiva = objeto.QuestoesDiscursivas.Select(x => new DtoQuestaoDaLista<DtoQuestaoDiscursiva> { Questao = conversorQuestoesDiscursiva.Converta(x.Questao) as DtoQuestaoDiscursiva, Numero = x.Numero, Peso = x.Peso }).ToList();
-                dto.QuestoesMultiplaEscolha = objeto.QuestoesMultiplaEscolha.Select(x => new DtoQuestaoDaLista<DtoQuestaoMultiplaEscolha> { Questao = conversorQuestoesMultiplaEscolha.Converta(x.Questao) as DtoQuestaoMultiplaEscolha, Numero = x.Numero, Peso = x.Peso }).ToList();
-                dto.QuestoesAssociacaoDeColunas = objeto.QuestoesAssociacaoDeColunas.Select(x => new DtoQuestaoDaLista<DtoQuestaoAssociacaoDeColunas> { Questao = conversorAssociacaoDeColunas.Converta(x.Questao) as DtoQuestaoAssociacaoDeColunas, Numero = x.Numero, Peso = x.Peso }).ToList();
-                dto.QuestoesVerdadeiroOuFalso = objeto.QuestoesVerdadeiroOuFalso.Select(x => new DtoQuestaoDaLista<DtoQuestaoVerdadeiroOuFalso> { Questao = conversorVerdadeiroOuFalso.Converta(x.Questao) as DtoQuestaoVerdadeiroOuFalso, Numero = x.Numero, Peso = x.Peso }).ToList();
+                dto.QuestoesDiscursiva = objeto.QuestoesDiscursivas.Select(x => new DtoQuestaoDaLista<DtoQuestaoDiscursiva> { Questao = ConversorQuestaoDiscursiva().Converta(x.Questao), Numero = x.Numero, Peso = x.Peso }).ToList();
+                dto.QuestoesMultiplaEscolha = objeto.QuestoesMultiplaEscolha.Select(x => new DtoQuestaoDaLista<DtoQuestaoMultiplaEscolha> { Questao = ConversorQuestaoMultliplaEscolha().Converta(x.Questao), Numero = x.Numero, Peso = x.Peso }).ToList();
+                dto.QuestoesAssociacaoDeColunas = objeto.QuestoesAssociacaoDeColunas.Select(x => new DtoQuestaoDaLista<DtoQuestaoAssociacaoDeColunas> { Questao = ConversorQuestaoAssociacaoDeColuna().Converta(x.Questao), Numero = x.Numero, Peso = x.Peso }).ToList();
+                dto.QuestoesVerdadeiroOuFalso = objeto.QuestoesVerdadeiroOuFalso.Select(x => new DtoQuestaoDaLista<DtoQuestaoVerdadeiroOuFalso> { Questao = ConversorQuestaoVerdadeiroOuFalso().Converta(x.Questao), Numero = x.Numero, Peso = x.Peso }).ToList();
+
+                dto.TiposDeQuestao = objeto.QuestoesDiscursivas.Select(x => x.Questao.Tipo)
+                    .Union(objeto.QuestoesMultiplaEscolha.Select(x => x.Questao.Tipo))
+                    .Union(objeto.QuestoesVerdadeiroOuFalso.Select(x => x.Questao.Tipo))
+                    .Union(objeto.QuestoesAssociacaoDeColunas.Select(x => x.Questao.Tipo))
+                    .ToList();
             }
 
             return dto;
         }
 
+        /// <summary>
+        /// Converte um dto de lista para seu objeto.
+        /// </summary>
+        /// <param name="dto">Dto a ser convertido.</param>
+        /// <returns>Retorna o objeto convertido.</returns>
         public ListaQuestoes Converta(DtoListaQuestoes dto)
         {
             ListaQuestoes lista = null;
-            var conversorQuestoesDiscursiva = new ConversorQuestao<Discursiva, DtoQuestaoDiscursiva>();
-            var conversorQuestoesMultiplaEscolha = new ConversorQuestao<MultiplaEscolha, DtoQuestaoMultiplaEscolha>();
-            var conversorAssociacaoDeColunas = new ConversorQuestao<AssociacaoDeColunas, DtoQuestaoAssociacaoDeColunas>();
-            var conversorVerdadeiroOuFalso = new ConversorQuestao<VerdadeiroOuFalso, DtoQuestaoVerdadeiroOuFalso>();
 
             if (dto != null)
             {
@@ -63,27 +77,13 @@ namespace ListElab.Servico.Conversores
                     lista.Id = dto.Id;
                 }
 
-                List<QuestaoDaLista<Discursiva>> questoesDiscursiva = ConvertaQuestaoDiscursiva(dto);
-                List<QuestaoDaLista<MultiplaEscolha>> questoesMultiplaEscolha = ConvertaQuestaoMultiplaEscolha(dto);
-                List<QuestaoDaLista<AssociacaoDeColunas>> questoesAssociacaoColunas = ConvertaQuestaoAssociacaoDeColunas(dto);
-                List<QuestaoDaLista<VerdadeiroOuFalso>> questoesVerdadeiroOuFalso = ConvertaQuestaoVerdadeiroOuFalso(dto);
+                ObtenhaQuestoesDaLista(dto);
 
-                var areasDeConhecimento = questoesDiscursiva.Select(x => x.Questao.AreaDeConhecimento.Codigo).ToList();
-                areasDeConhecimento.AddRange(questoesMultiplaEscolha.Select(x => x.Questao.AreaDeConhecimento.Codigo).ToList());
-                areasDeConhecimento.AddRange(questoesAssociacaoColunas.Select(x => x.Questao.AreaDeConhecimento.Codigo).ToList());
-                areasDeConhecimento.AddRange(questoesVerdadeiroOuFalso.Select(x => x.Questao.AreaDeConhecimento.Codigo).ToList());
+                var areasDeConhecimento = ObtenhaAreasDeConhecimentoDaLista();
+                var disciplinas = ObtenhaDisciplinhasDaLista();
+                var tags = ObtenhaTagsDaLista();
+                int nivelDificuldade = ObtenhaNivelDeDificuldadeDaLista();
 
-                var disciplinas = questoesDiscursiva.Select(x => x.Questao.Disciplina.Codigo).ToList();
-                disciplinas.AddRange(questoesMultiplaEscolha.Select(x => x.Questao.Disciplina.Codigo).ToList());
-                disciplinas.AddRange(questoesAssociacaoColunas.Select(x => x.Questao.Disciplina.Codigo).ToList());
-                disciplinas.AddRange(questoesVerdadeiroOuFalso.Select(x => x.Questao.Disciplina.Codigo).ToList());
-
-                var tags = questoesDiscursiva.SelectMany(x => x.Questao.Tags).ToList();
-                tags.AddRange(questoesMultiplaEscolha.SelectMany(x => x.Questao.Tags).ToList());
-                tags.AddRange(questoesAssociacaoColunas.SelectMany(x => x.Questao.Tags).ToList());
-                tags.AddRange(questoesVerdadeiroOuFalso.SelectMany(x => x.Questao.Tags).ToList());
-
-                var nivelDificuldade = dto.QuestoesDiscursiva.Sum(x => (int)x.Questao.NivelDificuldade) + dto.QuestoesMultiplaEscolha.Sum(x => (int)x.Questao.NivelDificuldade) / dto.QuestoesDiscursiva.Count + dto.QuestoesMultiplaEscolha.Count;
                 lista.NivelDificuldade = nivelDificuldade == 0 ? 1 : nivelDificuldade;
                 lista.Usuario = dto.Usuario;
                 lista.Titulo = dto.Titulo;
@@ -92,14 +92,91 @@ namespace ListElab.Servico.Conversores
                 lista.TempoEsperadoResposta = questoesDiscursiva.Sum(x => x.Questao.TempoMaximoDeResposta) + questoesMultiplaEscolha.Sum(x => x.Questao.TempoMaximoDeResposta) + questoesAssociacaoColunas.Sum(x => x.Questao.TempoMaximoDeResposta);
                 lista.Tags = tags;
                 lista.Disciplinas = disciplinas;
-                lista.QuestoesDiscursivas = questoesDiscursiva.Where(x => x.Questao.Tipo == TipoQuestao.Discursiva).ToList();
-                lista.QuestoesMultiplaEscolha = questoesMultiplaEscolha.Where(x => x.Questao.Tipo == TipoQuestao.MultiplaEscolha).ToList();
-                lista.QuestoesAssociacaoDeColunas = questoesAssociacaoColunas.Where(x => x.Questao.Tipo == TipoQuestao.Associacao).ToList();
-                lista.QuestoesVerdadeiroOuFalso = questoesVerdadeiroOuFalso.Where(x => x.Questao.Tipo == TipoQuestao.VerdadeiroOuFalso).ToList();
+                PreenchaDadosDasQuestoes(lista);
             }
 
             return lista;
         }
+
+        private void ObtenhaQuestoesDaLista(DtoListaQuestoes dto)
+        {
+            questoesDiscursiva = ConvertaQuestaoDiscursiva(dto);
+            questoesMultiplaEscolha = ConvertaQuestaoMultiplaEscolha(dto);
+            questoesAssociacaoColunas = ConvertaQuestaoAssociacaoDeColunas(dto);
+            questoesVerdadeiroOuFalso = ConvertaQuestaoVerdadeiroOuFalso(dto);
+        }
+
+        #region DADOS DERIVADOES DE QUESTÕES
+
+        private void PreenchaDadosDasQuestoes(ListaQuestoes lista)
+        {
+            lista.QuestoesDiscursivas = questoesDiscursiva.Where(x => x.Questao.Tipo == TipoQuestao.Discursiva).ToList();
+            lista.QuestoesMultiplaEscolha = questoesMultiplaEscolha.Where(x => x.Questao.Tipo == TipoQuestao.MultiplaEscolha).ToList();
+            lista.QuestoesAssociacaoDeColunas = questoesAssociacaoColunas.Where(x => x.Questao.Tipo == TipoQuestao.Associacao).ToList();
+            lista.QuestoesVerdadeiroOuFalso = questoesVerdadeiroOuFalso.Where(x => x.Questao.Tipo == TipoQuestao.VerdadeiroOuFalso).ToList();
+        }
+
+        private int ObtenhaNivelDeDificuldadeDaLista()
+        {
+            return (questoesDiscursiva.Sum(x => (int)x.Questao.NivelDificuldade) + questoesMultiplaEscolha.Sum(x => (int)x.Questao.NivelDificuldade) +
+                                questoesAssociacaoColunas.Sum(x => (int)x.Questao.NivelDificuldade) + questoesVerdadeiroOuFalso.Sum(x => (int)x.Questao.NivelDificuldade))
+                                / (questoesAssociacaoColunas.Count + questoesVerdadeiroOuFalso.Count + questoesDiscursiva.Count + questoesMultiplaEscolha.Count);
+        }
+
+        private List<string> ObtenhaTagsDaLista()
+        {
+            var tags = questoesDiscursiva.SelectMany(x => x.Questao.Tags).ToList();
+            tags.AddRange(questoesMultiplaEscolha.SelectMany(x => x.Questao.Tags).ToList());
+            tags.AddRange(questoesAssociacaoColunas.SelectMany(x => x.Questao.Tags).ToList());
+            tags.AddRange(questoesVerdadeiroOuFalso.SelectMany(x => x.Questao.Tags).ToList());
+            return tags;
+        }
+
+        private List<string> ObtenhaDisciplinhasDaLista()
+        {
+            var disciplinas = questoesDiscursiva.Select(x => x.Questao.Disciplina.Codigo).ToList();
+            disciplinas.AddRange(questoesMultiplaEscolha.Select(x => x.Questao.Disciplina.Codigo).ToList());
+            disciplinas.AddRange(questoesAssociacaoColunas.Select(x => x.Questao.Disciplina.Codigo).ToList());
+            disciplinas.AddRange(questoesVerdadeiroOuFalso.Select(x => x.Questao.Disciplina.Codigo).ToList());
+            return disciplinas;
+        }
+
+        private List<string> ObtenhaAreasDeConhecimentoDaLista()
+        {
+            var areasDeConhecimento = questoesDiscursiva.Select(x => x.Questao.AreaDeConhecimento.Codigo).ToList();
+            areasDeConhecimento.AddRange(questoesMultiplaEscolha.Select(x => x.Questao.AreaDeConhecimento.Codigo).ToList());
+            areasDeConhecimento.AddRange(questoesAssociacaoColunas.Select(x => x.Questao.AreaDeConhecimento.Codigo).ToList());
+            areasDeConhecimento.AddRange(questoesVerdadeiroOuFalso.Select(x => x.Questao.AreaDeConhecimento.Codigo).ToList());
+            return areasDeConhecimento;
+        }
+
+        #endregion
+
+        #region REPOSITÓRIOS
+
+        private IRepositorio<Questao<Discursiva>> RepositorioQuestaoDiscursiva()
+        {
+            return repositorioQuestaoDiscursiva ?? (repositorioQuestaoDiscursiva = new Repositorio<Questao<Discursiva>>());
+        }
+
+        private IRepositorio<Questao<MultiplaEscolha>> RepositorioQuestaoMultiplaEscolha()
+        {
+            return repositorioQuestaoMultiplaEscolha ?? (repositorioQuestaoMultiplaEscolha = new Repositorio<Questao<MultiplaEscolha>>());
+        }
+
+        private IRepositorio<Questao<AssociacaoDeColunas>> RepositorioQuestaoAssociacaoDeColunas()
+        {
+            return repositorioQuestaoAssociacaoDeColunas ?? (repositorioQuestaoAssociacaoDeColunas = new Repositorio<Questao<AssociacaoDeColunas>>());
+        }
+
+        private IRepositorio<Questao<VerdadeiroOuFalso>> RepositorioQuestaoVerdadeiroOuFalso()
+        {
+            return repositorioQuestaoVerdadeiroOuFalso ?? (repositorioQuestaoVerdadeiroOuFalso = new Repositorio<Questao<VerdadeiroOuFalso>>());
+        }
+
+        #endregion
+
+        #region CONVERSORES DE QUESTÕES
 
         private List<QuestaoDaLista<MultiplaEscolha>> ConvertaQuestaoMultiplaEscolha(DtoListaQuestoes dto)
         {
@@ -198,24 +275,26 @@ namespace ListElab.Servico.Conversores
             return questoesAssociacaoDeColunas;
         }
 
-        private IRepositorio<Questao<Discursiva>> RepositorioQuestaoDiscursiva()
+        private ConversorQuestaoDiscursiva ConversorQuestaoDiscursiva()
         {
-            return repositorioQuestaoDiscursiva ?? (repositorioQuestaoDiscursiva = new Repositorio<Questao<Discursiva>>());
+            return new ConversorQuestaoDiscursiva();
         }
 
-        private IRepositorio<Questao<MultiplaEscolha>> RepositorioQuestaoMultiplaEscolha()
+        private ConversorQuestaoMultiplaEscolha ConversorQuestaoMultliplaEscolha()
         {
-            return repositorioQuestaoMultiplaEscolha ?? (repositorioQuestaoMultiplaEscolha = new Repositorio<Questao<MultiplaEscolha>>());
+            return new ConversorQuestaoMultiplaEscolha();
         }
 
-        private IRepositorio<Questao<AssociacaoDeColunas>> RepositorioQuestaoAssociacaoDeColunas()
+        private ConversorQuestaoAssociacaoDeColunas ConversorQuestaoAssociacaoDeColuna()
         {
-            return repositorioQuestaoAssociacaoDeColunas ?? (repositorioQuestaoAssociacaoDeColunas = new Repositorio<Questao<AssociacaoDeColunas>>());
+            return new ConversorQuestaoAssociacaoDeColunas();
         }
 
-        private IRepositorio<Questao<VerdadeiroOuFalso>> RepositorioQuestaoVerdadeiroOuFalso()
+        private ConversorQuestaoVerdadeiroOuFalso ConversorQuestaoVerdadeiroOuFalso()
         {
-            return repositorioQuestaoVerdadeiroOuFalso ?? (repositorioQuestaoVerdadeiroOuFalso = new Repositorio<Questao<VerdadeiroOuFalso>>());
+            return new ConversorQuestaoVerdadeiroOuFalso();
         }
+
+        #endregion
     }
 }
