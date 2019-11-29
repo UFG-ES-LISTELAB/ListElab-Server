@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using ListElab.Dominio.Enumeradores;
+using System.Collections.Generic;
 
 namespace ListElab.Dominio.Dtos
 {
@@ -18,6 +19,16 @@ namespace ListElab.Dominio.Dtos
         /// O email do usuário que criou a lista.
         /// </summary>
         public string Usuario { get; set; }
+
+        /// <summary>
+        /// Nível de dificuldade da lista, média das questões.
+        /// </summary>
+        public int NivelDeDificuldade { get; set; }
+
+        /// <summary>
+        /// Os tipos de questões que a lista possui.
+        /// </summary>
+        public List<TipoQuestao> TiposDeQuestao { get; set; }
 
         /// <summary>
         /// Questões discursivas
