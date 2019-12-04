@@ -27,7 +27,7 @@ namespace ListElab.Servico.ServicosImplementados
         {
             var objeto = Conversor().Converta(dto);
 
-            Validador().AssineRegrasAtualizacao();
+            Validador().AssineRegrasPadraoDeAtualizacao();
 
             var resultado = Validador().Valide(objeto);
 
@@ -48,7 +48,7 @@ namespace ListElab.Servico.ServicosImplementados
         {
             var objeto = Conversor().Converta(dto);
 
-            Validador().AssineRegrasCadastro();
+            Validador().AssineRegrasPadraoDeCadastro();
 
             var resultado = Validador().Valide(objeto);
 
@@ -103,7 +103,7 @@ namespace ListElab.Servico.ServicosImplementados
 
             if (Guid.TryParse(id, out idConvertido))
             {
-                Validador().AssineRegrasExclusao();
+                Validador().AssineRegrasPadraoDeExclusao();
 
                 var objeto = (TObjeto)Activator.CreateInstance(typeof(TObjeto));
 

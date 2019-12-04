@@ -44,10 +44,7 @@ namespace ListElab.Servico.Conversores
                 dto.ProntaParaAplicacao = objeto.ProntaParaAplicacao;
                 dto.NivelDeDificuldade = objeto.NivelDificuldade;
 
-                dto.QuestoesDiscursiva = objeto.QuestoesDiscursivas.Select(x => new DtoQuestaoDaLista<DtoQuestaoDiscursiva> { Questao = ConversorQuestaoDiscursiva().Converta(x.Questao), Numero = x.Numero, Peso = x.Peso }).ToList();
-                dto.QuestoesMultiplaEscolha = objeto.QuestoesMultiplaEscolha.Select(x => new DtoQuestaoDaLista<DtoQuestaoMultiplaEscolha> { Questao = ConversorQuestaoMultliplaEscolha().Converta(x.Questao), Numero = x.Numero, Peso = x.Peso }).ToList();
-                dto.QuestoesAssociacaoDeColunas = objeto.QuestoesAssociacaoDeColunas.Select(x => new DtoQuestaoDaLista<DtoQuestaoAssociacaoDeColunas> { Questao = ConversorQuestaoAssociacaoDeColuna().Converta(x.Questao), Numero = x.Numero, Peso = x.Peso }).ToList();
-                dto.QuestoesVerdadeiroOuFalso = objeto.QuestoesVerdadeiroOuFalso.Select(x => new DtoQuestaoDaLista<DtoQuestaoVerdadeiroOuFalso> { Questao = ConversorQuestaoVerdadeiroOuFalso().Converta(x.Questao), Numero = x.Numero, Peso = x.Peso }).ToList();
+                ConvertaQuestoesDaLista(objeto, dto);
 
                 dto.TiposDeQuestao = objeto.QuestoesDiscursivas.Select(x => x.Questao.Tipo)
                     .Union(objeto.QuestoesMultiplaEscolha.Select(x => x.Questao.Tipo))
@@ -57,6 +54,14 @@ namespace ListElab.Servico.Conversores
             }
 
             return dto;
+        }
+
+        private void ConvertaQuestoesDaLista(ListaQuestoes objeto, DtoListaQuestoes dto)
+        {
+            dto.QuestoesDiscursiva = objeto.QuestoesDiscursivas.Select(x => new DtoQuestaoDaLista<DtoQuestaoDiscursiva> { Questao = ConversorQuestaoDiscursiva().Converta(x.Questao), Numero = x.Numero, Peso = x.Peso }).ToList();
+            dto.QuestoesMultiplaEscolha = objeto.QuestoesMultiplaEscolha.Select(x => new DtoQuestaoDaLista<DtoQuestaoMultiplaEscolha> { Questao = ConversorQuestaoMultliplaEscolha().Converta(x.Questao), Numero = x.Numero, Peso = x.Peso }).ToList();
+            dto.QuestoesAssociacaoDeColunas = objeto.QuestoesAssociacaoDeColunas.Select(x => new DtoQuestaoDaLista<DtoQuestaoAssociacaoDeColunas> { Questao = ConversorQuestaoAssociacaoDeColuna().Converta(x.Questao), Numero = x.Numero, Peso = x.Peso }).ToList();
+            dto.QuestoesVerdadeiroOuFalso = objeto.QuestoesVerdadeiroOuFalso.Select(x => new DtoQuestaoDaLista<DtoQuestaoVerdadeiroOuFalso> { Questao = ConversorQuestaoVerdadeiroOuFalso().Converta(x.Questao), Numero = x.Numero, Peso = x.Peso }).ToList();
         }
 
         /// <summary>

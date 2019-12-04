@@ -53,7 +53,7 @@ namespace ListElab.Servico.Validacoes
                         .WithMessage("A coluna principal deve possuir algum item na coluna associada.");
         }
 
-        protected override void AssineRegrasDeAtualizacao()
+        protected override void AssineRegrasPersonalizadasDeAtualizacao()
         {
             AssineRegraTipoQuestaAssociacaoDeColunas();
             AssineRegraColunaPrincipalPossuiItem();
@@ -68,7 +68,7 @@ namespace ListElab.Servico.Validacoes
             AssineRegraAreaDeConhecimentoFoiInformada();
         }
 
-        protected override void AssineRegrasDeCadastro()
+        protected override void AssineRegrasPersonalizadasDeCadastro()
         {
             AssineRegraTipoQuestaAssociacaoDeColunas();
             AssineRegraColunaPrincipalPossuiItem();
@@ -83,7 +83,7 @@ namespace ListElab.Servico.Validacoes
             AssineRegraAreaDeConhecimentoFoiInformada();
         }
 
-        protected override void AssineRegrasDeExclusao()
+        protected override void AssineRegrasPersonalizadasDeExclusao()
         {
         }
     }

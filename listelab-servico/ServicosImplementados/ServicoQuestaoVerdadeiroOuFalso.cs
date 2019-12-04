@@ -16,8 +16,8 @@ namespace ListElab.Servico.ServicosImplementados
     /// </summary>
     public class ServicoQuestaoVerdadeiroOuFalso : ServicoQuestao<VerdadeiroOuFalso, DtoQuestaoVerdadeiroOuFalso>
     {
-        private IRepositorio<Questao<VerdadeiroOuFalso>> _repositorio;
-        private ValidacoesQuestaoVerdadeiroOuFalso _validador;
+        private IRepositorio<Questao<VerdadeiroOuFalso>> repositorio;
+        private ValidacoesQuestaoVerdadeiroOuFalso validador;
 
         protected override IConversor<DtoQuestaoVerdadeiroOuFalso, Questao<VerdadeiroOuFalso>> Conversor()
         {
@@ -26,12 +26,12 @@ namespace ListElab.Servico.ServicosImplementados
 
         protected override IRepositorio<Questao<VerdadeiroOuFalso>> Repositorio()
         {
-            return _repositorio ?? (_repositorio = new Repositorio<Questao<VerdadeiroOuFalso>>());
+            return repositorio ?? (repositorio = new Repositorio<Questao<VerdadeiroOuFalso>>());
         }
 
         protected override ValidadorPadrao<Questao<VerdadeiroOuFalso>> Validador()
         {
-            return _validador ?? (_validador = new ValidacoesQuestaoVerdadeiroOuFalso());
+            return validador ?? (validador = new ValidacoesQuestaoVerdadeiroOuFalso());
         }
 
         protected override Expression<Func<Questao<VerdadeiroOuFalso>, bool>> CondicaoConsulteUm(Guid idConvertido)

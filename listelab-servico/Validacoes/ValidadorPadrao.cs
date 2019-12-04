@@ -23,7 +23,7 @@ namespace ListElab.Servico.Validacoes
         }
 
         /// <summary>
-        /// Número do requisito.
+        /// Valida regra que o id deve ser informado na atualização.
         /// </summary>
         public void AssineRegraIdDeveSerInformado()
         {
@@ -33,7 +33,7 @@ namespace ListElab.Servico.Validacoes
         }
 
         /// <summary>
-        /// Número do requisito.
+        /// Valida regra que o id passado não pode ser inválido e deve representar um conceito cadastrado.
         /// </summary>
         public void AssineRegraConceitoExiste()
         {
@@ -45,35 +45,35 @@ namespace ListElab.Servico.Validacoes
         /// <summary>
         /// Agrupamento de regras para cadastro.
         /// </summary>
-        public void AssineRegrasCadastro()
+        public void AssineRegrasPadraoDeCadastro()
         {
-            AssineRegrasDeCadastro();
+            AssineRegrasPersonalizadasDeCadastro();
         }
 
         /// <summary>
         /// Agrupamento de regras de atualização.
         /// </summary>
-        public void AssineRegrasAtualizacao()
+        public void AssineRegrasPadraoDeAtualizacao()
         {
             AssineRegraIdDeveSerInformado();
             AssineRegraConceitoExiste();
-            AssineRegrasDeAtualizacao();
+            AssineRegrasPersonalizadasDeAtualizacao();
         }
 
         /// <summary>
         /// Agrupamento de regras de exclusão.
         /// </summary>
-        public void AssineRegrasExclusao()
+        public void AssineRegrasPadraoDeExclusao()
         {
             AssineRegraConceitoExiste();
-            AssineRegrasDeExclusao();
+            AssineRegrasPersonalizadasDeExclusao();
         }
 
-        protected abstract void AssineRegrasDeCadastro();
+        protected abstract void AssineRegrasPersonalizadasDeCadastro();
 
-        protected abstract void AssineRegrasDeAtualizacao();
+        protected abstract void AssineRegrasPersonalizadasDeAtualizacao();
 
-        protected abstract void AssineRegrasDeExclusao();
+        protected abstract void AssineRegrasPersonalizadasDeExclusao();
 
         protected IRepositorio<T> Repositorio()
         {

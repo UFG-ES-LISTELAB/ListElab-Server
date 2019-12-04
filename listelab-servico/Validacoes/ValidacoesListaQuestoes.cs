@@ -5,14 +5,14 @@ namespace ListElab.Servico.Validacoes
 {
     public class ValidacoesListaQuestoes : ValidadorPadrao<ListaQuestoes>
     {
-        protected override void AssineRegrasDeAtualizacao()
+        protected override void AssineRegrasPersonalizadasDeAtualizacao()
         {
             AssineRegraListaDeveTerTitulo();
             AssineRegraListaDeveTerUsuario();
             AssineRegraListaDeveTerQuestoes();
         }
 
-        protected override void AssineRegrasDeCadastro()
+        protected override void AssineRegrasPersonalizadasDeCadastro()
         {
             AssineRegraListaDeveTerTitulo();
             AssineRegraListaDeveTerUsuario();
@@ -43,7 +43,7 @@ namespace ListElab.Servico.Validacoes
                 .WithMessage("É preciso informar as questões que compõe uma lista, certifique-se de que os ids das questões foram repassados à requisição");
         }
 
-        protected override void AssineRegrasDeExclusao()
+        protected override void AssineRegrasPersonalizadasDeExclusao()
         {
             //TODO: Elaborar uma regra para exclusão
             //No momento não consegui pensar em nada a respeito

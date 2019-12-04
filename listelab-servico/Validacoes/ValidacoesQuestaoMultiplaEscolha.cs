@@ -49,7 +49,7 @@ namespace ListElab.Servico.Validacoes
                 .WithMessage("Ao menos uma questão deve ser a alternativa correta.");
         }
 
-        protected override void AssineRegrasDeAtualizacao()
+        protected override void AssineRegrasPersonalizadasDeAtualizacao()
         {
             AssineRegraTipoQuestaoMultiplaEscolha();
             AssineRegraDeveTerEnunciado();
@@ -64,7 +64,7 @@ namespace ListElab.Servico.Validacoes
             AssineRegraEscolhaDevePossuirAlternativaCorreta();
         }
 
-        protected override void AssineRegrasDeCadastro()
+        protected override void AssineRegrasPersonalizadasDeCadastro()
         {
             AssineRegraTipoQuestaoMultiplaEscolha();
             AssineRegraDeveTerEnunciado();
@@ -78,7 +78,7 @@ namespace ListElab.Servico.Validacoes
             AssineRegraEscolhaDevePossuirAlternativaCorreta();
         }
 
-        protected override void AssineRegrasDeExclusao()
+        protected override void AssineRegrasPersonalizadasDeExclusao()
         {
         }
     }

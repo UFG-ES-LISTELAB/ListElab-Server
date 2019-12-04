@@ -14,8 +14,8 @@ namespace ListElab.Servico.ServicosImplementados
 {
     public class ServicoQuestaoDiscursiva : ServicoQuestao<Discursiva, DtoQuestaoDiscursiva>
     {
-        private IRepositorio<Questao<Discursiva>> _repositorio;
-        private ValidacoesQuestaoDiscursiva _validador;
+        private IRepositorio<Questao<Discursiva>> repositorio;
+        private ValidacoesQuestaoDiscursiva validador;
 
         /// <summary>
         /// Retorna o repositório de questões discursivas.
@@ -23,7 +23,7 @@ namespace ListElab.Servico.ServicosImplementados
         /// <returns>Uma instância do repositório.</returns>
         protected override IRepositorio<Questao<Discursiva>> Repositorio()
         {
-            return _repositorio ?? (_repositorio = new Repositorio<Questao<Discursiva>>());
+            return repositorio ?? (repositorio = new Repositorio<Questao<Discursiva>>());
         }
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace ListElab.Servico.ServicosImplementados
         /// <returns>Uma instância do validador.</returns>
         protected override ValidadorPadrao<Questao<Discursiva>> Validador()
         {
-            return _validador ?? (_validador = new ValidacoesQuestaoDiscursiva());
+            return validador ?? (validador = new ValidacoesQuestaoDiscursiva());
         }
 
         protected override IConversor<DtoQuestaoDiscursiva, Questao<Discursiva>> Conversor()

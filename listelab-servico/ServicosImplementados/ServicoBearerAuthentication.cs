@@ -10,7 +10,7 @@ namespace ListElab.Servico.ServicosImplementados
 {
     public class ServicoBearerAuthentication : IServicoBearerAuthentication
     {
-        private IRepositorio<Usuario> _repositorio;
+        private IRepositorio<Usuario> repositorio;
 
         private const string salt = "listelab";
 
@@ -83,7 +83,7 @@ namespace ListElab.Servico.ServicosImplementados
 
         private IRepositorio<Usuario> Repositorio()
         {
-            return _repositorio ?? (_repositorio = new Repositorio<Usuario>());
+            return repositorio ?? (repositorio = new Repositorio<Usuario>());
         }
 
 
