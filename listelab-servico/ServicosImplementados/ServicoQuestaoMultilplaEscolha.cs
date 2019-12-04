@@ -13,8 +13,8 @@ namespace ListElab.Servico.ServicosImplementados
 {
     public class ServicoQuestaoMultilplaEscolha : ServicoQuestao<MultiplaEscolha, DtoQuestaoMultiplaEscolha>
     {
-        private IRepositorio<Questao<MultiplaEscolha>> _repositorio;
-        private ValidacoesQuestaoMultiplaEscolha _validador;
+        private IRepositorio<Questao<MultiplaEscolha>> repositorio;
+        private ValidacoesQuestaoMultiplaEscolha validador;
 
         protected override IConversor<DtoQuestaoMultiplaEscolha, Questao<MultiplaEscolha>> Conversor()
         {
@@ -23,12 +23,12 @@ namespace ListElab.Servico.ServicosImplementados
 
         protected override IRepositorio<Questao<MultiplaEscolha>> Repositorio()
         {
-            return _repositorio ?? (_repositorio = new Repositorio<Questao<MultiplaEscolha>>());
+            return repositorio ?? (repositorio = new Repositorio<Questao<MultiplaEscolha>>());
         }
 
         protected override ValidadorPadrao<Questao<MultiplaEscolha>> Validador()
         {
-            return _validador ?? (_validador = new ValidacoesQuestaoMultiplaEscolha());
+            return validador ?? (validador = new ValidacoesQuestaoMultiplaEscolha());
         }
 
         protected override Expression<Func<Questao<MultiplaEscolha>, bool>> CondicaoConsulteUm(Guid idConvertido)

@@ -19,7 +19,7 @@ namespace ListElab.Servico.Validacoes
                 .WithMessage("O tipo de questão deve ser 'Múltipla Escolha'");
         }
 
-        protected override void AssineRegrasDeAtualizacao()
+        protected override void AssineRegrasPersonalizadasDeAtualizacao()
         {
             AssineRegraTipoQuestaoMultiplaEscolha();
             AssineRegraDeveTerEnunciado();
@@ -31,7 +31,7 @@ namespace ListElab.Servico.Validacoes
             AssineRegraAreaDeConhecimentoFoiInformada();
         }
 
-        protected override void AssineRegrasDeCadastro()
+        protected override void AssineRegrasPersonalizadasDeCadastro()
         {
             AssineRegraTipoQuestaoMultiplaEscolha();
             AssineRegraDeveTerEnunciado();
@@ -42,7 +42,7 @@ namespace ListElab.Servico.Validacoes
             AssineRegraAreaDeConhecimentoFoiInformada();
         }
 
-        protected override void AssineRegrasDeExclusao()
+        protected override void AssineRegrasPersonalizadasDeExclusao()
         {
         }
     }

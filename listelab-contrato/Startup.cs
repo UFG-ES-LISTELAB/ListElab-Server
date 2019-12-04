@@ -37,7 +37,7 @@ namespace ListElab.Contrato
                 c.IncludeXmlComments(xmlFile);
             });
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version21);
 
             var corsBuilder = new CorsPolicyBuilder();
             corsBuilder.AllowAnyHeader();

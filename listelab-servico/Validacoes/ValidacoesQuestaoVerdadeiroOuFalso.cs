@@ -19,7 +19,7 @@ namespace ListElab.Servico.Validacoes
                 .WithMessage("O tipo de questão deve ser 'Verdadeiro ou Falso'");
         }
 
-        protected override void AssineRegrasDeAtualizacao()
+        protected override void AssineRegrasPersonalizadasDeAtualizacao()
         {
             AssineRegraTipoQuestaoVerdadeiroOuFalso();
             AssineRegraDeveTerEnunciado();
@@ -31,7 +31,7 @@ namespace ListElab.Servico.Validacoes
             AssineRegraAreaDeConhecimentoFoiInformada();
         }
 
-        protected override void AssineRegrasDeCadastro()
+        protected override void AssineRegrasPersonalizadasDeCadastro()
         {
             AssineRegraTipoQuestaoVerdadeiroOuFalso();
             AssineRegraDeveTerEnunciado();
@@ -42,7 +42,7 @@ namespace ListElab.Servico.Validacoes
             AssineRegraAreaDeConhecimentoFoiInformada();
         }
 
-        protected override void AssineRegrasDeExclusao()
+        protected override void AssineRegrasPersonalizadasDeExclusao()
         {
         }
     }

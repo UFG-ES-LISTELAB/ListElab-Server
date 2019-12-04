@@ -17,17 +17,17 @@ namespace ListElab.Servico.Validacoes
                 .WithMessage("O tipo de questão deve ser 'Associação de colunas'");
         }
 
-        protected override void AssineRegrasDeAtualizacao()
+        protected override void AssineRegrasPersonalizadasDeAtualizacao()
         {
             AssineRegraTipoQuestaAssociacaoDeColunas();
         }
 
-        protected override void AssineRegrasDeCadastro()
+        protected override void AssineRegrasPersonalizadasDeCadastro()
         {
             AssineRegraTipoQuestaAssociacaoDeColunas();
         }
 
-        protected override void AssineRegrasDeExclusao()
+        protected override void AssineRegrasPersonalizadasDeExclusao()
         {
         }
     }

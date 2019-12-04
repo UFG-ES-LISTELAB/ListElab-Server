@@ -9,7 +9,7 @@ namespace ListElab.Data.Repositorios
 {
     public class Repositorio<T> : IRepositorio<T>
     {
-        private ConexaoDb _conexao;
+        private ConexaoDb conexao;
 
         /// <summary>
         /// Acessa a coleção do objeto passado no tipo genérico.
@@ -119,7 +119,7 @@ namespace ListElab.Data.Repositorios
 
         private ConexaoDb Conexao()
         {
-            return _conexao ?? (_conexao = new ConexaoDb());
+            return conexao ?? (conexao = new ConexaoDb());
         }
     }
 }

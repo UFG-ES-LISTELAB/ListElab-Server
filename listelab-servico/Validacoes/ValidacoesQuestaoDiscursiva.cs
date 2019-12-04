@@ -12,7 +12,7 @@ namespace ListElab.Servico.Validacoes
     public class ValidacoesQuestaoDiscursiva : ValidacoesQuestao<Discursiva>
     {
         /// <summary>
-        /// Número do requisito.
+        /// Valida regra que o tipo de questão deve ser 'Discursiva'.
         /// </summary>
         public void AssineRegraTipoQuestaoDiscursiva()
         {
@@ -22,7 +22,7 @@ namespace ListElab.Servico.Validacoes
         }
 
         /// <summary>
-        /// Número do requisito.
+        /// Valida regra que pelo menos uma palavra chave deve ser informada.
         /// </summary>
         public void AssineRegraPalavraChaveInformada()
         {
@@ -34,7 +34,7 @@ namespace ListElab.Servico.Validacoes
         /// <summary>
         /// Assina regras para o cenário de cadastro.
         /// </summary>
-        protected override void AssineRegrasDeCadastro()
+        protected override void AssineRegrasPersonalizadasDeCadastro()
         {
             AssineRegraPalavraChaveInformada();
             AssineRegraDeveTerEnunciado();
@@ -49,7 +49,7 @@ namespace ListElab.Servico.Validacoes
         /// <summary>
         /// Assina regras para o cenário de atualização.
         /// </summary>
-        protected override void AssineRegrasDeAtualizacao()
+        protected override void AssineRegrasPersonalizadasDeAtualizacao()
         {
             AssineRegraPalavraChaveInformada();
             AssineRegraDeveTerEnunciado();
@@ -65,7 +65,7 @@ namespace ListElab.Servico.Validacoes
         /// <summary>
         /// Assina regras para o cenário de exclusão.
         /// </summary>
-        protected override void AssineRegrasDeExclusao()
+        protected override void AssineRegrasPersonalizadasDeExclusao()
         {
         }
 

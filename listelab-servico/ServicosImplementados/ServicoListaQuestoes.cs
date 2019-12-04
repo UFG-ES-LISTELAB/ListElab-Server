@@ -15,8 +15,8 @@ namespace ListElab.Servico.ServicosImplementados
 {
     public class ServicoListaQuestoes : ServicoCrudCompleto<ListaQuestoes, DtoListaQuestoes>, IServicoListaQuestoes
     {
-        private IRepositorio<ListaQuestoes> _repositorio;
-        private ValidacoesListaQuestoes _validador;
+        private IRepositorio<ListaQuestoes> repositorio;
+        private ValidacoesListaQuestoes validador;
 
         /// <summary>
         /// Retorna uma lista de questões de acordo com o filtro passado.
@@ -94,12 +94,12 @@ namespace ListElab.Servico.ServicosImplementados
 
         protected override IRepositorio<ListaQuestoes> Repositorio()
         {
-            return _repositorio ?? (_repositorio = new Repositorio<ListaQuestoes>());
+            return repositorio ?? (repositorio = new Repositorio<ListaQuestoes>());
         }
 
         protected override ValidadorPadrao<ListaQuestoes> Validador()
         {
-            return _validador ?? (_validador = new ValidacoesListaQuestoes());
+            return validador ?? (validador = new ValidacoesListaQuestoes());
         }
 
         protected override IConversor<DtoListaQuestoes, ListaQuestoes> Conversor()
