@@ -36,10 +36,7 @@ namespace ListElab.Servico.Validacoes
         public void AssineRegraListaDeveTerQuestoes()
         {
             RuleFor(x => x.Id)
-                .Must((lista, id) => (lista.QuestoesDiscursivas != null && lista.QuestoesDiscursivas.Count > 0) ||
-                                    (lista.QuestoesMultiplaEscolha != null && lista.QuestoesMultiplaEscolha.Count > 0) ||
-                                    (lista.QuestoesVerdadeiroOuFalso != null && lista.QuestoesVerdadeiroOuFalso.Count > 0) ||
-                                    (lista.QuestoesAssociacaoDeColunas != null && lista.QuestoesAssociacaoDeColunas.Count > 0))
+                .Must((lista, id) => lista.QuestoesDiscursivas != null && lista.QuestoesDiscursivas.Count > 0)
                 .WithMessage("É preciso informar as questões que compõe uma lista, certifique-se de que os ids das questões foram repassados à requisição");
         }
 

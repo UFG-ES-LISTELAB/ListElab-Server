@@ -87,7 +87,7 @@ namespace ListElab.Servico.Conversores
                 lista.NivelDificuldade = nivelDificuldade == 0 ? 1 : nivelDificuldade;
                 lista.Usuario = dto.Usuario;
                 lista.Titulo = dto.Titulo;
-                lista.ProntaParaAplicacao = dto.ProntaParaAplicacao;
+                lista.ProntaParaAplicacao = lista.ProntaParaAplicacao;
                 lista.AreasDeConhecimento = areasDeConhecimento;
                 lista.TempoEsperadoResposta = questoesDiscursiva.Sum(x => x.Questao.TempoMaximoDeResposta) + questoesMultiplaEscolha.Sum(x => x.Questao.TempoMaximoDeResposta) + questoesAssociacaoColunas.Sum(x => x.Questao.TempoMaximoDeResposta);
                 lista.Tags = tags;
