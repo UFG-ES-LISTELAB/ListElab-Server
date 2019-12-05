@@ -13,7 +13,7 @@ namespace ListElab.Servico.Validacoes
         private IRepositorio<AreaDeConhecimento> repositorioAreaConhecimento;
 
         /// <summary>
-        /// Número do requisito.
+        /// Valida regra que o enunciado da questão deve ser informado.
         /// </summary>
         public void AssineRegraDeveTerEnunciado()
         {
@@ -23,7 +23,7 @@ namespace ListElab.Servico.Validacoes
         }
 
         /// <summary>
-        /// Número do requisito.
+        /// Valida regra que deve ser informado um valor válido para nível de dificuldade.
         /// </summary>
         public void AssineRegraDificuldadeFoiInformadaEValida()
         {

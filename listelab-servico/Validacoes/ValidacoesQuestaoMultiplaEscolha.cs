@@ -19,7 +19,37 @@ namespace ListElab.Servico.Validacoes
                 .WithMessage("O tipo de questão deve ser 'Múltipla Escolha'");
         }
 
-        protected override void AssineRegrasDeAtualizacao()
+        /// <summary>
+        /// A questão deve possuir duas ou mais alternativas.
+        /// </summary>
+        public void AssineRegraQuestaoMultiplaEscolhaPossuiDuasOuMaisAlternativas()
+        {
+            RuleFor(questao => questao.RespostaEsperada)
+                .Must(resposta => resposta.Alternativas != null && resposta.Alternativas.Count >= 2)
+                .WithMessage("O tipo de questão 'Múltipla Escolha' deve possuir duas ou mais escolhas.");
+        }
+
+        /// <summary>
+        /// A questão deve possuir duas ou mais alternativas.
+        /// </summary>
+        public void AssineRegraEscolhasNaoDevemSerVazias()
+        {
+            RuleFor(questao => questao.RespostaEsperada)
+                .Must(resposta => resposta.Alternativas != null && !resposta.Alternativas.Exists(escolha => string.IsNullOrEmpty(escolha.Descricao)))
+                .WithMessage("As escolhas da questão não podem ser vazias.");
+        }
+
+        /// <summary>
+        /// Ao menos uma questão deve ser a alternativa correta.
+        /// </summary>
+        public void AssineRegraEscolhaDevePossuirAlternativaCorreta()
+        {
+            RuleFor(questao => questao.RespostaEsperada)
+                .Must(resposta => resposta.Alternativas != null && resposta.Alternativas.Exists(escolha => escolha.Correta))
+                .WithMessage("Ao menos uma questão deve ser a alternativa correta.");
+        }
+
+        protected override void AssineRegrasPersonalizadasDeAtualizacao()
         {
             AssineRegraTipoQuestaoMultiplaEscolha();
             AssineRegraDeveTerEnunciado();
@@ -29,9 +59,12 @@ namespace ListElab.Servico.Validacoes
             AssineRegraDificuldadeFoiInformadaEValida();
             AssineRegraDisciplinaFoiInformada();
             AssineRegraAreaDeConhecimentoFoiInformada();
+            AssineRegraQuestaoMultiplaEscolhaPossuiDuasOuMaisAlternativas();
+            AssineRegraEscolhasNaoDevemSerVazias();
+            AssineRegraEscolhaDevePossuirAlternativaCorreta();
         }
 
-        protected override void AssineRegrasDeCadastro()
+        protected override void AssineRegrasPersonalizadasDeCadastro()
         {
             AssineRegraTipoQuestaoMultiplaEscolha();
             AssineRegraDeveTerEnunciado();
@@ -40,9 +73,12 @@ namespace ListElab.Servico.Validacoes
             AssineRegraDificuldadeFoiInformadaEValida();
             AssineRegraDisciplinaFoiInformada();
             AssineRegraAreaDeConhecimentoFoiInformada();
+            AssineRegraQuestaoMultiplaEscolhaPossuiDuasOuMaisAlternativas();
+            AssineRegraEscolhasNaoDevemSerVazias();
+            AssineRegraEscolhaDevePossuirAlternativaCorreta();
         }
 
-        protected override void AssineRegrasDeExclusao()
+        protected override void AssineRegrasPersonalizadasDeExclusao()
         {
         }
     }

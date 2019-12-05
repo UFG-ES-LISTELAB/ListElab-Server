@@ -13,19 +13,19 @@ namespace ListElab.Servico.ServicosImplementados
 {
     public class ServicoQuestaoAssociacaoDeColunas : ServicoQuestao<AssociacaoDeColunas, DtoQuestaoAssociacaoDeColunas>
     {
-        private IRepositorio<Questao<AssociacaoDeColunas>> _repositorio;
-        private ValidacoesQuestaoAssociacaoDeColuna _validador;
+        private IRepositorio<Questao<AssociacaoDeColunas>> repositorio;
+        private ValidacoesQuestaoAssociacaoDeColuna validador;
 
         protected override IConversor<DtoQuestaoAssociacaoDeColunas, Questao<AssociacaoDeColunas>> Conversor() => new ConversorQuestaoAssociacaoDeColunas();
 
         protected override IRepositorio<Questao<AssociacaoDeColunas>> Repositorio()
         {
-            return _repositorio ?? (_repositorio = new Repositorio<Questao<AssociacaoDeColunas>>());
+            return repositorio ?? (repositorio = new Repositorio<Questao<AssociacaoDeColunas>>());
         }
 
         protected override ValidadorPadrao<Questao<AssociacaoDeColunas>> Validador()
         {
-            return _validador ?? (_validador = new ValidacoesQuestaoAssociacaoDeColuna());
+            return validador ?? (validador = new ValidacoesQuestaoAssociacaoDeColuna());
         }
 
         protected override Expression<Func<Questao<AssociacaoDeColunas>, bool>> CondicaoDeConsulta()
