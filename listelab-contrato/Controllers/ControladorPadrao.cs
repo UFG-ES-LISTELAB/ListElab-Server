@@ -68,7 +68,7 @@ namespace ListElab.Contrato.Controllers
         /// <param name="objeto">O registro a ser cadastrado..</param>
         /// <returns>Retorna objeto com resultado da requisição.</returns>
         [HttpPost]
-        [Authorize(Roles = "Admin,Professor")]
+        [Authorize(Roles = "Administrador,Professor")]
         public ActionResult<DtoResultado<TDto>> Cadastre([FromBody] TDto objeto)
         {
             return ExecuteAcaoAutorizada(() =>
@@ -84,7 +84,7 @@ namespace ListElab.Contrato.Controllers
         /// <param name="objeto">O registro com seus novos dados e o id para identificação.</param>
         /// <returns>Retorna objeto com resultado da requisição.</returns>
         [HttpPut]
-        [Authorize(Roles = "Admin,Professor")]
+        [Authorize(Roles = "Administrador,Professor")]
         public ActionResult<DtoResultado<TDto>> Atualize([FromBody] TDto objeto)
         {
             return ExecuteAcaoAutorizada(() =>
@@ -101,7 +101,7 @@ namespace ListElab.Contrato.Controllers
         /// <param name="id">Id do registro que será excluído.</param>
         /// <returns>Retorna objeto com resultado da requisição.</returns>
         [HttpDelete("{id}")]
-        [Authorize(Roles = "Admin,Professor")]
+        [Authorize(Roles = "Administrador,Professor")]
         public ActionResult<DtoResultado<TDto>> Delete(string id)
         {
             return ExecuteAcaoAutorizada(() =>
