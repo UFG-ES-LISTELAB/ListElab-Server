@@ -194,7 +194,9 @@ namespace ListElab.Servico.Conversores
                     var questaLista = new QuestaoDaLista<MultiplaEscolha>();
                     questaLista.Numero = questao.Numero;
                     questaLista.Peso = questao.Peso;
-                    questaLista.Questao = RepositorioQuestaoMultiplaEscolha().ConsulteUm(x => x.Id == questao.Questao.Id);
+                    questaLista.Questao = !string.IsNullOrEmpty(questao.Questao.Enunciado) && questao.Questao.RespostaEsperada != null && questao.Questao.RespostaEsperada.Count > 0
+                        ? ConversorQuestaoMultliplaEscolha().Converta(questao.Questao)
+                        : RepositorioQuestaoMultiplaEscolha().ConsulteUm(x => x.Id == questao.Questao.Id);
 
                     questoesMultiplaEscolha.Add(questaLista);
                 }
@@ -219,7 +221,9 @@ namespace ListElab.Servico.Conversores
 
                     questaLista.Numero = questao.Numero;
                     questaLista.Peso = questao.Peso;
-                    questaLista.Questao = RepositorioQuestaoDiscursiva().ConsulteUm(x => x.Id == questao.Questao.Id);
+                    questaLista.Questao = !string.IsNullOrEmpty(questao.Questao.Enunciado) && questao.Questao.RespostaEsperada != null && questao.Questao.RespostaEsperada.Count > 0
+                        ? ConversorQuestaoDiscursiva().Converta(questao.Questao)
+                        : RepositorioQuestaoDiscursiva().ConsulteUm(x => x.Id == questao.Questao.Id);
 
                     questoesDiscursiva.Add(questaLista);
                 }
@@ -243,7 +247,9 @@ namespace ListElab.Servico.Conversores
                     var questaLista = new QuestaoDaLista<VerdadeiroOuFalso>();
                     questaLista.Numero = questao.Numero;
                     questaLista.Peso = questao.Peso;
-                    questaLista.Questao = RepositorioQuestaoVerdadeiroOuFalso().ConsulteUm(x => x.Id == questao.Questao.Id);
+                    questaLista.Questao = !string.IsNullOrEmpty(questao.Questao.Enunciado) && questao.Questao.RespostaEsperada != null && questao.Questao.RespostaEsperada.Count > 0
+                        ? ConversorQuestaoVerdadeiroOuFalso().Converta(questao.Questao)
+                        : RepositorioQuestaoVerdadeiroOuFalso().ConsulteUm(x => x.Id == questao.Questao.Id);
 
                     questoesAssociacaoDeColunas.Add(questaLista);
                 }
@@ -267,7 +273,9 @@ namespace ListElab.Servico.Conversores
                     var questaLista = new QuestaoDaLista<AssociacaoDeColunas>();
                     questaLista.Numero = questao.Numero;
                     questaLista.Peso = questao.Peso;
-                    questaLista.Questao = RepositorioQuestaoAssociacaoDeColunas().ConsulteUm(x => x.Id == questao.Questao.Id);
+                    questaLista.Questao = !string.IsNullOrEmpty(questao.Questao.Enunciado) && questao.Questao.RespostaEsperada != null && questao.Questao.RespostaEsperada.Count > 0
+                        ? ConversorQuestaoAssociacaoDeColuna().Converta(questao.Questao)
+                        : RepositorioQuestaoAssociacaoDeColunas().ConsulteUm(x => x.Id == questao.Questao.Id);
 
                     questoesAssociacaoDeColunas.Add(questaLista);
                 }
